@@ -1,0 +1,17 @@
+/home/igor/Development/medalynx/medalynxAPIMVC/bin/Debug/netcoreapp3.0/appsettings.Development.json
+/home/igor/Development/medalynx/medalynxAPIMVC/bin/Debug/netcoreapp3.0/appsettings.json
+/home/igor/Development/medalynx/medalynxAPIMVC/bin/Debug/netcoreapp3.0/MedalynxAPI
+/home/igor/Development/medalynx/medalynxAPIMVC/bin/Debug/netcoreapp3.0/MedalynxAPI.deps.json
+/home/igor/Development/medalynx/medalynxAPIMVC/bin/Debug/netcoreapp3.0/MedalynxAPI.runtimeconfig.json
+/home/igor/Development/medalynx/medalynxAPIMVC/bin/Debug/netcoreapp3.0/MedalynxAPI.runtimeconfig.dev.json
+/home/igor/Development/medalynx/medalynxAPIMVC/bin/Debug/netcoreapp3.0/MedalynxAPI.dll
+/home/igor/Development/medalynx/medalynxAPIMVC/bin/Debug/netcoreapp3.0/MedalynxAPI.pdb
+/home/igor/Development/medalynx/medalynxAPIMVC/obj/Debug/netcoreapp3.0/MedalynxAPI.csprojAssemblyReference.cache
+/home/igor/Development/medalynx/medalynxAPIMVC/obj/Debug/netcoreapp3.0/staticwebassets/MedalynxAPI.StaticWebAssets.Manifest.cache
+/home/igor/Development/medalynx/medalynxAPIMVC/obj/Debug/netcoreapp3.0/staticwebassets/MedalynxAPI.StaticWebAssets.xml
+/home/igor/Development/medalynx/medalynxAPIMVC/obj/Debug/netcoreapp3.0/MedalynxAPI.MvcApplicationPartsAssemblyInfo.cache
+/home/igor/Development/medalynx/medalynxAPIMVC/obj/Debug/netcoreapp3.0/MedalynxAPI.AssemblyInfoInputs.cache
+/home/igor/Development/medalynx/medalynxAPIMVC/obj/Debug/netcoreapp3.0/MedalynxAPI.AssemblyInfo.cs
+/home/igor/Development/medalynx/medalynxAPIMVC/obj/Debug/netcoreapp3.0/MedalynxAPI.RazorTargetAssemblyInfo.cache
+/home/igor/Development/medalynx/medalynxAPIMVC/obj/Debug/netcoreapp3.0/MedalynxAPI.dll
+/home/igor/Development/medalynx/medalynxAPIMVC/obj/Debug/netcoreapp3.0/MedalynxAPI.pdb

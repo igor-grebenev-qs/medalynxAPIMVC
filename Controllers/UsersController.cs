@@ -22,9 +22,9 @@ namespace MedalynxAPI.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<User> GetById(string userId/*guid*/)
+        public ActionResult<User> GetById(string id/*guid*/)
         {
-            string sid = Utils.ToGuid(userId, false).ToString("B");
+            string sid = Utils.ToGuid(id, false).ToString("B");
             List<User> users = Program.MedialynxData.userDBAPI.GetUser(sid);
             if (users.Count == 0)
             {

@@ -1,12 +1,3 @@
-// Set preprocessor directive(s) to enable the scenarios you want to test.
-// For more information on preprocessor directives and sample apps, see:
-// https://docs.microsoft.com/aspnet/core/#preprocessor-directives-in-sample-code
-//
-// DefaultBehavior - default ControllerBase and ApiController behavior.
-// SuppressApiControllerBehavior - use 2.1 behaviors although compat version is 2.2.
-
-#define DefaultBehavior // or SuppressApiControllerBehavior
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,23 +17,7 @@ namespace MedalynxAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-#if SuppressApiControllerBehavior
-            #region snippet_ConfigureApiBehaviorOptions
-            services.AddControllers()
-                .ConfigureApiBehaviorOptions(options =>
-                {
-                    options.SuppressConsumesConstraintForFormFileParameters = true;
-                    options.SuppressInferBindingSourcesForParameters = true;
-                    options.SuppressModelStateInvalidFilter = true;
-                    options.SuppressMapClientErrors = true;
-                    options.ClientErrorMapping[404].Link =
-                        "https://httpstatuses.com/404";
-                });
-            #endregion
-#endif
-#if DefaultBehavior
             services.AddControllers();
-#endif
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -51,16 +26,19 @@ namespace MedalynxAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            //app.UseHttpsRedirection();
 
-            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors("default");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

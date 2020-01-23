@@ -8,11 +8,9 @@ using MedalynxAPI.Models;
 
 namespace MedalynxAPI.Controllers
 {
-    #region snippet_Inherit
     [Produces(MediaTypeNames.Application.Json)]
     [Route("[controller]")]
     public class UsersController : MedalynxControllerBase
-    #endregion
     {
         private static readonly List<User> _usersInMemoryStore = new List<User>();
 
@@ -35,6 +33,8 @@ namespace MedalynxAPI.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<List<User>> GetAll() {
             return _usersInMemoryStore;
         }
@@ -43,29 +43,26 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<User> GetById(string id/*guid*/)
         {
-            var user = _usersInMemoryStore.FirstOrDefault(user => user.Id == id);
+            User user = _usersInMemoryStore.FirstOrDefault(user => user.Id == id);
 
-            #region snippet_ProblemDetailsStatusCode
             if (user == null)
             {
                 return NotFound();
             }
-            #endregion
 
             return user;
         }
 
-        #region snippet_400And201
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<User> Create(User user)
         {
+            // Create new guid for new user
             user.Id = Guid.NewGuid().ToString("B");
             _usersInMemoryStore.Add(user);
 
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
         }
-        #endregion
     }
 }

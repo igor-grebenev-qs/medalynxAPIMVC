@@ -4,5 +4,4 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <ProjectUISubcaption>ASP.NET Core 3.0</ProjectUISubcaption>
   </PropertyGroup>
-
 </Project>

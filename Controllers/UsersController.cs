@@ -13,7 +13,7 @@ namespace MedalynxAPI.Controllers
     public class UsersController : MedalynxControllerBase
     {
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<List<User>> GetAll() {
             List<User> users = Program.MedialynxData.userDBAPI.GetUser();
@@ -21,6 +21,7 @@ namespace MedalynxAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<User> GetById(string id/*guid*/)
         {
@@ -35,7 +36,7 @@ namespace MedalynxAPI.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<User> Create(User user)
         {

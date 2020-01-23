@@ -26,7 +26,7 @@ namespace MedalynxAPI.Controllers
         {
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<User> users = Program.MedialynxData.userDBAPI.GetUser(sid);
-            if (users.Count == 0)
+            if (users.Count != 1)
             {
                 return NotFound();
             }

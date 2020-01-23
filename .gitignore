@@ -1,4 +1,5 @@
 *.pdb
+*.dll
 bin/
 obj/
 bin/Debug/netcoreapp3.0/

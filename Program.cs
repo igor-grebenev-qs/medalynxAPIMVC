@@ -5,6 +5,9 @@ namespace MedalynxAPI
 {
     public class Program
     {
+
+        public static MedialynxData MedialynxData = new MedialynxData();
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

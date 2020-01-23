@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <ProjectUISubcaption>ASP.NET Core 3.0</ProjectUISubcaption>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.0.1" />
+  </ItemGroup>
+
 </Project>

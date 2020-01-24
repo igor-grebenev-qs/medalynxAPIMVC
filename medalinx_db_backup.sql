@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Biomarkers`
+--
+
+DROP TABLE IF EXISTS `Biomarkers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Biomarkers` (
+  `Id` varchar(38) NOT NULL,
+  `Criteria` varchar(1024) DEFAULT NULL,
+  `DeseaseState` varchar(1024) DEFAULT NULL,
+  `Biomarkerscol` float DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Biomarkers`
+--
+
+LOCK TABLES `Biomarkers` WRITE;
+/*!40000 ALTER TABLE `Biomarkers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Biomarkers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Cohorts`
 --
 
@@ -34,6 +59,7 @@ CREATE TABLE `Cohorts` (
   `Prognosis` longtext DEFAULT '[]',
   `PreviousTreatment` longtext DEFAULT '[]',
   `NumberOfSubjectsRequired` int(11) DEFAULT 0,
+  `Request` int(11) DEFAULT 0,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -45,6 +71,188 @@ CREATE TABLE `Cohorts` (
 LOCK TABLES `Cohorts` WRITE;
 /*!40000 ALTER TABLE `Cohorts` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Cohorts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Demographics`
+--
+
+DROP TABLE IF EXISTS `Demographics`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Demographics` (
+  `Id` varchar(38) NOT NULL,
+  `Criteria` varchar(1024) DEFAULT NULL,
+  `Age` varchar(255) DEFAULT NULL,
+  `Gender` varchar(255) DEFAULT NULL,
+  `Demographicscol` float DEFAULT 0,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Demographics`
+--
+
+LOCK TABLES `Demographics` WRITE;
+/*!40000 ALTER TABLE `Demographics` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Demographics` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DeseaseStates`
+--
+
+DROP TABLE IF EXISTS `DeseaseStates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `DeseaseStates` (
+  `Id` varchar(38) NOT NULL,
+  `Criteria` varchar(1024) DEFAULT NULL,
+  `DeseaseState` varchar(1024) DEFAULT NULL,
+  `Percentage` float DEFAULT 0,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DeseaseStates`
+--
+
+LOCK TABLES `DeseaseStates` WRITE;
+/*!40000 ALTER TABLE `DeseaseStates` DISABLE KEYS */;
+/*!40000 ALTER TABLE `DeseaseStates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Ethnicitys`
+--
+
+DROP TABLE IF EXISTS `Ethnicitys`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Ethnicitys` (
+  `Id` varchar(38) NOT NULL,
+  `Criteria` varchar(1024) DEFAULT NULL,
+  `Nationality` varchar(1024) DEFAULT NULL,
+  `Percentage` float DEFAULT 0,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Ethnicitys`
+--
+
+LOCK TABLES `Ethnicitys` WRITE;
+/*!40000 ALTER TABLE `Ethnicitys` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Ethnicitys` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `GeneticMatches`
+--
+
+DROP TABLE IF EXISTS `GeneticMatches`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `GeneticMatches` (
+  `Id` varchar(38) NOT NULL,
+  `Criteria` varchar(1024) DEFAULT NULL,
+  `Chromosome` int(11) DEFAULT NULL,
+  `Position` int(11) DEFAULT NULL,
+  `Ref` varchar(1024) DEFAULT NULL,
+  `Alt` varchar(1024) DEFAULT NULL,
+  `dbSNP` varchar(1024) DEFAULT NULL,
+  `Percentage` float DEFAULT 0,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `GeneticMatches`
+--
+
+LOCK TABLES `GeneticMatches` WRITE;
+/*!40000 ALTER TABLE `GeneticMatches` DISABLE KEYS */;
+/*!40000 ALTER TABLE `GeneticMatches` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `PreviousTreatments`
+--
+
+DROP TABLE IF EXISTS `PreviousTreatments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `PreviousTreatments` (
+  `Id` varchar(38) NOT NULL,
+  `Criteria` varchar(1024) DEFAULT NULL,
+  `Keyword` varchar(1024) DEFAULT NULL,
+  `Percentage` float DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `PreviousTreatments`
+--
+
+LOCK TABLES `PreviousTreatments` WRITE;
+/*!40000 ALTER TABLE `PreviousTreatments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `PreviousTreatments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Prognosis`
+--
+
+DROP TABLE IF EXISTS `Prognosis`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Prognosis` (
+  `Id` varchar(38) NOT NULL,
+  `Criteria` varchar(1024) DEFAULT NULL,
+  `Keyword` varchar(1024) DEFAULT NULL,
+  `Percentage` float DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Prognosis`
+--
+
+LOCK TABLES `Prognosis` WRITE;
+/*!40000 ALTER TABLE `Prognosis` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Prognosis` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `StageOfDesease`
+--
+
+DROP TABLE IF EXISTS `StageOfDesease`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `StageOfDesease` (
+  `Id` varchar(38) NOT NULL,
+  `Criteria` varchar(1024) DEFAULT NULL,
+  `StageOfTumour` int(11) DEFAULT NULL,
+  `NumberOfNodesAffected` int(11) DEFAULT NULL,
+  `NumberOfMetastasis` int(11) DEFAULT NULL,
+  `StageOfDeseasecol` float DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `StageOfDesease`
+--
+
+LOCK TABLES `StageOfDesease` WRITE;
+/*!40000 ALTER TABLE `StageOfDesease` DISABLE KEYS */;
+/*!40000 ALTER TABLE `StageOfDesease` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -86,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-24 15:47:44
+-- Dump completed on 2020-01-24 17:21:47

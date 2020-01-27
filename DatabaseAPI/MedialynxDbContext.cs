@@ -12,6 +12,7 @@ namespace MedalynxAPI
         public DbSet<Models.Enums.DeseaseStateItem> DeseaseStates { get; set; }
  
         public DbSet<Models.User> Users { get; set; }
+        public DbSet<Models.Enviroment> Enviroments { get; set; }
  
         public MedialynxDbContext()
         {

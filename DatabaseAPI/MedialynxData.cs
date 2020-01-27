@@ -14,6 +14,7 @@ namespace MedalynxAPI
         public AnalyticalApplicationsDBAPI analyticalApplicationsDBAPI;
         public DeseaseStatesDBAPI deseaseStatesDBAPI;
         public UserDBAPI userDBAPI;
+        public EnviromentDBAPI enviromentDBAPI;
 
         public MedialynxData () {
             dbContext = new MedialynxDbContext();
@@ -24,6 +25,7 @@ namespace MedalynxAPI
 
             //user
             userDBAPI = new UserDBAPI(dbContext);
+            enviromentDBAPI = new EnviromentDBAPI(dbContext);
 
             //cohort
         }

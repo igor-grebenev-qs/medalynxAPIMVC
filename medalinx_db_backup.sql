@@ -158,11 +158,11 @@ DROP TABLE IF EXISTS `Enviroments`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Enviroments` (
   `Id` varchar(38) NOT NULL,
-  `UserId` varchar(38) DEFAULT NULL,
-  `NumberOfUsers` int(11) DEFAULT NULL,
-  `DataStorage` float DEFAULT NULL COMMENT 'Data strorage GB',
-  `AnalyticalApplication` varchar(38) NOT NULL,
-  `TypeOfConnectivity` int(11) DEFAULT 0,
+  `UserId` varchar(38) NOT NULL,
+  `NumberOfUsers` int(11) DEFAULT 0,
+  `DataStorage` float DEFAULT 0 COMMENT 'Data strorage GB',
+  `AnalyticalApplication` longtext NOT NULL DEFAULT '[]' COMMENT 'Array of analytical applications',
+  `TypeOfConnectivity` varchar(38) DEFAULT '{00000000-0000-0000-0000-000000000000}',
   `Request` int(11) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -174,6 +174,7 @@ CREATE TABLE `Enviroments` (
 
 LOCK TABLES `Enviroments` WRITE;
 /*!40000 ALTER TABLE `Enviroments` DISABLE KEYS */;
+INSERT INTO `Enviroments` VALUES ('{5b890fcd-7017-4474-89c8-6ba3810868f2}','{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}',10,100,'[]','{2f3ff4f0-b363-40ba-990d-7b80f0df574f}',0);
 /*!40000 ALTER TABLE `Enviroments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,4 +373,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-27 15:31:00
+-- Dump completed on 2020-01-27 16:48:06

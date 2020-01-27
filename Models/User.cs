@@ -12,11 +12,4 @@ namespace MedalynxAPI.Models
         public RequestType Request { get; set; }
         public string Password { get; set; }
     }
-
-    public enum RequestType
-    {
-        Created = 0,
-        Approved = 1,
-        Rejected = 2
-    }
 }

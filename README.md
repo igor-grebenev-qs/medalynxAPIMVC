@@ -6,6 +6,7 @@ mysqldump --column-statistics=0 -uroot -pm1llions --host 35.188.34.140 medalynx_
 
 
 API USAGES:
+
 USERS:
 GET /Users
 GET /Users/{id} (localhost:5000/Users/{9ccf25f2-2500-4af3-a64c-10f3f83d8da1})
@@ -18,6 +19,21 @@ POST /Users (create new user
             "companyName": "Quantumsoft",
             "request": 0,
             "password": ""
+        }
+)
+
+ENVIROMENTS:
+GET /Enviroments
+GET /Enviroments/{UserId}
+POST /Enviroments (create new enviroment
+        body for request sample:
+        {
+            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+            "numberOfUsers": 10,
+            "dataStorage": 100,
+            "analyticalApplication": "[]",
+            "typeOfConnectivity": "{2f3ff4f0-b363-40ba-990d-7b80f0df574f}",
+            "request": 0
         }
 )
 

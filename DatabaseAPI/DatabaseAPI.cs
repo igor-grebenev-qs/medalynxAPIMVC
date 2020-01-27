@@ -76,6 +76,58 @@ namespace MedalynxAPI {
         }
     }
 
+    public class EnviromentDBAPI : DatabaseAPI {
+        public EnviromentDBAPI (MedialynxDbContext context) {
+            dbContext = context;
+        }
+
+        // Get Enviroment by user
+        public List<Enviroment> GetEnviroment (string userId = "{00000000-0000-0000-0000-000000000000}") {
+            Guid id = Utils.ToGuid(userId);
+            List<Enviroment> enviroments = new List<Enviroment>();
+
+            if (id != Guid.Empty)
+            {
+                string sid = id.ToString("B");
+                Enviroment enviroment = dbContext.Enviroments.FirstOrDefault(enviroment => enviroment != null && enviroment.UserId == sid);
+                enviroments.Add(enviroment);
+            }
+            else
+            {
+                // Add all enviroments
+                enviroments.AddRange(dbContext.Enviroments);
+            }
+            return enviroments;
+        }
+
+        public bool AddEnviroment (Enviroment enviroment) {
+            try
+            {
+                dbContext.Enviroments.Add(enviroment);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch {
+                return false;
+            }
+        }
+
+        public bool UpdateEnviroment (Enviroment enviroment) {
+            try
+            {
+                Enviroment existsEnviroment = dbContext.Enviroments.FirstOrDefault(env => env != null && env.Id == enviroment.Id);
+                if (existsEnviroment != null) {
+                    dbContext.Enviroments.Update(enviroment);
+                    dbContext.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception e) {
+                return false;
+            }
+        }
+    }
+
     public class DeseaseStatesDBAPI : DatabaseAPI {
         public DeseaseStatesDBAPI (MedialynxDbContext context) {
             dbContext = context;

@@ -17,16 +17,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Pomelo.EntityFrameworkCore.MySql.Storage;using MedalynxAPI.Models;
+using MedalynxAPI.Models.Enums;
 
 namespace MedalynxAPI {
     public abstract class DatabaseAPI {
+        internal MedialynxDbContext dbContext = null;
 
     }
 
     public class UserDBAPI : DatabaseAPI {
-
-        private MedialynxDbContext dbContext = null;
-
         public UserDBAPI (MedialynxDbContext context) {
             dbContext = context;
         }
@@ -65,9 +64,112 @@ namespace MedalynxAPI {
             try
             {
                 User existsUser = dbContext.Users.FirstOrDefault(u => u != null && u.Id == user.Id);
+                if (existsUser != null) {
+                    dbContext.Users.Update(user);
+                    dbContext.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception e) {
+                return false;
+            }
+        }
+    }
 
-                dbContext.Users.Update(user);
+    public class DeseaseStatesDBAPI : DatabaseAPI {
+        public DeseaseStatesDBAPI (MedialynxDbContext context) {
+            dbContext = context;
+        }
+
+        public List<DeseaseStateItem> GetEnum (string itemId = "{00000000-0000-0000-0000-000000000000}") {
+            Guid id = Utils.ToGuid(itemId);
+            List<DeseaseStateItem> items = new List<DeseaseStateItem>();
+
+            if (id != Guid.Empty)
+            {
+                string sid = id.ToString("B");
+                DeseaseStateItem item = dbContext.DeseaseStates.FirstOrDefault(item => item != null && item.Id == sid);
+                items.Add(item);
+            }
+            else 
+            {
+                // Add all items
+                items.AddRange(dbContext.DeseaseStates);
+            }
+            return items;
+        }
+
+        public bool AddItem (DeseaseStateItem item) {
+            try
+            {
+                dbContext.DeseaseStates.Add(item);
                 dbContext.SaveChanges();
+                return true;
+            }
+            catch {
+                return false;
+            }
+        }
+
+        public bool UpdateItem (DeseaseStateItem item) {
+            try
+            {
+                DeseaseStateItem existsEnumItem = dbContext.DeseaseStates.FirstOrDefault(itm => itm != null && itm.Id == item.Id);
+                if (existsEnumItem != null) {
+                    dbContext.DeseaseStates.Update(item);
+                    dbContext.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception e) {
+                return false;
+            }
+        }
+    }
+
+    public class AnalyticalApplicationsDBAPI : DatabaseAPI {
+        public AnalyticalApplicationsDBAPI (MedialynxDbContext context) {
+            dbContext = context;
+        }
+
+        public List<AnalyticalApplicationItem> GetEnum (string itemId = "{00000000-0000-0000-0000-000000000000}") {
+            Guid id = Utils.ToGuid(itemId);
+            List<AnalyticalApplicationItem> items = new List<AnalyticalApplicationItem>();
+
+            if (id != Guid.Empty)
+            {
+                string sid = id.ToString("B");
+                AnalyticalApplicationItem item = dbContext.AnalyticalApplications.FirstOrDefault(item => item != null && item.Id == sid);
+                items.Add(item);
+            }
+            else 
+            {
+                // Add all items
+                items.AddRange(dbContext.AnalyticalApplications);
+            }
+            return items;
+        }
+
+        public bool AddItem (AnalyticalApplicationItem item) {
+            try
+            {
+                dbContext.AnalyticalApplications.Add(item);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch {
+                return false;
+            }
+        }
+
+        public bool UpdateItem (AnalyticalApplicationItem item) {
+            try
+            {
+                AnalyticalApplicationItem existsEnumItem = dbContext.AnalyticalApplications.FirstOrDefault(itm => itm != null && itm.Id == item.Id);
+                if (existsEnumItem != null) {
+                    dbContext.AnalyticalApplications.Update(item);
+                    dbContext.SaveChanges();
+                }
                 return true;
             }
             catch (Exception e) {

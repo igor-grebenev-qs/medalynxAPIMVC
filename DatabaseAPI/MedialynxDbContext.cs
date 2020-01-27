@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 namespace MedalynxAPI
 {
     public class MedialynxDbContext : DbContext {
+        public DbSet<Models.Enums.AnalyticalApplicationItem> AnalyticalApplications { get; set; }
+        public DbSet<Models.Enums.DeseaseStateItem> DeseaseStates { get; set; }
+ 
         public DbSet<Models.User> Users { get; set; }
  
         public MedialynxDbContext()
@@ -20,4 +23,4 @@ namespace MedalynxAPI
             optionsBuilder.UseMySql("server=35.188.34.140;UserId=root;Password=m1llions;database=medalynx_db;");
         }
     }
-}
+    }

@@ -11,11 +11,21 @@ namespace MedalynxAPI
 
         private MedialynxDbContext dbContext;
 
+        public AnalyticalApplicationsDBAPI analyticalApplicationsDBAPI;
+        public DeseaseStatesDBAPI deseaseStatesDBAPI;
         public UserDBAPI userDBAPI;
 
         public MedialynxData () {
             dbContext = new MedialynxDbContext();
+
+            // enums
+            analyticalApplicationsDBAPI = new AnalyticalApplicationsDBAPI(dbContext);
+            deseaseStatesDBAPI = new DeseaseStatesDBAPI(dbContext);
+
+            //user
             userDBAPI = new UserDBAPI(dbContext);
+
+            //cohort
         }
 
         ~MedialynxData () {

@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `AnalyticalApplications`
+--
+
+DROP TABLE IF EXISTS `AnalyticalApplications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `AnalyticalApplications` (
+  `Id` varchar(38) NOT NULL,
+  `Pos` int(11) NOT NULL DEFAULT 0,
+  `Name` varchar(1024) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AnalyticalApplications`
+--
+
+LOCK TABLES `AnalyticalApplications` WRITE;
+/*!40000 ALTER TABLE `AnalyticalApplications` DISABLE KEYS */;
+INSERT INTO `AnalyticalApplications` VALUES ('{01176d49-d602-46b3-bdee-ead758ccec07}',7,'BWA'),('{029352de-a17b-4ce0-b350-02702e67cf55}',2,'R Studio'),('{260aedf3-ce40-48d4-aa2e-8b7ee43cc192}',18,'Platypus'),('{2b1c7bb0-67bf-48f7-b0da-1dceec9e429d}',3,'Vcftools'),('{3ac5ecf4-7d42-44a9-8d70-1b104ba1066e}',15,'Knimev'),('{4bb13f4a-6481-4ac9-b8f3-275930d964ba}',8,'Bowtie'),('{4f31e556-9886-4a26-baf5-53d9defe4f6e}',16,'perl'),('{6b9a507e-3340-4d64-8fd9-908a69c00f6d}',1,'R'),('{73231c3a-e405-48e9-a6a0-c8197edb9513}',12,'Gvcftools'),('{732749ff-2a1a-43c7-94c7-9c11a04b0ff8}',5,'Samtools'),('{77478c17-b0d9-4f97-8c40-fc3d63e238d0}',10,'GATK'),('{78ccc45c-ef7a-4500-8056-6a32ba3d4979}',17,'Pickard'),('{9a10a5ec-5adb-46e0-897d-4f0619bc95da}',13,'ICG genome browser'),('{9ac8b41f-933e-4188-be8d-f4a5d81790d4}',9,'Python'),('{a3726509-f0f1-47a1-8d1c-01d6dbd3972b}',14,'Java'),('{b2c39a46-856a-43b5-98aa-37aaf881c641}',4,'Bcftools'),('{c5e4dfe7-83ed-439c-9ec2-68f9ee059896}',0,'I will load my own applications'),('{d03e9edd-0b89-4423-bb0c-9a1882fe312b}',6,'Blast'),('{db38f8e1-fbb5-4a63-904b-ddbc576af70a}',11,'Gcc'),('{ecbf979e-0853-4801-bda3-a60b23015750}',19,'VEP (variant effect predictor)');
+/*!40000 ALTER TABLE `AnalyticalApplications` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Biomarkers`
 --
 
@@ -108,7 +133,6 @@ DROP TABLE IF EXISTS `DeseaseStates`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `DeseaseStates` (
   `Id` varchar(38) NOT NULL,
-  `Criteria` varchar(1024) DEFAULT NULL,
   `DeseaseState` varchar(1024) DEFAULT NULL,
   `Percentage` float DEFAULT 0,
   PRIMARY KEY (`Id`)
@@ -121,7 +145,36 @@ CREATE TABLE `DeseaseStates` (
 
 LOCK TABLES `DeseaseStates` WRITE;
 /*!40000 ALTER TABLE `DeseaseStates` DISABLE KEYS */;
+INSERT INTO `DeseaseStates` VALUES ('{4f57817f-3113-4f2f-9617-ca881061df2b}','Localised Salmonella infections',0),('{5197faa8-c0c3-4f47-981c-6fb7fb7aab7a}','Paratyphoid fever A',0),('{cace0279-ad76-4529-bc2e-58078c665bdb}','Salmonella septicaemia',0),('{f14840b5-46c2-46e8-a92c-f9b2dbc5dbd7}','Salmonella gastro-enteritis',0);
 /*!40000 ALTER TABLE `DeseaseStates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Enviroments`
+--
+
+DROP TABLE IF EXISTS `Enviroments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Enviroments` (
+  `Id` varchar(38) NOT NULL,
+  `UserId` varchar(38) DEFAULT NULL,
+  `NumberOfUsers` int(11) DEFAULT NULL,
+  `DataStorage` float DEFAULT NULL COMMENT 'Data strorage GB',
+  `AnalyticalApplication` varchar(38) NOT NULL,
+  `TypeOfConnectivity` int(11) DEFAULT 0,
+  `Request` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Enviroments`
+--
+
+LOCK TABLES `Enviroments` WRITE;
+/*!40000 ALTER TABLE `Enviroments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Enviroments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -256,6 +309,31 @@ LOCK TABLES `StageOfDesease` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `TypeOfConnectivity`
+--
+
+DROP TABLE IF EXISTS `TypeOfConnectivity`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `TypeOfConnectivity` (
+  `Id` varchar(38) NOT NULL,
+  `Pos` int(11) NOT NULL DEFAULT 0,
+  `Name` varchar(1024) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `TypeOfConnectivity`
+--
+
+LOCK TABLES `TypeOfConnectivity` WRITE;
+/*!40000 ALTER TABLE `TypeOfConnectivity` DISABLE KEYS */;
+INSERT INTO `TypeOfConnectivity` VALUES ('{2f3ff4f0-b363-40ba-990d-7b80f0df574f}',0,'Broadband'),('{724b466c-789f-4d85-8a33-cf1136f662a0}',2,'Direct Network'),('{c20cce93-c3d0-4ecb-8df7-7dedbaf34acf}',1,'Virtual Private Network (VPN)');
+/*!40000 ALTER TABLE `TypeOfConnectivity` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Users`
 --
 
@@ -294,4 +372,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-24 17:21:47
+-- Dump completed on 2020-01-27 15:31:00

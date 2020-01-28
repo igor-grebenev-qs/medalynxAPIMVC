@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 
 namespace MedalynxAPI {
     public static class Utils {
@@ -21,6 +22,26 @@ namespace MedalynxAPI {
             {
                 return ForEmptyGuid(canCreate);
             }
+        }
+
+        public static bool CopyPropertyValues<T>(T src, T dest){
+            bool updated = false;
+            PropertyInfo[] srcPropsInfo = src.GetType().GetProperties();
+            foreach (PropertyInfo pi in srcPropsInfo) {
+                var srcPropValue = pi.GetValue(src);
+
+                if (srcPropValue == null) { continue; } // value is not initialized
+
+                var destPropValue = pi.GetValue(dest);
+
+                if (srcPropValue == destPropValue) { continue; } // value is same. nothing to update
+
+                pi.SetValue(dest, srcPropValue);
+
+                updated = true;
+            }
+
+            return updated; // object changed
         }
     }
 }

@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.18, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.19, for Linux (x86_64)
 --
 -- Host: 35.188.34.140    Database: medalynx_db
 -- ------------------------------------------------------
@@ -349,6 +349,8 @@ CREATE TABLE `Users` (
   `CompanyName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Request` int(11) DEFAULT 0 COMMENT '0 - created\n1 - accepted\n2 - rejected',
   `Password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `LastUpdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Email` (`Email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -360,7 +362,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES ('{1d9ba239-853e-4f48-b693-e55527599357}','test@mail.ru','Igor',NULL,NULL,38,NULL),('{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}','igor.grebenev@quantumsoft.ru','Igor','Grebenev','Quantumsoft Group',38,NULL),('{62f9cb80-1639-46cf-903b-1932ba4159fd}','igor.ge@mail.ru','AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','Grebenev','Quantumsoft',0,''),('{69576e2e-bd65-430a-bd12-b0451c653664}','test2@mail.ru','NewUser2',NULL,NULL,3,NULL),('{8bb9b66c-7ec2-4016-a286-33215e2211de}','test3@mail.ru','NewUser3',NULL,NULL,3,NULL);
+INSERT INTO `Users` VALUES ('{1d9ba239-853e-4f48-b693-e55527599357}','test@mail.ru','Igor',NULL,NULL,38,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}','igor.grebenev@quantumsoft.ru','Igor','Grebenev','Quantumsoft Group',38,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{62f9cb80-1639-46cf-903b-1932ba4159fd}','igor.ge@mail.ru','AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','Grebenev','Quantumsoft',0,'','2020-01-28 12:11:00','2020-01-28 12:16:27'),('{69576e2e-bd65-430a-bd12-b0451c653664}','test2@mail.ru','NewUser2',NULL,NULL,3,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{7bc415c8-9395-4801-b12d-ced9a8daf880}','igor.ge@mail.ru_new1','Igor (TEST USER) UPDATED2','Grebenev','Quantumsoft',0,'','2020-01-28 12:11:00','2020-01-28 19:18:30'),('{8bb9b66c-7ec2-4016-a286-33215e2211de}','test3@mail.ru','NewUser3',NULL,NULL,3,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -373,4 +375,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-27 16:48:06
+-- Dump completed on 2020-01-28 21:48:38

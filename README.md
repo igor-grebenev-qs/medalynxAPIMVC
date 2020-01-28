@@ -21,7 +21,7 @@ POST /Users (create new user
             "password": ""
         }
 )
-PUT /Users (update exists user
+PUT /Users (update exists user. You can provide not all fields. id - reqired
         body for request sample:
         {
             "id": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}"

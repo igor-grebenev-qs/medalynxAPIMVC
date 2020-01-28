@@ -41,10 +41,27 @@ namespace MedalynxAPI.Controllers
         public ActionResult<User> Create(User user)
         {
             Guid id = Utils.ToGuid(user.Id, false);
+            user.CreationDate = DateTime.Now;
+            user.LastUpdate = user.CreationDate;
             if (id == Guid.Empty) {
                 user.Id = Guid.NewGuid().ToString("B");
+                Program.MedialynxData.userDBAPI.AddUser(user);
+                return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
             }
-            Program.MedialynxData.userDBAPI.AddUser(user);
+            return BadRequest();
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<User> Update(User user)
+        {
+            Guid id = Utils.ToGuid(user.Id, false);
+            if (id == Guid.Empty) {
+                return BadRequest();
+            }
+            Program.MedialynxData.userDBAPI.UpdateUser(user);
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
         }
     }

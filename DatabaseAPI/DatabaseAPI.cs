@@ -55,8 +55,8 @@ namespace MedalynxAPI {
                 dbContext.SaveChanges();
                 return true;
             }
-            catch {
-                return false;
+            catch (Exception e) {
+                throw;
             }
         }
 
@@ -65,13 +65,20 @@ namespace MedalynxAPI {
             {
                 User existsUser = dbContext.Users.FirstOrDefault(u => u != null && u.Id == user.Id);
                 if (existsUser != null) {
-                    dbContext.Users.Update(user);
+                    existsUser.Email = user.Email;
+                    existsUser.FirstName = user.FirstName;
+                    existsUser.LastName = user.LastName;
+                    existsUser.CompanyName = user.CompanyName;
+                    existsUser.Request = user.Request;
+                    existsUser.Password = user.Password;
+                    existsUser.LastUpdate = DateTime.Now;
+                    dbContext.Users.Update(existsUser);
                     dbContext.SaveChanges();
                 }
                 return true;
             }
             catch (Exception e) {
-                return false;
+                throw;
             }
         }
     }

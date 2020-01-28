@@ -21,6 +21,18 @@ POST /Users (create new user
             "password": ""
         }
 )
+PUT /Users (update exists user
+        body for request sample:
+        {
+            "id": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}"
+            "email": "igor.grebenev@quantumsoft.ru",
+            "firstName": "Igor",
+            "lastName": "Grebenev",
+            "companyName": "Quantumsoft",
+            "request": 1,
+            "password": ""
+        }
+)
 
 ENVIROMENTS:
 GET /Enviroments

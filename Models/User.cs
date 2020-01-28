@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MedalynxAPI.Models
 {
@@ -11,5 +12,7 @@ namespace MedalynxAPI.Models
         public string CompanyName { get; set; }
         public RequestType Request { get; set; }
         public string Password { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastUpdate { get; set; }
     }
 }

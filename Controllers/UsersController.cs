@@ -61,6 +61,7 @@ namespace MedalynxAPI.Controllers
             if (id == Guid.Empty) {
                 return BadRequest();
             }
+            user.LastUpdate = DateTime.Now;
             Program.MedialynxData.userDBAPI.UpdateUser(user);
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
         }

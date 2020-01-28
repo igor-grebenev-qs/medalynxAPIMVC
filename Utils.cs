@@ -32,6 +32,16 @@ namespace MedalynxAPI {
 
                 if (srcPropValue == null) { continue; } // value is not initialized
 
+                var propType = pi.PropertyType;
+                if (propType == typeof(DateTime)){
+                    // check the value required
+                    if ((DateTime) srcPropValue == DateTime.MinValue)
+                    {
+                        // unassigned (i.e. date time is null)
+                        continue;
+                    }
+                }
+
                 var destPropValue = pi.GetValue(dest);
 
                 if (srcPropValue == destPropValue) { continue; } // value is same. nothing to update

@@ -9,7 +9,7 @@ using MedalynxAPI.Models;
 namespace MedalynxAPI.Controllers
 {
     [Produces(MediaTypeNames.Application.Json)]
-    [Route("[controller]")]
+    [Route("Environments")]
     public class EnviromentsController : MedalynxControllerBase
     {
         [HttpGet]

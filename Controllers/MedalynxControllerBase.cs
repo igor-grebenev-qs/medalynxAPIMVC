@@ -3,7 +3,7 @@
 namespace MedalynxAPI.Controllers
 {
     [ApiController]
-    [AddHeader("Access-Control-Allow-Origin", "true")]
+    [AddHeader("Access-Control-Allow-Origin", "*")]
     public class MedalynxControllerBase : ControllerBase
     {
     }

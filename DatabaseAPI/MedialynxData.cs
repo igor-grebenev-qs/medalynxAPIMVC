@@ -8,34 +8,19 @@ using Microsoft.EntityFrameworkCore;
 namespace MedalynxAPI
 {
     public class MedialynxData {
-
-        private MedialynxDbContext dbContext;
-
         public AnalyticalApplicationsDBAPI analyticalApplicationsDBAPI;
-        public DeseaseStatesDBAPI deseaseStatesDBAPI;
         public UserDBAPI userDBAPI;
         public EnviromentDBAPI enviromentDBAPI;
 
         public MedialynxData () {
-            dbContext = new MedialynxDbContext();
-
             // enums
-            analyticalApplicationsDBAPI = new AnalyticalApplicationsDBAPI(dbContext);
-            deseaseStatesDBAPI = new DeseaseStatesDBAPI(dbContext);
+            analyticalApplicationsDBAPI = new AnalyticalApplicationsDBAPI();
 
             //user
-            userDBAPI = new UserDBAPI(dbContext);
-            enviromentDBAPI = new EnviromentDBAPI(dbContext);
+            userDBAPI = new UserDBAPI();
+            enviromentDBAPI = new EnviromentDBAPI();
 
             //cohort
-        }
-
-        ~MedialynxData () {
-            dbContext.Dispose();
-        }
-
-        public DbSet<Models.User> Users {
-            get { return dbContext.Users; }
         }
     }
 }

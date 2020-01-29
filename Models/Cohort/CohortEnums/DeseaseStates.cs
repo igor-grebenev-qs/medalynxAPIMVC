@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MedalynxAPI.Models.Enums
+namespace MedalynxAPI.Models.Cohort.CohortEnums
 {
-    public class DeseaseStateItem
+    public class DeseaseStates
     {
-        public string Id { get; set; } // guid
+        public string Id { get; set; }
         public string DeseaseState { get; set; }
         public float Percentage { get; set; }
     }

@@ -10,7 +10,7 @@ namespace MedalynxAPI.Controllers
 {
     [Produces(MediaTypeNames.Application.Json)]
     [Route("[controller]")]
-    public class Controller : MedalynxControllerBase
+    public class EnviromentsController : MedalynxControllerBase
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]

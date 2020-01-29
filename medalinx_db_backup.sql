@@ -49,9 +49,7 @@ DROP TABLE IF EXISTS `Biomarkers`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Biomarkers` (
   `Id` varchar(38) NOT NULL,
-  `Criteria` varchar(1024) DEFAULT NULL,
   `DeseaseState` varchar(1024) DEFAULT NULL,
-  `Biomarkerscol` float DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -66,6 +64,32 @@ LOCK TABLES `Biomarkers` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `CohortEnums`
+--
+
+DROP TABLE IF EXISTS `CohortEnums`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `CohortEnums` (
+  `Id` varchar(38) NOT NULL,
+  `Name` varchar(1024) DEFAULT NULL,
+  `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `LastUpdate` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Cohort enums:\n  DeseaseStates\n  GeneticMatches\n  Biomarkers\n  Demographics\n  Ethnicitys\n  StageOfDeseases\n  Prognosis\n  PreviousTreatments';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `CohortEnums`
+--
+
+LOCK TABLES `CohortEnums` WRITE;
+/*!40000 ALTER TABLE `CohortEnums` DISABLE KEYS */;
+INSERT INTO `CohortEnums` VALUES ('{152583bb-7105-462e-ad74-c9702696feae}','PreviousTreatments','2020-01-29 06:39:24','2020-01-29 06:39:24'),('{3089e988-cbaa-4417-9ff2-447a3d90a534}','DeseaseStates','2020-01-29 12:00:00','2020-01-29 12:00:00'),('{441ae4d5-6bac-4ff2-9153-4fa88393a7e6}','GeneticMatches','2020-01-29 06:39:22','2020-01-29 06:39:22'),('{47f7bac5-60e6-4161-86d9-4ec5f561cafa}','Demographics','2020-01-29 06:39:23','2020-01-29 06:39:23'),('{5d65643e-4060-48e3-a094-347133b0ed81}','Prognosis','2020-01-29 06:39:24','2020-01-29 06:39:24'),('{bc70c1e5-04ff-40ef-a80f-f5911f99bfc4}','Biomarkers','2020-01-29 06:39:22','2020-01-29 06:39:22'),('{cc77ecca-8279-4c9d-b321-064ba492ba9e}','StageOfDeseases','2020-01-29 06:39:23','2020-01-29 06:39:23'),('{f1c60ef6-f4cc-45c6-9dc3-e53d9edc14c5}','Ethnicitys','2020-01-29 06:39:23','2020-01-29 06:39:23');
+/*!40000 ALTER TABLE `CohortEnums` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Cohorts`
 --
 
@@ -75,16 +99,11 @@ DROP TABLE IF EXISTS `Cohorts`;
 CREATE TABLE `Cohorts` (
   `Id` varchar(38) NOT NULL COMMENT 'Guid',
   `UserId` varchar(38) NOT NULL DEFAULT '{00000000-0000-0000-0000-000000000000}',
-  `DeseaseState` longtext DEFAULT '[]',
-  `GeneticMatches` longtext DEFAULT '[]',
-  `Biomarkers` longtext DEFAULT '[]',
-  `Demographics` longtext DEFAULT '[]',
-  `Ethnicity` longtext DEFAULT '[]',
-  `StageOfDesease` longtext DEFAULT '[]',
-  `Prognosis` longtext DEFAULT '[]',
-  `PreviousTreatment` longtext DEFAULT '[]',
   `NumberOfSubjectsRequired` int(11) DEFAULT 0,
+  `CohortType` varchar(1024) DEFAULT NULL,
   `Request` int(11) DEFAULT 0,
+  `CreationDate` datetime DEFAULT current_timestamp(),
+  `LastUpdate` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -107,10 +126,8 @@ DROP TABLE IF EXISTS `Demographics`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Demographics` (
   `Id` varchar(38) NOT NULL,
-  `Criteria` varchar(1024) DEFAULT NULL,
-  `Age` varchar(255) DEFAULT NULL,
-  `Gender` varchar(255) DEFAULT NULL,
-  `Demographicscol` float DEFAULT 0,
+  `Age` varchar(1024) DEFAULT NULL,
+  `Gender` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -134,7 +151,6 @@ DROP TABLE IF EXISTS `DeseaseStates`;
 CREATE TABLE `DeseaseStates` (
   `Id` varchar(38) NOT NULL,
   `DeseaseState` varchar(1024) DEFAULT NULL,
-  `Percentage` float DEFAULT 0,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -145,7 +161,7 @@ CREATE TABLE `DeseaseStates` (
 
 LOCK TABLES `DeseaseStates` WRITE;
 /*!40000 ALTER TABLE `DeseaseStates` DISABLE KEYS */;
-INSERT INTO `DeseaseStates` VALUES ('{4f57817f-3113-4f2f-9617-ca881061df2b}','Localised Salmonella infections',0),('{5197faa8-c0c3-4f47-981c-6fb7fb7aab7a}','Paratyphoid fever A',0),('{cace0279-ad76-4529-bc2e-58078c665bdb}','Salmonella septicaemia',0),('{f14840b5-46c2-46e8-a92c-f9b2dbc5dbd7}','Salmonella gastro-enteritis',0);
+INSERT INTO `DeseaseStates` VALUES ('{4f57817f-3113-4f2f-9617-ca881061df2b}','Localised Salmonella infections'),('{5197faa8-c0c3-4f47-981c-6fb7fb7aab7a}','Paratyphoid fever A'),('{cace0279-ad76-4529-bc2e-58078c665bdb}','Salmonella septicaemia'),('{f14840b5-46c2-46e8-a92c-f9b2dbc5dbd7}','Salmonella gastro-enteritis');
 /*!40000 ALTER TABLE `DeseaseStates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,9 +203,7 @@ DROP TABLE IF EXISTS `Ethnicitys`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Ethnicitys` (
   `Id` varchar(38) NOT NULL,
-  `Criteria` varchar(1024) DEFAULT NULL,
   `Nationality` varchar(1024) DEFAULT NULL,
-  `Percentage` float DEFAULT 0,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -212,13 +226,11 @@ DROP TABLE IF EXISTS `GeneticMatches`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `GeneticMatches` (
   `Id` varchar(38) NOT NULL,
-  `Criteria` varchar(1024) DEFAULT NULL,
   `Chromosome` int(11) DEFAULT NULL,
   `Position` int(11) DEFAULT NULL,
   `Ref` varchar(1024) DEFAULT NULL,
   `Alt` varchar(1024) DEFAULT NULL,
   `dbSNP` varchar(1024) DEFAULT NULL,
-  `Percentage` float DEFAULT 0,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -241,9 +253,7 @@ DROP TABLE IF EXISTS `PreviousTreatments`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `PreviousTreatments` (
   `Id` varchar(38) NOT NULL,
-  `Criteria` varchar(1024) DEFAULT NULL,
   `Keyword` varchar(1024) DEFAULT NULL,
-  `Percentage` float DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -266,9 +276,7 @@ DROP TABLE IF EXISTS `Prognosis`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Prognosis` (
   `Id` varchar(38) NOT NULL,
-  `Criteria` varchar(1024) DEFAULT NULL,
   `Keyword` varchar(1024) DEFAULT NULL,
-  `Percentage` float DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -283,30 +291,28 @@ LOCK TABLES `Prognosis` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `StageOfDesease`
+-- Table structure for table `StageOfDeseases`
 --
 
-DROP TABLE IF EXISTS `StageOfDesease`;
+DROP TABLE IF EXISTS `StageOfDeseases`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `StageOfDesease` (
+CREATE TABLE `StageOfDeseases` (
   `Id` varchar(38) NOT NULL,
-  `Criteria` varchar(1024) DEFAULT NULL,
   `StageOfTumour` int(11) DEFAULT NULL,
   `NumberOfNodesAffected` int(11) DEFAULT NULL,
   `NumberOfMetastasis` int(11) DEFAULT NULL,
-  `StageOfDeseasecol` float DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `StageOfDesease`
+-- Dumping data for table `StageOfDeseases`
 --
 
-LOCK TABLES `StageOfDesease` WRITE;
-/*!40000 ALTER TABLE `StageOfDesease` DISABLE KEYS */;
-/*!40000 ALTER TABLE `StageOfDesease` ENABLE KEYS */;
+LOCK TABLES `StageOfDeseases` WRITE;
+/*!40000 ALTER TABLE `StageOfDeseases` DISABLE KEYS */;
+/*!40000 ALTER TABLE `StageOfDeseases` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -362,7 +368,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES ('{1d9ba239-853e-4f48-b693-e55527599357}','test@mail.ru','Igor',NULL,NULL,38,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}','igor.grebenev@quantumsoft.ru','Igor','Grebenev','Quantumsoft Group',38,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{62f9cb80-1639-46cf-903b-1932ba4159fd}','igor.ge@mail.ru','AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','Grebenev','Quantumsoft',0,'','2020-01-28 12:11:00','2020-01-28 12:16:27'),('{69576e2e-bd65-430a-bd12-b0451c653664}','test2@mail.ru','NewUser2',NULL,NULL,3,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{7bc415c8-9395-4801-b12d-ced9a8daf880}','igor.ge@mail.ru_new1','Igor (TEST USER) UPDATED2','Grebenev','Quantumsoft',0,'','2020-01-28 12:11:00','2020-01-28 19:18:30'),('{8bb9b66c-7ec2-4016-a286-33215e2211de}','test3@mail.ru','NewUser3',NULL,NULL,3,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27');
+INSERT INTO `Users` VALUES ('{1d9ba239-853e-4f48-b693-e55527599357}','test@mail.ru','Igor',NULL,NULL,38,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}','igor.grebenev@quantumsoft.ru','Igor','Grebenev','Quantumsoft Group',38,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{62f9cb80-1639-46cf-903b-1932ba4159fd}','igor.ge@mail.ru','Igor (TEST USER) UPDATED P2','Grebenev','Quantumsoft',0,'','2020-01-28 12:11:00','2020-01-28 15:49:20'),('{69576e2e-bd65-430a-bd12-b0451c653664}','test2@mail.ru','NewUser2',NULL,NULL,3,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{7bc415c8-9395-4801-b12d-ced9a8daf880}','igor.ge@mail.ru_new1','Igor (TEST USER) UPDATED2','Grebenev','Quantumsoft',0,'','2020-01-28 12:11:00','2020-01-28 19:18:30'),('{8bb9b66c-7ec2-4016-a286-33215e2211de}','test3@mail.ru','NewUser3',NULL,NULL,3,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -375,4 +381,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-28 21:48:38
+-- Dump completed on 2020-01-29 15:57:06

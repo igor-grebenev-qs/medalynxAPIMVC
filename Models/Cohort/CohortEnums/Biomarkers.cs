@@ -1,6 +1,6 @@
-﻿namespace MedalynxAPI.Models.Cohort.CohortEnums
+namespace medalynxAPIMVC.Models.Cohort.CohortEnums
 {
-    public class DeseaseStates
+    public class Biomarkers
     {
         public string Id { get; set; }
         public string DeseaseState { get; set; }

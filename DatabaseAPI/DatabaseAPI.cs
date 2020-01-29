@@ -74,29 +74,29 @@ namespace MedalynxAPI
         public List<Enviroment> GetEnviroment(string userId = "{00000000-0000-0000-0000-000000000000}")
         {
             Guid id = Utils.ToGuid(userId);
-            List<Enviroment> enviroments = new List<Enviroment>();
-            using (var dbContext = new MedialynxDbEnviromentsContext()) {
+            List<Enviroment> Environments = new List<Enviroment>();
+            using (var dbContext = new MedialynxDbEnvironmentsContext()) {
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    Enviroment enviroment = dbContext.Enviroments.FirstOrDefault(enviroment => enviroment != null && enviroment.UserId == sid);
-                    enviroments.Add(enviroment);
+                    Enviroment enviroment = dbContext.Environments.FirstOrDefault(enviroment => enviroment != null && enviroment.UserId == sid);
+                    Environments.Add(enviroment);
                 }
                 else
                 {
-                    // Add all enviroments
-                    enviroments.AddRange(dbContext.Enviroments);
+                    // Add all Environments
+                    Environments.AddRange(dbContext.Environments);
                 }
             }
-            return enviroments;
+            return Environments;
         }
 
         public bool AddEnviroment(Enviroment enviroment)
         {
             try
             {
-                using (var dbContext = new MedialynxDbEnviromentsContext()) {
-                    dbContext.Enviroments.Add(enviroment);
+                using (var dbContext = new MedialynxDbEnvironmentsContext()) {
+                    dbContext.Environments.Add(enviroment);
                     dbContext.SaveChanges();
                 }
                 return true;
@@ -111,11 +111,11 @@ namespace MedalynxAPI
         {
             try
             {
-                using (var dbContext = new MedialynxDbEnviromentsContext()) {
-                    Enviroment existsEnviroment = dbContext.Enviroments.FirstOrDefault(env => env != null && env.Id == enviroment.Id);
+                using (var dbContext = new MedialynxDbEnvironmentsContext()) {
+                    Enviroment existsEnviroment = dbContext.Environments.FirstOrDefault(env => env != null && env.Id == enviroment.Id);
                     if (existsEnviroment != null)
                     {
-                        dbContext.Enviroments.Update(enviroment);
+                        dbContext.Environments.Update(enviroment);
                         dbContext.SaveChanges();
                     }
                 }

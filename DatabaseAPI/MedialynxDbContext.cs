@@ -30,7 +30,7 @@ namespace MedalynxAPI
         public DbSet<Models.Enums.AnalyticalApplicationItem> AnalyticalApplications { get; set; }
     }
 
-    public class MedialynxDbEnviromentsContext : BaseDbContext {
-        public DbSet<Models.Enviroment> Enviroments { get; set; }
+    public class MedialynxDbEnvironmentsContext : BaseDbContext {
+        public DbSet<Models.Enviroment> Environments { get; set; }
     }
 }

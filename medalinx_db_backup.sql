@@ -166,13 +166,13 @@ INSERT INTO `DeseaseStates` VALUES ('{4f57817f-3113-4f2f-9617-ca881061df2b}','Lo
 UNLOCK TABLES;
 
 --
--- Table structure for table `Enviroments`
+-- Table structure for table `Environments`
 --
 
-DROP TABLE IF EXISTS `Enviroments`;
+DROP TABLE IF EXISTS `Environments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Enviroments` (
+CREATE TABLE `Environments` (
   `Id` varchar(38) NOT NULL,
   `UserId` varchar(38) NOT NULL,
   `NumberOfUsers` int(11) DEFAULT 0,
@@ -185,13 +185,13 @@ CREATE TABLE `Enviroments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Enviroments`
+-- Dumping data for table `Environments`
 --
 
-LOCK TABLES `Enviroments` WRITE;
-/*!40000 ALTER TABLE `Enviroments` DISABLE KEYS */;
-INSERT INTO `Enviroments` VALUES ('{5b890fcd-7017-4474-89c8-6ba3810868f2}','{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}',10,100,'[]','{2f3ff4f0-b363-40ba-990d-7b80f0df574f}',0);
-/*!40000 ALTER TABLE `Enviroments` ENABLE KEYS */;
+LOCK TABLES `Environments` WRITE;
+/*!40000 ALTER TABLE `Environments` DISABLE KEYS */;
+INSERT INTO `Environments` VALUES ('{5b890fcd-7017-4474-89c8-6ba3810868f2}','{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}',10,100,'[]','{2f3ff4f0-b363-40ba-990d-7b80f0df574f}',0);
+/*!40000 ALTER TABLE `Environments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -381,4 +381,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-29 15:57:06
+-- Dump completed on 2020-01-29 16:09:46

@@ -10,14 +10,14 @@ namespace MedalynxAPI.Controllers
 {
     [Produces(MediaTypeNames.Application.Json)]
     [Route("[controller]")]
-    public class EnviromentsController : MedalynxControllerBase
+    public class EnvironmentsController : MedalynxControllerBase
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<List<Enviroment>> GetAll() {
-            List<Enviroment> enviroments = Program.MedialynxData.enviromentDBAPI.GetEnviroment();
-            return enviroments;
+            List<Enviroment> Environments = Program.MedialynxData.enviromentDBAPI.GetEnviroment();
+            return Environments;
         }
 
         [HttpGet("{id}")]
@@ -26,13 +26,13 @@ namespace MedalynxAPI.Controllers
         public ActionResult<Enviroment> GetById(string id/*guid*/)
         {
             string sid = Utils.ToGuid(id, false).ToString("B");
-            List<Enviroment> enviroments = Program.MedialynxData.enviromentDBAPI.GetEnviroment(sid);
-            if (enviroments.Count != 1)
+            List<Enviroment> Environments = Program.MedialynxData.enviromentDBAPI.GetEnviroment(sid);
+            if (Environments.Count != 1)
             {
                 return NotFound();
             }
 
-            return enviroments[0];
+            return Environments[0];
         }
 
         [HttpPost]

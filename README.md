@@ -34,10 +34,10 @@ PUT /Users (update exists user. You can provide not all fields. id - reqired
         }
 )
 
-ENVIROMENTS:
-GET /Enviroments
-GET /Enviroments/{UserId}
-POST /Enviroments (create new enviroment
+Environments:
+GET /Environments
+GET /Environments/{UserId}
+POST /Environments (create new enviroment
         body for request sample:
         {
             "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",

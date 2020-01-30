@@ -65,5 +65,13 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.userDBAPI.UpdateUser(user);
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
         }
+
+        [HttpOptions]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Enviroment> Options()
+        {
+            return Ok();
+        }
     }
 }

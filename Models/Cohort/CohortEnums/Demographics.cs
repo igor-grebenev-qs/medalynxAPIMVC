@@ -1,4 +1,4 @@
-namespace medalynxAPIMVC.Models.Cohort.CohortEnums
+namespace MedalynxAPI.Models.Cohort.CohortEnums
 {
     public class Demographics
     {

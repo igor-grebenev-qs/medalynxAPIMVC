@@ -49,34 +49,37 @@ POST /Enviroments (create new enviroment
         }
 )
 
-ENUMS:
+ENUMMS ???:
 ----------------------------------------------------------------------------------------------------------------------
+
+COHORTS:
+!!! Important !!! When cohor creating links filling from original enumst into CohortEnumLinks !!!
+
 GET
-    /AnalyticalApplications
-    /AnalyticalApplications/{id}
+    /Cohorts
+    /Cohorts/{id}
 POST
     /AnalyticalApplications (create new AnalyticalApplications item
         body for request sample :
         {
-            "pos": 7,
-            "name": "BWA"
+            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+            "numberOfSubjectsRequired": 1,
+            "cohortType": "unknown",
+            "request": 0,
+            "creationDate": "2020-01-30T06:25:13",
+            "lastUpdate": "2020-01-30T06:25:13"
         }
-    )
 )
-----------------------------------------------------------------------------------------------------------------------
-GET
-    /DeseaseStates
-    /DeseaseStates/{id}
-POST
-    /DeseaseStates (create me enum item
-        body for request :
+PUT
+    /AnalyticalApplications (create new AnalyticalApplications item
+        body for request sample :
         {
-            "deseaseState": "Localised Salmonella infections",
-            "percentage": 0
+            "id": "{c9b1ab2d-fa5d-4ce1-9604-3b7b6061c95b}",
+            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+            "numberOfSubjectsRequired": 1,
+            "cohortType": "unknown",
+            "request": 0,
+            "creationDate": "2020-01-30T06:25:13",
+            "lastUpdate": "2020-01-30T06:25:13"
         }
-    )
 )
-----------------------------------------------------------------------------------------------------------------------
-
-
-COHORTS:

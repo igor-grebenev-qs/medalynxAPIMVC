@@ -41,7 +41,7 @@ namespace MedalynxAPI.Controllers
         public ActionResult<User> Create(User user)
         {
             Guid id = Utils.ToGuid(user.Id, false);
-            user.CreationDate = DateTime.Now;
+            user.CreationDate = DateTime.UtcNow;
             user.LastUpdate = user.CreationDate;
             if (id == Guid.Empty) {
                 user.Id = Guid.NewGuid().ToString("B");
@@ -61,7 +61,7 @@ namespace MedalynxAPI.Controllers
             if (id == Guid.Empty) {
                 return BadRequest();
             }
-            user.LastUpdate = DateTime.Now;
+            user.LastUpdate = DateTime.UtcNow;
             Program.MedialynxData.userDBAPI.UpdateUser(user);
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
         }

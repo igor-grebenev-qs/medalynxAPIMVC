@@ -60,7 +60,39 @@ CREATE TABLE `Biomarkers` (
 
 LOCK TABLES `Biomarkers` WRITE;
 /*!40000 ALTER TABLE `Biomarkers` DISABLE KEYS */;
+INSERT INTO `Biomarkers` VALUES ('{3399fdb9-f33c-4532-8fc4-cd370fde592e}','Progesterone'),('{7b1b6585-e9dd-4d17-9ef0-af179246e2b3}','Calcium'),('{7f93db44-b29a-4039-a836-e713044d444c}','C-Reactive Protein'),('{92f64a21-6170-4019-8cc8-917ab7e8b4dd}','Absolute Monocytes	');
 /*!40000 ALTER TABLE `Biomarkers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `CohortEnumLink`
+--
+
+DROP TABLE IF EXISTS `CohortEnumLink`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `CohortEnumLink` (
+  `Id` varchar(38) NOT NULL,
+  `CohortId` varchar(38) NOT NULL,
+  `CohortEnumId` varchar(38) NOT NULL,
+  `EnumItemId` varchar(38) DEFAULT NULL,
+  `Include` int(11) DEFAULT 0,
+  `Percentage` float DEFAULT NULL COMMENT 'Percentage match to the criteria grouped into bands',
+  `NumberOfSubjects` int(11) DEFAULT NULL COMMENT 'Number of subjects matching the criteria',
+  `Rate` float DEFAULT NULL COMMENT 'Rate of growth of the subject base matching the inclusion criteria',
+  `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `LastUpdate` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `CohortEnumLink`
+--
+
+LOCK TABLES `CohortEnumLink` WRITE;
+/*!40000 ALTER TABLE `CohortEnumLink` DISABLE KEYS */;
+/*!40000 ALTER TABLE `CohortEnumLink` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -138,6 +170,7 @@ CREATE TABLE `Demographics` (
 
 LOCK TABLES `Demographics` WRITE;
 /*!40000 ALTER TABLE `Demographics` DISABLE KEYS */;
+INSERT INTO `Demographics` VALUES ('{acb0eeeb-e141-4e34-8177-274fd392a39d}','25-27','Female'),('{c2474a7f-16db-4bc9-b7f4-915f4baadd48}','18-24','Male');
 /*!40000 ALTER TABLE `Demographics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,6 +247,7 @@ CREATE TABLE `Ethnicitys` (
 
 LOCK TABLES `Ethnicitys` WRITE;
 /*!40000 ALTER TABLE `Ethnicitys` DISABLE KEYS */;
+INSERT INTO `Ethnicitys` VALUES ('{1b48b566-2323-4f84-9f13-311a189dbea7}','Hispanic or Latino');
 /*!40000 ALTER TABLE `Ethnicitys` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,6 +275,7 @@ CREATE TABLE `GeneticMatches` (
 
 LOCK TABLES `GeneticMatches` WRITE;
 /*!40000 ALTER TABLE `GeneticMatches` DISABLE KEYS */;
+INSERT INTO `GeneticMatches` VALUES ('{555babc2-3a1d-4025-b835-a8098945726c}',23,10862848,'C','F','rs3916649'),('{a6b6e490-4d92-4f0b-8352-3fd8a1e8d268}',40,10862847,'B','H','rs3916648'),('{b784b009-20e8-43c7-9251-5593e1183484}',45,10862849,'D','L','rs3916640'),('{f132a112-030b-423e-a304-69748cad26d5}',5,10862846,'A','T','rs3916645');
 /*!40000 ALTER TABLE `GeneticMatches` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,6 +299,7 @@ CREATE TABLE `PreviousTreatments` (
 
 LOCK TABLES `PreviousTreatments` WRITE;
 /*!40000 ALTER TABLE `PreviousTreatments` DISABLE KEYS */;
+INSERT INTO `PreviousTreatments` VALUES ('{94c14b9a-0cec-4c86-8a7d-53fb17ead9b8}','Mortin');
 /*!40000 ALTER TABLE `PreviousTreatments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,6 +323,7 @@ CREATE TABLE `Prognosis` (
 
 LOCK TABLES `Prognosis` WRITE;
 /*!40000 ALTER TABLE `Prognosis` DISABLE KEYS */;
+INSERT INTO `Prognosis` VALUES ('{e869be57-0400-4c55-9d6d-911e5af0a51f}','Tumor');
 /*!40000 ALTER TABLE `Prognosis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,6 +349,7 @@ CREATE TABLE `StageOfDeseases` (
 
 LOCK TABLES `StageOfDeseases` WRITE;
 /*!40000 ALTER TABLE `StageOfDeseases` DISABLE KEYS */;
+INSERT INTO `StageOfDeseases` VALUES ('{42511681-3320-4b70-8c8a-7b41a62edf07}',3,6,6);
 /*!40000 ALTER TABLE `StageOfDeseases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -381,4 +419,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-29 15:57:06
+-- Dump completed on 2020-01-30 11:48:22

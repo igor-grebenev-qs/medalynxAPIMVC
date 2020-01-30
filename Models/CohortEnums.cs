@@ -1,6 +1,6 @@
 using System;
 
-namespace medalynxAPIMVC.Models
+namespace MedalynxAPI.Models
 {
     public class CohortEnums
     {

@@ -6,6 +6,7 @@ using MedalynxAPI.Models;
 namespace MedalynxAPI.Controllers
 {
     [ApiController]
+    [AddHeader("Access-Control-Allow-Headers", "*")]
     [AddHeader("Access-Control-Allow-Origin", "*")]
     public class MedalynxControllerBase : ControllerBase
     {

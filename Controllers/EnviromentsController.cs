@@ -46,5 +46,13 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.enviromentDBAPI.AddEnviroment(enviroment);
             return CreatedAtAction(nameof(GetById), new { id = enviroment.Id }, enviroment);
         }
+
+        [HttpOptions]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Enviroment> Options()
+        {
+            return Ok();
+        }
     }
 }

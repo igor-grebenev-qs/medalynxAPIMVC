@@ -48,5 +48,13 @@ namespace MedalynxAPI.Controllers.Enums
             Program.MedialynxData.cohortEnumsDBAPI.AddItem(item);
             return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
         }
+
+        [HttpOptions]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Enviroment> Options()
+        {
+            return Ok();
+        }
     }
 }

@@ -80,5 +80,13 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.cohortEnumLinkDBAPI.UpdateCohortEnumLink(link);
             return CreatedAtAction(nameof(GetById), new { id = link.Id }, link);
         }
+
+        [HttpOptions]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Enviroment> Options()
+        {
+            return Ok();
+        }
     }
 }

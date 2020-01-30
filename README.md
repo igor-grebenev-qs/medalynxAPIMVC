@@ -49,17 +49,49 @@ POST /Enviroments (create new enviroment
         }
 )
 
-ENUMMS ???:
+ENUMMS:
+----------------------------------------------------------------------------------------------------------------------
+GET
+    /AnalyticalApplications
+    /AnalyticalApplications/{id}
+POST
+    /AnalyticalApplications (create new AnalyticalApplications item
+        body for request sample :
+        {
+            "pos": 9,
+            "name": "BWA"
+        },
+)
+PUT
+    /AnalyticalApplications (update AnalyticalApplications item
+        body for request sample :
+        {
+            "id": "{01176d49-d602-46b3-bdee-ead758ccec07}",
+            "pos": 7,
+            "name": "BWA"
+        },
+)
+----------------------------------------------------------------------------------------------------------------------
+GET
+    /CohortEnums
+    /CohortEnums/{id}
+POST
+    /CohortEnums (create new AnalyticalApplications item
+        body for request sample :
+        {
+            "name": "PreviousTreatments"
+        },
+)
 ----------------------------------------------------------------------------------------------------------------------
 
-COHORTS:
-!!! Important !!! When cohor creating links filling from original enumst into CohortEnumLinks !!!
 
+COHORTS:
+!!! Important !!! When cohort creating links will be filled from original enumst into CohortEnumLinks !!!
 GET
     /Cohorts
     /Cohorts/{id}
 POST
-    /AnalyticalApplications (create new AnalyticalApplications item
+    /Cohorts (create new Cohort item
         body for request sample :
         {
             "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
@@ -71,7 +103,7 @@ POST
         }
 )
 PUT
-    /AnalyticalApplications (create new AnalyticalApplications item
+    /AnalyticalApplications (update Cohort item
         body for request sample :
         {
             "id": "{c9b1ab2d-fa5d-4ce1-9604-3b7b6061c95b}",

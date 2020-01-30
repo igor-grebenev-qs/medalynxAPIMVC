@@ -9,6 +9,7 @@ namespace MedalynxAPI
 {
     public class MedialynxData {
         public AnalyticalApplicationsDBAPI analyticalApplicationsDBAPI;
+        public CohortEnumsDBAPI cohortEnumsDBAPI;
         public UserDBAPI userDBAPI;
         public EnviromentDBAPI enviromentDBAPI;
         public CohortDBAPI cohortDBAPI;
@@ -17,6 +18,7 @@ namespace MedalynxAPI
         public MedialynxData () {
             // enums
             analyticalApplicationsDBAPI = new AnalyticalApplicationsDBAPI();
+            cohortEnumsDBAPI = new CohortEnumsDBAPI();
 
             //user
             userDBAPI = new UserDBAPI();

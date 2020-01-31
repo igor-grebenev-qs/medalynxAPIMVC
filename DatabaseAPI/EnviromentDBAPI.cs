@@ -8,7 +8,7 @@ namespace MedalynxAPI
     public class EnviromentDBAPI
     {
         // Get Enviroment by user
-        public List<Enviroment> Get(string userId = "{00000000-0000-0000-0000-000000000000}")
+        public List<Enviroment> GetByUser(string userId = "{00000000-0000-0000-0000-000000000000}")
         {
             Guid id = Utils.ToGuid(userId);
             List<Enviroment> enviroments = new List<Enviroment>();

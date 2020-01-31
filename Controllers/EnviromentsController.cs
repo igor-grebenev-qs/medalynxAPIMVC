@@ -15,16 +15,16 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<List<Enviroment>> GetAll() {
-            return Program.MedialynxData.enviromentDBAPI.Get();
+            return Program.MedialynxData.enviromentDBAPI.GetByUser();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Enviroment> GetById(string id)
+        public ActionResult<Enviroment> GetById(string userId)
         {
-            string sid = Utils.ToGuid(id, false).ToString("B");
-            List<Enviroment> enviroments = Program.MedialynxData.enviromentDBAPI.Get(sid);
+            string sid = Utils.ToGuid(userId, false).ToString("B");
+            List<Enviroment> enviroments = Program.MedialynxData.enviromentDBAPI.GetByUser(sid);
             if (enviroments.Count != 1)
             {
                 return NotFound();

@@ -1,8 +1,5 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using MedalynxAPI.Models.User;
+using MedalynxAPI.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedalynxAPI
@@ -23,11 +20,11 @@ namespace MedalynxAPI
     }
 
     public class MedialynxDbUserContext : BaseDbContext {
-        public DbSet<Models.User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 
     public class MedialynxDbAnalyticalApplicationsContext : BaseDbContext {
-        public DbSet<Models.Enums.AnalyticalApplicationItem> AnalyticalApplications { get; set; }
+        public DbSet<AnalyticalApplicationItem> AnalyticalApplications { get; set; }
     }
 
     public class MedialynxDbEnviromentsContext : BaseDbContext {
@@ -72,5 +69,9 @@ namespace MedalynxAPI
     }
     public class MedialynxDbNotificationsContext : BaseDbContext {
         public DbSet<Models.Notification> Notifications { get; set; }
+    }
+
+    public class MedialynxDbMessagesContext : BaseDbContext {
+        public DbSet<Models.User.Message> Messages { get; set; }
     }
 }

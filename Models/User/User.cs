@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MedalynxAPI.Models
+namespace MedalynxAPI.Models.User
 {
     public class User
     {

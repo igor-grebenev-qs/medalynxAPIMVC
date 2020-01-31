@@ -4,46 +4,43 @@ using System.Net.Mime;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MedalynxAPI.Models;
+using MedalynxAPI.Models.User;
 
-namespace MedalynxAPI.Controllers.Enums
+namespace MedalynxAPI.Controllers
 {
     [Produces(MediaTypeNames.Application.Json)]
     [Route("[controller]")]
-    public class CohortEnumsController : MedalynxControllerBase
+    public class MessagesController : MedalynxControllerBase
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<List<CohortEnums>> GetAll() {
-            return Program.MedialynxData.cohortEnumsDBAPI.Get();
+        public ActionResult<List<Message>> GetAll() {
+            return Program.MedialynxData.messageDBAPI.GetByUser();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<CohortEnums> GetById(string id)
+        public ActionResult<List<Message>> GetById(string userId)
         {
-            string sid = Utils.ToGuid(id, false).ToString("B");
-            List<CohortEnums> items = Program.MedialynxData.cohortEnumsDBAPI.Get(sid);
-            if (items.Count != 1)
-            {
-                return NotFound();
-            }
-
-            return items[0];
+            string sid = Utils.ToGuid(userId, false).ToString("B");
+            return Program.MedialynxData.messageDBAPI.GetByUser(sid);
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<CohortEnums> Create(CohortEnums item)
+        public ActionResult<Message> Create(Message message)
         {
-            Guid id = Utils.ToGuid(item.Id, false);
+            Guid id = Utils.ToGuid(message.Id, false);
+            message.CreationDate = DateTime.UtcNow;
             if (id == Guid.Empty) {
-                item.Id = Guid.NewGuid().ToString("B");
+                message.Id = Guid.NewGuid().ToString("B");
+                Program.MedialynxData.messageDBAPI.Add(message);
+                return CreatedAtAction(nameof(GetById), new { id = message.Id }, message);
             }
-            Program.MedialynxData.cohortEnumsDBAPI.Add(item);
-            return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
+            return BadRequest();
         }
 
         [HttpOptions]

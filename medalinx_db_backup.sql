@@ -227,7 +227,7 @@ CREATE TABLE `Enviroments` (
 
 LOCK TABLES `Enviroments` WRITE;
 /*!40000 ALTER TABLE `Enviroments` DISABLE KEYS */;
-INSERT INTO `Enviroments` VALUES ('{5b890fcd-7017-4474-89c8-6ba3810868f2}','{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}',10,100,'[]','{2f3ff4f0-b363-40ba-990d-7b80f0df574f}',0,'2020-01-31 05:25:01','2020-01-31 05:28:07');
+INSERT INTO `Enviroments` VALUES ('{5b890fcd-7017-4474-89c8-6ba3810868f2}','{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}',10,100,'[]','{2f3ff4f0-b363-40ba-990d-7b80f0df574f}',0,'2020-01-31 05:25:01','2020-01-31 05:28:07'),('{9787dda9-0d30-47fd-b3c7-3cff398cad0f}','',120,1,'[\"{c5e4dfe7-83ed-439c-9ec2-68f9ee059896}\",\"{ecbf979e-0853-4801-bda3-a60b23015750}\"]','{2f3ff4f0-b363-40ba-990d-7b80f0df574f}',2,'2020-01-31 06:23:13','2020-01-31 06:23:13'),('{9a053a72-49e0-42b8-a51c-db59895caeda}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}',1,1,'[\"{c5e4dfe7-83ed-439c-9ec2-68f9ee059896}\",\"{9ac8b41f-933e-4188-be8d-f4a5d81790d4}\",\"{ecbf979e-0853-4801-bda3-a60b23015750}\",\"{77478c17-b0d9-4f97-8c40-fc3d63e238d0}\"]','{c20cce93-c3d0-4ecb-8df7-7dedbaf34acf}',2,'2020-01-31 06:23:20','2020-01-31 06:23:20'),('{aa42028e-7120-4c7a-ae3d-77dac8bb1c5b}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}',12,100,'[\"{c5e4dfe7-83ed-439c-9ec2-68f9ee059896}\",\"{9ac8b41f-933e-4188-be8d-f4a5d81790d4}\",\"{77478c17-b0d9-4f97-8c40-fc3d63e238d0}\",\"{ecbf979e-0853-4801-bda3-a60b23015750}\"]','{c20cce93-c3d0-4ecb-8df7-7dedbaf34acf}',0,'2020-01-31 06:28:17','2020-01-31 06:28:17');
 /*!40000 ALTER TABLE `Enviroments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,6 +284,32 @@ INSERT INTO `GeneticMatches` VALUES ('{555babc2-3a1d-4025-b835-a8098945726c}','2
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Messages`
+--
+
+DROP TABLE IF EXISTS `Messages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Messages` (
+  `Id` varchar(38) NOT NULL,
+  `UserId` varchar(38) DEFAULT NULL,
+  `MessageBody` longtext DEFAULT NULL,
+  `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Messages`
+--
+
+LOCK TABLES `Messages` WRITE;
+/*!40000 ALTER TABLE `Messages` DISABLE KEYS */;
+INSERT INTO `Messages` VALUES ('{3b44a430-2d82-4623-af1f-2337f74e50c7}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','some message','2020-01-28 12:16:27'),('{e5c4c9fa-b3d8-4b5a-95ee-d96752e30cb2}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','message text','2020-01-31 09:21:24');
+/*!40000 ALTER TABLE `Messages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Notifications`
 --
 
@@ -294,8 +320,9 @@ CREATE TABLE `Notifications` (
   `Id` varchar(38) NOT NULL,
   `Message` longtext DEFAULT NULL,
   `NoicationType` int(11) NOT NULL COMMENT 'Environment, Cohort, Pharma user etc',
-  `Status` int(11) NOT NULL DEFAULT 0,
+  `Status` int(11) NOT NULL DEFAULT 0 COMMENT 'Created = 0, Read = 1, Cancelld = 2\n',
   `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `LastUpdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -306,6 +333,7 @@ CREATE TABLE `Notifications` (
 
 LOCK TABLES `Notifications` WRITE;
 /*!40000 ALTER TABLE `Notifications` DISABLE KEYS */;
+INSERT INTO `Notifications` VALUES ('{8a299213-b198-459b-b8d8-e7829f6e4677}','Environment request from Wendy Howard',0,0,'2020-01-31 12:00:00','2020-01-31 12:00:00');
 /*!40000 ALTER TABLE `Notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -449,4 +477,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-31 13:12:13
+-- Dump completed on 2020-01-31 16:47:29

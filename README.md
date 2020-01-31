@@ -152,3 +152,14 @@ PUT /Notifications (update enviroment
             "lastUpdate": "2020-01-31T12:00:00"
         }
 )
+
+MESSAGES:
+GET /Messages
+GET /Messages/{userId}
+POST /Messages (create new message for user
+        body for request sample:
+        {
+            "userId": "{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}",
+            "MessageBody": "message text"
+        }
+)

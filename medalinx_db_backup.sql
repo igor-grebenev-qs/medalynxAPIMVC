@@ -92,6 +92,7 @@ CREATE TABLE `CohortEnumLink` (
 
 LOCK TABLES `CohortEnumLink` WRITE;
 /*!40000 ALTER TABLE `CohortEnumLink` DISABLE KEYS */;
+INSERT INTO `CohortEnumLink` VALUES ('{14687e91-fd7f-47d2-b86e-63288839db26}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{bc70c1e5-04ff-40ef-a80f-f5911f99bfc4}','{3399fdb9-f33c-4532-8fc4-cd370fde592e}',0,0,0,0,'2020-01-30 08:27:56','2020-01-30 08:27:56'),('{1752eda0-5614-467b-8f7f-9af0c883b073}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{152583bb-7105-462e-ad74-c9702696feae}','{94c14b9a-0cec-4c86-8a7d-53fb17ead9b8}',0,0,0,0,'2020-01-30 08:27:53','2020-01-30 08:27:53'),('{2e7e812a-a67f-4903-b3ea-885e4335de89}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{47f7bac5-60e6-4161-86d9-4ec5f561cafa}','{c2474a7f-16db-4bc9-b7f4-915f4baadd48}',0,0,0,0,'2020-01-30 08:27:54','2020-01-30 08:27:54'),('{2fa1f449-5d58-443e-adcf-e066b34e181e}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{441ae4d5-6bac-4ff2-9153-4fa88393a7e6}','{b784b009-20e8-43c7-9251-5593e1183484}',0,0,0,0,'2020-01-30 08:27:54','2020-01-30 08:27:54'),('{36e22b1a-a13f-4bd0-a2bf-e0d115c358ec}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{3089e988-cbaa-4417-9ff2-447a3d90a534}','{cace0279-ad76-4529-bc2e-58078c665bdb}',0,0,0,0,'2020-01-30 08:27:53','2020-01-30 08:27:53'),('{648a8f87-c7a8-4034-ad62-55dbe8499555}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{bc70c1e5-04ff-40ef-a80f-f5911f99bfc4}','{7b1b6585-e9dd-4d17-9ef0-af179246e2b3}',0,0,0,0,'2020-01-30 08:27:56','2020-01-30 08:27:56'),('{6a018d0c-d144-41e2-b501-b44aeca9bc25}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{5d65643e-4060-48e3-a094-347133b0ed81}','{e869be57-0400-4c55-9d6d-911e5af0a51f}',0,0,0,0,'2020-01-30 08:27:55','2020-01-30 08:27:55'),('{79bc2713-60ac-46e2-8dce-1f6fdc136a94}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{441ae4d5-6bac-4ff2-9153-4fa88393a7e6}','{f132a112-030b-423e-a304-69748cad26d5}',0,0,0,0,'2020-01-30 08:27:54','2020-01-30 08:27:54'),('{7db84c08-f6b4-4387-9a03-0c91d298f6fe}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{f1c60ef6-f4cc-45c6-9dc3-e53d9edc14c5}','{1b48b566-2323-4f84-9f13-311a189dbea7}',0,0,0,0,'2020-01-30 08:27:57','2020-01-30 08:27:57'),('{91d71a08-4083-405e-908c-7dc6bf7adbab}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{441ae4d5-6bac-4ff2-9153-4fa88393a7e6}','{555babc2-3a1d-4025-b835-a8098945726c}',0,0,0,0,'2020-01-30 08:27:54','2020-01-30 08:27:54'),('{936cdbeb-e73d-4df6-8867-cc94e47a7239}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{bc70c1e5-04ff-40ef-a80f-f5911f99bfc4}','{92f64a21-6170-4019-8cc8-917ab7e8b4dd}',0,0,0,0,'2020-01-30 08:27:56','2020-01-30 08:27:56'),('{98621b0c-3b5e-4f13-95c3-da5415bf9fda}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{cc77ecca-8279-4c9d-b321-064ba492ba9e}','{42511681-3320-4b70-8c8a-7b41a62edf07}',0,0,0,0,'2020-01-30 08:27:56','2020-01-30 08:27:56'),('{c0e2bd40-c364-4633-bac8-a16aad230a34}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{47f7bac5-60e6-4161-86d9-4ec5f561cafa}','{acb0eeeb-e141-4e34-8177-274fd392a39d}',0,0,0,0,'2020-01-30 08:27:54','2020-01-30 08:27:54'),('{c4c6f605-588f-4415-b249-b7ffa29e3877}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{bc70c1e5-04ff-40ef-a80f-f5911f99bfc4}','{7f93db44-b29a-4039-a836-e713044d444c}',0,0,0,0,'2020-01-30 08:27:56','2020-01-30 08:27:56'),('{c9ede3ed-bd40-4cd8-b26a-5ae75d7086ac}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{3089e988-cbaa-4417-9ff2-447a3d90a534}','{f14840b5-46c2-46e8-a92c-f9b2dbc5dbd7}',0,0,0,0,'2020-01-30 08:27:53','2020-01-30 08:27:53'),('{d98c7cb0-d9b9-4abf-93c2-e4d0c525fed0}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{441ae4d5-6bac-4ff2-9153-4fa88393a7e6}','{a6b6e490-4d92-4f0b-8352-3fd8a1e8d268}',0,0,0,0,'2020-01-30 08:27:54','2020-01-30 08:27:54'),('{e89da75a-1923-478b-b2ce-8b0ccf1d9ea4}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{3089e988-cbaa-4417-9ff2-447a3d90a534}','{4f57817f-3113-4f2f-9617-ca881061df2b}',0,0,0,0,'2020-01-30 08:27:53','2020-01-30 08:27:53'),('{ea3640e5-f4fb-4422-b62a-2ee30a8fd52b}','{fc6ce350-bdac-4f47-b196-68016b848c5f}','{3089e988-cbaa-4417-9ff2-447a3d90a534}','{5197faa8-c0c3-4f47-981c-6fb7fb7aab7a}',0,0,0,0,'2020-01-30 08:27:53','2020-01-30 08:27:53');
 /*!40000 ALTER TABLE `CohortEnumLink` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,8 +135,8 @@ CREATE TABLE `Cohorts` (
   `NumberOfSubjectsRequired` int(11) DEFAULT 0,
   `CohortType` varchar(1024) DEFAULT NULL,
   `Request` int(11) DEFAULT 0,
-  `CreationDate` datetime DEFAULT current_timestamp(),
-  `LastUpdate` datetime DEFAULT current_timestamp(),
+  `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `LastUpdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -146,6 +147,7 @@ CREATE TABLE `Cohorts` (
 
 LOCK TABLES `Cohorts` WRITE;
 /*!40000 ALTER TABLE `Cohorts` DISABLE KEYS */;
+INSERT INTO `Cohorts` VALUES ('{fc6ce350-bdac-4f47-b196-68016b848c5f}','{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}',1,'unknown',1,'2020-01-30 08:27:47','2020-01-30 08:27:47');
 /*!40000 ALTER TABLE `Cohorts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,7 +262,7 @@ DROP TABLE IF EXISTS `GeneticMatches`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `GeneticMatches` (
   `Id` varchar(38) NOT NULL,
-  `Chromosome` int(11) DEFAULT NULL,
+  `Chromosome` varchar(1024) DEFAULT NULL,
   `Position` int(11) DEFAULT NULL,
   `Ref` varchar(1024) DEFAULT NULL,
   `Alt` varchar(1024) DEFAULT NULL,
@@ -275,7 +277,7 @@ CREATE TABLE `GeneticMatches` (
 
 LOCK TABLES `GeneticMatches` WRITE;
 /*!40000 ALTER TABLE `GeneticMatches` DISABLE KEYS */;
-INSERT INTO `GeneticMatches` VALUES ('{555babc2-3a1d-4025-b835-a8098945726c}',23,10862848,'C','F','rs3916649'),('{a6b6e490-4d92-4f0b-8352-3fd8a1e8d268}',40,10862847,'B','H','rs3916648'),('{b784b009-20e8-43c7-9251-5593e1183484}',45,10862849,'D','L','rs3916640'),('{f132a112-030b-423e-a304-69748cad26d5}',5,10862846,'A','T','rs3916645');
+INSERT INTO `GeneticMatches` VALUES ('{555babc2-3a1d-4025-b835-a8098945726c}','23',10862848,'C','F','rs3916649'),('{a6b6e490-4d92-4f0b-8352-3fd8a1e8d268}','40',10862847,'B','H','rs3916648'),('{b784b009-20e8-43c7-9251-5593e1183484}','45',10862849,'D','L','rs3916640'),('{f132a112-030b-423e-a304-69748cad26d5}','5',10862846,'A','T','rs3916645');
 /*!40000 ALTER TABLE `GeneticMatches` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,7 +408,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES ('{1d9ba239-853e-4f48-b693-e55527599357}','test@mail.ru','Igor',NULL,NULL,38,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}','igor.grebenev@quantumsoft.ru','Igor','Grebenev','Quantumsoft Group',38,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{62f9cb80-1639-46cf-903b-1932ba4159fd}','igor.ge@mail.ru','Igor (TEST USER) UPDATED P2','Grebenev','Quantumsoft',0,'','2020-01-28 12:11:00','2020-01-28 15:49:20'),('{69576e2e-bd65-430a-bd12-b0451c653664}','test2@mail.ru','NewUser2',NULL,NULL,3,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{7bc415c8-9395-4801-b12d-ced9a8daf880}','igor.ge@mail.ru_new1','Igor (TEST USER) UPDATED2','Grebenev','Quantumsoft',0,'','2020-01-28 12:11:00','2020-01-28 19:18:30'),('{8bb9b66c-7ec2-4016-a286-33215e2211de}','test3@mail.ru','NewUser3',NULL,NULL,3,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27');
+INSERT INTO `Users` VALUES ('{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','igor.ge@mail.ru_new1QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ','Igor (TEST USER)','Grebenev','Quantumsoft',0,'','2020-01-30 10:15:46','2020-01-30 10:15:46'),('{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}','igor.grebenev@quantumsoft.ru','Igor','Grebenev','Quantumsoft Group',38,NULL,'2020-01-28 12:11:00','2020-01-28 12:16:27'),('{7d82c349-2ab7-4b07-8830-8e598caf2b1e}','test100@mail.ru','','','',0,'','2020-01-30 10:06:16','2020-01-30 10:06:16');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -419,4 +421,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-30 11:48:22
+-- Dump completed on 2020-01-31 12:01:26

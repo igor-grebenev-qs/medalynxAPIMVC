@@ -40,10 +40,26 @@ namespace MedalynxAPI.Controllers
         public ActionResult<Enviroment> Create(Enviroment enviroment)
         {
             Guid id = Utils.ToGuid(enviroment.Id, false);
+            enviroment.CreationDate = DateTime.UtcNow;
+            enviroment.LastUpdate = enviroment.CreationDate;
             if (id == Guid.Empty) {
                 enviroment.Id = Guid.NewGuid().ToString("B");
             }
             Program.MedialynxData.enviromentDBAPI.AddEnviroment(enviroment);
+            return CreatedAtAction(nameof(GetById), new { id = enviroment.Id }, enviroment);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Enviroment> Update(Enviroment enviroment)
+        {
+            Guid id = Utils.ToGuid(enviroment.Id, false);
+            if (id == Guid.Empty) {
+                return BadRequest();
+            }
+            Program.MedialynxData.enviromentDBAPI.UpdateEnviroment(enviroment);
             return CreatedAtAction(nameof(GetById), new { id = enviroment.Id }, enviroment);
         }
 

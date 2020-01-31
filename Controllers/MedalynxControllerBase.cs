@@ -8,6 +8,7 @@ namespace MedalynxAPI.Controllers
     [ApiController]
     [AddHeader("Access-Control-Allow-Headers", "*")]
     [AddHeader("Access-Control-Allow-Origin", "*")]
+    [AddHeader("Access-Control-Allow-Methods", "PUT")]
     public class MedalynxControllerBase : ControllerBase
     {
 

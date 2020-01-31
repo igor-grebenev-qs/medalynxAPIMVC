@@ -82,6 +82,8 @@ namespace MedalynxAPI.Controllers
         }
 
         [HttpOptions]
+        [HttpOptions("{id}")]
+        [HttpOptions("CohortId/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> Options()

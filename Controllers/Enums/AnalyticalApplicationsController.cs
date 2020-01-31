@@ -17,17 +17,16 @@ namespace MedalynxAPI.Controllers.Enums
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<List<AnalyticalApplicationItem>> GetAll() {
-            List<AnalyticalApplicationItem> items = Program.MedialynxData.analyticalApplicationsDBAPI.GetEnum();
-            return items;
+            return Program.MedialynxData.analyticalApplicationsDBAPI.Get();
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<AnalyticalApplicationItem> GetById(string id/*guid*/)
+        public ActionResult<AnalyticalApplicationItem> GetById(string id)
         {
             string sid = Utils.ToGuid(id, false).ToString("B");
-            List<AnalyticalApplicationItem> items = Program.MedialynxData.analyticalApplicationsDBAPI.GetEnum(sid);
+            List<AnalyticalApplicationItem> items = Program.MedialynxData.analyticalApplicationsDBAPI.Get(sid);
             if (items.Count != 1)
             {
                 return NotFound();
@@ -45,7 +44,7 @@ namespace MedalynxAPI.Controllers.Enums
             if (id == Guid.Empty) {
                 item.Id = Guid.NewGuid().ToString("B");
             }
-            Program.MedialynxData.analyticalApplicationsDBAPI.AddItem(item);
+            Program.MedialynxData.analyticalApplicationsDBAPI.Add(item);
             return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
         }
 

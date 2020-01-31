@@ -215,6 +215,8 @@ CREATE TABLE `Enviroments` (
   `AnalyticalApplication` longtext NOT NULL DEFAULT '[]' COMMENT 'Array of analytical applications',
   `TypeOfConnectivity` varchar(38) DEFAULT '{00000000-0000-0000-0000-000000000000}',
   `Request` int(11) DEFAULT NULL,
+  `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `LastUpdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -225,7 +227,7 @@ CREATE TABLE `Enviroments` (
 
 LOCK TABLES `Enviroments` WRITE;
 /*!40000 ALTER TABLE `Enviroments` DISABLE KEYS */;
-INSERT INTO `Enviroments` VALUES ('{5b890fcd-7017-4474-89c8-6ba3810868f2}','{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}',10,100,'[]','{2f3ff4f0-b363-40ba-990d-7b80f0df574f}',0);
+INSERT INTO `Enviroments` VALUES ('{5b890fcd-7017-4474-89c8-6ba3810868f2}','{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}',10,100,'[]','{2f3ff4f0-b363-40ba-990d-7b80f0df574f}',0,'2020-01-31 05:25:01','2020-01-31 05:28:07');
 /*!40000 ALTER TABLE `Enviroments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,6 +281,32 @@ LOCK TABLES `GeneticMatches` WRITE;
 /*!40000 ALTER TABLE `GeneticMatches` DISABLE KEYS */;
 INSERT INTO `GeneticMatches` VALUES ('{555babc2-3a1d-4025-b835-a8098945726c}','23',10862848,'C','F','rs3916649'),('{a6b6e490-4d92-4f0b-8352-3fd8a1e8d268}','40',10862847,'B','H','rs3916648'),('{b784b009-20e8-43c7-9251-5593e1183484}','45',10862849,'D','L','rs3916640'),('{f132a112-030b-423e-a304-69748cad26d5}','5',10862846,'A','T','rs3916645');
 /*!40000 ALTER TABLE `GeneticMatches` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Notifications`
+--
+
+DROP TABLE IF EXISTS `Notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Notifications` (
+  `Id` varchar(38) NOT NULL,
+  `Message` longtext DEFAULT NULL,
+  `NoicationType` int(11) NOT NULL COMMENT 'Environment, Cohort, Pharma user etc',
+  `Status` int(11) NOT NULL DEFAULT 0,
+  `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Notifications`
+--
+
+LOCK TABLES `Notifications` WRITE;
+/*!40000 ALTER TABLE `Notifications` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -421,4 +449,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-31 12:01:26
+-- Dump completed on 2020-01-31 13:12:13

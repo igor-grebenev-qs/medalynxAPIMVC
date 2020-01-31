@@ -15,17 +15,16 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<List<Enviroment>> GetAll() {
-            List<Enviroment> enviroments = Program.MedialynxData.enviromentDBAPI.GetEnviroment();
-            return enviroments;
+            return Program.MedialynxData.enviromentDBAPI.Get();
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Enviroment> GetById(string id/*guid*/)
+        public ActionResult<Enviroment> GetById(string id)
         {
             string sid = Utils.ToGuid(id, false).ToString("B");
-            List<Enviroment> enviroments = Program.MedialynxData.enviromentDBAPI.GetEnviroment(sid);
+            List<Enviroment> enviroments = Program.MedialynxData.enviromentDBAPI.Get(sid);
             if (enviroments.Count != 1)
             {
                 return NotFound();
@@ -45,7 +44,7 @@ namespace MedalynxAPI.Controllers
             if (id == Guid.Empty) {
                 enviroment.Id = Guid.NewGuid().ToString("B");
             }
-            Program.MedialynxData.enviromentDBAPI.AddEnviroment(enviroment);
+            Program.MedialynxData.enviromentDBAPI.Add(enviroment);
             return CreatedAtAction(nameof(GetById), new { id = enviroment.Id }, enviroment);
         }
 
@@ -59,7 +58,7 @@ namespace MedalynxAPI.Controllers
             if (id == Guid.Empty) {
                 return BadRequest();
             }
-            Program.MedialynxData.enviromentDBAPI.UpdateEnviroment(enviroment);
+            Program.MedialynxData.enviromentDBAPI.Update(enviroment);
             return CreatedAtAction(nameof(GetById), new { id = enviroment.Id }, enviroment);
         }
 

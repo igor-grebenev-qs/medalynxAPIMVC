@@ -16,17 +16,16 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<List<User>> GetAll() {
-            List<User> users = Program.MedialynxData.userDBAPI.GetUser();
-            return users;
+            return Program.MedialynxData.userDBAPI.Get();
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<User> GetById(string id/*guid*/)
+        public ActionResult<User> GetById(string id)
         {
             string sid = Utils.ToGuid(id, false).ToString("B");
-            List<User> users = Program.MedialynxData.userDBAPI.GetUser(sid);
+            List<User> users = Program.MedialynxData.userDBAPI.Get(sid);
             if (users.Count != 1)
             {
                 return NotFound();
@@ -45,7 +44,7 @@ namespace MedalynxAPI.Controllers
             user.LastUpdate = user.CreationDate;
             if (id == Guid.Empty) {
                 user.Id = Guid.NewGuid().ToString("B");
-                Program.MedialynxData.userDBAPI.AddUser(user);
+                Program.MedialynxData.userDBAPI.Add(user);
                 return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
             }
             return BadRequest();
@@ -62,7 +61,7 @@ namespace MedalynxAPI.Controllers
                 return BadRequest();
             }
             user.LastUpdate = DateTime.UtcNow;
-            Program.MedialynxData.userDBAPI.UpdateUser(user);
+            Program.MedialynxData.userDBAPI.Update(user);
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
         }
 

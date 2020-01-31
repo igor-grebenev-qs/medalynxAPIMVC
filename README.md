@@ -48,6 +48,18 @@ POST /Enviroments (create new enviroment
             "request": 0
         }
 )
+PUT /Enviroments (update enviroment
+        body for request sample:
+        {
+            "id": "{577c9b90-8495-4ed7-9fa1-3877c64d1111}",
+            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+            "numberOfUsers": 10,
+            "dataStorage": 100,
+            "analyticalApplication": "[]",
+            "typeOfConnectivity": "{2f3ff4f0-b363-40ba-990d-7b80f0df574f}",
+            "request": 0
+        }
+)
 
 ENUMMS:
 ----------------------------------------------------------------------------------------------------------------------
@@ -113,5 +125,30 @@ PUT
             "request": 0,
             "creationDate": "2020-01-30T06:25:13",
             "lastUpdate": "2020-01-30T06:25:13"
+        }
+)
+
+NOTIFICATIONS:
+GET /Notifications
+GET /Notifications/{id}
+POST /Notifications (create new notification
+        body for request sample:
+        {
+            "message": "Environment request from Wendy Howard",
+            "noicationType": 0,
+            "status": 0,
+            "creationDate": "2020-01-31T12:00:00",
+            "lastUpdate": "2020-01-31T12:00:00"
+        }
+)
+PUT /Notifications (update enviroment
+        body for request sample:
+        {
+            "id": "{8a299213-b198-459b-b8d8-e7829f6e4677}",
+            "message": "Environment request from Wendy Howard",
+            "noicationType": 0,
+            "status": 0,
+            "creationDate": "2020-01-31T12:00:00",
+            "lastUpdate": "2020-01-31T12:00:00"
         }
 )

@@ -16,8 +16,7 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<List<CohortEnumLink>> GetAll() {
-            List<CohortEnumLink> links = Program.MedialynxData.cohortEnumLinkDBAPI.GetLink();
-            return links;
+            return Program.MedialynxData.cohortEnumLinkDBAPI.Get();
         }
 
         [HttpGet("{id}")]
@@ -26,7 +25,7 @@ namespace MedalynxAPI.Controllers
         public ActionResult<CohortEnumLink> GetById(string id)
         {
             string sid = Utils.ToGuid(id, false).ToString("B");
-            List<CohortEnumLink> links = Program.MedialynxData.cohortEnumLinkDBAPI.GetLink(sid);
+            List<CohortEnumLink> links = Program.MedialynxData.cohortEnumLinkDBAPI.Get(sid);
             if (links.Count != 1)
             {
                 return NotFound();
@@ -60,7 +59,7 @@ namespace MedalynxAPI.Controllers
             link.LastUpdate = link.CreationDate;
             if (id == Guid.Empty) {
                 link.Id = Guid.NewGuid().ToString("B");
-                Program.MedialynxData.cohortEnumLinkDBAPI.AddCohortEnumLink(link);
+                Program.MedialynxData.cohortEnumLinkDBAPI.Add(link);
                 return CreatedAtAction(nameof(GetById), new { id = link.Id }, link);
             }
             return BadRequest();
@@ -77,7 +76,7 @@ namespace MedalynxAPI.Controllers
                 return BadRequest();
             }
             link.LastUpdate = DateTime.UtcNow;
-            Program.MedialynxData.cohortEnumLinkDBAPI.UpdateCohortEnumLink(link);
+            Program.MedialynxData.cohortEnumLinkDBAPI.Update(link);
             return CreatedAtAction(nameof(GetById), new { id = link.Id }, link);
         }
 

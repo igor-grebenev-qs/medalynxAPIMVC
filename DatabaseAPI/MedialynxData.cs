@@ -14,6 +14,7 @@ namespace MedalynxAPI
         public EnviromentDBAPI enviromentDBAPI;
         public CohortDBAPI cohortDBAPI;
         public CohortEnumLinkDBAPI cohortEnumLinkDBAPI;
+        public NotificationDBAPI notificationDBAPI;
 
         public MedialynxData () {
             // enums
@@ -27,6 +28,8 @@ namespace MedalynxAPI
             //cohort
             cohortDBAPI = new CohortDBAPI();
             cohortEnumLinkDBAPI = new CohortEnumLinkDBAPI();
+            
+            notificationDBAPI = new NotificationDBAPI();
         }
     }
 }

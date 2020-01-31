@@ -17,8 +17,7 @@ namespace MedalynxAPI.Controllers.Enums
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<List<CohortEnums>> GetAll() {
-            List<CohortEnums> items = Program.MedialynxData.cohortEnumsDBAPI.GetCohortEnums();
-            return items;
+            return Program.MedialynxData.cohortEnumsDBAPI.Get();
         }
 
         [HttpGet("{id}")]
@@ -27,7 +26,7 @@ namespace MedalynxAPI.Controllers.Enums
         public ActionResult<CohortEnums> GetById(string id)
         {
             string sid = Utils.ToGuid(id, false).ToString("B");
-            List<CohortEnums> items = Program.MedialynxData.cohortEnumsDBAPI.GetCohortEnums(sid);
+            List<CohortEnums> items = Program.MedialynxData.cohortEnumsDBAPI.Get(sid);
             if (items.Count != 1)
             {
                 return NotFound();
@@ -45,7 +44,7 @@ namespace MedalynxAPI.Controllers.Enums
             if (id == Guid.Empty) {
                 item.Id = Guid.NewGuid().ToString("B");
             }
-            Program.MedialynxData.cohortEnumsDBAPI.AddItem(item);
+            Program.MedialynxData.cohortEnumsDBAPI.Add(item);
             return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
         }
 

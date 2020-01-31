@@ -70,4 +70,7 @@ namespace MedalynxAPI
     public class MedialynxDbPreviousTreatmentsContext : BaseDbContext {
         public DbSet<Models.Cohort.CohortEnums.PreviousTreatments> PreviousTreatments { get; set; }
     }
+    public class MedialynxDbNotificationsContext : BaseDbContext {
+        public DbSet<Models.Notification> Notifications { get; set; }
+    }
 }

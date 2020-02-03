@@ -34,26 +34,21 @@ namespace MedalynxAPI.Controllers
             return users[0];
         }
 
-        [HttpGet("Login")]
+        [HttpPost("Login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Session> Login(Credentials credentials)
+        public ActionResult<CredentialsInfo> Login(Credentials credentials)
         {
-            string sUserId = Utils.ToGuid(credentials.UserId, false).ToString("B");
-            List<User> users = Program.MedialynxData.userDBAPI.Get(sUserId);
-            if (users.Count != 1)
-            {
-                return NotFound();
-            }
-            User user = users[0];
+            User user = Program.MedialynxData.userDBAPI.GetByEmail(credentials.UserEmail);
             if (user == null) {
                 return NotFound();
             }
             if (user.Password == credentials.Password) { // OK!!!
                 // login success. Session required.
-                Session existsSession = Program.MedialynxData.sessionDBAPI.Get(credentials.UserId);
+                Session existsSession = Program.MedialynxData.sessionDBAPI.Get(user.Id);
+                CredentialsInfo credentialsInfo = new CredentialsInfo();
                 if (existsSession != null) { // session exists
-                    return existsSession;
+                    credentialsInfo.Session = existsSession;
                 }
                 else {
                     Session newSession = new Session();
@@ -62,8 +57,10 @@ namespace MedalynxAPI.Controllers
                     newSession.CreationDate = DateTime.UtcNow;
                     newSession.LastUpdate = newSession.CreationDate;
                     Program.MedialynxData.sessionDBAPI.Add(newSession);
-                    return newSession;
+                    credentialsInfo.Session = newSession;
                 }
+                credentialsInfo.User = user;
+                return credentialsInfo;
             }
             return null;
         }

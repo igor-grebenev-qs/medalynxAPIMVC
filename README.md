@@ -10,10 +10,10 @@ API USAGES:
 USERS:
 GET /Users
 GET /Users/{id} (localhost:5000/Users/{9ccf25f2-2500-4af3-a64c-10f3f83d8da1})
-GET /Users/Login (check credentials)
+POST /Users/Login (check credentials)
         body for request sample:
         {
-            "userId": "{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}",
+            "UserEmail": "igor.grebenev@quantumsoft.ru",
             "Password": "some_pwd"
         }
 

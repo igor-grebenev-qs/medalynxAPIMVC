@@ -34,6 +34,16 @@ namespace MedalynxAPI.Controllers
             return users[0];
         }
 
+        [HttpGet("Logout/{sessionId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<string> Logout(string sessionId)
+        {
+            string sid = Utils.ToGuid(sessionId, false).ToString("B");
+            Program.MedialynxData.sessionDBAPI.Delete(sid);
+            return sid;
+        }
+
         [HttpPost("Login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -98,6 +108,8 @@ namespace MedalynxAPI.Controllers
 
         [HttpOptions]
         [HttpOptions("{id}")]
+        [HttpOptions("Login")]
+        [HttpOptions("Logout/{sessionId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> Options()

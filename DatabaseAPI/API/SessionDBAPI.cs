@@ -50,7 +50,7 @@ namespace MedalynxAPI
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    IEnumerable<Session> sessions = dbContext.Sessions.Where(session => session != null && session.UserId == sid);
+                    IEnumerable<Session> sessions = dbContext.Sessions.Where(session => session != null && session.Id == sid);
                     dbContext.Sessions.RemoveRange(sessions);
                     dbContext.SaveChanges();
                 }

@@ -10,6 +10,13 @@ API USAGES:
 USERS:
 GET /Users
 GET /Users/{id} (localhost:5000/Users/{9ccf25f2-2500-4af3-a64c-10f3f83d8da1})
+GET /Users/Login (check credentials)
+        body for request sample:
+        {
+            "userId": "{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}",
+            "Password": "some_pwd"
+        }
+
 POST /Users (create new user
         body for request sample:
         {
@@ -134,6 +141,7 @@ GET /Notifications/{id}
 POST /Notifications (create new notification
         body for request sample:
         {
+            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
             "message": "Environment request from Wendy Howard",
             "noicationType": 0,
             "status": 0,
@@ -141,10 +149,11 @@ POST /Notifications (create new notification
             "lastUpdate": "2020-01-31T12:00:00"
         }
 )
-PUT /Notifications (update enviroment
+PUT /Notifications (update notification
         body for request sample:
         {
             "id": "{8a299213-b198-459b-b8d8-e7829f6e4677}",
+            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
             "message": "Environment request from Wendy Howard",
             "noicationType": 0,
             "status": 0,

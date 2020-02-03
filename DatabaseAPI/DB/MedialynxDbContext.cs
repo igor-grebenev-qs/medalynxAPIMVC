@@ -70,8 +70,10 @@ namespace MedalynxAPI
     public class MedialynxDbNotificationsContext : BaseDbContext {
         public DbSet<Models.Notification> Notifications { get; set; }
     }
-
     public class MedialynxDbMessagesContext : BaseDbContext {
         public DbSet<Models.User.Message> Messages { get; set; }
+    }
+    public class MedialynxDbSessionContext : BaseDbContext {
+        public DbSet<Models.Session> Sessions { get; set; }
     }
 }

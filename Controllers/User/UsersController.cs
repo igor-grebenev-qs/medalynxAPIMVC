@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MedalynxAPI.Models;
 using MedalynxAPI.Models.User;
+using medalynxAPIMVC.Notifications;
 using Microsoft.Extensions.Primitives;
 
 namespace MedalynxAPI.Controllers
@@ -114,6 +115,14 @@ namespace MedalynxAPI.Controllers
             if (id == Guid.Empty) {
                 user.Id = Guid.NewGuid().ToString("B");
                 Program.MedialynxData.userDBAPI.Add(user);
+
+                #pragma warning disable 4014
+                EmailService.SendEmailAsync(
+                    user.Email,
+                    "Account created successfully",
+                    "Account created successfully.");
+                #pragma warning restore 4014
+
                 return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
             }
             return BadRequest();

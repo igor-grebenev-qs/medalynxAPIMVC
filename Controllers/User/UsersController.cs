@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MedalynxAPI.Models;
 using MedalynxAPI.Models.User;
+using Microsoft.Extensions.Primitives;
 
 namespace MedalynxAPI.Controllers
 {
@@ -51,6 +52,21 @@ namespace MedalynxAPI.Controllers
 
             string sid = Utils.ToGuid(sessionId, false).ToString("B");
             Program.MedialynxData.sessionDBAPI.Delete(sid);
+        }
+
+        [HttpGet("me")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<User> Me()
+        {
+            StringValues sessionIdHeaders;
+            this.Request.Headers.TryGetValue("Session-Id", out sessionIdHeaders);
+            if (sessionIdHeaders.Count == 0)
+            {
+                return NotFound();
+            }
+            string sid = Utils.ToGuid(sessionIdHeaders[0], false).ToString("B");
+            return Program.MedialynxData.userDBAPI.GetBySession(sid);
         }
 
         [HttpPost("Login")]

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MedalynxAPI.Models;
 using MedalynxAPI.Models.User;
 
 namespace MedalynxAPI
@@ -32,6 +33,25 @@ namespace MedalynxAPI
             using (var dbContext = new MedialynxDbUserContext()) {
                 return dbContext.Users.FirstOrDefault(user => user != null && user.Email == email);
             }
+        }
+
+        public User GetBySession(string sessionId)
+        {
+            using (var dbContext = new MedialynxDbSessionContext()) {
+                Session session = dbContext.Sessions.FirstOrDefault(s => s != null && s.Id == sessionId);
+                if (session != null) {
+                    Guid id = Utils.ToGuid(session.UserId);
+                    using (var dbUserContext = new MedialynxDbUserContext()) {
+                        if (id != Guid.Empty)
+                        {
+                            string sid = id.ToString("B");
+                            User user = dbUserContext.Users.FirstOrDefault(user => user != null && user.Id == sid);
+                            return user;
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
         public void Add(User user)

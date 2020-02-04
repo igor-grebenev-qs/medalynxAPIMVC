@@ -10,6 +10,7 @@ API USAGES:
 USERS:
 GET /Users
 GET /Users/{id} (localhost:5000/Users/{9ccf25f2-2500-4af3-a64c-10f3f83d8da1})
+GET /Users/me (get user. Session Id obtain from headers)
 
 POST /Users/Login (check credentials)
         body for request sample:

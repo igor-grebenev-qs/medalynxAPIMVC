@@ -15,7 +15,11 @@ namespace MedalynxAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<List<Message>> GetAll() {
+        public ActionResult<List<Message>> GetAll()
+        {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             return Program.MedialynxData.messageDBAPI.GetByUser();
         }
 
@@ -24,6 +28,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<Message>> GetById(string userId)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             string sid = Utils.ToGuid(userId, false).ToString("B");
             return Program.MedialynxData.messageDBAPI.GetByUser(sid);
         }
@@ -33,6 +40,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Message> Create(Message message)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(message.Id, false);
             message.CreationDate = DateTime.UtcNow;
             if (id == Guid.Empty) {

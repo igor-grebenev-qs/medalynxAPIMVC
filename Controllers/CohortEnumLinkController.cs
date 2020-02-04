@@ -14,7 +14,11 @@ namespace MedalynxAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<List<CohortEnumLink>> GetAll() {
+        public ActionResult<List<CohortEnumLink>> GetAll()
+        {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             return Program.MedialynxData.cohortEnumLinkDBAPI.Get();
         }
 
@@ -23,6 +27,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CohortEnumLink> GetById(string id)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<CohortEnumLink> links = Program.MedialynxData.cohortEnumLinkDBAPI.Get(sid);
             if (links.Count != 1)
@@ -38,6 +45,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CohortEnumLink> GetByCohortId(string id)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             string sid = Utils.ToGuid(id, false).ToString("B");
             CohortEnumLink link = Program.MedialynxData.cohortEnumLinkDBAPI.GetLinkByCohort(sid);
             if (link == null)
@@ -53,6 +63,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<CohortEnumLink> Create(CohortEnumLink link)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(link.Id, false);
             link.CreationDate = DateTime.UtcNow;
             link.LastUpdate = link.CreationDate;
@@ -70,6 +83,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<CohortEnumLink> Update(CohortEnumLink link)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(link.Id, false);
             if (id == Guid.Empty) {
                 return BadRequest();

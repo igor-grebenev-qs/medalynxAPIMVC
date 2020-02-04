@@ -14,7 +14,11 @@ namespace MedalynxAPI.Controllers.Enums
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<List<CohortEnums>> GetAll() {
+        public ActionResult<List<CohortEnums>> GetAll()
+        {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             return Program.MedialynxData.cohortEnumsDBAPI.Get();
         }
 
@@ -23,6 +27,9 @@ namespace MedalynxAPI.Controllers.Enums
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CohortEnums> GetById(string id)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<CohortEnums> items = Program.MedialynxData.cohortEnumsDBAPI.Get(sid);
             if (items.Count != 1)
@@ -38,6 +45,9 @@ namespace MedalynxAPI.Controllers.Enums
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<CohortEnums> Create(CohortEnums item)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(item.Id, false);
             if (id == Guid.Empty) {
                 item.Id = Guid.NewGuid().ToString("B");

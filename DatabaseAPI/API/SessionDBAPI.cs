@@ -7,7 +7,20 @@ namespace MedalynxAPI
 {
     public class SessionDBAPI
     {
-        public Session Get(string userId)
+        public Session Get(string sessionId)
+        {
+            Guid id = Utils.ToGuid(sessionId, false);
+            using (var dbContext = new MedialynxDbSessionContext()) {
+                if (id != Guid.Empty)
+                {
+                    string sid = id.ToString("B");
+                    return dbContext.Sessions.FirstOrDefault(session => session != null && session.Id == sid);
+                }
+            }
+            return null;
+        }
+
+        public Session GetByUser(string userId)
         {
             Guid id = Utils.ToGuid(userId);
             using (var dbContext = new MedialynxDbSessionContext()) {

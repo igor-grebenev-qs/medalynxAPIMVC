@@ -14,7 +14,11 @@ namespace MedalynxAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<List<Enviroment>> GetAll() {
+        public ActionResult<List<Enviroment>> GetAll()
+        {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             return Program.MedialynxData.enviromentDBAPI.GetByUser();
         }
 
@@ -23,6 +27,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> GetById(string userId)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             string sid = Utils.ToGuid(userId, false).ToString("B");
             List<Enviroment> enviroments = Program.MedialynxData.enviromentDBAPI.GetByUser(sid);
             if (enviroments.Count != 1)
@@ -38,6 +45,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Enviroment> Create(Enviroment enviroment)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(enviroment.Id, false);
             enviroment.CreationDate = DateTime.UtcNow;
             enviroment.LastUpdate = enviroment.CreationDate;
@@ -54,6 +64,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Enviroment> Update(Enviroment enviroment)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(enviroment.Id, false);
             if (id == Guid.Empty) {
                 return BadRequest();

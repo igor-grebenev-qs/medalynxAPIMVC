@@ -16,7 +16,11 @@ namespace MedalynxAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<List<Cohort>> GetAll() {
+        public ActionResult<List<Cohort>> GetAll()
+        {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             return Program.MedialynxData.cohortDBAPI.Get();
         }
 
@@ -25,6 +29,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Cohort> GetById(string id)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<Cohort> cohorts = Program.MedialynxData.cohortDBAPI.Get(sid);
             if (cohorts.Count != 1)
@@ -40,6 +47,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Cohort> Create(Cohort cohort)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(cohort.Id, false);
             cohort.CreationDate = DateTime.UtcNow;
             cohort.LastUpdate = cohort.CreationDate;
@@ -59,6 +69,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Cohort> Update(Cohort cohort)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(cohort.Id, false);
             if (id == Guid.Empty) {
                 return BadRequest();

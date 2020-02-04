@@ -15,7 +15,11 @@ namespace MedalynxAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<List<Notification>> GetAll() {
+        public ActionResult<List<Notification>> GetAll()
+        {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             return Program.MedialynxData.notificationDBAPI.Get();
         }
 
@@ -24,6 +28,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Notification> GetById(string id)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<Notification> notifications = Program.MedialynxData.notificationDBAPI.Get(sid);
             if (notifications.Count != 1)
@@ -39,6 +46,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Notification> Create(Notification notification)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(notification.Id, false);
             notification.CreationDate = DateTime.UtcNow;
             notification.LastUpdate = notification.CreationDate;
@@ -56,6 +66,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Notification> Update(Notification notification)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(notification.Id, false);
             if (id == Guid.Empty) {
                 return BadRequest();

@@ -15,7 +15,11 @@ namespace MedalynxAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<List<User>> GetAll() {
+        public ActionResult<List<User>> GetAll()
+        {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             return Program.MedialynxData.userDBAPI.Get();
         }
 
@@ -24,6 +28,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<User> GetById(string id)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<User> users = Program.MedialynxData.userDBAPI.Get(sid);
             if (users.Count != 1)
@@ -39,6 +46,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public void Logout(string sessionId)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return; }
+
             string sid = Utils.ToGuid(sessionId, false).ToString("B");
             Program.MedialynxData.sessionDBAPI.Delete(sid);
         }
@@ -54,7 +64,7 @@ namespace MedalynxAPI.Controllers
             }
             if (user.Password == credentials.Password) { // OK!!!
                 // login success. Session required.
-                Session existsSession = Program.MedialynxData.sessionDBAPI.Get(user.Id);
+                Session existsSession = Program.MedialynxData.sessionDBAPI.GetByUser(user.Id);
                 CredentialsInfo credentialsInfo = new CredentialsInfo();
                 if (existsSession != null) { // session exists
                     credentialsInfo.Session = existsSession;
@@ -79,6 +89,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<User> Create(User user)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(user.Id, false);
             user.CreationDate = DateTime.UtcNow;
             user.LastUpdate = user.CreationDate;
@@ -96,6 +109,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<User> Update(User user)
         {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
             Guid id = Utils.ToGuid(user.Id, false);
             if (id == Guid.Empty) {
                 return BadRequest();

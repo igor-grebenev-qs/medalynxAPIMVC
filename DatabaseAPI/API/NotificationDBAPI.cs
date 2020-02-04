@@ -44,7 +44,7 @@ namespace MedalynxAPI
                 {
                     if (Utils.CopyPropertyValues<Notification>(notification, existsNotification))
                     {
-                        dbContext.Notifications.Update(notification);
+                        dbContext.Notifications.Update(existsNotification);
                         dbContext.SaveChanges();
                     }
                 }

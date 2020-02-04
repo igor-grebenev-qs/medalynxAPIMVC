@@ -1,5 +1,8 @@
 using System;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
+using MedalynxAPI.Models;
 
 namespace MedalynxAPI {
     public static class Utils {
@@ -52,6 +55,19 @@ namespace MedalynxAPI {
             }
 
             return updated; // object changed
+        }
+
+        public static bool ValidateSession (IHeaderDictionary headers) {
+            StringValues sessionIdHeaders;
+            headers.TryGetValue("Session-Id", out sessionIdHeaders);
+ 
+            if (sessionIdHeaders.Count == 0) {
+                return false;
+            }
+            // check that sessin exists
+            Session session = Program.MedialynxData.sessionDBAPI.Get(sessionIdHeaders[0]);
+
+            return session != null;
         }
     }
 }

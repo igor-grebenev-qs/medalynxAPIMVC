@@ -22,7 +22,7 @@ namespace MedalynxAPI
                 else
                 {
                     // Add all users
-                    users.AddRange(dbContext.Users);
+                    users.AddRange(dbContext.Users.Where(user => user.Role != Role.AdminUser));
                 }
             }
             return users;

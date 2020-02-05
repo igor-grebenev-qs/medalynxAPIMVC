@@ -17,6 +17,8 @@ using EASendMail;
 /// {"installed":{"client_id":"182965434126-nto1llumients8gmv9p5rv519le8omkv.apps.googleusercontent.com","project_id":"medalynx-267210","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"iTd4oIAPSP5namuCrStwNq_p","redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}
 /// 
 /// medalynx@yandex.ru / m1llions
+/// 
+/// Mailchimp medalynx / M1llions@ attached to medalynx@gmail.com
 /// </summary>
 namespace medalynxAPIMVC.Notifications
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MedalynxAPI.Models;
 using MedalynxAPI.Models.Cohort.CohortEnums;
+using MedalynxAPI.Models.User;
 
 namespace MedalynxAPI
 {
@@ -65,42 +66,42 @@ namespace MedalynxAPI
             using (var dbCohortContext = new MedialynxDbCohortEnumsContext()) {
                 foreach (CohortEnums enumItem in dbCohortContext.CohortEnums){
                     switch (enumItem.Id) {
-                        case "{3089e988-cbaa-4417-9ff2-447a3d90a534}": // DeseaseStates
+                        case CohortEnumsDictionary.DeseaseStates:
                             using (var dbDeseaseStatesContext = new MedialynxDbDeseaseStatesContext()) {
                                 links.AddRange(ExistingOptionsAsLink<DeseaseStates>(new List<DeseaseStates>(dbDeseaseStatesContext.DeseaseStates), cohortId, enumItem.Id));
                             }
                         break;
-                        case "{441ae4d5-6bac-4ff2-9153-4fa88393a7e6}": // GeneticMatches
+                        case CohortEnumsDictionary.GeneticMatches:
                             using (var dbGeneticMatchesContext = new MedialynxDbGeneticMatchesContext()) {
                                 links.AddRange(ExistingOptionsAsLink<GeneticMatches>(new List<GeneticMatches>(dbGeneticMatchesContext.GeneticMatches), cohortId, enumItem.Id));
                             }
                         break;
-                        case "{bc70c1e5-04ff-40ef-a80f-f5911f99bfc4}": // Biomarkers
+                        case CohortEnumsDictionary.Biomarkers:
                             using (var dbBiomarkersContext = new MedialynxDbBiomarkersContext()) {
                                 links.AddRange(ExistingOptionsAsLink<Biomarkers>(new List<Biomarkers>(dbBiomarkersContext.Biomarkers), cohortId, enumItem.Id));
                             }
                         break;
-                        case "{47f7bac5-60e6-4161-86d9-4ec5f561cafa}": // Demographics
+                        case CohortEnumsDictionary.Demographics:
                             using (var dbDemographicsContext = new MedialynxDbDemographicsContext()) {
                                 links.AddRange(ExistingOptionsAsLink<Demographics>(new List<Demographics>(dbDemographicsContext.Demographics), cohortId, enumItem.Id));
                             }
                         break;
-                        case "{f1c60ef6-f4cc-45c6-9dc3-e53d9edc14c5}": // Ethnicitys
+                        case CohortEnumsDictionary.Ethnicitys:
                             using (var dbEthnicitysContext = new MedialynxDbEthnicitysContext()) {
                                 links.AddRange(ExistingOptionsAsLink<Ethnicitys>(new List<Ethnicitys>(dbEthnicitysContext.Ethnicitys), cohortId, enumItem.Id));
                             }
                         break;
-                        case "{cc77ecca-8279-4c9d-b321-064ba492ba9e}": // StageOfDeseases
+                        case CohortEnumsDictionary.StageOfDeseases:
                             using (var dbStageOfDeseasesContext = new MedialynxDbStageOfDeseasesContext()) {
                                 links.AddRange(ExistingOptionsAsLink<StageOfDeseases>(new List<StageOfDeseases>(dbStageOfDeseasesContext.StageOfDeseases), cohortId, enumItem.Id));
                             }
                         break;
-                        case "{5d65643e-4060-48e3-a094-347133b0ed81}": // Prognosis
+                        case CohortEnumsDictionary.Prognosis:
                             using (var dbPrognosisContext = new MedialynxDbPrognosisContext()) {
                                 links.AddRange(ExistingOptionsAsLink<Prognosis>(new List<Prognosis>(dbPrognosisContext.Prognosis), cohortId, enumItem.Id));
                             }
                         break;
-                        case "{152583bb-7105-462e-ad74-c9702696feae}": // PreviousTreatments
+                        case CohortEnumsDictionary.PreviousTreatments:
                             using (var dbPreviousTreatmentsContext = new MedialynxDbPreviousTreatmentsContext()) {
                                 links.AddRange(ExistingOptionsAsLink<PreviousTreatments>(new List<PreviousTreatments>(dbPreviousTreatmentsContext.PreviousTreatments), cohortId, enumItem.Id));
                             }

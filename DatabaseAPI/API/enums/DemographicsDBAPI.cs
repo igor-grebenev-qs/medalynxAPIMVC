@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MedalynxAPI.Models;
+using MedalynxAPI.Models.Cohort.CohortEnums;
+
+namespace MedalynxAPI
+{
+    public class DemographicsDBAPI
+    {
+        public List<Demographics> Get(string filter = "")
+        {
+            using (var dbContext = new MedialynxDbDemographicsContext()) {
+                return dbContext.Demographics.Where(enumItem => filter == "" || enumItem.Age.Contains(filter) || enumItem.Gender.Contains(filter)).ToList();
+            }
+        }
+
+        public void Add(object enumItemObject)
+        {
+            Demographics enumItem = (Demographics) enumItemObject;
+            using (var dbContext = new MedialynxDbDemographicsContext()) {
+                dbContext.Demographics.Add(enumItem);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void Update(Demographics enumItem)
+        {
+            using (var dbContext = new MedialynxDbDemographicsContext()) {
+                var existsItem = dbContext.Demographics.FirstOrDefault(u => u != null && u.Id == enumItem.Id);
+                if (existsItem != null)
+                {
+                    if (Utils.CopyPropertyValues<Demographics>(enumItem, existsItem))
+                    {
+                        dbContext.Demographics.Update(existsItem);
+                        dbContext.SaveChanges();
+                    }
+                }
+            }
+        }
+    }
+}

@@ -100,13 +100,7 @@ PUT
 GET
     /CohortEnums
     /CohortEnums/{id}
-POST
-    /CohortEnums (create new AnalyticalApplications item
-        body for request sample :
-        {
-            "name": "PreviousTreatments"
-        },
-)
+    /CohortEnums/{enumId}/values
 ----------------------------------------------------------------------------------------------------------------------
 
 

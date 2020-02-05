@@ -20,7 +20,6 @@ namespace MedalynxAPI
                 }
                 else
                 {
-                    // Add all users
                     enums.AddRange(dbContext.CohortEnums);
                 }
             }

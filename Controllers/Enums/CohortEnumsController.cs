@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Mime;
+using System.Reflection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MedalynxAPI.Models;
+using MedalynxAPI.Models.Cohort.CohortEnums;
+using MedalynxAPI.Models.User;
+using Microsoft.Extensions.Primitives;
 
 namespace MedalynxAPI.Controllers.Enums
 {
@@ -40,24 +44,47 @@ namespace MedalynxAPI.Controllers.Enums
             return items[0];
         }
 
-        [HttpPost]
+        [HttpGet("{enumId}/values")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<CohortEnums> Create(CohortEnums item)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<IEnumerable<object>> GetEnumValues(string enumId)
         {
             // validate that session exists
             if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
 
-            Guid id = Utils.ToGuid(item.Id, false);
-            if (id == Guid.Empty) {
-                item.Id = Guid.NewGuid().ToString("B");
+            StringValues filterHeaders;
+            this.Request.Headers.TryGetValue("Filter", out filterHeaders);
+
+            string sid = Utils.ToGuid(enumId, false).ToString("B");
+            List<CohortEnums> items = Program.MedialynxData.cohortEnumsDBAPI.Get(sid);
+            if (items.Count != 1)
+            {
+                return NotFound(); // Enum not found
             }
-            Program.MedialynxData.cohortEnumsDBAPI.Add(item);
-            return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
+            switch (sid) {
+                case CohortEnumsDictionary.DeseaseStates:
+                    return Program.MedialynxData.deseaseStatesDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
+                case CohortEnumsDictionary.GeneticMatches:
+                    return Program.MedialynxData.geneticMatchesDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
+                case CohortEnumsDictionary.Biomarkers:
+                    return Program.MedialynxData.biomarkersDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
+                case CohortEnumsDictionary.Demographics:
+                    return Program.MedialynxData.demographicsDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
+                case CohortEnumsDictionary.Ethnicitys:
+                    return Program.MedialynxData.ethnicitysDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
+                case CohortEnumsDictionary.StageOfDeseases:
+                    return Program.MedialynxData.stageOfDeseasesDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
+                case CohortEnumsDictionary.Prognosis:
+                    return Program.MedialynxData.prognosisDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
+                case CohortEnumsDictionary.PreviousTreatments:
+                    return Program.MedialynxData.previousTreatmentsDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
+            }
+            return null;
         }
 
         [HttpOptions]
         [HttpOptions("{id}")]
+        [HttpOptions("{enumId}/values")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> Options()

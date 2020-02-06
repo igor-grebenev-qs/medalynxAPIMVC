@@ -95,25 +95,37 @@ namespace MedalynxAPI.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }
-        /*
+
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Cohort> Update(Cohort cohort)
+        public ActionResult<Cohort> Update(CohortAPI cohortApi)
         {
             // validate that session exists
             if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
 
-            Guid id = Utils.ToGuid(cohort.Id, false);
+            Guid id = Utils.ToGuid(cohortApi.Id, false);
             if (id == Guid.Empty) {
                 return BadRequest();
             }
+
+            // setup cohort
+            Cohort cohort = new Cohort();
+            cohort.Id = cohortApi.Id;
+            cohort.UserId = cohortApi.UserId;
+            cohort.NumberOfSubjectsRequired = cohortApi.NumberOfSubjectsRequired;
+            cohort.CohortType = cohortApi.CohortType;
+            cohort.Request = cohortApi.Request;
             cohort.LastUpdate = DateTime.UtcNow;
+            // update cohort
             Program.MedialynxData.cohortDBAPI.Update(cohort);
+            // update/create/delete cohort links (neccessary enum items will be created with link)
+            Program.MedialynxData.cohortEnumLinkDBAPI.UpdateLinks(cohort.Id, cohortApi.cohortEnumLinks);
+
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }
-        */
+
         [HttpOptions]
         [HttpOptions("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

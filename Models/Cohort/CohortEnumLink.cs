@@ -20,10 +20,6 @@ namespace MedalynxAPI.Models
 
         public float Percentage { get; set; }
 
-        public int NumberOfSubjects { get; set; }
-
-        public float Rate { get; set; }
-
         public DateTime CreationDate { get; set; }
 
         public DateTime LastUpdate { get; set; }

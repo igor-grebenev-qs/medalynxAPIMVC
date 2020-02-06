@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using MedalynxAPI.Models;
+using MedalynxAPI.Models.Cohort;
 using MedalynxAPI.Models.Cohort.CohortEnums;
 using MedalynxAPI.Models.User;
 
@@ -113,6 +115,93 @@ namespace MedalynxAPI
                     dbContext.CohortEnumLink.AddRange(links);
                     dbContext.SaveChanges();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Assume that EnumItemAPI contains fields for any cases. PROPS MUST HEVE SAME NAMES !!!
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dest"></param>
+        /// <typeparam name="T"></typeparam>
+        private static void DirtyCopyEnumItem<T>(EnumItemAPI src, T dest, string id){
+            PropertyInfo[] destPropsInfo = dest.GetType().GetProperties();
+            foreach (PropertyInfo destPropInfo in destPropsInfo) { // enumerate fields in destanation onbect
+                var srcPropValue = src.GetType().GetProperty(destPropInfo.Name).GetValue(src);
+                if (srcPropValue == null) { continue; } // value is not initialized
+
+                // ENSURE THAT COHORT ENUMS NOT CONTAINS DATETIME PROPS !!!
+
+                destPropInfo.SetValue(dest, srcPropValue);
+            }
+            dest.GetType().GetProperty("Id").SetValue(dest, id);
+        }
+
+        public void CreateLinks(string cohortId, List<CohortEnumLinkAPI> LinksForCreation) {
+            if (LinksForCreation == null) {
+                return; // nothing to create
+            }
+            foreach (CohortEnumLinkAPI linkAPI in LinksForCreation) {
+
+                // enum item defined within link item. Must be created and used instead linkAPI.EnumItemId
+                if (linkAPI.enumItem != null) {
+                    string newEnumItemId = Guid.NewGuid().ToString("B");
+                    // owerwrite id anyway
+                    linkAPI.EnumItemId = newEnumItemId;
+                    switch (linkAPI.CohortEnumId) {
+                        case CohortEnumsDictionary.DeseaseStates:
+                            DeseaseStates dsItem = new DeseaseStates();
+                            DirtyCopyEnumItem<DeseaseStates>(linkAPI.enumItem, dsItem, newEnumItemId);
+                            Program.MedialynxData.deseaseStatesDBAPI.Add(dsItem);
+                            break;
+                        case CohortEnumsDictionary.GeneticMatches:
+                            GeneticMatches gmItem = new GeneticMatches();
+                            DirtyCopyEnumItem<GeneticMatches>(linkAPI.enumItem, gmItem, newEnumItemId);
+                            Program.MedialynxData.geneticMatchesDBAPI.Add(gmItem);
+                            break;
+                        case CohortEnumsDictionary.Biomarkers:
+                            Biomarkers bmItem = new Biomarkers();
+                            DirtyCopyEnumItem<Biomarkers>(linkAPI.enumItem, bmItem, newEnumItemId);
+                            Program.MedialynxData.biomarkersDBAPI.Add(bmItem);
+                            break;
+                        case CohortEnumsDictionary.Demographics:
+                            Demographics dmItem = new Demographics();
+                            DirtyCopyEnumItem<Demographics>(linkAPI.enumItem, dmItem, newEnumItemId);
+                            Program.MedialynxData.demographicsDBAPI.Add(dmItem);
+                            break;
+                        case CohortEnumsDictionary.Ethnicitys:
+                            Ethnicitys eItem = new Ethnicitys();
+                            DirtyCopyEnumItem<Ethnicitys>(linkAPI.enumItem, eItem, newEnumItemId);
+                            Program.MedialynxData.ethnicitysDBAPI.Add(eItem);
+                            break;
+                        case CohortEnumsDictionary.StageOfDeseases:
+                            StageOfDeseases sdItem = new StageOfDeseases();
+                            DirtyCopyEnumItem<StageOfDeseases>(linkAPI.enumItem, sdItem, newEnumItemId);
+                            Program.MedialynxData.stageOfDeseasesDBAPI.Add(sdItem);
+                            break;
+                        case CohortEnumsDictionary.Prognosis:
+                            Prognosis pItem = new Prognosis();
+                            DirtyCopyEnumItem<Prognosis>(linkAPI.enumItem, pItem, newEnumItemId);
+                            Program.MedialynxData.prognosisDBAPI.Add(pItem);
+                            break;
+                        case CohortEnumsDictionary.PreviousTreatments:
+                            PreviousTreatments ptItem = new PreviousTreatments();
+                            DirtyCopyEnumItem<PreviousTreatments>(linkAPI.enumItem, ptItem, newEnumItemId);
+                            Program.MedialynxData.previousTreatmentsDBAPI.Add(ptItem);
+                            break;
+                    }
+                }
+
+                CohortEnumLink link = new CohortEnumLink();
+                link.Id = Guid.NewGuid().ToString("B");
+                link.CohortId = cohortId;
+                link.CohortEnumId = linkAPI.CohortEnumId;
+                link.EnumItemId = linkAPI.EnumItemId;
+                link.Include = linkAPI.Include;
+                link.Percentage = linkAPI.Percentage;
+                link.CreationDate = DateTime.UtcNow;
+                link.LastUpdate = link.CreationDate;
+                this.Add(link);
             }
         }
 

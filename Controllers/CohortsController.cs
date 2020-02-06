@@ -42,27 +42,60 @@ namespace MedalynxAPI.Controllers
             return cohorts[0];
         }
 
+        /// <summary>
+        /* Object sample
+            {
+                "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+                "numberOfSubjectsRequired": 1,
+                "cohortType": "unknown",
+                "request": 0,
+                "cohortEnumLinks": [
+                    {
+                        "cohortEnumId": "{cc77ecca-8279-4c9d-b321-064ba492ba9e}",
+                        "enumItemId": null,
+                        "include": 0,
+                        "percentage": 0,
+                        "numberOfSubjects": 0,
+                        "enumItem":
+                            {
+                                "stageOfTumour": 3,
+                                "numberOfNodesAffected": 6,
+                                "numberOfMetastasis": 6
+                            }
+                    }
+                ]
+            }
+        */
+        /// </summary>
+        /// <param name="cohort"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Cohort> Create(Cohort cohort)
+        public ActionResult<Cohort> Create(CohortAPI cohortApi)
         {
             // validate that session exists
             if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
 
-            Guid id = Utils.ToGuid(cohort.Id, false);
+            cohortApi.Id = Guid.NewGuid().ToString("B");
+
+            // setup cohort
+            Cohort cohort = new Cohort();
+            cohort.Id = cohortApi.Id;
+            cohort.UserId = cohortApi.UserId;
+            cohort.NumberOfSubjectsRequired = cohortApi.NumberOfSubjectsRequired;
+            cohort.CohortType = cohortApi.CohortType;
+            cohort.Request = cohortApi.Request;
             cohort.CreationDate = DateTime.UtcNow;
             cohort.LastUpdate = cohort.CreationDate;
-            if (id == Guid.Empty) {
-                cohort.Id = Guid.NewGuid().ToString("B");
-                // create all options
-                Program.MedialynxData.cohortEnumLinkDBAPI.Generate(cohort.Id);
-                Program.MedialynxData.cohortDBAPI.Add(cohort);
-                return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
-            }
-            return BadRequest();
-        }
+            // create cohort
+            Program.MedialynxData.cohortDBAPI.Add(cohort);
+            // create cohort links (neccessary enum items will be created with link)
+            Program.MedialynxData.cohortEnumLinkDBAPI.CreateLinks(cohort.Id, cohortApi.cohortEnumLinks);
 
+            return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
+        }
+        /*
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -80,7 +113,7 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.cohortDBAPI.Update(cohort);
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }
-
+        */
         [HttpOptions]
         [HttpOptions("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -105,7 +105,6 @@ GET
 
 
 COHORTS:
-!!! Important !!! When cohort creating links will be filled from original enumst into CohortEnumLinks !!!
 GET
     /Cohorts
     /Cohorts/{id}
@@ -117,10 +116,28 @@ POST
             "numberOfSubjectsRequired": 1,
             "cohortType": "unknown",
             "request": 0,
-            "creationDate": "2020-01-30T06:25:13",
-            "lastUpdate": "2020-01-30T06:25:13"
+            "cohortEnumLinks": [
+                {
+                "cohortEnumId": "{cc77ecca-8279-4c9d-b321-064ba492ba9e}",
+                "enumItemId": null,
+                "include": 0,
+                "percentage": 0,
+                "numberOfSubjects": 0,
+                "enumItem":
+                    {
+                        "stageOfTumour": 3,
+                        "numberOfNodesAffected": 6,
+                        "numberOfMetastasis": 6
+                    }
+                }
+            ]
         }
 )
+PUT
+    todo ....
+
+----------------------------------------------------------------------------------------------------------------------
+// AnalyticalApplications
 PUT
     /AnalyticalApplications (update Cohort item
         body for request sample :
@@ -134,7 +151,7 @@ PUT
             "lastUpdate": "2020-01-30T06:25:13"
         }
 )
-
+----------------------------------------------------------------------------------------------------------------------
 NOTIFICATIONS:
 GET /Notifications
 GET /Notifications/{id}

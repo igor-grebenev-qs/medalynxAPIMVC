@@ -39,7 +39,10 @@ namespace MedalynxAPI.Controllers
                 return NotFound();
             }
 
-            return cohorts[0];
+            CohortPresentation coh = new CohortPresentation(cohorts[0]);
+            // get all links forcohort
+            coh.CohortEnumLinks = Program.MedialynxData.cohortEnumLinkDBAPI.GetLinksByCohort(sid);
+            return coh;
         }
 
         /// <summary>

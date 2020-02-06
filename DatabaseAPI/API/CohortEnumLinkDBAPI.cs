@@ -30,15 +30,43 @@ namespace MedalynxAPI
             }
             return links;
         }
-
-        public CohortEnumLink GetLinkByCohort(string cohortId = "{00000000-0000-0000-0000-000000000000}")
+        private object GetEnumValue(string enumId, string enumItemId) {
+            switch (enumId) {
+                case CohortEnumsDictionary.DeseaseStates:
+                    return Program.MedialynxData.deseaseStatesDBAPI.Get("", enumItemId)[0];
+                case CohortEnumsDictionary.GeneticMatches:
+                    return Program.MedialynxData.geneticMatchesDBAPI.Get("", enumItemId)[0];
+                case CohortEnumsDictionary.Biomarkers:
+                    return Program.MedialynxData.biomarkersDBAPI.Get("", enumItemId)[0];
+                case CohortEnumsDictionary.Demographics:
+                    return Program.MedialynxData.demographicsDBAPI.Get("", enumItemId)[0];
+                case CohortEnumsDictionary.Ethnicitys:
+                    return Program.MedialynxData.ethnicitysDBAPI.Get("", enumItemId)[0];
+                case CohortEnumsDictionary.StageOfDeseases:
+                    return Program.MedialynxData.stageOfDeseasesDBAPI.Get("", enumItemId)[0];
+                case CohortEnumsDictionary.Prognosis:
+                    return Program.MedialynxData.prognosisDBAPI.Get("", enumItemId)[0];
+                case CohortEnumsDictionary.PreviousTreatments:
+                    return Program.MedialynxData.previousTreatmentsDBAPI.Get("", enumItemId)[0];
+            }
+            return null;
+        }
+        public List<CohortEnumLinkPresentation> GetLinksByCohort(string cohortId = "{00000000-0000-0000-0000-000000000000}")
         {
             Guid id = Utils.ToGuid(cohortId);
             using (var dbContext = new MedialynxDbCohortEnumLinkContext()) {
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    return dbContext.CohortEnumLink.FirstOrDefault(link => link != null && link.CohortId == sid);
+                    List<CohortEnumLink> links = dbContext.CohortEnumLink.Where(link => link != null && link.CohortId == sid).ToList();
+                    List<CohortEnumLinkPresentation> presentation = new List<CohortEnumLinkPresentation>();
+                    foreach (CohortEnumLink enumLink in links)
+                    {
+                        CohortEnumLinkPresentation p = new CohortEnumLinkPresentation(enumLink);
+                        p.CohortEnumItem = this.GetEnumValue(enumLink.CohortEnumId, enumLink.EnumItemId);
+                        presentation.Add(p);
+                    }
+                    return presentation;
                 }
             }
             return null;

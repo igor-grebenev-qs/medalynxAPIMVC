@@ -8,10 +8,10 @@ namespace MedalynxAPI
 {
     public class GeneticMatchesDBAPI
     {
-        public List<GeneticMatches> Get(string filter = "")
+        public List<GeneticMatches> Get(string filter = "", string enumItemId = "")
         {
             using (var dbContext = new MedialynxDbGeneticMatchesContext()) {
-                return dbContext.GeneticMatches.Where(enumItem => filter == "" || enumItem.Chromosome.Contains(filter) || enumItem.Ref.Contains(filter) || enumItem.Alt.Contains(filter)).ToList();
+                return dbContext.GeneticMatches.Where(enumItem => enumItemId == "" || enumItem.Id == enumItemId).Where(enumItem => filter == "" || enumItem.Chromosome.Contains(filter) || enumItem.Ref.Contains(filter) || enumItem.Alt.Contains(filter)).ToList();
             }
         }
 

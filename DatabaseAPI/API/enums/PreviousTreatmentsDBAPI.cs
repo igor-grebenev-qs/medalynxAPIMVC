@@ -8,10 +8,10 @@ namespace MedalynxAPI
 {
     public class PreviousTreatmentsDBAPI
     {
-        public List<PreviousTreatments> Get(string filter = "")
+        public List<PreviousTreatments> Get(string filter = "", string enumItemId = "")
         {
             using (var dbContext = new MedialynxDbPreviousTreatmentsContext()) {
-                return dbContext.PreviousTreatments.Where(enumItem => filter == "" || enumItem.Keyword.Contains(filter)).ToList();
+                return dbContext.PreviousTreatments.Where(enumItem => enumItemId == "" || enumItem.Id == enumItemId).Where(enumItem => filter == "" || enumItem.Keyword.Contains(filter)).ToList();
             }
         }
 

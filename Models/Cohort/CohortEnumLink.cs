@@ -1,6 +1,7 @@
 using System;
 namespace MedalynxAPI.Models
 {
+    // see CohortEnumLinkPresentation
     public class CohortEnumLink
     {
         public string Id { get; set; }

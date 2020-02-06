@@ -43,19 +43,15 @@ namespace MedalynxAPI.Controllers
         [HttpGet("CohortId/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<CohortEnumLink> GetByCohortId(string id)
+        public ActionResult<List<CohortEnumLinkPresentation>> GetByCohortId(string id)
         {
             // validate that session exists
             if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
-            CohortEnumLink link = Program.MedialynxData.cohortEnumLinkDBAPI.GetLinkByCohort(sid);
-            if (link == null)
-            {
-                return NotFound();
-            }
+            List<CohortEnumLinkPresentation> links = Program.MedialynxData.cohortEnumLinkDBAPI.GetLinksByCohort(sid);
 
-            return link;
+            return links;
         }
 
         [HttpPost]

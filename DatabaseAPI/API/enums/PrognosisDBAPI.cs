@@ -8,10 +8,10 @@ namespace MedalynxAPI
 {
     public class PrognosisDBAPI
     {
-        public List<Prognosis> Get(string filter = "")
+        public List<Prognosis> Get(string filter = "", string enumItemId = "")
         {
             using (var dbContext = new MedialynxDbPrognosisContext()) {
-                return dbContext.Prognosis.Where(enumItem => filter == "" || enumItem.Keyword.Contains(filter)).ToList();
+                return dbContext.Prognosis.Where(enumItem => enumItemId == "" || enumItem.Id == enumItemId).Where(enumItem => filter == "" || enumItem.Keyword.Contains(filter)).ToList();
             }
         }
 

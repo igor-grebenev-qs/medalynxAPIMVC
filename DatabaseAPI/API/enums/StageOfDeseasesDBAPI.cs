@@ -8,10 +8,10 @@ namespace MedalynxAPI
 {
     public class StageOfDeseasesDBAPI
     {
-        public List<StageOfDeseases> Get(string filter = "")
+        public List<StageOfDeseases> Get(string filter = "", string enumItemId = "")
         {
             using (var dbContext = new MedialynxDbStageOfDeseasesContext()) {
-                return dbContext.StageOfDeseases.Where(enumItem => filter == "" || enumItem.StageOfTumour.ToString().Contains(filter)).ToList();
+                return dbContext.StageOfDeseases.Where(enumItem => enumItemId == "" || enumItem.Id == enumItemId).Where(enumItem => filter == "" || enumItem.StageOfTumour.ToString().Contains(filter)).ToList();
             }
         }
 

@@ -2,6 +2,7 @@
 
 namespace MedalynxAPI.Models.Cohort
 {
+    // see CohortPresentation
     public class Cohort
     {
         public string Id { get; set; }

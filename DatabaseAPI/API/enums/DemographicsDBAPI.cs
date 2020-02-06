@@ -8,10 +8,10 @@ namespace MedalynxAPI
 {
     public class DemographicsDBAPI
     {
-        public List<Demographics> Get(string filter = "")
+        public List<Demographics> Get(string filter = "", string enumItemId = "")
         {
             using (var dbContext = new MedialynxDbDemographicsContext()) {
-                return dbContext.Demographics.Where(enumItem => filter == "" || enumItem.AgeFrom.ToString().Contains(filter) || enumItem.AgeTo.ToString().Contains(filter) || enumItem.Gender.Contains(filter)).ToList();
+                return dbContext.Demographics.Where(enumItem => enumItemId == "" || enumItem.Id == enumItemId).Where(enumItem => filter == "" || enumItem.AgeFrom.ToString().Contains(filter) || enumItem.AgeTo.ToString().Contains(filter) || enumItem.Gender.Contains(filter)).ToList();
             }
         }
 

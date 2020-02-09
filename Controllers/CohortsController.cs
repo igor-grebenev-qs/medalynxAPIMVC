@@ -33,6 +33,7 @@ namespace MedalynxAPI.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CohortRepresentation> GetById(string id)
         {
@@ -51,6 +52,7 @@ namespace MedalynxAPI.Controllers
 
         [HttpGet("ByUser/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
         public ActionResult<CohortRepresentation> GetByUserId(string userId)

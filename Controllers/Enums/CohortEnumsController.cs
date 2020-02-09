@@ -28,6 +28,7 @@ namespace MedalynxAPI.Controllers.Enums
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CohortEnums> GetById(string id)
         {
@@ -46,6 +47,7 @@ namespace MedalynxAPI.Controllers.Enums
 
         [HttpGet("{enumId}/values")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<object>> GetEnumValues(string enumId)
         {

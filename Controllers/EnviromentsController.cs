@@ -24,6 +24,7 @@ namespace MedalynxAPI.Controllers
 
         [HttpGet("ByUser/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> GetById(string userId)
         {

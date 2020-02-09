@@ -25,6 +25,7 @@ namespace MedalynxAPI.Controllers
 
         [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<List<Message>> GetById(string userId)
         {
             // validate that session exists

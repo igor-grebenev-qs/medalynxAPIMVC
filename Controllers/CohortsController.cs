@@ -27,7 +27,7 @@ namespace MedalynxAPI.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Cohort> GetById(string id)
+        public ActionResult<CohortRepresentation> GetById(string id)
         {
             // validate that session exists
             if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
@@ -42,6 +42,27 @@ namespace MedalynxAPI.Controllers
             CohortRepresentation coh = new CohortRepresentation(cohorts[0]);
             // get all links forcohort
             coh.CohortEnumLinks = Program.MedialynxData.cohortEnumLinkDBAPI.GetLinksByCohort(sid);
+            return coh;
+        }
+
+        [HttpGet("ByUser/{userId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<CohortRepresentation> GetByUserId(string userId)
+        {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
+            string sid = Utils.ToGuid(userId, false).ToString("B");
+            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetByUser(sid);
+            if (cohort == null)
+            {
+                return NotFound();
+            }
+
+            CohortRepresentation coh = new CohortRepresentation(cohort);
+            // get all links forcohort
+            coh.CohortEnumLinks = Program.MedialynxData.cohortEnumLinkDBAPI.GetLinksByCohort(cohort.Id);
             return coh;
         }
 
@@ -131,7 +152,7 @@ namespace MedalynxAPI.Controllers
 
         [HttpOptions]
         [HttpOptions("{id}")]
-        [HttpOptions("ByUser/{id}")]
+        [HttpOptions("ByUser/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> Options()

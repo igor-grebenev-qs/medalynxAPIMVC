@@ -107,7 +107,8 @@ GET
 COHORTS:
 GET
     /Cohorts
-    /Cohorts/{id}
+    /Cohorts/{id} - Alive cohort by user (CohortRepresentation)
+    /Cohorts/ByUser/{userId} - Alive cohort by user (CohortRepresentation)
 POST
     /Cohorts (create new Cohort item
         body for request sample :

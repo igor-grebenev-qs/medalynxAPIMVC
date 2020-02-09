@@ -27,6 +27,19 @@ namespace MedalynxAPI
             return cohorts;
         }
 
+        public Cohort GetByUser(string userId)
+        {
+            Guid id = Utils.ToGuid(userId);
+            using (var dbContext = new MedialynxDbCohortContext()) {
+                if (id != Guid.Empty)
+                {
+                    string sid = id.ToString("B");
+                    return dbContext.Cohorts.FirstOrDefault(c => c != null && c.UserId == sid);
+                }
+            }
+            return null;
+        }
+
         public void Add(Cohort cohort)
         {
             using (var dbContext = new MedialynxDbCohortContext()) {

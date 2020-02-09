@@ -22,7 +22,7 @@ namespace MedalynxAPI.Controllers
             return Program.MedialynxData.enviromentDBAPI.GetByUser();
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("ByUser/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> GetById(string userId)
@@ -76,7 +76,7 @@ namespace MedalynxAPI.Controllers
         }
 
         [HttpOptions]
-        [HttpOptions("{id}")]
+        [HttpOptions("ByUser/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> Options()

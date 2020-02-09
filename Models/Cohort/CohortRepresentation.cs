@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedalynxAPI.Models.Cohort
 {
+    /// <summary>
+    /// Alive cohort with uploaded links.
+    /// </summary>
     [NotMapped]
-    public class CohortPresentation : Cohort
+    public class CohortRepresentation : Cohort
     {
-        public CohortPresentation(Cohort coh) {
+        public CohortRepresentation(Cohort coh) {
             this.Id = coh.Id;
             this.UserId = coh.UserId;
             this.NumberOfSubjectsRequired = coh.NumberOfSubjectsRequired;
@@ -16,6 +18,6 @@ namespace MedalynxAPI.Models.Cohort
             this.CreationDate = coh.CreationDate;
             this.LastUpdate = coh.LastUpdate;
         }
-        public List<CohortEnumLinkPresentation> CohortEnumLinks { get; set; }
+        public List<CohortEnumLinkRepresentation> CohortEnumLinks { get; set; }
     }
 }

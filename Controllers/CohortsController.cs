@@ -39,7 +39,7 @@ namespace MedalynxAPI.Controllers
                 return NotFound();
             }
 
-            CohortPresentation coh = new CohortPresentation(cohorts[0]);
+            CohortRepresentation coh = new CohortRepresentation(cohorts[0]);
             // get all links forcohort
             coh.CohortEnumLinks = Program.MedialynxData.cohortEnumLinkDBAPI.GetLinksByCohort(sid);
             return coh;
@@ -131,6 +131,7 @@ namespace MedalynxAPI.Controllers
 
         [HttpOptions]
         [HttpOptions("{id}")]
+        [HttpOptions("ByUser/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> Options()

@@ -51,7 +51,7 @@ namespace MedalynxAPI
             }
             return null;
         }
-        public List<CohortEnumLinkPresentation> GetLinksByCohort(string cohortId = "{00000000-0000-0000-0000-000000000000}")
+        public List<CohortEnumLinkRepresentation> GetLinksByCohort(string cohortId = "{00000000-0000-0000-0000-000000000000}")
         {
             Guid id = Utils.ToGuid(cohortId);
             using (var dbContext = new MedialynxDbCohortEnumLinkContext()) {
@@ -59,10 +59,10 @@ namespace MedalynxAPI
                 {
                     string sid = id.ToString("B");
                     List<CohortEnumLink> links = dbContext.CohortEnumLink.Where(link => link != null && link.CohortId == sid).ToList();
-                    List<CohortEnumLinkPresentation> presentation = new List<CohortEnumLinkPresentation>();
+                    List<CohortEnumLinkRepresentation> presentation = new List<CohortEnumLinkRepresentation>();
                     foreach (CohortEnumLink enumLink in links)
                     {
-                        CohortEnumLinkPresentation p = new CohortEnumLinkPresentation(enumLink);
+                        CohortEnumLinkRepresentation p = new CohortEnumLinkRepresentation(enumLink);
                         p.CohortEnumItem = this.GetEnumValue(enumLink.CohortEnumId, enumLink.EnumItemId);
                         presentation.Add(p);
                     }

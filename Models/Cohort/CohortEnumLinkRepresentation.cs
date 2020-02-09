@@ -1,9 +1,15 @@
-using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace MedalynxAPI.Models
 {
-    public class CohortEnumLinkPresentation : CohortEnumLink
+    /// <summary>
+    /// Alive link with uploaded enum item.
+    /// </summary>
+    [NotMapped]
+    public class CohortEnumLinkRepresentation : CohortEnumLink
     {
-        public CohortEnumLinkPresentation(CohortEnumLink link) {
+        public CohortEnumLinkRepresentation(CohortEnumLink link) {
             this.Id = link.Id;
             this.CohortId = link.CohortId;
             this.CohortEnumId = link.CohortEnumId;

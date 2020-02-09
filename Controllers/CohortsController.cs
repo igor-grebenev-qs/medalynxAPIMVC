@@ -24,6 +24,7 @@ namespace MedalynxAPI.Controllers
             return Program.MedialynxData.cohortDBAPI.Get();
         }
 
+        [NonAction]
         private CohortRepresentation GetCohortRepresentation(Cohort cohort) {
             CohortRepresentation cohortRepresentation = new CohortRepresentation(cohort);
             // get all alive links for cohort
@@ -54,7 +55,6 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-
         public ActionResult<CohortRepresentation> GetByUserId(string userId)
         {
             // validate that session exists
@@ -98,6 +98,7 @@ namespace MedalynxAPI.Controllers
         /// <param name="cohort"></param>
         /// <returns></returns>
         [HttpPost]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Cohort> Create(CohortAPI cohortApi)
@@ -125,6 +126,7 @@ namespace MedalynxAPI.Controllers
         }
 
         [HttpPut]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedalynxAPI.Models.Cohort
 {
+    /// <summary>
+    /// EnumItemAPI contains all possible fields for cohort enums
+    /// </summary>
     [NotMapped]
     public class EnumItemAPI {
         public string Id { get; set; }
@@ -23,6 +26,9 @@ namespace MedalynxAPI.Models.Cohort
         public int StageOfTumour { get; set; }
     }
 
+    /// <summary>
+    /// Link with alive enum item. Simple way to save objects in the one request.
+    /// </summary>
     [NotMapped]
     public class CohortEnumLinkAPI
     {
@@ -41,6 +47,10 @@ namespace MedalynxAPI.Models.Cohort
         public EnumItemAPI enumItem { get; set; }
     }
 
+    /// <summary>
+    /// Like CohortRepresentation.null API has differend in list item (EnumItemAPI).
+    /// This is a simple way to map.
+    /// </summary>
     [NotMapped]
     public class CohortAPI
     {

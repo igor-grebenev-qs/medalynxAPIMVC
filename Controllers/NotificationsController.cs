@@ -81,7 +81,6 @@ namespace MedalynxAPI.Controllers
         [HttpOptions]
         [HttpOptions("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> Options()
         {
             return Ok();

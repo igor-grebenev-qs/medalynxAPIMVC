@@ -42,7 +42,6 @@ namespace MedalynxAPI.Controllers
 
         [HttpGet("CohortId/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<CohortEnumLinkRepresentation>> GetByCohortId(string id)
         {
             // validate that session exists
@@ -95,7 +94,6 @@ namespace MedalynxAPI.Controllers
         [HttpOptions("{id}")]
         [HttpOptions("CohortId/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> Options()
         {
             return Ok();

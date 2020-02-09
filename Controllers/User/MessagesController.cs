@@ -25,7 +25,6 @@ namespace MedalynxAPI.Controllers
 
         [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<Message>> GetById(string userId)
         {
             // validate that session exists
@@ -56,7 +55,6 @@ namespace MedalynxAPI.Controllers
         [HttpOptions]
         [HttpOptions("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> Options()
         {
             return Ok();

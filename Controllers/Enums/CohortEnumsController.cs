@@ -86,7 +86,6 @@ namespace MedalynxAPI.Controllers.Enums
         [HttpOptions("{id}")]
         [HttpOptions("{enumId}/values")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Enviroment> Options()
         {
             return Ok();

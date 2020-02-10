@@ -116,6 +116,13 @@ namespace MedalynxAPI.Controllers
             // validate that session exists
             if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
 
+            // validate links
+            foreach (var link in cohortApi.cohortEnumLinks) {
+                if (Utils.IsEmpty(link.enumItem) && link.EnumItemId == "") {
+                    return BadRequest();
+                }
+            }
+
             cohortApi.Id = Guid.NewGuid().ToString("B");
 
             // setup cohort

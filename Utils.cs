@@ -57,6 +57,17 @@ namespace MedalynxAPI {
             return updated; // object changed
         }
 
+        public static bool IsEmpty<T>(T obj){
+            PropertyInfo[] srcPropsInfo = obj.GetType().GetProperties();
+            foreach (PropertyInfo pi in srcPropsInfo) {
+                var srcPropValue = pi.GetValue(obj);
+
+                if (srcPropValue != null) { return false; }
+            }
+
+            return true;
+        }
+
         public static bool ValidateSession (IHeaderDictionary headers) {
             StringValues sessionIdHeaders;
             headers.TryGetValue("Session-Id", out sessionIdHeaders);

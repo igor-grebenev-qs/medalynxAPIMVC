@@ -6,7 +6,7 @@ using MedalynxAPI.Models;
 
 namespace MedalynxAPI {
     public static class Utils {
-        private static  Guid ForEmptyGuid(bool canCreate) {
+        private static Guid ForEmptyGuid(bool canCreate) {
             if (canCreate) {return Guid.NewGuid();}
             else {return new Guid();}
         }

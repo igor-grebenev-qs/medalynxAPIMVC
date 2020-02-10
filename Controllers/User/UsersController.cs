@@ -109,9 +109,6 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<User> Create(User user)
         {
-            // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
-
             Guid id = Utils.ToGuid(user.Id, false);
             user.CreationDate = DateTime.UtcNow;
             user.LastUpdate = user.CreationDate;

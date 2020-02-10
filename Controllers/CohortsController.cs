@@ -32,7 +32,7 @@ namespace MedalynxAPI.Controllers
             return cohortRepresentation;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         private ActionResult<bool> RemoveCohort(string cohortId) {

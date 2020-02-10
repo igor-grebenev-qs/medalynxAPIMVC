@@ -109,6 +109,8 @@ GET
     /Cohorts
     /Cohorts/{id} - Alive cohort by user (CohortRepresentation)
     /Cohorts/ByUser/{userId} - Alive cohort by user (CohortRepresentation)
+DELETE
+    /Cohorts/{id} - Remove cohort
 POST
     /Cohorts (create new Cohort item
         body for request sample :

@@ -58,6 +58,9 @@ namespace MedalynxAPI {
         }
 
         public static bool IsEmpty<T>(T obj){
+            if (obj == null) {
+                return true;
+            }
             PropertyInfo[] srcPropsInfo = obj.GetType().GetProperties();
             foreach (PropertyInfo pi in srcPropsInfo) {
                 var srcPropValue = pi.GetValue(obj);

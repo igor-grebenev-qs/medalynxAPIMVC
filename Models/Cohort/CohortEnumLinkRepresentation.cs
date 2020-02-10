@@ -20,6 +20,6 @@ namespace MedalynxAPI.Models
             this.LastUpdate = link.LastUpdate;
         }
 
-        public object CohortEnumItem  { get; set; }
+        public object EnumItem  { get; set; }
     }
 }

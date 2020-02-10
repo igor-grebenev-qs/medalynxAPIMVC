@@ -63,7 +63,7 @@ namespace MedalynxAPI
                     foreach (CohortEnumLink enumLink in links)
                     {
                         CohortEnumLinkRepresentation p = new CohortEnumLinkRepresentation(enumLink);
-                        p.CohortEnumItem = this.GetEnumValue(enumLink.CohortEnumId, enumLink.EnumItemId);
+                        p.EnumItem = this.GetEnumValue(enumLink.CohortEnumId, enumLink.EnumItemId);
                         representation.Add(p);
                     }
                     return representation;

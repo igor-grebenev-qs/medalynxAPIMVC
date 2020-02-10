@@ -33,21 +33,21 @@ namespace MedalynxAPI
         private object GetEnumValue(string enumId, string enumItemId) {
             switch (enumId) {
                 case CohortEnumsDictionary.DeseaseStates:
-                    return Program.MedialynxData.deseaseStatesDBAPI.Get("", enumItemId)[0];
+                    return Program.MedialynxData.deseaseStatesDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.GeneticMatches:
-                    return Program.MedialynxData.geneticMatchesDBAPI.Get("", enumItemId)[0];
+                    return Program.MedialynxData.geneticMatchesDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.Biomarkers:
-                    return Program.MedialynxData.biomarkersDBAPI.Get("", enumItemId)[0];
+                    return Program.MedialynxData.biomarkersDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.Demographics:
-                    return Program.MedialynxData.demographicsDBAPI.Get("", enumItemId)[0];
+                    return Program.MedialynxData.demographicsDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.Ethnicitys:
-                    return Program.MedialynxData.ethnicitysDBAPI.Get("", enumItemId)[0];
+                    return Program.MedialynxData.ethnicitysDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.StageOfDeseases:
-                    return Program.MedialynxData.stageOfDeseasesDBAPI.Get("", enumItemId)[0];
+                    return Program.MedialynxData.stageOfDeseasesDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.Prognosis:
-                    return Program.MedialynxData.prognosisDBAPI.Get("", enumItemId)[0];
+                    return Program.MedialynxData.prognosisDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.PreviousTreatments:
-                    return Program.MedialynxData.previousTreatmentsDBAPI.Get("", enumItemId)[0];
+                    return Program.MedialynxData.previousTreatmentsDBAPI.Get("", enumItemId).FirstOrDefault();
             }
             return null;
         }

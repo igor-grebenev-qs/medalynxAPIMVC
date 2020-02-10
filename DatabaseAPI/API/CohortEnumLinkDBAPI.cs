@@ -59,14 +59,14 @@ namespace MedalynxAPI
                 {
                     string sid = id.ToString("B");
                     List<CohortEnumLink> links = dbContext.CohortEnumLink.Where(link => link != null && link.CohortId == sid).ToList();
-                    List<CohortEnumLinkRepresentation> presentation = new List<CohortEnumLinkRepresentation>();
+                    List<CohortEnumLinkRepresentation> representation = new List<CohortEnumLinkRepresentation>();
                     foreach (CohortEnumLink enumLink in links)
                     {
                         CohortEnumLinkRepresentation p = new CohortEnumLinkRepresentation(enumLink);
                         p.CohortEnumItem = this.GetEnumValue(enumLink.CohortEnumId, enumLink.EnumItemId);
-                        presentation.Add(p);
+                        representation.Add(p);
                     }
-                    return presentation;
+                    return representation;
                 }
             }
             return null;

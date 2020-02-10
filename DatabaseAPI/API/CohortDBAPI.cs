@@ -36,13 +36,15 @@ namespace MedalynxAPI
                 {
                     string sid = id.ToString("B");
                     Cohort cohort = dbContext.Cohorts.FirstOrDefault(c => c != null && c.Id == sid);
-                    dbContext.Cohorts.Remove(cohort);
-                    dbContext.SaveChanges();
+                    if (cohort != null) {
+                        dbContext.Cohorts.Remove(cohort);
+                        dbContext.SaveChanges();
 
-                    using (var dbContextLinks = new MedialynxDbCohortEnumLinkContext()) {
-                        List<CohortEnumLink> links = dbContextLinks.CohortEnumLink.Where(link => link != null && link.CohortId == sid).ToList();
-                        dbContextLinks.RemoveRange(links);
-                        dbContextLinks.SaveChanges();
+                        using (var dbContextLinks = new MedialynxDbCohortEnumLinkContext()) {
+                            List<CohortEnumLink> links = dbContextLinks.CohortEnumLink.Where(link => link != null && link.CohortId == sid).ToList();
+                            dbContextLinks.RemoveRange(links);
+                            dbContextLinks.SaveChanges();
+                        }
                     }
                     return true;
                 }

@@ -32,10 +32,10 @@ namespace MedalynxAPI.Controllers
             return cohortRepresentation;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{cohortId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        private ActionResult<bool> RemoveCohort(string cohortId) {
+        public ActionResult<bool> RemoveCohort(string cohortId) {
             // validate that session exists
             if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
 

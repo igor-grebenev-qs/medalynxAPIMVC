@@ -122,6 +122,11 @@ namespace MedalynxAPI.Controllers
                     return BadRequest();
                 }
             }
+            // validate that cohort is not exists
+            Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetByUser(cohortApi.UserId);
+            if (existsCohort != null) {
+                return BadRequest(); // cohort already exists. Please use update.
+            }
 
             cohortApi.Id = Guid.NewGuid().ToString("B");
 

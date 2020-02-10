@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MedalynxAPI.Models;
 using MedalynxAPI.Models.Cohort;
 
 namespace MedalynxAPI
@@ -25,6 +26,28 @@ namespace MedalynxAPI
                 }
             }
             return cohorts;
+        }
+
+        public bool Remove(string cohortId)
+        {
+            Guid id = Utils.ToGuid(cohortId);
+            using (var dbContext = new MedialynxDbCohortContext()) {
+                if (id != Guid.Empty)
+                {
+                    string sid = id.ToString("B");
+                    Cohort cohort = dbContext.Cohorts.FirstOrDefault(c => c != null && c.Id == sid);
+                    dbContext.Cohorts.Remove(cohort);
+                    dbContext.SaveChanges();
+
+                    using (var dbContextLinks = new MedialynxDbCohortEnumLinkContext()) {
+                        List<CohortEnumLink> links = dbContextLinks.CohortEnumLink.Where(link => link != null && link.CohortId == sid).ToList();
+                        dbContextLinks.RemoveRange(links);
+                        dbContextLinks.SaveChanges();
+                    }
+                    return true;
+                }
+            }
+            return false;
         }
 
         public Cohort GetByUser(string userId)

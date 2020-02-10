@@ -32,6 +32,16 @@ namespace MedalynxAPI.Controllers
             return cohortRepresentation;
         }
 
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        private ActionResult<bool> RemoveCohort(string cohortId) {
+            // validate that session exists
+            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+
+            return Program.MedialynxData.cohortDBAPI.Remove(cohortId);
+        }
+
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

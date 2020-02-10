@@ -71,7 +71,7 @@ namespace MedalynxAPI.Controllers
         }
 
         /// <summary>
-        /* Object sample
+        /* Object sample (CohortAPI)
             {
                 "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
                 "numberOfSubjectsRequired": 1,
@@ -95,7 +95,7 @@ namespace MedalynxAPI.Controllers
             }
         */
         /// </summary>
-        /// <param name="cohort"></param>
+        /// <param name="CohortAPI object"></param>
         /// <returns></returns>
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]

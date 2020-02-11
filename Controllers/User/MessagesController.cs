@@ -18,7 +18,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<List<Message>> GetAll()
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             return Program.MedialynxData.messageDBAPI.GetByUser();
         }
@@ -29,7 +30,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<List<Message>> GetById(string userId)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             string sid = Utils.ToGuid(userId, false).ToString("B");
             return Program.MedialynxData.messageDBAPI.GetByUser(sid);
@@ -41,7 +43,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<Message> Create(Message message)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             Guid id = Utils.ToGuid(message.Id, false);
             message.CreationDate = DateTime.UtcNow;

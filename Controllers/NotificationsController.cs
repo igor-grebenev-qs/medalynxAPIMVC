@@ -18,7 +18,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<List<Notification>> GetAll()
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             return Program.MedialynxData.notificationDBAPI.Get();
         }
@@ -30,7 +31,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<Notification> GetById(string id)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<Notification> notifications = Program.MedialynxData.notificationDBAPI.Get(sid);
@@ -48,7 +50,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<Notification> Create(Notification notification)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             Guid id = Utils.ToGuid(notification.Id, false);
             notification.CreationDate = DateTime.UtcNow;
@@ -68,7 +71,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<Notification> Update(Notification notification)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             Guid id = Utils.ToGuid(notification.Id, false);
             if (id == Guid.Empty) {

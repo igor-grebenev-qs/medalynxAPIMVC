@@ -21,7 +21,8 @@ namespace MedalynxAPI.Controllers.Enums
         public ActionResult<List<CohortEnums>> GetAll()
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             return Program.MedialynxData.cohortEnumsDBAPI.Get();
         }
@@ -33,7 +34,8 @@ namespace MedalynxAPI.Controllers.Enums
         public ActionResult<CohortEnums> GetById(string id)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<CohortEnums> items = Program.MedialynxData.cohortEnumsDBAPI.Get(sid);
@@ -52,7 +54,8 @@ namespace MedalynxAPI.Controllers.Enums
         public ActionResult<IEnumerable<object>> GetEnumValues(string enumId)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             StringValues filterHeaders;
             this.Request.Headers.TryGetValue("Filter", out filterHeaders);

@@ -75,18 +75,23 @@ namespace MedalynxAPI {
             return typeof(T).GetProperty(propertyName, propertyType) != null;
         }
 
-        public static bool ValidateSession (IHeaderDictionary headers) {
+        public static bool ValidateSession (IHeaderDictionary headers, out string userId) {
             StringValues sessionIdHeaders;
             headers.TryGetValue("Session-Id", out sessionIdHeaders);
  
             if (sessionIdHeaders.Count == 0) {
+                userId = (new Guid()).ToString("B");
                 return false;
             }
 
             // check that sessin exists
             Session session = Program.MedialynxData.sessionDBAPI.Get(sessionIdHeaders[0]);
-
-            return session != null;
+            if (session != null) {
+                userId = session.UserId;
+                return true;
+            }
+            userId = (new Guid()).ToString("B");
+            return false;
         }
     }
 }

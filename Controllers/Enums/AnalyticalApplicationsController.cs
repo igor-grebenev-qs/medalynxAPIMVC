@@ -18,7 +18,8 @@ namespace MedalynxAPI.Controllers.Enums
         public ActionResult<List<AnalyticalApplicationItem>> GetAll()
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             return Program.MedialynxData.analyticalApplicationsDBAPI.Get();
         }
@@ -30,7 +31,8 @@ namespace MedalynxAPI.Controllers.Enums
         public ActionResult<AnalyticalApplicationItem> GetById(string id)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<AnalyticalApplicationItem> items = Program.MedialynxData.analyticalApplicationsDBAPI.Get(sid);
@@ -48,7 +50,8 @@ namespace MedalynxAPI.Controllers.Enums
         public ActionResult<AnalyticalApplicationItem> Create(AnalyticalApplicationItem item)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             Guid id = Utils.ToGuid(item.Id, false);
             if (id == Guid.Empty) {

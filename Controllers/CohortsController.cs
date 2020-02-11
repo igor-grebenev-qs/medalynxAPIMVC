@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<List<Cohort>> GetAll()
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             return Program.MedialynxData.cohortDBAPI.Get();
         }
@@ -37,7 +39,9 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<bool> RemoveCohort(string cohortId) {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            Program.MedialynxData.historyDBAPI.Add(new HistoryItem(sessionUserId, this.GetType().ToString(), "Remove cohort called with id=" + cohortId));
 
             return Program.MedialynxData.cohortDBAPI.Remove(cohortId);
         }
@@ -49,7 +53,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<CohortRepresentation> GetById(string id)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<Cohort> cohorts = Program.MedialynxData.cohortDBAPI.Get(sid);
@@ -68,7 +73,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<CohortRepresentation> GetByUserId(string userId)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             string sid = Utils.ToGuid(userId, false).ToString("B");
             Cohort cohort = Program.MedialynxData.cohortDBAPI.GetByUser(sid);
@@ -114,7 +120,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<Cohort> Create(CohortAPI cohortApi)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             // validate links
             foreach (var link in cohortApi.cohortEnumLinks) {
@@ -129,6 +136,14 @@ namespace MedalynxAPI.Controllers
             }
 
             cohortApi.Id = Guid.NewGuid().ToString("B");
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    this.GetType().ToString(),
+                    "Create cohort called with data:" + JsonSerializer.Serialize(cohortApi)
+                )
+            );
 
             // setup cohort
             Cohort cohort = new Cohort();
@@ -155,7 +170,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<CohortRepresentation> Update(CohortAPI cohortApi)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             Guid id = Utils.ToGuid(cohortApi.Id, false);
             if (id == Guid.Empty) {

@@ -17,7 +17,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<List<Enviroment>> GetAll()
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             return Program.MedialynxData.enviromentDBAPI.GetByUser();
         }
@@ -29,7 +30,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<Enviroment> GetById(string userId)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             string sid = Utils.ToGuid(userId, false).ToString("B");
             List<Enviroment> enviroments = Program.MedialynxData.enviromentDBAPI.GetByUser(sid);
@@ -47,7 +49,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<Enviroment> Create(Enviroment enviroment)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             Guid id = Utils.ToGuid(enviroment.Id, false);
             enviroment.CreationDate = DateTime.UtcNow;
@@ -66,7 +69,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<Enviroment> Update(Enviroment enviroment)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             Guid id = Utils.ToGuid(enviroment.Id, false);
             if (id == Guid.Empty) {

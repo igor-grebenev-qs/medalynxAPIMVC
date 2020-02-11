@@ -20,7 +20,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<List<User>> GetAll()
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             return Program.MedialynxData.userDBAPI.Get();
         }
@@ -32,7 +33,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<User> GetById(string id)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<User> users = Program.MedialynxData.userDBAPI.Get(sid);
@@ -49,7 +51,8 @@ namespace MedalynxAPI.Controllers
         public void Logout(string sessionId)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return; }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return; }
 
             string sid = Utils.ToGuid(sessionId, false).ToString("B");
             Program.MedialynxData.sessionDBAPI.Delete(sid);
@@ -135,7 +138,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<User> Update(User user)
         {
             // validate that session exists
-            if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             Guid id = Utils.ToGuid(user.Id, false);
             if (id == Guid.Empty) {

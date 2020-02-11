@@ -42,6 +42,10 @@ namespace MedalynxAPI
 
         public void Add(HistoryItem historyItem)
         {
+            if (historyItem.Id == null) {
+                historyItem.Id = Guid.NewGuid().ToString("B");
+            }
+            historyItem.CreationDate = DateTime.UtcNow;
             using (var dbContext = new MedialynxDbHistoryContext()) {
                 dbContext.HistoryItems.Add(historyItem);
                 dbContext.SaveChanges();

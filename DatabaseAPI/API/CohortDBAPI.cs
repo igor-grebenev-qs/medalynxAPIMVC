@@ -59,7 +59,11 @@ namespace MedalynxAPI
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    return dbContext.Cohorts.FirstOrDefault(c => c != null && c.UserId == sid && (requestType == RequestType.Any || c.Request == requestType));
+                    return dbContext.Cohorts.FirstOrDefault(c => c != null && c.UserId == sid &&
+                        (requestType == RequestType.Any || 
+                        (requestType == RequestType.CreatedOrApproved && (c.Request == RequestType.Created || c.Request == RequestType.Approved)) ||
+                        c.Request == requestType)
+                        );
                 }
             }
             return null;

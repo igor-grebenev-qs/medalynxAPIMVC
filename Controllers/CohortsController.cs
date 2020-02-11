@@ -80,7 +80,7 @@ namespace MedalynxAPI.Controllers
             StringValues requestTypeHeaders;
 
             this.Request.Headers.TryGetValue("Request-Type", out requestTypeHeaders);
-            RequestType requestType = (RequestType)((requestTypeHeaders.Count == 0) ? 0 : Int32.Parse(requestTypeHeaders[0]));
+            RequestType requestType = (requestTypeHeaders.Count == 0) ? RequestType.CreatedOrApproved : (RequestType) Int32.Parse(requestTypeHeaders[0]);
 
             string sid = Utils.ToGuid(userId, false).ToString("B");
             Cohort cohort = Program.MedialynxData.cohortDBAPI.GetByUser(sid, requestType);

@@ -108,7 +108,7 @@ COHORTS:
 GET
     /Cohorts
     /Cohorts/{id} - Alive cohort by user (CohortRepresentation)
-    /Cohorts/ByUser/{userId} - Alive cohort by user (CohortRepresentation) Request-Type header required (see RequestType)
+    /Cohorts/ByUser/{userId} - Alive cohort by user (CohortRepresentation) Request-Type header required (see RequestType). If Request-Type not passed or have invalid value assume CreatedOrApproved
 DELETE
     /Cohorts/{id} - Remove cohort
 POST

@@ -20,7 +20,7 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelUserTest() {
             // Fields constraints. All necessary filds listed below
-            Assert.True(typeof(User).GetProperties().Length == 10);
+            Assert.Equal(10, typeof(User).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<User>("Id", typeof(string)));
@@ -41,7 +41,7 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelMessageTest() {
             // Fields constraints. All necessary filds listed below
-            Assert.True(typeof(Message).GetProperties().Length == 4);
+            Assert.Equal(4, typeof(Message).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<Message>("Id", typeof(string)));
@@ -56,7 +56,7 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelAnalyticalApplicationItemTest() {
             // Fields constraints. All necessary filds listed below
-            Assert.True(typeof(AnalyticalApplicationItem).GetProperties().Length == 3);
+            Assert.Equal(3, typeof(AnalyticalApplicationItem).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<AnalyticalApplicationItem>("Id", typeof(string)));
@@ -70,7 +70,7 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelCohortTest() {
             // Fields constraints. All necessary filds listed below
-            Assert.True(typeof(Cohort).GetProperties().Length == 7);
+            Assert.Equal(7, typeof(Cohort).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<Cohort>("Id", typeof(string)));
@@ -88,7 +88,7 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelCohortEnumLinkTest() {
             // Fields constraints. All necessary filds listed below
-            Assert.True(typeof(CohortEnumLink).GetProperties().Length == 8);
+            Assert.Equal(8, typeof(CohortEnumLink).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<CohortEnumLink>("Id", typeof(string)));
@@ -109,13 +109,181 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelBiomarkersTest() {
             // Fields constraints. All necessary filds listed below
-            Assert.True(typeof(Biomarkers).GetProperties().Length == 2);
+            Assert.Equal(2, typeof(Biomarkers).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<Biomarkers>("Id", typeof(string)));
             Assert.True(Utils.HasProperty<Biomarkers>("DeseaseState", typeof(string)));
         }
 
+        /// <summary>
+        /// Demographics entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelDemographicsTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(4, typeof(Demographics).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<Demographics>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<Demographics>("AgeFrom", typeof(float)));
+            Assert.True(Utils.HasProperty<Demographics>("AgeTo", typeof(float)));
+            Assert.True(Utils.HasProperty<Demographics>("Gender", typeof(string)));
+        }
+
+        /// <summary>
+        /// DeseaseStates entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelDeseaseStatesTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(2, typeof(DeseaseStates).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<DeseaseStates>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<DeseaseStates>("DeseaseState", typeof(string)));
+        }
+
+        /// <summary>
+        /// Ethnicitys entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelEthnicitysTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(2, typeof(Ethnicitys).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<Ethnicitys>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<Ethnicitys>("Nationality", typeof(string)));
+        }
+
+        /// <summary>
+        /// GeneticMatches entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelGeneticMatchesTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(6, typeof(GeneticMatches).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<GeneticMatches>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<GeneticMatches>("Chromosome", typeof(string)));
+            Assert.True(Utils.HasProperty<GeneticMatches>("Position", typeof(int)));
+            Assert.True(Utils.HasProperty<GeneticMatches>("Ref", typeof(string)));
+            Assert.True(Utils.HasProperty<GeneticMatches>("Alt", typeof(string)));
+            Assert.True(Utils.HasProperty<GeneticMatches>("dbSNP", typeof(string)));
+        }
+
+        /// <summary>
+        /// PreviousTreatments entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelPreviousTreatmentsTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(2, typeof(PreviousTreatments).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<PreviousTreatments>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<PreviousTreatments>("Keyword", typeof(string)));
+        }
+
+        /// <summary>
+        /// Prognosis entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelPrognosisTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(2, typeof(Prognosis).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<Prognosis>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<Prognosis>("Keyword", typeof(string)));
+        }
+
+        /// <summary>
+        /// StageOfDeseases entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelStageOfDeseasesTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(4, typeof(StageOfDeseases).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<StageOfDeseases>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<StageOfDeseases>("StageOfTumour", typeof(int)));
+            Assert.True(Utils.HasProperty<StageOfDeseases>("NumberOfNodesAffected", typeof(int)));
+            Assert.True(Utils.HasProperty<StageOfDeseases>("NumberOfMetastasis", typeof(int)));
+        }
+
         #endregion
+
+        /// <summary>
+        /// CohortEnums entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelCohortEnumsTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(4, typeof(CohortEnums).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<CohortEnums>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<CohortEnums>("Name", typeof(string)));
+            Assert.True(Utils.HasProperty<CohortEnums>("CreationDate", typeof(DateTime)));
+            Assert.True(Utils.HasProperty<CohortEnums>("LastUpdate", typeof(DateTime)));
+        }
+
+        /// <summary>
+        /// Enviroment entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelEnviromentTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(9, typeof(Enviroment).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<Enviroment>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<Enviroment>("UserId", typeof(string)));
+            Assert.True(Utils.HasProperty<Enviroment>("NumberOfUsers", typeof(int)));
+            Assert.True(Utils.HasProperty<Enviroment>("DataStorage", typeof(float)));
+            Assert.True(Utils.HasProperty<Enviroment>("AnalyticalApplication", typeof(string)));
+            Assert.True(Utils.HasProperty<Enviroment>("TypeOfConnectivity", typeof(string)));
+            Assert.True(Utils.HasProperty<Enviroment>("Request", typeof(RequestType)));
+            Assert.True(Utils.HasProperty<Enviroment>("CreationDate", typeof(DateTime)));
+            Assert.True(Utils.HasProperty<Enviroment>("LastUpdate", typeof(DateTime)));
+        }
+
+        /// <summary>
+        /// Notification entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelNotificationTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(7, typeof(Notification).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<Notification>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<Notification>("UserId", typeof(string)));
+            Assert.True(Utils.HasProperty<Notification>("Message", typeof(string)));
+            Assert.True(Utils.HasProperty<Notification>("NoicationType", typeof(int)));
+            Assert.True(Utils.HasProperty<Notification>("Status", typeof(NotificationStatus)));
+            Assert.True(Utils.HasProperty<Notification>("CreationDate", typeof(DateTime)));
+            Assert.True(Utils.HasProperty<Notification>("LastUpdate", typeof(DateTime)));
+        }
+
+        /// <summary>
+        /// Session entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelSessionTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(4, typeof(Session).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<Notification>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<Notification>("UserId", typeof(string)));
+            Assert.True(Utils.HasProperty<Notification>("CreationDate", typeof(DateTime)));
+            Assert.True(Utils.HasProperty<Notification>("LastUpdate", typeof(DateTime)));
+       }
+
     }
 }

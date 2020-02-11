@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MedalynxAPI.Models;
 using MedalynxAPI.Models.Cohort;
+using Microsoft.Extensions.Primitives;
 
 namespace MedalynxAPI.Controllers
 {
@@ -76,8 +77,13 @@ namespace MedalynxAPI.Controllers
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
+            StringValues requestTypeHeaders;
+
+            this.Request.Headers.TryGetValue("Request-Type", out requestTypeHeaders);
+            RequestType requestType = (RequestType)((requestTypeHeaders.Count == 0) ? 0 : Int32.Parse(requestTypeHeaders[0]));
+
             string sid = Utils.ToGuid(userId, false).ToString("B");
-            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetByUser(sid);
+            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetByUser(sid, requestType);
             if (cohort == null)
             {
                 return NotFound();
@@ -130,7 +136,7 @@ namespace MedalynxAPI.Controllers
                 }
             }
             // validate that cohort is not exists
-            Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetByUser(cohortApi.UserId);
+            Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetByUser(cohortApi.UserId, RequestType.Any);
             if (existsCohort != null) {
                 return BadRequest(); // cohort already exists. Please use update.
             }

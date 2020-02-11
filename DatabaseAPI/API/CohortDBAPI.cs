@@ -52,14 +52,14 @@ namespace MedalynxAPI
             return false;
         }
 
-        public Cohort GetByUser(string userId)
+        public Cohort GetByUser(string userId, RequestType requestType)
         {
             Guid id = Utils.ToGuid(userId);
             using (var dbContext = new MedialynxDbCohortContext()) {
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    return dbContext.Cohorts.FirstOrDefault(c => c != null && c.UserId == sid);
+                    return dbContext.Cohorts.FirstOrDefault(c => c != null && c.UserId == sid && (requestType == RequestType.Any || c.Request == requestType));
                 }
             }
             return null;

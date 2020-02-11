@@ -76,4 +76,8 @@ namespace MedalynxAPI
     public class MedialynxDbSessionContext : BaseDbContext {
         public DbSet<Models.Session> Sessions { get; set; }
     }
+    public class MedialynxDbHistoryContext : BaseDbContext {
+        public DbSet<Models.HistoryItem> HistoryItems { get; set; }
+    }
+
 }

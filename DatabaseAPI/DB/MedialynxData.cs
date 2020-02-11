@@ -28,6 +28,8 @@ namespace MedalynxAPI
         public PrognosisDBAPI prognosisDBAPI;
         public PreviousTreatmentsDBAPI previousTreatmentsDBAPI;
 
+        public HistoryDBAPI historyDBAPI;
+
         public MedialynxData () {
             // enums
             analyticalApplicationsDBAPI = new AnalyticalApplicationsDBAPI();
@@ -54,6 +56,8 @@ namespace MedalynxAPI
             stageOfDeseasesDBAPI = new StageOfDeseasesDBAPI();
             prognosisDBAPI = new PrognosisDBAPI();
             previousTreatmentsDBAPI = new PreviousTreatmentsDBAPI();
+
+            historyDBAPI = new HistoryDBAPI();
         }
     }
 }

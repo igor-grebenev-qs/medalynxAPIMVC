@@ -285,5 +285,21 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<Notification>("LastUpdate", typeof(DateTime)));
        }
 
+        /// <summary>
+        /// HistoryItem entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelHistoryItemTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.Equal(5, typeof(HistoryItem).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<HistoryItem>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<HistoryItem>("UserId", typeof(string)));
+            Assert.True(Utils.HasProperty<HistoryItem>("ObjectType", typeof(string)));
+            Assert.True(Utils.HasProperty<HistoryItem>("Message", typeof(string)));
+            Assert.True(Utils.HasProperty<HistoryItem>("CreationDate", typeof(DateTime)));
+       }
+
     }
 }

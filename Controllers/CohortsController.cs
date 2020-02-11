@@ -123,7 +123,7 @@ namespace MedalynxAPI.Controllers
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Cohort> Create(CohortAPI cohortApi)
+        public ActionResult<CohortRepresentation> Create(CohortAPI cohortApi)
         {
             // validate that session exists
             string sessionUserId;
@@ -165,7 +165,14 @@ namespace MedalynxAPI.Controllers
             // create cohort links (neccessary enum items will be created with link)
             Program.MedialynxData.cohortEnumLinkDBAPI.CreateLinks(cohort.Id, cohortApi.cohortEnumLinks);
 
-            return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
+            // reload and alive cohort
+            string sid = Utils.ToGuid(cohort.Id, false).ToString("B");
+            List<Cohort> cohorts = Program.MedialynxData.cohortDBAPI.Get(sid);
+            if (cohorts.Count != 1)
+            {
+                return NotFound();
+            }
+            return this.GetCohortRepresentation(cohorts[0]);
         }
 
         [HttpPut]

@@ -71,6 +71,10 @@ namespace MedalynxAPI {
             return true;
         }
 
+        public static bool HasProperty<T>(string propertyName, Type propertyType){
+            return typeof(T).GetProperty(propertyName, propertyType) != null;
+        }
+
         public static bool ValidateSession (IHeaderDictionary headers) {
             StringValues sessionIdHeaders;
             headers.TryGetValue("Session-Id", out sessionIdHeaders);
@@ -78,6 +82,7 @@ namespace MedalynxAPI {
             if (sessionIdHeaders.Count == 0) {
                 return false;
             }
+
             // check that sessin exists
             Session session = Program.MedialynxData.sessionDBAPI.Get(sessionIdHeaders[0]);
 

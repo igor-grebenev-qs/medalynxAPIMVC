@@ -12,6 +12,10 @@ namespace medalynxAPI.Tests
         public string sProp2;
     }
 
+    internal class ModelValidationTestClass{
+        public int TestProp { get; set; }
+    }
+
     public class UtilsTests
     {
         //[Theory]
@@ -52,6 +56,11 @@ namespace medalynxAPI.Tests
 
             Assert.NotStrictEqual(object1.sProp2, object2.sProp2);
 
+        }
+
+        [Fact]
+        public void PassingHasPropertyTest() {
+            Assert.True(Utils.HasProperty<ModelValidationTestClass>("TestProp", typeof(int)));
         }
     }
 }

@@ -3,6 +3,7 @@ using Xunit;
 using MedalynxAPI;
 using MedalynxAPI.Models;
 using MedalynxAPI.Models.Cohort;
+using MedalynxAPI.Models.Cohort.CohortEnums;
 using MedalynxAPI.Models.Enums;
 using MedalynxAPI.Models.User;
 
@@ -62,5 +63,59 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<AnalyticalApplicationItem>("Pos", typeof(int)));
             Assert.True(Utils.HasProperty<AnalyticalApplicationItem>("Name", typeof(string)));
         }
+
+        /// <summary>
+        /// Cohort entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelCohortTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.True(typeof(Cohort).GetProperties().Length == 7);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<Cohort>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<Cohort>("UserId", typeof(string)));
+            Assert.True(Utils.HasProperty<Cohort>("NumberOfSubjectsRequired", typeof(int)));
+            Assert.True(Utils.HasProperty<Cohort>("CohortType", typeof(string)));
+            Assert.True(Utils.HasProperty<Cohort>("Request", typeof(RequestType)));
+            Assert.True(Utils.HasProperty<Cohort>("CreationDate", typeof(DateTime)));
+            Assert.True(Utils.HasProperty<Cohort>("LastUpdate", typeof(DateTime)));
+        }
+
+        /// <summary>
+        /// CohortEnumLink entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelCohortEnumLinkTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.True(typeof(CohortEnumLink).GetProperties().Length == 8);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<CohortEnumLink>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<CohortEnumLink>("CohortId", typeof(string)));
+            Assert.True(Utils.HasProperty<CohortEnumLink>("CohortEnumId", typeof(string)));
+            Assert.True(Utils.HasProperty<CohortEnumLink>("EnumItemId", typeof(string)));
+            Assert.True(Utils.HasProperty<CohortEnumLink>("Include", typeof(int)));
+            Assert.True(Utils.HasProperty<CohortEnumLink>("Percentage", typeof(float)));
+            Assert.True(Utils.HasProperty<CohortEnumLink>("CreationDate", typeof(DateTime)));
+            Assert.True(Utils.HasProperty<CohortEnumLink>("LastUpdate", typeof(DateTime)));
+        }
+
+        #region Cohort enums
+
+        /// <summary>
+        /// Biomarkers entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelBiomarkersTest() {
+            // Fields constraints. All necessary filds listed below
+            Assert.True(typeof(Biomarkers).GetProperties().Length == 2);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<Biomarkers>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<Biomarkers>("DeseaseState", typeof(string)));
+        }
+
+        #endregion
     }
 }

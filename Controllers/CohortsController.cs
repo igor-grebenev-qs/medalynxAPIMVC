@@ -152,7 +152,7 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Cohort> Update(CohortAPI cohortApi)
+        public ActionResult<CohortRepresentation> Update(CohortAPI cohortApi)
         {
             // validate that session exists
             if (!Utils.ValidateSession(this.Request.Headers)) { return BadRequest(); }
@@ -175,7 +175,15 @@ namespace MedalynxAPI.Controllers
             // update/create/delete cohort links (neccessary enum items will be created with link)
             Program.MedialynxData.cohortEnumLinkDBAPI.UpdateLinks(cohort.Id, cohortApi.cohortEnumLinks);
 
-            return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
+            // reload and alive cohort
+            string sid = Utils.ToGuid(cohort.Id, false).ToString("B");
+            List<Cohort> cohorts = Program.MedialynxData.cohortDBAPI.Get(sid);
+            if (cohorts.Count != 1)
+            {
+                return NotFound();
+            }
+            return this.GetCohortRepresentation(cohorts[0]);
+
         }
 
         [HttpOptions]

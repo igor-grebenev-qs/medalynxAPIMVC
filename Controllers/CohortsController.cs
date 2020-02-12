@@ -131,10 +131,11 @@ namespace MedalynxAPI.Controllers
 
             // validate links
             foreach (var link in cohortApi.cohortEnumLinks) {
-                if (Utils.IsEmpty(link.enumItem) && link.EnumItemId == "") {
+                bool enumItemIdDefined = link.EnumItemId != null && link.EnumItemId != "";
+                if (Utils.IsEmpty(link.enumItem) && !enumItemIdDefined) {
                     return BadRequest();
                 }
-                if (!Utils.IsEmpty(link.enumItem) && link.EnumItemId != "") {
+                if (!Utils.IsEmpty(link.enumItem) && enumItemIdDefined) {
                     return BadRequest(); // can't set both values
                 }
             }

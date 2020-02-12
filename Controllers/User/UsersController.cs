@@ -73,6 +73,26 @@ namespace MedalynxAPI.Controllers
             return Program.MedialynxData.userDBAPI.GetBySession(sid);
         }
 
+        private CredentialsInfo GetCredentialsInfo(User user) {
+            // login success. Session required.
+            Session existsSession = Program.MedialynxData.sessionDBAPI.GetByUser(user.Id);
+            CredentialsInfo credentialsInfo = new CredentialsInfo();
+            if (existsSession != null) { // session exists
+                credentialsInfo.Session = existsSession;
+            }
+            else {
+                Session newSession = new Session();
+                newSession.Id = Guid.NewGuid().ToString("B");;
+                newSession.UserId = user.Id;
+                newSession.CreationDate = DateTime.UtcNow;
+                newSession.LastUpdate = newSession.CreationDate;
+                Program.MedialynxData.sessionDBAPI.Add(newSession);
+                credentialsInfo.Session = newSession;
+            }
+            credentialsInfo.User = user;
+            return credentialsInfo;
+        }
+
         [HttpPost("Login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -86,23 +106,7 @@ namespace MedalynxAPI.Controllers
                 return NotFound();
             }
             if (user.Password == credentials.Password) { // OK!!!
-                // login success. Session required.
-                Session existsSession = Program.MedialynxData.sessionDBAPI.GetByUser(user.Id);
-                CredentialsInfo credentialsInfo = new CredentialsInfo();
-                if (existsSession != null) { // session exists
-                    credentialsInfo.Session = existsSession;
-                }
-                else {
-                    Session newSession = new Session();
-                    newSession.Id = Guid.NewGuid().ToString("B");;
-                    newSession.UserId = user.Id;
-                    newSession.CreationDate = DateTime.UtcNow;
-                    newSession.LastUpdate = newSession.CreationDate;
-                    Program.MedialynxData.sessionDBAPI.Add(newSession);
-                    credentialsInfo.Session = newSession;
-                }
-                credentialsInfo.User = user;
-                return credentialsInfo;
+                return this.GetCredentialsInfo(user);
             }
             return null;
         }
@@ -110,7 +114,7 @@ namespace MedalynxAPI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<User> Create(User user)
+        public ActionResult<UserRepresentation> Create(User user)
         {
             Guid id = Utils.ToGuid(user.Id, false);
             user.CreationDate = DateTime.UtcNow;
@@ -125,8 +129,11 @@ namespace MedalynxAPI.Controllers
                     "Account created successfully",
                     "Account created successfully.");
                 #pragma warning restore 4014
+                UserRepresentation userRepresentation = new UserRepresentation(user);
+                userRepresentation.CredentialsInfo = this.GetCredentialsInfo(user);
+                return userRepresentation;
 
-                return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
+                // return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
             }
             return BadRequest();
         }

@@ -10,13 +10,7 @@ namespace MedalynxAPI.Models.Cohort
     public class CohortRepresentation : Cohort
     {
         public CohortRepresentation(Cohort coh) {
-            this.Id = coh.Id;
-            this.UserId = coh.UserId;
-            this.NumberOfSubjectsRequired = coh.NumberOfSubjectsRequired;
-            this.CohortType = coh.CohortType;
-            this.Request = coh.Request;
-            this.CreationDate = coh.CreationDate;
-            this.LastUpdate = coh.LastUpdate;
+            Utils.CopyPropertyValues<Cohort>(coh, this);
         }
         public List<CohortEnumLinkRepresentation> CohortEnumLinks { get; set; }
     }

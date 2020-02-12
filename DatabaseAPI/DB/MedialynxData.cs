@@ -30,6 +30,8 @@ namespace MedalynxAPI
 
         public HistoryDBAPI historyDBAPI;
 
+        public MedialynxDbMetadataContext medialynxDbMetadataContext;
+
         public MedialynxData () {
             // enums
             analyticalApplicationsDBAPI = new AnalyticalApplicationsDBAPI();
@@ -58,6 +60,8 @@ namespace MedalynxAPI
             previousTreatmentsDBAPI = new PreviousTreatmentsDBAPI();
 
             historyDBAPI = new HistoryDBAPI();
+
+            medialynxDbMetadataContext = new MedialynxDbMetadataContext();
         }
     }
 }

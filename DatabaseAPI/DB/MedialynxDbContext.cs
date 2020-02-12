@@ -80,4 +80,7 @@ namespace MedalynxAPI
         public DbSet<Models.HistoryItem> HistoryItems { get; set; }
     }
 
+    public class MedialynxDbMetadataContext : BaseDbContext {
+        public DbSet<Models.Metadata> Metadata { get; set; }
+    }
 }

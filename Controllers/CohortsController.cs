@@ -134,6 +134,9 @@ namespace MedalynxAPI.Controllers
                 if (Utils.IsEmpty(link.enumItem) && link.EnumItemId == "") {
                     return BadRequest();
                 }
+                if (!Utils.IsEmpty(link.enumItem) && link.EnumItemId != "") {
+                    return BadRequest(); // can't set both values
+                }
             }
             // validate that cohort is not exists
             Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetByUser(cohortApi.UserId, RequestType.Any);

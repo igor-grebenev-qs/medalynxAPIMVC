@@ -116,6 +116,17 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<UserRepresentation> Create(User user)
         {
+            // validate email
+            if (!Utils.IsValidEmail(user.Email)) {
+                return BadRequest("Invalid email address");
+            }
+
+            // validate password
+            string passwordValidationMessage;
+            if (!Utils.IsValidPassword(user.Password, out passwordValidationMessage)) {
+                return BadRequest(passwordValidationMessage);
+            }
+
             Guid id = Utils.ToGuid(user.Id, false);
             user.CreationDate = DateTime.UtcNow;
             user.LastUpdate = user.CreationDate;

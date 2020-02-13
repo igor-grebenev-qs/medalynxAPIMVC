@@ -111,6 +111,31 @@ namespace MedalynxAPI.Controllers
             return null;
         }
 
+        [HttpPost("Password")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<CredentialsInfo> ValidatePassword(string password)
+        {
+            // validate password
+            string passwordValidationMessage;
+            if (!Utils.IsValidPassword(password, out passwordValidationMessage)) {
+                return BadRequest(passwordValidationMessage);
+            }
+            return Ok();
+        }
+
+        [HttpPost("Email")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<CredentialsInfo> ValidateEmail(string email)
+        {
+            // validate email
+            if (!Utils.IsValidEmail(email)) {
+                return BadRequest("Invalid email address");
+            }
+            return Ok();
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -171,6 +196,8 @@ namespace MedalynxAPI.Controllers
         [HttpOptions]
         [HttpOptions("{id}")]
         [HttpOptions("Login")]
+        [HttpOptions("Email")]
+        [HttpOptions("Password")]
         [HttpOptions("Logout/{sessionId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Enviroment> Options()

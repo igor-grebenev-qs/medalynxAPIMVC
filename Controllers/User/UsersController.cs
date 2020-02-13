@@ -114,11 +114,11 @@ namespace MedalynxAPI.Controllers
         [HttpPost("Password")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<CredentialsInfo> ValidatePassword(string password)
+        public ActionResult<CredentialsInfo> ValidatePassword(Credentials credentials)
         {
             // validate password
             string passwordValidationMessage;
-            if (!Utils.IsValidPassword(password, out passwordValidationMessage)) {
+            if (!Utils.IsValidPassword(credentials.Password, out passwordValidationMessage)) {
                 return BadRequest(passwordValidationMessage);
             }
             return Ok();
@@ -127,10 +127,10 @@ namespace MedalynxAPI.Controllers
         [HttpPost("Email")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<CredentialsInfo> ValidateEmail(string email)
+        public ActionResult<CredentialsInfo> ValidateEmail(Credentials credentials)
         {
             // validate email
-            if (!Utils.IsValidEmail(email)) {
+            if (!Utils.IsValidEmail(credentials.UserEmail)) {
                 return BadRequest("Invalid email address");
             }
             return Ok();

@@ -21,6 +21,18 @@ POST /Users/Login (check credentials)
 
 GET /Users/Logout/{sessionId}
 
+POST /Users/Email
+        body for request sample:
+        {
+            "UserEmail": "igor.grebenev@quantumsoft.ru",
+        }
+
+POST /Users/Password
+        body for request sample:
+        {
+            "Password": "some_pwd"
+        }
+
 POST /Users (create new user
         body for request sample:
         {

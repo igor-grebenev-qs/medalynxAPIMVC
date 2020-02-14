@@ -119,7 +119,7 @@ namespace MedalynxAPI.Controllers
             // validate password
             string passwordValidationMessage;
             if (!Utils.IsValidPassword(credentials.Password, out passwordValidationMessage)) {
-                return BadRequest(passwordValidationMessage);
+                return BadRequest(new ValidationResult("password", passwordValidationMessage));
             }
             return Ok();
         }
@@ -131,7 +131,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate email
             if (!Utils.IsValidEmail(credentials.UserEmail)) {
-                return BadRequest("Invalid email address");
+                return BadRequest(new ValidationResult("email", "Invalid email address"));
             }
             return Ok();
         }
@@ -143,13 +143,13 @@ namespace MedalynxAPI.Controllers
         {
             // validate email
             if (!Utils.IsValidEmail(user.Email)) {
-                return BadRequest("Invalid email address");
+                return BadRequest(new ValidationResult("email", "Invalid email address"));
             }
 
             // validate password
             string passwordValidationMessage;
             if (!Utils.IsValidPassword(user.Password, out passwordValidationMessage)) {
-                return BadRequest(passwordValidationMessage);
+                return BadRequest(new ValidationResult("password", passwordValidationMessage));
             }
 
             Guid id = Utils.ToGuid(user.Id, false);

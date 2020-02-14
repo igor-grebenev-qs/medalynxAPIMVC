@@ -130,7 +130,8 @@ POST
             "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
             "numberOfSubjectsRequired": 1,
             "cohortType": "unknown",
-            "request": 0,
+            "requestAdmin": 0,
+            "requestUser": 0,
             "cohortEnumLinks": [
                 {
                 "cohortEnumId": "{cc77ecca-8279-4c9d-b321-064ba492ba9e}",
@@ -156,7 +157,8 @@ PUT
             "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
             "numberOfSubjectsRequired": 1,
             "cohortType": "unknown",
-            "request": 0,
+            "requestAdmin": 0,
+            "requestUser": 0,
             "cohortEnumLinks": [
                 {
                 "id" ... Link can contains id for update or will be create new. If link not present in this property - link will removed

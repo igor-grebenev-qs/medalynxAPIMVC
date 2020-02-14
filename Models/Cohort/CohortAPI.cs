@@ -58,7 +58,8 @@ namespace MedalynxAPI.Models.Cohort
         public string UserId { get; set; }
         public int NumberOfSubjectsRequired { get; set; }
         public string CohortType { get; set; }
-        public RequestType Request { get; set; }
+        public RequestType RequestAdmin { get; set; }
+        public RequestType RequestUser { get; set; }
         public List<CohortEnumLinkAPI> cohortEnumLinks { get; set; }
     }
 }

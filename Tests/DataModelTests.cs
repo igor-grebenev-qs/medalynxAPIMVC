@@ -20,7 +20,7 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelUserTest() {
             // Fields constraints. All necessary filds listed below
-            Assert.Equal(10, typeof(User).GetProperties().Length);
+            Assert.Equal(11, typeof(User).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<User>("Id", typeof(string)));
@@ -31,6 +31,7 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<User>("Request", typeof(RequestType)));
             Assert.True(Utils.HasProperty<User>("Password", typeof(string)));
             Assert.True(Utils.HasProperty<User>("Role", typeof(string)));
+            Assert.True(Utils.HasProperty<User>("Status", typeof(int)));
             Assert.True(Utils.HasProperty<User>("CreationDate", typeof(DateTime)));
             Assert.True(Utils.HasProperty<User>("LastUpdate", typeof(DateTime)));
         }
@@ -70,14 +71,15 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelCohortTest() {
             // Fields constraints. All necessary filds listed below
-            Assert.Equal(7, typeof(Cohort).GetProperties().Length);
+            Assert.Equal(8, typeof(Cohort).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<Cohort>("Id", typeof(string)));
             Assert.True(Utils.HasProperty<Cohort>("UserId", typeof(string)));
             Assert.True(Utils.HasProperty<Cohort>("NumberOfSubjectsRequired", typeof(int)));
             Assert.True(Utils.HasProperty<Cohort>("CohortType", typeof(string)));
-            Assert.True(Utils.HasProperty<Cohort>("Request", typeof(RequestType)));
+            Assert.True(Utils.HasProperty<Cohort>("RequestAdmin", typeof(RequestType)));
+            Assert.True(Utils.HasProperty<Cohort>("RequestUser", typeof(RequestType)));
             Assert.True(Utils.HasProperty<Cohort>("CreationDate", typeof(DateTime)));
             Assert.True(Utils.HasProperty<Cohort>("LastUpdate", typeof(DateTime)));
         }

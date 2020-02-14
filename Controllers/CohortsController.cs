@@ -161,7 +161,8 @@ namespace MedalynxAPI.Controllers
             cohort.UserId = cohortApi.UserId;
             cohort.NumberOfSubjectsRequired = cohortApi.NumberOfSubjectsRequired;
             cohort.CohortType = cohortApi.CohortType;
-            cohort.Request = cohortApi.Request;
+            cohort.RequestAdmin = cohortApi.RequestAdmin;
+            cohort.RequestUser = cohortApi.RequestUser;
             cohort.CreationDate = DateTime.UtcNow;
             cohort.LastUpdate = cohort.CreationDate;
             // create cohort
@@ -201,7 +202,8 @@ namespace MedalynxAPI.Controllers
             cohort.UserId = cohortApi.UserId;
             cohort.NumberOfSubjectsRequired = cohortApi.NumberOfSubjectsRequired;
             cohort.CohortType = cohortApi.CohortType;
-            cohort.Request = cohortApi.Request;
+            cohort.RequestAdmin = cohortApi.RequestAdmin;
+            cohort.RequestUser = cohortApi.RequestUser;
             cohort.LastUpdate = DateTime.UtcNow;
             // update cohort
             Program.MedialynxData.cohortDBAPI.Update(cohort);

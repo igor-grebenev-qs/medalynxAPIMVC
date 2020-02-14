@@ -61,8 +61,8 @@ namespace MedalynxAPI
                     string sid = id.ToString("B");
                     return dbContext.Cohorts.FirstOrDefault(c => c != null && c.UserId == sid &&
                         (requestType == RequestType.Any || 
-                        (requestType == RequestType.CreatedOrApproved && (c.Request == RequestType.Created || c.Request == RequestType.Approved)) ||
-                        c.Request == requestType)
+                        (requestType == RequestType.CreatedOrApproved && (c.RequestUser == RequestType.Created || c.RequestUser == RequestType.Approved)) ||
+                        c.RequestUser == requestType)
                         );
                 }
             }

@@ -169,7 +169,7 @@ namespace MedalynxAPI {
             }
             else if (!hasMiniMaxChars.IsMatch(input))
             {
-                ErrorMessage = "Password should not be less than or greater than 12 characters";
+                ErrorMessage = "Password should not be less than 8 or greater than 15 characters";
                 return false;
             }
             else if (!hasNumber.IsMatch(input))

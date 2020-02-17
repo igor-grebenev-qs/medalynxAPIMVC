@@ -31,7 +31,7 @@ namespace MedalynxAPI
         public User GetByEmail(string email)
         {
             using (var dbContext = new MedialynxDbUserContext()) {
-                return dbContext.Users.FirstOrDefault(user => user != null && user.Email == email);
+                return dbContext.Users.FirstOrDefault(user => user != null && user.Email.ToLower() == email.ToLower());
             }
         }
 

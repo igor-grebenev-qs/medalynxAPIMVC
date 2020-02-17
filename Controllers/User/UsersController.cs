@@ -153,6 +153,7 @@ namespace MedalynxAPI.Controllers
             }
 
             Guid id = Utils.ToGuid(user.Id, false);
+            user.Email = user.Email.ToLower(); // ensure that email does not contains uppercase
             user.CreationDate = DateTime.UtcNow;
             user.LastUpdate = user.CreationDate;
             if (id == Guid.Empty) {

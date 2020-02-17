@@ -5,6 +5,14 @@ using MedalynxAPI.Models;
 
 namespace MedalynxAPI
 {
+    internal class EnviromentComparer : IComparer<Enviroment>
+    {
+        public int Compare(Enviroment x, Enviroment y)
+        {
+            return y.LastUpdate.CompareTo(x.LastUpdate);
+        }
+    }
+
     public class EnviromentDBAPI
     {
         // Get Enviroment by user
@@ -25,6 +33,7 @@ namespace MedalynxAPI
                     enviroments.AddRange(dbContext.Enviroments);
                 }
             }
+            enviroments.Sort(new EnviromentComparer());
             return enviroments;
         }
 

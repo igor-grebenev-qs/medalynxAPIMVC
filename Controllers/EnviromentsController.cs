@@ -9,7 +9,7 @@ namespace MedalynxAPI.Controllers
 {
     [Produces(MediaTypeNames.Application.Json)]
     [Route("Environments")]
-    public class EnviromentsController : MedalynxControllerBase
+    public class EnvironmentsController : MedalynxControllerBase
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -20,7 +20,7 @@ namespace MedalynxAPI.Controllers
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
-            return Program.MedialynxData.enviromentDBAPI.GetByUser();
+            return Program.MedialynxData.environmentDBAPI.GetByUser();
         }
 
         [HttpGet("ByUser/{userId}")]
@@ -34,31 +34,31 @@ namespace MedalynxAPI.Controllers
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             string sid = Utils.ToGuid(userId, false).ToString("B");
-            List<Models.Environment> enviroments = Program.MedialynxData.enviromentDBAPI.GetByUser(sid);
-            if (enviroments.Count != 1)
+            List<Models.Environment> environments = Program.MedialynxData.environmentDBAPI.GetByUser(sid);
+            if (environments.Count != 1)
             {
                 return NotFound();
             }
 
-            return enviroments[0];
+            return environments[0];
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Models.Environment> Create(Models.Environment enviroment)
+        public ActionResult<Models.Environment> Create(Models.Environment environment)
         {
             // validate that session exists
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
-            Guid id = Utils.ToGuid(enviroment.Id, false);
-            enviroment.CreationDate = DateTime.UtcNow;
-            enviroment.LastUpdate = enviroment.CreationDate;
+            Guid id = Utils.ToGuid(environment.Id, false);
+            environment.CreationDate = DateTime.UtcNow;
+            environment.LastUpdate = environment.CreationDate;
             if (id == Guid.Empty) {
-                enviroment.Id = Guid.NewGuid().ToString("B");
+                environment.Id = Guid.NewGuid().ToString("B");
             }
-            Program.MedialynxData.enviromentDBAPI.Add(enviroment);
+            Program.MedialynxData.environmentDBAPI.Add(environment);
 
             Notification notification = new Notification();
             notification.Id = Guid.NewGuid().ToString("B");
@@ -70,7 +70,7 @@ namespace MedalynxAPI.Controllers
             notification.LastUpdate = notification.CreationDate;
             Program.MedialynxData.notificationDBAPI.Add(notification);
 
-            return CreatedAtAction(nameof(GetById), new { id = enviroment.Id }, enviroment);
+            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 
         [HttpPut]
@@ -87,7 +87,7 @@ namespace MedalynxAPI.Controllers
             if (id == Guid.Empty) {
                 return BadRequest();
             }
-            Program.MedialynxData.enviromentDBAPI.Update(enviroment);
+            Program.MedialynxData.environmentDBAPI.Update(enviroment);
             return CreatedAtAction(nameof(GetById), new { id = enviroment.Id }, enviroment);
         }
 

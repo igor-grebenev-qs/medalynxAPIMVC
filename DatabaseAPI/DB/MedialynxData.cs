@@ -11,7 +11,7 @@ namespace MedalynxAPI
         public AnalyticalApplicationsDBAPI analyticalApplicationsDBAPI;
         public CohortEnumsDBAPI cohortEnumsDBAPI;
         public UserDBAPI userDBAPI;
-        public EnviromentDBAPI enviromentDBAPI;
+        public EnvironmentDBAPI environmentDBAPI;
         public CohortDBAPI cohortDBAPI;
         public CohortEnumLinkDBAPI cohortEnumLinkDBAPI;
         public NotificationDBAPI notificationDBAPI;
@@ -39,7 +39,7 @@ namespace MedalynxAPI
 
             //user
             userDBAPI = new UserDBAPI();
-            enviromentDBAPI = new EnviromentDBAPI();
+            environmentDBAPI = new EnvironmentDBAPI();
 
             //cohort
             cohortDBAPI = new CohortDBAPI();

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MedalynxAPI.Models;
 using MedalynxAPI.Models.Enums;
 
 namespace MedalynxAPI.Controllers.Enums

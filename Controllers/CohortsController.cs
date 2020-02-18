@@ -182,7 +182,7 @@ namespace MedalynxAPI.Controllers
             notification.Id = Guid.NewGuid().ToString("B");
             notification.UserId = sessionUserId;
             notification.Message = "Cohort created";
-            notification.NoicationType = 0;
+            notification.NotificationType = 0;
             notification.Status = NotificationStatus.Created;
             notification.CreationDate = DateTime.UtcNow;
             notification.LastUpdate = notification.CreationDate;

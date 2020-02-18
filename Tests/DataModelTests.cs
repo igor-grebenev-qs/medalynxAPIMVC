@@ -268,7 +268,7 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<Notification>("Id", typeof(string)));
             Assert.True(Utils.HasProperty<Notification>("UserId", typeof(string)));
             Assert.True(Utils.HasProperty<Notification>("Message", typeof(string)));
-            Assert.True(Utils.HasProperty<Notification>("NoicationType", typeof(int)));
+            Assert.True(Utils.HasProperty<Notification>("NotificationType", typeof(int)));
             Assert.True(Utils.HasProperty<Notification>("Status", typeof(NotificationStatus)));
             Assert.True(Utils.HasProperty<Notification>("CreationDate", typeof(DateTime)));
             Assert.True(Utils.HasProperty<Notification>("LastUpdate", typeof(DateTime)));

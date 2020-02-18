@@ -14,7 +14,7 @@ namespace MedalynxAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<List<Enviroment>> GetAll()
+        public ActionResult<List<Models.Environment>> GetAll()
         {
             // validate that session exists
             string sessionUserId;
@@ -27,14 +27,14 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Enviroment> GetById(string userId)
+        public ActionResult<Models.Environment> GetById(string userId)
         {
             // validate that session exists
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
             string sid = Utils.ToGuid(userId, false).ToString("B");
-            List<Enviroment> enviroments = Program.MedialynxData.enviromentDBAPI.GetByUser(sid);
+            List<Models.Environment> enviroments = Program.MedialynxData.enviromentDBAPI.GetByUser(sid);
             if (enviroments.Count != 1)
             {
                 return NotFound();
@@ -46,7 +46,7 @@ namespace MedalynxAPI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Enviroment> Create(Enviroment enviroment)
+        public ActionResult<Models.Environment> Create(Models.Environment enviroment)
         {
             // validate that session exists
             string sessionUserId;
@@ -77,7 +77,7 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Enviroment> Update(Enviroment enviroment)
+        public ActionResult<Models.Environment> Update(Models.Environment enviroment)
         {
             // validate that session exists
             string sessionUserId;
@@ -94,7 +94,7 @@ namespace MedalynxAPI.Controllers
         [HttpOptions]
         [HttpOptions("ByUser/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<Enviroment> Options()
+        public ActionResult<Models.Environment> Options()
         {
             return Ok();
         }

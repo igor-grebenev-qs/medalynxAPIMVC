@@ -5,9 +5,9 @@ using MedalynxAPI.Models;
 
 namespace MedalynxAPI
 {
-    internal class EnviromentComparer : IComparer<Enviroment>
+    internal class EnviromentComparer : IComparer<Models.Environment>
     {
-        public int Compare(Enviroment x, Enviroment y)
+        public int Compare(Models.Environment x, Models.Environment y)
         {
             return y.LastUpdate.CompareTo(x.LastUpdate);
         }
@@ -16,15 +16,15 @@ namespace MedalynxAPI
     public class EnviromentDBAPI
     {
         // Get Enviroment by user
-        public List<Enviroment> GetByUser(string userId = "{00000000-0000-0000-0000-000000000000}")
+        public List<Models.Environment> GetByUser(string userId = "{00000000-0000-0000-0000-000000000000}")
         {
             Guid id = Utils.ToGuid(userId);
-            List<Enviroment> enviroments = new List<Enviroment>();
+            List<Models.Environment> enviroments = new List<Models.Environment>();
             using (var dbContext = new MedialynxDbEnviromentsContext()) {
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    Enviroment enviroment = dbContext.Enviroments.FirstOrDefault(enviroment => enviroment != null && enviroment.UserId == sid);
+                    Models.Environment enviroment = dbContext.Enviroments.FirstOrDefault(enviroment => enviroment != null && enviroment.UserId == sid);
                     enviroments.Add(enviroment);
                 }
                 else
@@ -37,7 +37,7 @@ namespace MedalynxAPI
             return enviroments;
         }
 
-        public void Add(Enviroment enviroment)
+        public void Add(Models.Environment enviroment)
         {
             using (var dbContext = new MedialynxDbEnviromentsContext()) {
                 dbContext.Enviroments.Add(enviroment);
@@ -45,13 +45,13 @@ namespace MedalynxAPI
             }
         }
 
-        public void Update(Enviroment enviroment)
+        public void Update(Models.Environment enviroment)
         {
             using (var dbContext = new MedialynxDbEnviromentsContext()) {
-                Enviroment existsEnviroment = dbContext.Enviroments.FirstOrDefault(env => env != null && env.Id == enviroment.Id);
+                Models.Environment existsEnviroment = dbContext.Enviroments.FirstOrDefault(env => env != null && env.Id == enviroment.Id);
                 if (existsEnviroment != null)
                 {
-                    if (Utils.CopyPropertyValues<Enviroment>(enviroment, existsEnviroment))
+                    if (Utils.CopyPropertyValues<Models.Environment>(enviroment, existsEnviroment))
                     {
                         dbContext.Enviroments.Update(existsEnviroment);
                         dbContext.SaveChanges();

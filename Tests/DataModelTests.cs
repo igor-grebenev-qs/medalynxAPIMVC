@@ -19,7 +19,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelUserTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(11, typeof(User).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -41,7 +41,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelMessageTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(4, typeof(Message).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -56,7 +56,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelAnalyticalApplicationItemTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(3, typeof(AnalyticalApplicationItem).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -70,7 +70,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelCohortTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(9, typeof(Cohort).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -236,24 +236,24 @@ namespace medalynxAPI.Tests
         }
 
         /// <summary>
-        /// Enviroment entity validation.
+        /// Environment entity validation.
         /// </summary>
         [Fact]
-        public void PassingModelEnviromentTest() {
+        public void PassingModelEnvironmentTest() {
             // Fields constraints. All necessary filds listed below
-            Assert.Equal(10, typeof(Enviroment).GetProperties().Length);
+            Assert.Equal(10, typeof(MedalynxAPI.Models.Environment).GetProperties().Length);
 
             // Enumerate all exists fields
-            Assert.True(Utils.HasProperty<Enviroment>("Id", typeof(string)));
-            Assert.True(Utils.HasProperty<Enviroment>("UserId", typeof(string)));
-            Assert.True(Utils.HasProperty<Enviroment>("NumberOfUsers", typeof(int)));
-            Assert.True(Utils.HasProperty<Enviroment>("DataStorage", typeof(float)));
-            Assert.True(Utils.HasProperty<Enviroment>("AnalyticalApplication", typeof(string)));
-            Assert.True(Utils.HasProperty<Enviroment>("TypeOfConnectivity", typeof(string)));
-            Assert.True(Utils.HasProperty<Enviroment>("Request", typeof(RequestType)));
-            Assert.True(Utils.HasProperty<Enviroment>("Status", typeof(ObjectStatus)));
-            Assert.True(Utils.HasProperty<Enviroment>("CreationDate", typeof(DateTime)));
-            Assert.True(Utils.HasProperty<Enviroment>("LastUpdate", typeof(DateTime)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("UserId", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("NumberOfUsers", typeof(int)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("DataStorage", typeof(float)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("AnalyticalApplication", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("TypeOfConnectivity", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("Request", typeof(RequestType)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("Status", typeof(ObjectStatus)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("CreationDate", typeof(DateTime)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("LastUpdate", typeof(DateTime)));
         }
 
         /// <summary>

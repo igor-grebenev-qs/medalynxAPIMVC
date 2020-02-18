@@ -101,7 +101,7 @@ namespace MedalynxAPI.Controllers
         [HttpOptions("{id}")]
         [HttpOptions("CohortId/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<Enviroment> Options()
+        public ActionResult<Models.Environment> Options()
         {
             return Ok();
         }

@@ -91,7 +91,7 @@ namespace MedalynxAPI.Controllers.Enums
         [HttpOptions("{id}")]
         [HttpOptions("{enumId}/values")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<Enviroment> Options()
+        public ActionResult<Models.Environment> Options()
         {
             return Ok();
         }

@@ -207,7 +207,7 @@ namespace MedalynxAPI.Controllers
         [HttpOptions("Password")]
         [HttpOptions("Logout/{sessionId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<Enviroment> Options()
+        public ActionResult<Models.Environment> Options()
         {
             return Ok();
         }

@@ -28,7 +28,7 @@ namespace MedalynxAPI
     }
 
     public class MedialynxDbEnviromentsContext : BaseDbContext {
-        public DbSet<Models.Enviroment> Enviroments { get; set; }
+        public DbSet<Models.Environment> Enviroments { get; set; }
     }
 
     public class MedialynxDbCohortEnumLinkContext : BaseDbContext {

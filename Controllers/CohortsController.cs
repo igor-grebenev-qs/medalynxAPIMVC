@@ -236,7 +236,7 @@ namespace MedalynxAPI.Controllers
         [HttpOptions("{id}")]
         [HttpOptions("ByUser/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<Enviroment> Options()
+        public ActionResult<Models.Environment> Options()
         {
             return Ok();
         }

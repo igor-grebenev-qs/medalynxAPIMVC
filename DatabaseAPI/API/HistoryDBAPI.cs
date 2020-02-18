@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MedalynxAPI.Models;
-using MedalynxAPI.Models.Cohort;
 
 namespace MedalynxAPI
 {

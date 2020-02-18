@@ -77,18 +77,18 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Models.Environment> Update(Models.Environment enviroment)
+        public ActionResult<Models.Environment> Update(Models.Environment environment)
         {
             // validate that session exists
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
 
-            Guid id = Utils.ToGuid(enviroment.Id, false);
+            Guid id = Utils.ToGuid(environment.Id, false);
             if (id == Guid.Empty) {
                 return BadRequest();
             }
-            Program.MedialynxData.environmentDBAPI.Update(enviroment);
-            return CreatedAtAction(nameof(GetById), new { id = enviroment.Id }, enviroment);
+            Program.MedialynxData.environmentDBAPI.Update(environment);
+            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 
         [HttpOptions]

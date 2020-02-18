@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MedalynxAPI.Models;
 using MedalynxAPI.Models.User;
 
 namespace MedalynxAPI
 {
     public class MessageDBAPI
     {
-        // Get Enviroment by user
+        // Get Environment by user
         public List<Message> GetByUser(string userId = "{00000000-0000-0000-0000-000000000000}")
         {
             Guid id = Utils.ToGuid(userId);

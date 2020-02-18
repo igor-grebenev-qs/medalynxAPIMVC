@@ -152,6 +152,12 @@ namespace MedalynxAPI.Controllers
                 return BadRequest(new ValidationResult("password", passwordValidationMessage));
             }
 
+            User existsUser = Program.MedialynxData.userDBAPI.GetByEmail(user.Email);
+            if (user != null) {
+                return BadRequest("User already exists with same email");
+            }
+
+
             Guid id = Utils.ToGuid(user.Id, false);
             user.Email = user.Email.ToLower(); // ensure that email does not contains uppercase
             user.CreationDate = DateTime.UtcNow;

@@ -90,7 +90,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelCohortEnumLinkTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(8, typeof(CohortEnumLink).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -111,7 +111,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelBiomarkersTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(2, typeof(Biomarkers).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -124,7 +124,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelDemographicsTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(4, typeof(Demographics).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -139,7 +139,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelDeseaseStatesTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(2, typeof(DeseaseStates).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -152,7 +152,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelEthnicitysTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(2, typeof(Ethnicitys).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -165,7 +165,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelGeneticMatchesTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(6, typeof(GeneticMatches).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -182,7 +182,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelPreviousTreatmentsTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(2, typeof(PreviousTreatments).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -195,7 +195,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelPrognosisTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(2, typeof(Prognosis).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -208,7 +208,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelStageOfDeseasesTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(4, typeof(StageOfDeseases).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -225,7 +225,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelCohortEnumsTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(4, typeof(CohortEnums).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -240,7 +240,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelEnvironmentTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(10, typeof(MedalynxAPI.Models.Environment).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -261,7 +261,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelNotificationTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(7, typeof(Notification).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -279,7 +279,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelSessionTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(4, typeof(Session).GetProperties().Length);
 
             // Enumerate all exists fields
@@ -294,7 +294,7 @@ namespace medalynxAPI.Tests
         /// </summary>
         [Fact]
         public void PassingModelHistoryItemTest() {
-            // Fields constraints. All necessary filds listed below
+            // Fields constraints. All necessary fields listed below
             Assert.Equal(5, typeof(HistoryItem).GetProperties().Length);
 
             // Enumerate all exists fields

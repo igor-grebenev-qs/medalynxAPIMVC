@@ -4,6 +4,6 @@ namespace MedalynxAPI.Models
     {
         Created = 0,
         Read = 1,
-        Cancelld = 2
+        Cancelled = 2
     }
 }

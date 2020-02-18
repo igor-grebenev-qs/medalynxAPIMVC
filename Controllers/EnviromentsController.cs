@@ -64,7 +64,7 @@ namespace MedalynxAPI.Controllers
             notification.Id = Guid.NewGuid().ToString("B");
             notification.UserId = sessionUserId;
             notification.Message = "Environment created";
-            notification.NotificationType = 0;
+            notification.NotificationType = 1;
             notification.Status = NotificationStatus.Created;
             notification.CreationDate = DateTime.UtcNow;
             notification.LastUpdate = notification.CreationDate;

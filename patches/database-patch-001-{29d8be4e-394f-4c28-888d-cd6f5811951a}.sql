@@ -2,7 +2,7 @@ SET @dbname = DATABASE();
 SET @schemaname = "medalynx_db";
 
 SET @tablename = "Cohorts";
-SET @columnname = "State";
+SET @columnname = "Status";
 SET @after = "RequestUser";
 SET @preparedStatement = (SELECT IF(
   (
@@ -20,7 +20,7 @@ EXECUTE alterIfNotExists;
 DEALLOCATE PREPARE alterIfNotExists;
 
 SET @tablename = "Enviroments";
-SET @columnname = "State";
+SET @columnname = "Status";
 SET @after = "Request";
 SET @preparedStatement = (SELECT IF(
   (

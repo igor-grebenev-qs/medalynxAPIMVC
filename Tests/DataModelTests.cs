@@ -71,7 +71,7 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelCohortTest() {
             // Fields constraints. All necessary filds listed below
-            Assert.Equal(8, typeof(Cohort).GetProperties().Length);
+            Assert.Equal(9, typeof(Cohort).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<Cohort>("Id", typeof(string)));
@@ -80,6 +80,7 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<Cohort>("CohortType", typeof(string)));
             Assert.True(Utils.HasProperty<Cohort>("RequestAdmin", typeof(RequestType)));
             Assert.True(Utils.HasProperty<Cohort>("RequestUser", typeof(RequestType)));
+            Assert.True(Utils.HasProperty<Cohort>("Status", typeof(ObjectStatus)));
             Assert.True(Utils.HasProperty<Cohort>("CreationDate", typeof(DateTime)));
             Assert.True(Utils.HasProperty<Cohort>("LastUpdate", typeof(DateTime)));
         }
@@ -240,7 +241,7 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelEnviromentTest() {
             // Fields constraints. All necessary filds listed below
-            Assert.Equal(9, typeof(Enviroment).GetProperties().Length);
+            Assert.Equal(10, typeof(Enviroment).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<Enviroment>("Id", typeof(string)));
@@ -250,6 +251,7 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<Enviroment>("AnalyticalApplication", typeof(string)));
             Assert.True(Utils.HasProperty<Enviroment>("TypeOfConnectivity", typeof(string)));
             Assert.True(Utils.HasProperty<Enviroment>("Request", typeof(RequestType)));
+            Assert.True(Utils.HasProperty<Enviroment>("Status", typeof(ObjectStatus)));
             Assert.True(Utils.HasProperty<Enviroment>("CreationDate", typeof(DateTime)));
             Assert.True(Utils.HasProperty<Enviroment>("LastUpdate", typeof(DateTime)));
         }

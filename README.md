@@ -70,7 +70,8 @@ POST /Enviroments (create new enviroment
             "dataStorage": 100,
             "analyticalApplication": "[]",
             "typeOfConnectivity": "{2f3ff4f0-b363-40ba-990d-7b80f0df574f}",
-            "request": 0
+            "request": 0,
+            "status": 0
         }
 )
 PUT /Enviroments (update enviroment
@@ -82,7 +83,8 @@ PUT /Enviroments (update enviroment
             "dataStorage": 100,
             "analyticalApplication": "[]",
             "typeOfConnectivity": "{2f3ff4f0-b363-40ba-990d-7b80f0df574f}",
-            "request": 0
+            "request": 0,
+            "status": 0
         }
 )
 
@@ -132,6 +134,7 @@ POST
             "cohortType": "unknown",
             "requestAdmin": 0,
             "requestUser": 0,
+            "status": 0.
             "cohortEnumLinks": [
                 {
                 "cohortEnumId": "{cc77ecca-8279-4c9d-b321-064ba492ba9e}",
@@ -159,6 +162,7 @@ PUT
             "cohortType": "unknown",
             "requestAdmin": 0,
             "requestUser": 0,
+            "status": 0,
             "cohortEnumLinks": [
                 {
                 "id" ... Link can contains id for update or will be create new. If link not present in this property - link will removed

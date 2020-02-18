@@ -20,7 +20,7 @@ using EASendMail;
 /// 
 /// Mailchimp medalynx / M1llions@ attached to medalynx@gmail.com
 /// </summary>
-namespace medalynxAPIMVC.Notifications
+namespace medalynxAPI.Notifications
 {
     public class EmailService
     {

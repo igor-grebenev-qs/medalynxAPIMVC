@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MedalynxAPI.Models;
 using MedalynxAPI.Models.User;
-using medalynxAPIMVC.Notifications;
+using medalynxAPI.Notifications;
 using Microsoft.Extensions.Primitives;
 
 namespace MedalynxAPI.Controllers

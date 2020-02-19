@@ -19,7 +19,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             return Program.MedialynxData.notificationDBAPI.Get();
         }
@@ -32,7 +32,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<Notification> notifications = Program.MedialynxData.notificationDBAPI.Get(sid);
@@ -51,7 +51,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid id = Utils.ToGuid(notification.Id, false);
             notification.CreationDate = DateTime.UtcNow;
@@ -61,7 +61,7 @@ namespace MedalynxAPI.Controllers
                 Program.MedialynxData.notificationDBAPI.Add(notification);
                 return CreatedAtAction(nameof(GetById), new { id = notification.Id }, notification);
             }
-            return BadRequest();
+            return BadRequest("Notification can't be created. Invalid id (" + id + ")");
         }
 
         [HttpPut]
@@ -72,11 +72,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid id = Utils.ToGuid(notification.Id, false);
             if (id == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
             notification.LastUpdate = DateTime.UtcNow;
             Program.MedialynxData.notificationDBAPI.Update(notification);

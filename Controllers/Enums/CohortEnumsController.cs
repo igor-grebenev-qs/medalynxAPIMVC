@@ -19,7 +19,7 @@ namespace MedalynxAPI.Controllers.Enums
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             return Program.MedialynxData.cohortEnumsDBAPI.Get();
         }
@@ -32,7 +32,7 @@ namespace MedalynxAPI.Controllers.Enums
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<CohortEnums> items = Program.MedialynxData.cohortEnumsDBAPI.Get(sid);
@@ -52,7 +52,7 @@ namespace MedalynxAPI.Controllers.Enums
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             StringValues filterHeaders;
             this.Request.Headers.TryGetValue("Filter", out filterHeaders);

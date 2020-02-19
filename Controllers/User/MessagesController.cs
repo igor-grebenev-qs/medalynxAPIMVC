@@ -18,7 +18,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             return Program.MedialynxData.messageDBAPI.GetByUser();
         }
@@ -30,7 +30,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             string sid = Utils.ToGuid(userId, false).ToString("B");
             return Program.MedialynxData.messageDBAPI.GetByUser(sid);
@@ -43,7 +43,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid id = Utils.ToGuid(message.Id, false);
             message.CreationDate = DateTime.UtcNow;
@@ -52,7 +52,7 @@ namespace MedalynxAPI.Controllers
                 Program.MedialynxData.messageDBAPI.Add(message);
                 return CreatedAtAction(nameof(GetById), new { id = message.Id }, message);
             }
-            return BadRequest();
+            return BadRequest("Message can't be created. Id provided");
         }
 
         [HttpOptions]

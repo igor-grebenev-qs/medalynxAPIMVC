@@ -22,7 +22,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             return Program.MedialynxData.userDBAPI.Get();
         }
@@ -35,7 +35,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<User> users = Program.MedialynxData.userDBAPI.Get(sid);
@@ -182,7 +182,7 @@ namespace MedalynxAPI.Controllers
 
                 // return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
             }
-            return BadRequest();
+            return BadRequest("User can't be created. Provided id (" + id + ")");
         }
 
         [HttpPut]
@@ -193,11 +193,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid id = Utils.ToGuid(user.Id, false);
             if (id == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("User id is not valid (" + id + ")");
             }
             user.Password = String.IsNullOrEmpty(user.Password) ? null : Utils.GetHashString(user.Password).ToString("B");
             user.LastUpdate = DateTime.UtcNow;

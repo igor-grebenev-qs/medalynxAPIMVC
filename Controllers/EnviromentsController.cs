@@ -19,7 +19,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             return Program.MedialynxData.environmentDBAPI.GetByUser();
         }
@@ -32,7 +32,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             string sid = Utils.ToGuid(userId, false).ToString("B");
             List<Models.Environment> environments = Program.MedialynxData.environmentDBAPI.GetByUser(sid);
@@ -51,7 +51,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid id = Utils.ToGuid(environment.Id, false);
             environment.CreationDate = DateTime.UtcNow;
@@ -91,11 +91,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid id = Utils.ToGuid(environment.Id, false);
             if (id == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
             Program.MedialynxData.environmentDBAPI.Update(environment);
 
@@ -119,11 +119,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid environmentId = Utils.ToGuid(id, false);
             if (environmentId == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
@@ -161,11 +161,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid environmentId = Utils.ToGuid(id, false);
             if (environmentId == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
@@ -203,11 +203,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid environmentId = Utils.ToGuid(id, false);
             if (environmentId == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
@@ -242,11 +242,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid environmentId = Utils.ToGuid(id, false);
             if (environmentId == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");

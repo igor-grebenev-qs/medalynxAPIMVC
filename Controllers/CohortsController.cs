@@ -21,7 +21,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             return Program.MedialynxData.cohortDBAPI.Get();
         }
@@ -40,9 +40,8 @@ namespace MedalynxAPI.Controllers
         public ActionResult<bool> RemoveCohort(string cohortId) {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) {
-                return BadRequest();
-            }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
+
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
                     sessionUserId,
@@ -63,9 +62,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) {
-                return BadRequest();
-            }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<Cohort> cohorts = Program.MedialynxData.cohortDBAPI.Get(sid);
@@ -85,7 +82,7 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             StringValues requestTypeHeaders;
 
@@ -137,16 +134,16 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             // validate links
             foreach (var link in cohortApi.cohortEnumLinks) {
                 bool enumItemIdDefined = link.EnumItemId != null && link.EnumItemId != "";
                 if (Utils.IsEmpty(link.enumItem) && !enumItemIdDefined) {
-                    return BadRequest();
+                    return BadRequest("enumItem and enumItemIdDefined can't be null at same time.");
                 }
                 if (!Utils.IsEmpty(link.enumItem) && enumItemIdDefined) {
-                    return BadRequest(); // can't set both values
+                    return BadRequest("enumItem and enumItemIdDefined can't be initialized at same time.");
                 }
             }
             // validate that cohort is not exists
@@ -211,11 +208,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid id = Utils.ToGuid(cohortApi.Id, false);
             if (id == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
 
             // setup cohort
@@ -260,11 +257,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid cohortId = Utils.ToGuid(id, false);
             if (cohortId == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
@@ -302,11 +299,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid cohortId = Utils.ToGuid(id, false);
             if (cohortId == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
@@ -344,11 +341,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid cohortId = Utils.ToGuid(id, false);
             if (cohortId == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
@@ -382,11 +379,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid cohortId = Utils.ToGuid(id, false);
             if (cohortId == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
@@ -420,11 +417,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid cohortId = Utils.ToGuid(id, false);
             if (cohortId == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
@@ -458,11 +455,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid cohortId = Utils.ToGuid(id, false);
             if (cohortId == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Invalid id (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
@@ -497,11 +494,11 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
             Guid cohortId = Utils.ToGuid(id, false);
             if (cohortId == Guid.Empty) {
-                return BadRequest();
+                return BadRequest("Cohort id is not valid (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");

@@ -15,7 +15,7 @@ namespace MedalynxAPI.Models.Cohort
         public string Alt { get; set; }
         public string Chromosome { get; set; }
         public string dbSNP { get; set; }
-        public string DeseaseState { get; set; }
+        public string DiseaseState { get; set; }
         public string Gender { get; set; }
         public string Keyword { get; set; }
         public string Nationality { get; set; }

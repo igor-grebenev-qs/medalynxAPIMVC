@@ -117,7 +117,7 @@ namespace medalynxAPI.Tests
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<Biomarkers>("Id", typeof(string)));
-            Assert.True(Utils.HasProperty<Biomarkers>("DeseaseState", typeof(string)));
+            Assert.True(Utils.HasProperty<Biomarkers>("DiseaseState", typeof(string)));
         }
 
         /// <summary>
@@ -136,16 +136,16 @@ namespace medalynxAPI.Tests
         }
 
         /// <summary>
-        /// DeseaseStates entity validation.
+        /// DiseaseStates entity validation.
         /// </summary>
         [Fact]
-        public void PassingModelDeseaseStatesTest() {
+        public void PassingModelDiseaseStatesTest() {
             // Fields constraints. All necessary fields listed below
-            Assert.Equal(2, typeof(DeseaseStates).GetProperties().Length);
+            Assert.Equal(2, typeof(DiseaseStates).GetProperties().Length);
 
             // Enumerate all exists fields
-            Assert.True(Utils.HasProperty<DeseaseStates>("Id", typeof(string)));
-            Assert.True(Utils.HasProperty<DeseaseStates>("DeseaseState", typeof(string)));
+            Assert.True(Utils.HasProperty<DiseaseStates>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<DiseaseStates>("DiseaseState", typeof(string)));
         }
 
         /// <summary>
@@ -205,18 +205,18 @@ namespace medalynxAPI.Tests
         }
 
         /// <summary>
-        /// StageOfDeseases entity validation.
+        /// StageOfDiseases entity validation.
         /// </summary>
         [Fact]
-        public void PassingModelStageOfDeseasesTest() {
+        public void PassingModelStageOfDiseasesTest() {
             // Fields constraints. All necessary fields listed below
-            Assert.Equal(4, typeof(StageOfDeseases).GetProperties().Length);
+            Assert.Equal(4, typeof(StageOfDiseases).GetProperties().Length);
 
             // Enumerate all exists fields
-            Assert.True(Utils.HasProperty<StageOfDeseases>("Id", typeof(string)));
-            Assert.True(Utils.HasProperty<StageOfDeseases>("StageOfTumour", typeof(int)));
-            Assert.True(Utils.HasProperty<StageOfDeseases>("NumberOfNodesAffected", typeof(int)));
-            Assert.True(Utils.HasProperty<StageOfDeseases>("NumberOfMetastasis", typeof(int)));
+            Assert.True(Utils.HasProperty<StageOfDiseases>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<StageOfDiseases>("StageOfTumour", typeof(int)));
+            Assert.True(Utils.HasProperty<StageOfDiseases>("NumberOfNodesAffected", typeof(int)));
+            Assert.True(Utils.HasProperty<StageOfDiseases>("NumberOfMetastasis", typeof(int)));
         }
 
         #endregion

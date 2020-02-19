@@ -42,7 +42,7 @@ POST /Users (create new user
             "companyName": "Quantumsoft",
             "request": 0,
             "password": "",
-            "role": "STANDART_USER"
+            "role": "STANDARD_USER"
         }
 )
 PUT /Users (update exists user. You can provide not all fields. id - reqired
@@ -55,7 +55,7 @@ PUT /Users (update exists user. You can provide not all fields. id - reqired
             "companyName": "Quantumsoft",
             "request": 1,
             "password": "",
-            "role": "STANDART_USER"
+            "role": "STANDARD_USER"
         }
 )
 

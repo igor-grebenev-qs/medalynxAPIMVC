@@ -32,8 +32,8 @@ namespace MedalynxAPI
         }
         private object GetEnumValue(string enumId, string enumItemId) {
             switch (enumId) {
-                case CohortEnumsDictionary.DeseaseStates:
-                    return Program.MedialynxData.deseaseStatesDBAPI.Get("", enumItemId).FirstOrDefault();
+                case CohortEnumsDictionary.DiseaseStates:
+                    return Program.MedialynxData.diseaseStatesDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.GeneticMatches:
                     return Program.MedialynxData.geneticMatchesDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.Biomarkers:
@@ -42,8 +42,8 @@ namespace MedalynxAPI
                     return Program.MedialynxData.demographicsDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.Ethnicitys:
                     return Program.MedialynxData.ethnicitysDBAPI.Get("", enumItemId).FirstOrDefault();
-                case CohortEnumsDictionary.StageOfDeseases:
-                    return Program.MedialynxData.stageOfDeseasesDBAPI.Get("", enumItemId).FirstOrDefault();
+                case CohortEnumsDictionary.StageOfDiseases:
+                    return Program.MedialynxData.stageOfDiseasesDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.Prognosis:
                     return Program.MedialynxData.prognosisDBAPI.Get("", enumItemId).FirstOrDefault();
                 case CohortEnumsDictionary.PreviousTreatments:
@@ -96,9 +96,9 @@ namespace MedalynxAPI
             using (var dbCohortContext = new MedialynxDbCohortEnumsContext()) {
                 foreach (CohortEnums enumItem in dbCohortContext.CohortEnums){
                     switch (enumItem.Id) {
-                        case CohortEnumsDictionary.DeseaseStates:
-                            using (var dbDeseaseStatesContext = new MedialynxDbDeseaseStatesContext()) {
-                                links.AddRange(ExistingOptionsAsLink<DeseaseStates>(new List<DeseaseStates>(dbDeseaseStatesContext.DeseaseStates), cohortId, enumItem.Id));
+                        case CohortEnumsDictionary.DiseaseStates:
+                            using (var dbDiseaseStatesContext = new MedialynxDbDiseaseStatesContext()) {
+                                links.AddRange(ExistingOptionsAsLink<DiseaseStates>(new List<DiseaseStates>(dbDiseaseStatesContext.DiseaseStates), cohortId, enumItem.Id));
                             }
                         break;
                         case CohortEnumsDictionary.GeneticMatches:
@@ -121,9 +121,9 @@ namespace MedalynxAPI
                                 links.AddRange(ExistingOptionsAsLink<Ethnicitys>(new List<Ethnicitys>(dbEthnicitysContext.Ethnicitys), cohortId, enumItem.Id));
                             }
                         break;
-                        case CohortEnumsDictionary.StageOfDeseases:
-                            using (var dbStageOfDeseasesContext = new MedialynxDbStageOfDeseasesContext()) {
-                                links.AddRange(ExistingOptionsAsLink<StageOfDeseases>(new List<StageOfDeseases>(dbStageOfDeseasesContext.StageOfDeseases), cohortId, enumItem.Id));
+                        case CohortEnumsDictionary.StageOfDiseases:
+                            using (var dbStageOfDiseasesContext = new MedialynxDbStageOfDiseasesContext()) {
+                                links.AddRange(ExistingOptionsAsLink<StageOfDiseases>(new List<StageOfDiseases>(dbStageOfDiseasesContext.StageOfDiseases), cohortId, enumItem.Id));
                             }
                         break;
                         case CohortEnumsDictionary.Prognosis:
@@ -173,10 +173,10 @@ namespace MedalynxAPI
             // owerwrite id anyway
             linkAPI.EnumItemId = newEnumItemId;
             switch (linkAPI.CohortEnumId) {
-                case CohortEnumsDictionary.DeseaseStates:
-                    DeseaseStates dsItem = new DeseaseStates();
-                    DirtyCopyEnumItem<DeseaseStates>(linkAPI.enumItem, dsItem, newEnumItemId);
-                    Program.MedialynxData.deseaseStatesDBAPI.Add(dsItem);
+                case CohortEnumsDictionary.DiseaseStates:
+                    DiseaseStates dsItem = new DiseaseStates();
+                    DirtyCopyEnumItem<DiseaseStates>(linkAPI.enumItem, dsItem, newEnumItemId);
+                    Program.MedialynxData.diseaseStatesDBAPI.Add(dsItem);
                     break;
                 case CohortEnumsDictionary.GeneticMatches:
                     GeneticMatches gmItem = new GeneticMatches();
@@ -198,10 +198,10 @@ namespace MedalynxAPI
                     DirtyCopyEnumItem<Ethnicitys>(linkAPI.enumItem, eItem, newEnumItemId);
                     Program.MedialynxData.ethnicitysDBAPI.Add(eItem);
                     break;
-                case CohortEnumsDictionary.StageOfDeseases:
-                    StageOfDeseases sdItem = new StageOfDeseases();
-                    DirtyCopyEnumItem<StageOfDeseases>(linkAPI.enumItem, sdItem, newEnumItemId);
-                    Program.MedialynxData.stageOfDeseasesDBAPI.Add(sdItem);
+                case CohortEnumsDictionary.StageOfDiseases:
+                    StageOfDiseases sdItem = new StageOfDiseases();
+                    DirtyCopyEnumItem<StageOfDiseases>(linkAPI.enumItem, sdItem, newEnumItemId);
+                    Program.MedialynxData.stageOfDiseasesDBAPI.Add(sdItem);
                     break;
                 case CohortEnumsDictionary.Prognosis:
                     Prognosis pItem = new Prognosis();

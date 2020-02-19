@@ -10,7 +10,7 @@ namespace MedalynxAPI.Models
 
         /// <summary>
         /// Id of aggregated any enum record.
-        /// Cohort enums: DeseaseStates, GeneticMatches, Biomarkers, Demographics, Ethnicity, StageOfDesease, Prognosis, PreviousTreatment
+        /// Cohort enums: DiseaseStates, GeneticMatches, Biomarkers, Demographics, Ethnicity, StageOfDisease, Prognosis, PreviousTreatment
         /// </summary>
         /// <value></value>
         public string CohortEnumId { get; set; }

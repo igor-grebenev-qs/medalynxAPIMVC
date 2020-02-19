@@ -1,6 +1,6 @@
 namespace MedalynxAPI.Models.Cohort.CohortEnums
 {
-    public class StageOfDeseases
+    public class StageOfDiseases
     {
         public string Id { get; set; }
         public int StageOfTumour { get; set; }

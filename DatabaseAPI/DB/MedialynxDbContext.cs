@@ -42,8 +42,8 @@ namespace MedalynxAPI
         public DbSet<Models.CohortEnums> CohortEnums { get; set; }
     }
 
-    public class MedialynxDbDeseaseStatesContext : BaseDbContext {
-        public DbSet<Models.Cohort.CohortEnums.DeseaseStates> DeseaseStates { get; set; }
+    public class MedialynxDbDiseaseStatesContext : BaseDbContext {
+        public DbSet<Models.Cohort.CohortEnums.DiseaseStates> DiseaseStates { get; set; }
     }
         
     public class MedialynxDbGeneticMatchesContext : BaseDbContext {
@@ -58,8 +58,8 @@ namespace MedalynxAPI
     public class MedialynxDbEthnicitysContext : BaseDbContext {
         public DbSet<Models.Cohort.CohortEnums.Ethnicitys> Ethnicitys { get; set; }
     }
-    public class MedialynxDbStageOfDeseasesContext : BaseDbContext {
-        public DbSet<Models.Cohort.CohortEnums.StageOfDeseases> StageOfDeseases { get; set; }
+    public class MedialynxDbStageOfDiseasesContext : BaseDbContext {
+        public DbSet<Models.Cohort.CohortEnums.StageOfDiseases> StageOfDiseases { get; set; }
     }
     public class MedialynxDbPrognosisContext : BaseDbContext {
         public DbSet<Models.Cohort.CohortEnums.Prognosis> Prognosis { get; set; }

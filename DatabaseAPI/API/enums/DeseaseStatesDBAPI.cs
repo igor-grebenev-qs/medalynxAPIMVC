@@ -4,33 +4,33 @@ using MedalynxAPI.Models.Cohort.CohortEnums;
 
 namespace MedalynxAPI
 {
-    public class DeseaseStatesDBAPI
+    public class DiseaseStatesDBAPI
     {
-        public List<DeseaseStates> Get(string filter = "", string enumItemId = "")
+        public List<DiseaseStates> Get(string filter = "", string enumItemId = "")
         {
-            using (var dbContext = new MedialynxDbDeseaseStatesContext()) {
-                return dbContext.DeseaseStates.Where(enumItem => enumItemId == "" || enumItem.Id == enumItemId).Where(enumItem => filter == "" || enumItem.DeseaseState.Contains(filter)).ToList();
+            using (var dbContext = new MedialynxDbDiseaseStatesContext()) {
+                return dbContext.DiseaseStates.Where(enumItem => enumItemId == "" || enumItem.Id == enumItemId).Where(enumItem => filter == "" || enumItem.DiseaseState.Contains(filter)).ToList();
             }
         }
 
         public void Add(object enumItemObject)
         {
-            DeseaseStates enumItem = (DeseaseStates) enumItemObject;
-            using (var dbContext = new MedialynxDbDeseaseStatesContext()) {
-                dbContext.DeseaseStates.Add(enumItem);
+            DiseaseStates enumItem = (DiseaseStates) enumItemObject;
+            using (var dbContext = new MedialynxDbDiseaseStatesContext()) {
+                dbContext.DiseaseStates.Add(enumItem);
                 dbContext.SaveChanges();
             }
         }
 
-        public void Update(DeseaseStates enumItem)
+        public void Update(DiseaseStates enumItem)
         {
-            using (var dbContext = new MedialynxDbDeseaseStatesContext()) {
-                var existsItem = dbContext.DeseaseStates.FirstOrDefault(u => u != null && u.Id == enumItem.Id);
+            using (var dbContext = new MedialynxDbDiseaseStatesContext()) {
+                var existsItem = dbContext.DiseaseStates.FirstOrDefault(u => u != null && u.Id == enumItem.Id);
                 if (existsItem != null)
                 {
-                    if (Utils.CopyPropertyValues<DeseaseStates>(enumItem, existsItem))
+                    if (Utils.CopyPropertyValues<DiseaseStates>(enumItem, existsItem))
                     {
-                        dbContext.DeseaseStates.Update(existsItem);
+                        dbContext.DiseaseStates.Update(existsItem);
                         dbContext.SaveChanges();
                     }
                 }

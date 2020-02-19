@@ -7,6 +7,6 @@ namespace MedalynxAPI.Models.User
     public class Role
     {
         public static string AdminUser { get { return "ADMIN"; } }
-        public static string StandartUser { get { return "STANDART_USER"; } }
+        public static string StandartUser { get { return "STANDARD_USER"; } }
     }
 }

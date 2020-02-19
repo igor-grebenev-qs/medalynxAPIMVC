@@ -12,12 +12,12 @@ namespace MedalynxAPI
         public SessionDBAPI sessionDBAPI;
 
         // enums
-        public DeseaseStatesDBAPI deseaseStatesDBAPI;
+        public DiseaseStatesDBAPI diseaseStatesDBAPI;
         public GeneticMatchesDBAPI geneticMatchesDBAPI;
         public BiomarkersDBAPI biomarkersDBAPI;
         public DemographicsDBAPI demographicsDBAPI;
         public EthnicitysDBAPI ethnicitysDBAPI;
-        public StageOfDeseasesDBAPI stageOfDeseasesDBAPI;
+        public StageOfDiseasesDBAPI stageOfDiseasesDBAPI;
         public PrognosisDBAPI prognosisDBAPI;
         public PreviousTreatmentsDBAPI previousTreatmentsDBAPI;
 
@@ -43,12 +43,12 @@ namespace MedalynxAPI
             
             sessionDBAPI = new SessionDBAPI();
 
-            deseaseStatesDBAPI = new DeseaseStatesDBAPI();
+            diseaseStatesDBAPI = new DiseaseStatesDBAPI();
             geneticMatchesDBAPI = new GeneticMatchesDBAPI();
             biomarkersDBAPI = new BiomarkersDBAPI();
             demographicsDBAPI = new DemographicsDBAPI();
             ethnicitysDBAPI = new EthnicitysDBAPI();
-            stageOfDeseasesDBAPI = new StageOfDeseasesDBAPI();
+            stageOfDiseasesDBAPI = new StageOfDiseasesDBAPI();
             prognosisDBAPI = new PrognosisDBAPI();
             previousTreatmentsDBAPI = new PreviousTreatmentsDBAPI();
 

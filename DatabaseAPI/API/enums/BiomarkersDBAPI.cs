@@ -9,7 +9,7 @@ namespace MedalynxAPI
         public List<Biomarkers> Get(string filter = "", string enumItemId = "")
         {
             using (var dbContext = new MedialynxDbBiomarkersContext()) {
-                return dbContext.Biomarkers.Where(enumItem => enumItemId == "" || enumItem.Id == enumItemId).Where(enumItem => filter == "" || enumItem.DeseaseState.Contains(filter)).ToList();
+                return dbContext.Biomarkers.Where(enumItem => enumItemId == "" || enumItem.Id == enumItemId).Where(enumItem => filter == "" || enumItem.DiseaseState.Contains(filter)).ToList();
             }
         }
 

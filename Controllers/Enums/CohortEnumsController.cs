@@ -64,8 +64,8 @@ namespace MedalynxAPI.Controllers.Enums
                 return NotFound(); // Enum not found
             }
             switch (sid) {
-                case CohortEnumsDictionary.DeseaseStates:
-                    return Program.MedialynxData.deseaseStatesDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
+                case CohortEnumsDictionary.DiseaseStates:
+                    return Program.MedialynxData.diseaseStatesDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
                 case CohortEnumsDictionary.GeneticMatches:
                     return Program.MedialynxData.geneticMatchesDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
                 case CohortEnumsDictionary.Biomarkers:
@@ -74,8 +74,8 @@ namespace MedalynxAPI.Controllers.Enums
                     return Program.MedialynxData.demographicsDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
                 case CohortEnumsDictionary.Ethnicitys:
                     return Program.MedialynxData.ethnicitysDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
-                case CohortEnumsDictionary.StageOfDeseases:
-                    return Program.MedialynxData.stageOfDeseasesDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
+                case CohortEnumsDictionary.StageOfDiseases:
+                    return Program.MedialynxData.stageOfDiseasesDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
                 case CohortEnumsDictionary.Prognosis:
                     return Program.MedialynxData.prognosisDBAPI.Get(filterHeaders.Count > 0 ? filterHeaders[0] : "");
                 case CohortEnumsDictionary.PreviousTreatments:

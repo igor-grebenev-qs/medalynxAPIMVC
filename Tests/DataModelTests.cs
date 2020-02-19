@@ -71,7 +71,7 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelCohortTest() {
             // Fields constraints. All necessary fields listed below
-            Assert.Equal(9, typeof(Cohort).GetProperties().Length);
+            Assert.Equal(10, typeof(Cohort).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<Cohort>("Id", typeof(string)));
@@ -81,6 +81,7 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<Cohort>("RequestAdmin", typeof(RequestType)));
             Assert.True(Utils.HasProperty<Cohort>("RequestUser", typeof(RequestType)));
             Assert.True(Utils.HasProperty<Cohort>("Status", typeof(ObjectStatus)));
+            Assert.True(Utils.HasProperty<Cohort>("RequestType", typeof(DeletionArchiveRequestType)));
             Assert.True(Utils.HasProperty<Cohort>("CreationDate", typeof(DateTime)));
             Assert.True(Utils.HasProperty<Cohort>("LastUpdate", typeof(DateTime)));
         }
@@ -300,7 +301,7 @@ namespace medalynxAPI.Tests
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<HistoryItem>("Id", typeof(string)));
             Assert.True(Utils.HasProperty<HistoryItem>("UserId", typeof(string)));
-            Assert.True(Utils.HasProperty<HistoryItem>("Object", typeof(string)));
+            Assert.True(Utils.HasProperty<HistoryItem>("ObjectId", typeof(string)));
             Assert.True(Utils.HasProperty<HistoryItem>("ObjectType", typeof(string)));
             Assert.True(Utils.HasProperty<HistoryItem>("Message", typeof(string)));
             Assert.True(Utils.HasProperty<HistoryItem>("CreationDate", typeof(DateTime)));

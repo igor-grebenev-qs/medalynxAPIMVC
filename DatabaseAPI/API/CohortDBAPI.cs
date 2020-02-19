@@ -66,7 +66,7 @@ namespace MedalynxAPI
             return false;
         }
 
-        public Cohort GetByUser(string userId, RequestType requestType)
+        public Cohort GetByUser(string userId, RequestType? requestType = null)
         {
             Guid id = Utils.ToGuid(userId);
             using (var dbContext = new MedialynxDbCohortContext()) {
@@ -74,10 +74,10 @@ namespace MedalynxAPI
                 {
                     string sid = id.ToString("B");
                     return dbContext.Cohorts.FirstOrDefault(c => c != null && c.UserId == sid &&
-                        (requestType == RequestType.Any || 
-                        (requestType == RequestType.CreatedOrApproved && (c.RequestUser == RequestType.Created || c.RequestUser == RequestType.Approved)) ||
-                        c.RequestUser == requestType)
-                        );
+                        ( 
+                            (requestType == null && (c.RequestUser == RequestType.Created || c.RequestUser == RequestType.Approved)) || c.RequestUser == requestType
+                        )
+                    );
                 }
             }
             return null;

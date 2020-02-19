@@ -90,7 +90,12 @@ namespace MedalynxAPI.Controllers
             StringValues requestTypeHeaders;
 
             this.Request.Headers.TryGetValue("Request-Type", out requestTypeHeaders);
-            RequestType requestType = (requestTypeHeaders.Count == 0) ? RequestType.CreatedOrApproved : (RequestType) Int32.Parse(requestTypeHeaders[0]);
+            bool requestTypeSpecified = requestTypeHeaders.Count > 0;
+
+            RequestType? requestType = null;
+            if (requestTypeSpecified) {
+                requestType = (RequestType) Int32.Parse(requestTypeHeaders[0]);
+            }
 
             string sid = Utils.ToGuid(userId, false).ToString("B");
             Cohort cohort = Program.MedialynxData.cohortDBAPI.GetByUser(sid, requestType);
@@ -150,11 +155,10 @@ namespace MedalynxAPI.Controllers
                 }
             }
             // validate that cohort is not exists
-            // USER CAN CONTAINS MANY COHORTS
-            //Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetByUser(cohortApi.UserId, RequestType.Any);
-            //if (existsCohort != null) {
-            //    return BadRequest("Cohort already exists"); // cohort already exists. Please use update.
-            //}
+            Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetByUser(cohortApi.UserId, null);
+            if (existsCohort != null) {
+                return BadRequest("Cohort already exists"); // cohort already exists. Please use update.
+            }
 
             cohortApi.Id = Guid.NewGuid().ToString("B");
 

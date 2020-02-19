@@ -191,7 +191,7 @@ namespace MedalynxAPI {
             }
         }
 
-        public static Guid GetHashString(string s)
+        public static string GetHashString(string s)
         {
             byte[] bytes = Encoding.Unicode.GetBytes(s);
 
@@ -205,7 +205,7 @@ namespace MedalynxAPI {
                 hash += string.Format("{0:x2}", b);
             }
 
-            return new Guid(hash);
+            return (new Guid(hash)).ToString("B");
         }
     }
 }

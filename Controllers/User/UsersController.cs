@@ -107,7 +107,7 @@ namespace MedalynxAPI.Controllers
                 return NotFound();
             }
             // {aef2cd61-a94e-0c7c-29cf-08c317991dea} - medalynx
-            string pass = Utils.GetHashString(credentials.Password).ToString("B");
+            string pass = Utils.GetHashString(credentials.Password);
             if (user.Password == pass) { // OK!!!
                 return this.GetCredentialsInfo(user);
             }
@@ -160,7 +160,7 @@ namespace MedalynxAPI.Controllers
                 return BadRequest("User already exists with same email");
             }
 
-            user.Password = Utils.GetHashString(user.Password).ToString("B"); // to hash string
+            user.Password = Utils.GetHashString(user.Password); // to hash string
 
             Guid id = Utils.ToGuid(user.Id, false);
             user.Email = user.Email.ToLower(); // ensure that email does not contains uppercase
@@ -199,7 +199,7 @@ namespace MedalynxAPI.Controllers
             if (id == Guid.Empty) {
                 return BadRequest("User id is not valid (" + id + ")");
             }
-            user.Password = String.IsNullOrEmpty(user.Password) ? null : Utils.GetHashString(user.Password).ToString("B");
+            user.Password = String.IsNullOrEmpty(user.Password) ? null : Utils.GetHashString(user.Password);
             user.LastUpdate = DateTime.UtcNow;
             Program.MedialynxData.userDBAPI.Update(user);
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);

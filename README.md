@@ -155,7 +155,7 @@ POST
         }
 )
 PUT
-    /Cohorts (create new Cohort item
+    /Cohorts (update Cohort item
         body for request sample :
         {
             "id": "{248b5596-9b28-43b4-b433-c45fff62921c}",
@@ -182,6 +182,8 @@ PUT
                 }
             ]
         }
+PUT /Cohorts/Archive/{id}
+PUT /Cohorts/Delete/{id}
 )
 
 ----------------------------------------------------------------------------------------------------------------------

@@ -112,6 +112,11 @@ namespace MedalynxAPI.Controllers
             {
                 return NotFound();
             }
+
+            if (environment.Status != ObjectStatus.Default) {
+                return BadRequest("You can't archive current environment");
+            }
+
             environment.Status = ObjectStatus.Archived;
 
             Program.MedialynxData.environmentDBAPI.Update(environment);
@@ -139,6 +144,11 @@ namespace MedalynxAPI.Controllers
             {
                 return NotFound();
             }
+
+            if (environment.Status != ObjectStatus.Default) {
+                return BadRequest("You can't delete current environment");
+            }
+
             environment.Status = ObjectStatus.Deleted;
 
             Program.MedialynxData.environmentDBAPI.Update(environment);

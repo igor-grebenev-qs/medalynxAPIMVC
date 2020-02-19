@@ -231,9 +231,74 @@ namespace MedalynxAPI.Controllers
 
         }
 
+        [HttpPut("Archive/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Cohort> Archive(string id)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+
+            Guid cohortId = Utils.ToGuid(id, false);
+            if (cohortId == Guid.Empty) {
+                return BadRequest();
+            }
+
+            string sid = Utils.ToGuid(id, false).ToString("B");
+            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetById(sid);
+            if (cohort == null)
+            {
+                return NotFound();
+            }
+
+            if (cohort.Status != ObjectStatus.Default) {
+                return BadRequest("You can't archive current cohort");
+            }
+
+            cohort.Status = ObjectStatus.Archived;
+
+            Program.MedialynxData.cohortDBAPI.Update(cohort);
+            return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
+        }
+
+        [HttpPut("Delete/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Cohort> MarkDeleted(string id)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+
+            Guid cohortId = Utils.ToGuid(id, false);
+            if (cohortId == Guid.Empty) {
+                return BadRequest();
+            }
+
+            string sid = Utils.ToGuid(id, false).ToString("B");
+            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetById(sid);
+            if (cohort == null)
+            {
+                return NotFound();
+            }
+
+            if (cohort.Status != ObjectStatus.Default) {
+                return BadRequest("You can't delete current cohort");
+            }
+
+            cohort.Status = ObjectStatus.Deleted;
+
+            Program.MedialynxData.cohortDBAPI.Update(cohort);
+            return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
+        }
         [HttpOptions]
         [HttpOptions("{id}")]
         [HttpOptions("ByUser/{userId}")]
+        [HttpOptions("Archive/{id}")]
+        [HttpOptions("Delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Models.Environment> Options()
         {

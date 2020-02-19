@@ -15,15 +15,15 @@ namespace MedalynxAPI
     public class EnvironmentDBAPI
     {
         // Get Environment by environment id
-        public Models.Environment Get(string id = "{00000000-0000-0000-0000-000000000000}")
+        public Models.Environment Get(string environmentId = "{00000000-0000-0000-0000-000000000000}")
         {
-            Guid environmentId = Utils.ToGuid(id, false);
-            if (environmentId == Guid.Empty) {
+            Guid id = Utils.ToGuid(environmentId, false);
+            if (id == Guid.Empty) {
                 return null;
             }
 
             using (var dbContext = new MedialynxDbEnvironmentsContext()) {
-                string sid = environmentId.ToString("B");
+                string sid = id.ToString("B");
                 return dbContext.Environments.FirstOrDefault(environment => environment != null && environment.UserId == sid);
             }
         }

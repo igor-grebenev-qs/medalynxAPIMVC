@@ -8,6 +8,20 @@ namespace MedalynxAPI
 {
     public class CohortDBAPI
     {
+        // Get cohort by id
+        public Cohort GetById(string cohortId = "{00000000-0000-0000-0000-000000000000}")
+        {
+            Guid id = Utils.ToGuid(cohortId, false);
+            if (id == Guid.Empty) {
+                return null;
+            }
+
+            using (var dbContext = new MedialynxDbCohortContext()) {
+                string sid = id.ToString("B");
+                return dbContext.Cohorts.FirstOrDefault(cohort => cohort != null && cohort.Id == sid);
+            }
+        }
+
         public List<Cohort> Get(string cohortId = "{00000000-0000-0000-0000-000000000000}")
         {
             Guid id = Utils.ToGuid(cohortId);

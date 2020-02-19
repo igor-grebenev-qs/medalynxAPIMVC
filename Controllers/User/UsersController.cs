@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MedalynxAPI;
 using MedalynxAPI.Models;
 using MedalynxAPI.Models.User;
 using medalynxAPI.Notifications;
@@ -105,6 +106,8 @@ namespace MedalynxAPI.Controllers
             if (user == null) {
                 return NotFound();
             }
+            // {aef2cd61-a94e-0c7c-29cf-08c317991dea} - medalynx
+            string pass = Utils.GetHashString(credentials.Password).ToString("B");
             if (user.Password == credentials.Password) { // OK!!!
                 return this.GetCredentialsInfo(user);
             }
@@ -157,6 +160,7 @@ namespace MedalynxAPI.Controllers
                 return BadRequest("User already exists with same email");
             }
 
+            user.Password = Utils.GetHashString(user.Password).ToString("B"); // to hash string
 
             Guid id = Utils.ToGuid(user.Id, false);
             user.Email = user.Email.ToLower(); // ensure that email does not contains uppercase

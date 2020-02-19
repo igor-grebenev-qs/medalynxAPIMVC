@@ -74,6 +74,7 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
                     sessionUserId,
+                    environment.Id,
                     this.GetType().ToString(),
                     "Create environment called with data:" + JsonSerializer.Serialize(environment)
                 )
@@ -101,6 +102,7 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
                     sessionUserId,
+                    environment.Id,
                     this.GetType().ToString(),
                     "Update environment called with data:" + JsonSerializer.Serialize(environment)
                 )
@@ -142,6 +144,7 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
                     sessionUserId,
+                    sid,
                     this.GetType().ToString(),
                     "Archive environment called with id: " + id
                 )
@@ -183,6 +186,7 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
                     sessionUserId,
+                    sid,
                     this.GetType().ToString(),
                     "Delete (mark as deleted) environment called with id: " + id
                 )

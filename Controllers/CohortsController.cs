@@ -46,6 +46,7 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
                     sessionUserId,
+                    cohortId,
                     this.GetType().ToString(),
                     "Remove (real deletion) cohort called with id=" + cohortId
                 )
@@ -174,6 +175,7 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
                     sessionUserId,
+                    cohort.Id,
                     this.GetType().ToString(),
                     "Create cohort called with data:" + JsonSerializer.Serialize(cohortApi)
                 )
@@ -233,6 +235,7 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
                     sessionUserId,
+                    cohort.Id,
                     this.GetType().ToString(),
                     "Update cohort called with data:" + JsonSerializer.Serialize(cohortApi)
                 )
@@ -282,6 +285,7 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
                     sessionUserId,
+                    sid,
                     this.GetType().ToString(),
                     "Archive cohort called with id: " + id
                 )
@@ -323,6 +327,7 @@ namespace MedalynxAPI.Controllers
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
                     sessionUserId,
+                    sid,
                     this.GetType().ToString(),
                     "Delete (mark as deleted) cohort called with id: " + id
                 )

@@ -5,8 +5,9 @@ namespace MedalynxAPI.Models
     public class HistoryItem
     {
         public HistoryItem(){}
-        public HistoryItem(string userId, string objectType, string message){
+        public HistoryItem(string userId, string objectId, string objectType, string message){
             UserId = userId;
+            ObjectId = objectId;
             ObjectType = objectType;
             Message = message;
         }

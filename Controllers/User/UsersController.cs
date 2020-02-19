@@ -199,6 +199,7 @@ namespace MedalynxAPI.Controllers
             if (id == Guid.Empty) {
                 return BadRequest();
             }
+            user.Password = String.IsNullOrEmpty(user.Password) ? null : Utils.GetHashString(user.Password).ToString("B");
             user.LastUpdate = DateTime.UtcNow;
             Program.MedialynxData.userDBAPI.Update(user);
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);

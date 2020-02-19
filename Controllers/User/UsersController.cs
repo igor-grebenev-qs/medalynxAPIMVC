@@ -108,7 +108,7 @@ namespace MedalynxAPI.Controllers
             }
             // {aef2cd61-a94e-0c7c-29cf-08c317991dea} - medalynx
             string pass = Utils.GetHashString(credentials.Password).ToString("B");
-            if (user.Password == credentials.Password) { // OK!!!
+            if (user.Password == pass) { // OK!!!
                 return this.GetCredentialsInfo(user);
             }
             return null;

@@ -40,8 +40,16 @@ namespace MedalynxAPI.Controllers
         public ActionResult<bool> RemoveCohort(string cohortId) {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
-            Program.MedialynxData.historyDBAPI.Add(new HistoryItem(sessionUserId, this.GetType().ToString(), "Remove cohort called with id=" + cohortId));
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) {
+                return BadRequest();
+            }
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    this.GetType().ToString(),
+                    "Remove (real deletion) cohort called with id=" + cohortId
+                )
+            );
 
             return Program.MedialynxData.cohortDBAPI.Remove(cohortId);
         }
@@ -54,7 +62,9 @@ namespace MedalynxAPI.Controllers
         {
             // validate that session exists
             string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) {
+                return BadRequest();
+            }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             List<Cohort> cohorts = Program.MedialynxData.cohortDBAPI.Get(sid);
@@ -146,14 +156,6 @@ namespace MedalynxAPI.Controllers
 
             cohortApi.Id = Guid.NewGuid().ToString("B");
 
-            Program.MedialynxData.historyDBAPI.Add(
-                new HistoryItem(
-                    sessionUserId,
-                    this.GetType().ToString(),
-                    "Create cohort called with data:" + JsonSerializer.Serialize(cohortApi)
-                )
-            );
-
             // setup cohort
             Cohort cohort = new Cohort();
             cohort.Id = cohortApi.Id;
@@ -166,8 +168,16 @@ namespace MedalynxAPI.Controllers
             cohort.LastUpdate = cohort.CreationDate;
             // create cohort
             Program.MedialynxData.cohortDBAPI.Add(cohort);
-            // create cohort links (neccessary enum items will be created with link)
+            // create cohort links (necessary enum items will be created with link)
             Program.MedialynxData.cohortEnumLinkDBAPI.CreateLinks(cohort.Id, cohortApi.cohortEnumLinks);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    this.GetType().ToString(),
+                    "Create cohort called with data:" + JsonSerializer.Serialize(cohortApi)
+                )
+            );
 
             // reload and alive cohort
             string sid = Utils.ToGuid(cohort.Id, false).ToString("B");
@@ -220,6 +230,14 @@ namespace MedalynxAPI.Controllers
             // update/create/delete cohort links (neccessary enum items will be created with link)
             Program.MedialynxData.cohortEnumLinkDBAPI.UpdateLinks(cohort.Id, cohortApi.cohortEnumLinks);
 
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    this.GetType().ToString(),
+                    "Update cohort called with data:" + JsonSerializer.Serialize(cohortApi)
+                )
+            );
+
             // reload and alive cohort
             string sid = Utils.ToGuid(cohort.Id, false).ToString("B");
             List<Cohort> cohorts = Program.MedialynxData.cohortDBAPI.Get(sid);
@@ -260,6 +278,15 @@ namespace MedalynxAPI.Controllers
             cohort.Status = ObjectStatus.Archived;
 
             Program.MedialynxData.cohortDBAPI.Update(cohort);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    this.GetType().ToString(),
+                    "Archive cohort called with id: " + id
+                )
+            );
+
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }
 
@@ -292,6 +319,15 @@ namespace MedalynxAPI.Controllers
             cohort.Status = ObjectStatus.Deleted;
 
             Program.MedialynxData.cohortDBAPI.Update(cohort);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    this.GetType().ToString(),
+                    "Delete (mark as deleted) cohort called with id: " + id
+                )
+            );
+
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }
         [HttpOptions]

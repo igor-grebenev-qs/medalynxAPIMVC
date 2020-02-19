@@ -295,11 +295,12 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelHistoryItemTest() {
             // Fields constraints. All necessary fields listed below
-            Assert.Equal(5, typeof(HistoryItem).GetProperties().Length);
+            Assert.Equal(6, typeof(HistoryItem).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<HistoryItem>("Id", typeof(string)));
             Assert.True(Utils.HasProperty<HistoryItem>("UserId", typeof(string)));
+            Assert.True(Utils.HasProperty<HistoryItem>("Object", typeof(string)));
             Assert.True(Utils.HasProperty<HistoryItem>("ObjectType", typeof(string)));
             Assert.True(Utils.HasProperty<HistoryItem>("Message", typeof(string)));
             Assert.True(Utils.HasProperty<HistoryItem>("CreationDate", typeof(DateTime)));

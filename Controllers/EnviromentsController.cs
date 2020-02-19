@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -70,6 +71,14 @@ namespace MedalynxAPI.Controllers
             notification.LastUpdate = notification.CreationDate;
             Program.MedialynxData.notificationDBAPI.Add(notification);
 
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    this.GetType().ToString(),
+                    "Create environment called with data:" + JsonSerializer.Serialize(environment)
+                )
+            );
+
             return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 
@@ -88,6 +97,15 @@ namespace MedalynxAPI.Controllers
                 return BadRequest();
             }
             Program.MedialynxData.environmentDBAPI.Update(environment);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    this.GetType().ToString(),
+                    "Update environment called with data:" + JsonSerializer.Serialize(environment)
+                )
+            );
+
             return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 
@@ -120,6 +138,15 @@ namespace MedalynxAPI.Controllers
             environment.Status = ObjectStatus.Archived;
 
             Program.MedialynxData.environmentDBAPI.Update(environment);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    this.GetType().ToString(),
+                    "Archive environment called with id: " + id
+                )
+            );
+
             return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 
@@ -152,6 +179,15 @@ namespace MedalynxAPI.Controllers
             environment.Status = ObjectStatus.Deleted;
 
             Program.MedialynxData.environmentDBAPI.Update(environment);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    this.GetType().ToString(),
+                    "Delete (mark as deleted) environment called with id: " + id
+                )
+            );
+
             return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 

@@ -191,7 +191,11 @@ PUT /Cohorts/ApproveAdmin/{id}
 PUT /Cohorts/ApproveUser/{id}
 PUT /Cohorts/RejectAdmin/{id}
 PUT /Cohorts/RejectUser/{id}
-)
+PUT /Cohorts/RequestType/{id}
+        body for request sample :
+        {
+            "requestType": 20
+        }
 
 ----------------------------------------------------------------------------------------------------------------------
 // AnalyticalApplications

@@ -488,6 +488,46 @@ namespace MedalynxAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }
 
+        [HttpPut("RequestType/{id}")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Cohort> UpdateRequestType(string id, RequestTypeAPI requestType)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+
+            Guid cohortId = Utils.ToGuid(id, false);
+            if (cohortId == Guid.Empty) {
+                return BadRequest();
+            }
+
+            string sid = Utils.ToGuid(id, false).ToString("B");
+            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetById(sid);
+            if (cohort == null)
+            {
+                return NotFound();
+            }
+
+            if ((int)cohort.RequestType != requestType.RequestType) {
+                cohort.RequestType = (DeletionArchiveRequestType) requestType.RequestType;
+
+                Program.MedialynxData.cohortDBAPI.Update(cohort);
+
+                Program.MedialynxData.historyDBAPI.Add(
+                    new HistoryItem(
+                        sessionUserId,
+                        sid,
+                        this.GetType().ToString(),
+                        "Cohort RequestType updated. id: " + id
+                    )
+                );
+            }
+            return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
+        }
+
         [HttpOptions]
         [HttpOptions("{id}")]
         [HttpOptions("ByUser/{userId}")]
@@ -497,6 +537,7 @@ namespace MedalynxAPI.Controllers
         [HttpOptions("ApproveUser/{id}")]
         [HttpOptions("RejectAdmin/{id}")]
         [HttpOptions("RejectUser/{id}")]
+        [HttpOptions("RequestType/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Models.Environment> Options()
         {

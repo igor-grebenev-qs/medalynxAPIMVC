@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `Biomarkers`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Biomarkers` (
   `Id` varchar(38) NOT NULL,
-  `DeseaseState` varchar(1024) DEFAULT NULL,
+  `DiseaseState` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -90,6 +90,7 @@ CREATE TABLE `CohortEnumLink` (
 
 LOCK TABLES `CohortEnumLink` WRITE;
 /*!40000 ALTER TABLE `CohortEnumLink` DISABLE KEYS */;
+INSERT INTO `CohortEnumLink` VALUES ('{43913fa6-d5a4-411b-9491-e22650538f3f}','{00e6abe1-9a44-4f8b-88a4-589056d0d83f}','{441ae4d5-6bac-4ff2-9153-4fa88393a7e6}','{1c308f58-c3e0-450d-91f4-9c5543129d42}',1,0,'2020-02-18 10:22:28','2020-02-18 10:22:28'),('{79f3a522-2026-4fad-bf19-d5c323948957}','{00e6abe1-9a44-4f8b-88a4-589056d0d83f}','{152583bb-7105-462e-ad74-c9702696feae}','{0eb27144-8c1c-4ad6-a513-ce109fc735ec}',1,0,'2020-02-18 10:22:32','2020-02-18 10:22:32'),('{850606cc-446c-4e6e-a9d4-0a2781a5a40f}','{00e6abe1-9a44-4f8b-88a4-589056d0d83f}','{47f7bac5-60e6-4161-86d9-4ec5f561cafa}','{dfd75b8b-b2e8-4c92-8eaf-b48a8a17f00a}',1,0,'2020-02-18 10:22:34','2020-02-18 10:22:34'),('{8d9a3e15-5415-48a2-a1f0-0b7dc17d80ed}','{00e6abe1-9a44-4f8b-88a4-589056d0d83f}','{3089e988-cbaa-4417-9ff2-447a3d90a534}','{2990b095-ad97-4144-a69f-b8007aa78ed3}',1,0,'2020-02-18 10:22:27','2020-02-18 10:22:27'),('{957d42c5-db04-404f-a547-3b4def0c8119}','{00e6abe1-9a44-4f8b-88a4-589056d0d83f}','{cc77ecca-8279-4c9d-b321-064ba492ba9e}','{089af994-0991-4e4a-bb0b-fac5c91450c0}',1,0,'2020-02-18 10:22:36','2020-02-18 10:22:36'),('{a8315044-8894-4224-8606-914b4b384634}','{00e6abe1-9a44-4f8b-88a4-589056d0d83f}','{5d65643e-4060-48e3-a094-347133b0ed81}','{3eb9d916-1a66-495d-9ba9-3f28f4510daf}',1,0,'2020-02-18 10:22:31','2020-02-18 10:22:31'),('{cde89ae7-94d4-4ad4-ba10-ef6aa4eec878}','{00e6abe1-9a44-4f8b-88a4-589056d0d83f}','{bc70c1e5-04ff-40ef-a80f-f5911f99bfc4}','{74e05cd7-8b87-4b34-86a0-73cac65db1a5}',1,0,'2020-02-18 10:22:29','2020-02-18 10:22:29'),('{d6fd343d-6b36-4267-b9a7-b58fb4bb7d3b}','{00e6abe1-9a44-4f8b-88a4-589056d0d83f}','{f1c60ef6-f4cc-45c6-9dc3-e53d9edc14c5}','{1b48b566-2323-4f84-9f13-311a189dbea7}',1,0,'2020-02-18 10:22:30','2020-02-18 10:22:30');
 /*!40000 ALTER TABLE `CohortEnumLink` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,6 +135,7 @@ CREATE TABLE `Cohorts` (
   `RequestAdmin` int(11) DEFAULT 0,
   `RequestUser` int(11) DEFAULT 0,
   `Status` int(11) NOT NULL DEFAULT 0,
+  `RequestType` int(11) DEFAULT 0,
   `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
   `LastUpdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`Id`)
@@ -146,6 +148,7 @@ CREATE TABLE `Cohorts` (
 
 LOCK TABLES `Cohorts` WRITE;
 /*!40000 ALTER TABLE `Cohorts` DISABLE KEYS */;
+INSERT INTO `Cohorts` VALUES ('{00e6abe1-9a44-4f8b-88a4-589056d0d83f}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}',122,'static',0,0,0,0,'2020-02-18 10:22:26','2020-02-18 10:22:26');
 /*!40000 ALTER TABLE `Cohorts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,41 +174,42 @@ CREATE TABLE `Demographics` (
 
 LOCK TABLES `Demographics` WRITE;
 /*!40000 ALTER TABLE `Demographics` DISABLE KEYS */;
+INSERT INTO `Demographics` VALUES ('{dfd75b8b-b2e8-4c92-8eaf-b48a8a17f00a}',1,2,'0');
 /*!40000 ALTER TABLE `Demographics` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `DeseaseStates`
+-- Table structure for table `DiseaseStates`
 --
 
-DROP TABLE IF EXISTS `DeseaseStates`;
+DROP TABLE IF EXISTS `DiseaseStates`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `DeseaseStates` (
+CREATE TABLE `DiseaseStates` (
   `Id` varchar(38) NOT NULL,
-  `DeseaseState` varchar(1024) DEFAULT NULL,
+  `DiseaseState` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `DeseaseStates`
+-- Dumping data for table `DiseaseStates`
 --
 
-LOCK TABLES `DeseaseStates` WRITE;
-/*!40000 ALTER TABLE `DeseaseStates` DISABLE KEYS */;
-INSERT INTO `DeseaseStates` VALUES ('{2990b095-ad97-4144-a69f-b8007aa78ed3}','Salmonella septicaemia'),('{4047257e-ca3d-4b47-ac1d-9ff49801d388}','Localised Salmonella infections'),('{5197faa8-c0c3-4f47-981c-6fb7fb7aab7a}','Paratyphoid fever A'),('{f14840b5-46c2-46e8-a92c-f9b2dbc5dbd7}','Salmonella gastro-enteritis');
-/*!40000 ALTER TABLE `DeseaseStates` ENABLE KEYS */;
+LOCK TABLES `DiseaseStates` WRITE;
+/*!40000 ALTER TABLE `DiseaseStates` DISABLE KEYS */;
+INSERT INTO `DiseaseStates` VALUES ('{2990b095-ad97-4144-a69f-b8007aa78ed3}','Salmonella septicaemia'),('{4047257e-ca3d-4b47-ac1d-9ff49801d388}','Localised Salmonella infections'),('{5197faa8-c0c3-4f47-981c-6fb7fb7aab7a}','Paratyphoid fever A'),('{f14840b5-46c2-46e8-a92c-f9b2dbc5dbd7}','Salmonella gastro-enteritis');
+/*!40000 ALTER TABLE `DiseaseStates` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Enviroments`
+-- Table structure for table `Environments`
 --
 
-DROP TABLE IF EXISTS `Enviroments`;
+DROP TABLE IF EXISTS `Environments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Enviroments` (
+CREATE TABLE `Environments` (
   `Id` varchar(38) NOT NULL,
   `UserId` varchar(38) NOT NULL,
   `NumberOfUsers` int(11) DEFAULT 0,
@@ -221,12 +225,13 @@ CREATE TABLE `Enviroments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Enviroments`
+-- Dumping data for table `Environments`
 --
 
-LOCK TABLES `Enviroments` WRITE;
-/*!40000 ALTER TABLE `Enviroments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Enviroments` ENABLE KEYS */;
+LOCK TABLES `Environments` WRITE;
+/*!40000 ALTER TABLE `Environments` DISABLE KEYS */;
+INSERT INTO `Environments` VALUES ('{2ae0f025-2b87-41cb-b47e-a47abbaaa69a}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}',1,1,'[\"{c5e4dfe7-83ed-439c-9ec2-68f9ee059896}\",\"{6b9a507e-3340-4d64-8fd9-908a69c00f6d}\"]','{2f3ff4f0-b363-40ba-990d-7b80f0df574f}',20,0,'2020-02-18 10:17:32','2020-02-18 10:17:32');
+/*!40000 ALTER TABLE `Environments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -291,6 +296,7 @@ DROP TABLE IF EXISTS `HistoryItems`;
 CREATE TABLE `HistoryItems` (
   `Id` varchar(38) NOT NULL,
   `UserId` varchar(38) NOT NULL,
+  `ObjectId` varchar(38) NOT NULL,
   `ObjectType` varchar(1024) DEFAULT NULL,
   `Message` longtext DEFAULT NULL,
   `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
@@ -383,6 +389,7 @@ CREATE TABLE `Notifications` (
 
 LOCK TABLES `Notifications` WRITE;
 /*!40000 ALTER TABLE `Notifications` DISABLE KEYS */;
+INSERT INTO `Notifications` VALUES ('{66edb680-3dab-47c3-bd8d-4362591e70e7}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','Environment created',1,0,'2020-02-18 10:17:34','2020-02-18 10:17:34'),('{db8242c4-fe87-450d-9a5f-eb56d81e4990}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','Cohort created',0,0,'2020-02-18 10:22:38','2020-02-18 10:22:38');
 /*!40000 ALTER TABLE `Notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -456,18 +463,18 @@ CREATE TABLE `Sessions` (
 
 LOCK TABLES `Sessions` WRITE;
 /*!40000 ALTER TABLE `Sessions` DISABLE KEYS */;
-INSERT INTO `Sessions` VALUES ('{258427cc-7e8f-40ca-b387-d25100708840}','{e38fe985-af6e-4b21-a719-547b7462afe8}','2020-02-18 07:19:08','2020-02-18 07:19:08'),('{2a007129-4be3-401f-a507-22f42dd2fa9e}','{57a98e8e-f5ab-4032-b647-b793b60468ff}','2020-02-18 05:58:33','2020-02-18 05:58:33'),('{38367e38-05ec-4a6a-833d-94358aaf877a}','{bde09723-429a-4d20-a0e1-ab1672936243}','2020-02-12 09:59:04','2020-02-12 09:59:04'),('{3b5741cf-57f5-4158-879f-00e9c57b2e67}','{49fffec7-48e4-4bbf-83b8-ee85e97051c5}','2020-02-18 08:57:58','2020-02-18 08:57:58'),('{42b37171-0fd5-4152-82e6-52797ebfe82c}','{db909a00-49a4-4107-9066-7b02af48fd11}','2020-02-17 14:08:53','2020-02-17 14:08:53'),('{6e7df61e-eb1d-4253-83ff-c6c96c943519}','{ae999fda-46fb-42ef-b238-55cbf4b21ff8}','2020-02-17 14:54:27','2020-02-17 14:54:27'),('{72ed5186-c84f-41f4-8d38-cbfeb2c77517}','{756f72f3-5150-4e85-b02a-a3f0ab23e07e}','2020-02-18 09:05:27','2020-02-18 09:05:27'),('{8702383f-fb6c-4ce8-8915-9d5f4a2971a9}','{aadc41b9-84a4-4d01-aec5-ffa982cdd1e5}','2020-02-17 12:23:40','2020-02-17 12:23:40'),('{8f68831d-50a3-4584-bdce-b11bf8ae8767}','{e8d62dd6-59d4-4029-a1b1-248da6f933e4}','2020-02-14 07:48:54','2020-02-14 07:48:54'),('{aa219cd1-dda1-471c-920d-2a12a3b47383}','{b3643e06-bd3a-4429-aacb-89a52f8f7950}','2020-02-10 06:03:09','2020-02-10 06:03:09'),('{aac82023-01ea-450b-a9ad-1453a50a3f6f}','{c2e3ff31-eeb6-40d1-9cbf-f92153dc427c}','2020-02-17 12:12:05','2020-02-17 12:12:05'),('{bab24d2f-e131-40d1-b37f-d7dce9369820}','{39c42f7e-c446-4416-b007-c40fdb5ef598}','2020-02-17 15:06:01','2020-02-17 15:06:01'),('{c2f1db3e-8db0-442a-8d71-d6a555cd8c84}','{f62a2c71-77db-4166-bad8-5ff2676ac21b}','2020-02-12 10:00:18','2020-02-12 10:00:18');
+INSERT INTO `Sessions` VALUES ('{568e02ae-a64c-4bec-b8af-84d49b2e9199}','{49fffec7-48e4-4bbf-83b8-ee85e97051c5}','2020-02-19 05:24:19','2020-02-19 05:24:19'),('{ba28e5c2-b89f-4b9b-a2fc-787d12ffb1fb}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','2020-02-19 02:08:51','2020-02-19 02:08:51');
 /*!40000 ALTER TABLE `Sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `StageOfDeseases`
+-- Table structure for table `StageOfDiseases`
 --
 
-DROP TABLE IF EXISTS `StageOfDeseases`;
+DROP TABLE IF EXISTS `StageOfDiseases`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `StageOfDeseases` (
+CREATE TABLE `StageOfDiseases` (
   `Id` varchar(38) NOT NULL,
   `StageOfTumour` int(11) DEFAULT NULL,
   `NumberOfNodesAffected` int(11) DEFAULT NULL,
@@ -477,12 +484,13 @@ CREATE TABLE `StageOfDeseases` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `StageOfDeseases`
+-- Dumping data for table `StageOfDiseases`
 --
 
-LOCK TABLES `StageOfDeseases` WRITE;
-/*!40000 ALTER TABLE `StageOfDeseases` DISABLE KEYS */;
-/*!40000 ALTER TABLE `StageOfDeseases` ENABLE KEYS */;
+LOCK TABLES `StageOfDiseases` WRITE;
+/*!40000 ALTER TABLE `StageOfDiseases` DISABLE KEYS */;
+INSERT INTO `StageOfDiseases` VALUES ('{089af994-0991-4e4a-bb0b-fac5c91450c0}',1,2,3);
+/*!40000 ALTER TABLE `StageOfDiseases` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -540,7 +548,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES ('{39c42f7e-c446-4416-b007-c40fdb5ef598}','dmitry.kochergin+demo@quantumsoft.pro','Dmitry','Kochergin','QuantumSoft',0,'Qwerty1!','STANDART_USER',0,'2020-02-17 15:05:59','2020-02-17 15:05:59'),('{49fffec7-48e4-4bbf-83b8-ee85e97051c5}','test4@mail.ru','testname','test','',0,'12345','STANDART_USER',0,'2020-02-12 10:07:33','2020-02-12 10:07:33'),('{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','igor.ge@mail.ru','Igor (TEST USER)','Grebenev','Quantumsoft',0,'m1llions','STANDART_USER',0,'2020-01-30 10:15:46','2020-01-30 10:15:46'),('{57a98e8e-f5ab-4032-b647-b793b60468ff}','medalynx@gmail.com','Admin','','',0,'admin','ADMIN',0,'2020-02-05 01:57:22','2020-02-05 01:57:22'),('{756f72f3-5150-4e85-b02a-a3f0ab23e07e}','test3@mail.ru','super','user','test',0,'12345','STANDART_USER',0,'2020-02-12 10:01:21','2020-02-12 10:01:21'),('{aadc41b9-84a4-4d01-aec5-ffa982cdd1e5}','vasiliy.sokolov@quantumsoft.pro','Vasiliy','Sokolov','QuantumSoft',0,'Qwerty123!','STANDART_USER',0,'2020-02-17 12:23:38','2020-02-17 12:23:38'),('{ae999fda-46fb-42ef-b238-55cbf4b21ff8}','vasiliy.sokolov+demo1@quantumsoft.pro','Vasily','Sokolov','QuantumSoft',0,'Qwerty123!','STANDART_USER',0,'2020-02-17 14:54:25','2020-02-17 14:54:25'),('{b3643e06-bd3a-4429-aacb-89a52f8f7950}','antony@mail.ru','antony','antony','antony corporation',0,'12345','STANDART_USER',0,'2020-02-10 06:02:57','2020-02-10 06:02:57'),('{bde09723-429a-4d20-a0e1-ab1672936243}','test1@mail.ru','antony','antony','antony',0,'12345','STANDART_USER',0,'2020-02-12 09:59:01','2020-02-12 09:59:01'),('{bffe1e64-4c5b-435b-be7b-71585dab06fd}','testdev@mail.ru','test','dev','company',0,'12345678Ab!','STANDART_USER',0,'2020-02-18 05:56:11','2020-02-18 05:56:11'),('{c2e3ff31-eeb6-40d1-9cbf-f92153dc427c}','dmitry.kochergin@quantumsoft.pro','Dmitry','Kochergin','QS',0,'1234567Qw!','STANDART_USER',0,'2020-02-17 12:12:03','2020-02-17 12:12:03'),('{db909a00-49a4-4107-9066-7b02af48fd11}','vasiliy.sokolov+demo@quantumsoft.pro','Vasiliy','Sokolov','QuantumSoft',0,'Qwerty123!','STANDART_USER',0,'2020-02-17 14:08:51','2020-02-17 14:08:51'),('{e38fe985-af6e-4b21-a719-547b7462afe8}','testdev2@mail.ru','test','user','company',0,'12345678Ab!','STANDART_USER',0,'2020-02-18 07:19:05','2020-02-18 07:19:05'),('{e8d62dd6-59d4-4029-a1b1-248da6f933e4}','test@mail.ru','test','test','adf',0,'12345678Ab!','STANDART_USER',0,'2020-02-14 07:48:51','2020-02-14 07:48:51'),('{f62a2c71-77db-4166-bad8-5ff2676ac21b}','test2@mail.ru','user','test','test',0,'12345','STANDART_USER',0,'2020-02-12 10:00:16','2020-02-12 10:00:16');
+INSERT INTO `Users` VALUES ('{39c42f7e-c446-4416-b007-c40fdb5ef598}','dmitry.kochergin+demo@quantumsoft.pro','Dmitry','Kochergin','QuantumSoft',0,'Qwerty1!','STANDARD_USER',0,'2020-02-17 15:05:59','2020-02-17 15:05:59'),('{49fffec7-48e4-4bbf-83b8-ee85e97051c5}','test4@mail.ru','testname','test','',0,'12345','STANDARD_USER',0,'2020-02-12 10:07:33','2020-02-12 10:07:33'),('{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','igor.ge@mail.ru','Igor (TEST USER)','Grebenev','Quantumsoft',0,'m1llions','STANDARD_USER',0,'2020-01-30 10:15:46','2020-01-30 10:15:46'),('{57a98e8e-f5ab-4032-b647-b793b60468ff}','medalynx@gmail.com','Admin','','',0,'admin','ADMIN',0,'2020-02-05 01:57:22','2020-02-05 01:57:22'),('{756f72f3-5150-4e85-b02a-a3f0ab23e07e}','test3@mail.ru','super','user','test',0,'12345','STANDARD_USER',0,'2020-02-12 10:01:21','2020-02-12 10:01:21'),('{aadc41b9-84a4-4d01-aec5-ffa982cdd1e5}','vasiliy.sokolov@quantumsoft.pro','Vasiliy','Sokolov','QuantumSoft',0,'Qwerty123!','STANDARD_USER',0,'2020-02-17 12:23:38','2020-02-17 12:23:38'),('{ae999fda-46fb-42ef-b238-55cbf4b21ff8}','vasiliy.sokolov+demo1@quantumsoft.pro','Vasily','Sokolov','QuantumSoft',0,'Qwerty123!','STANDARD_USER',0,'2020-02-17 14:54:25','2020-02-17 14:54:25'),('{b3643e06-bd3a-4429-aacb-89a52f8f7950}','antony@mail.ru','antony','antony','antony corporation',0,'12345','STANDARD_USER',0,'2020-02-10 06:02:57','2020-02-10 06:02:57'),('{bde09723-429a-4d20-a0e1-ab1672936243}','test1@mail.ru','antony','antony','antony',0,'12345','STANDARD_USER',0,'2020-02-12 09:59:01','2020-02-12 09:59:01'),('{bffe1e64-4c5b-435b-be7b-71585dab06fd}','testdev@mail.ru','test','dev','company',0,'12345678Ab!','STANDARD_USER',0,'2020-02-18 05:56:11','2020-02-18 05:56:11'),('{c2e3ff31-eeb6-40d1-9cbf-f92153dc427c}','dmitry.kochergin@quantumsoft.pro','Dmitry','Kochergin','QS',0,'1234567Qw!','STANDARD_USER',0,'2020-02-17 12:12:03','2020-02-17 12:12:03'),('{db909a00-49a4-4107-9066-7b02af48fd11}','vasiliy.sokolov+demo@quantumsoft.pro','Vasiliy','Sokolov','QuantumSoft',0,'Qwerty123!','STANDARD_USER',0,'2020-02-17 14:08:51','2020-02-17 14:08:51'),('{e38fe985-af6e-4b21-a719-547b7462afe8}','testdev2@mail.ru','test','user','company',0,'12345678Ab!','STANDARD_USER',0,'2020-02-18 07:19:05','2020-02-18 07:19:05'),('{e8d62dd6-59d4-4029-a1b1-248da6f933e4}','test@mail.ru','test','test','adf',0,'12345678Ab!','STANDARD_USER',0,'2020-02-14 07:48:51','2020-02-14 07:48:51'),('{f62a2c71-77db-4166-bad8-5ff2676ac21b}','test2@mail.ru','user','test','test',0,'12345','STANDARD_USER',0,'2020-02-12 10:00:16','2020-02-12 10:00:16');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -553,4 +561,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-18 17:13:20
+-- Dump completed on 2020-02-19 12:31:51

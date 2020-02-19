@@ -150,10 +150,11 @@ namespace MedalynxAPI.Controllers
                 }
             }
             // validate that cohort is not exists
-            Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetByUser(cohortApi.UserId, RequestType.Any);
-            if (existsCohort != null) {
-                return BadRequest(); // cohort already exists. Please use update.
-            }
+            // USER CAN CONTAINS MANY COHORTS
+            //Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetByUser(cohortApi.UserId, RequestType.Any);
+            //if (existsCohort != null) {
+            //    return BadRequest("Cohort already exists"); // cohort already exists. Please use update.
+            //}
 
             cohortApi.Id = Guid.NewGuid().ToString("B");
 

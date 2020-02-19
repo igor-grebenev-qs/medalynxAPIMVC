@@ -533,7 +533,7 @@ CREATE TABLE `Users` (
   `CompanyName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Request` int(11) DEFAULT 0 COMMENT '0 - created\n1 - accepted\n2 - rejected',
   `Password` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Role` varchar(45) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'STANDART_USER',
+  `Role` varchar(45) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'STANDARD_USER',
   `Status` int(11) NOT NULL DEFAULT 0,
   `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
   `LastUpdate` datetime NOT NULL DEFAULT current_timestamp(),
@@ -561,4 +561,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-19 12:31:51
+-- Dump completed on 2020-02-19 12:36:06

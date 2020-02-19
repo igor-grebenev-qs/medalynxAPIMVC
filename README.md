@@ -59,10 +59,10 @@ PUT /Users (update exists user. You can provide not all fields. id - reqired
         }
 )
 
-ENVIROMENTS:
-GET /Enviroments
-GET /Enviroments/{UserId}
-POST /Enviroments (create new enviroment
+ENVIRONMENTS:
+GET /Environments
+GET /Environments/{UserId}
+POST /Environments (create new environment
         body for request sample:
         {
             "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
@@ -74,7 +74,7 @@ POST /Enviroments (create new enviroment
             "status": 0
         }
 )
-PUT /Enviroments (update enviroment
+PUT /Environments (update environment
         body for request sample:
         {
             "id": "{577c9b90-8495-4ed7-9fa1-3877c64d1111}",
@@ -86,9 +86,11 @@ PUT /Enviroments (update enviroment
             "request": 0,
             "status": 0
         }
+PUT /Environments/Archive/{id}
+PUT /Environments/Delete/{id}
 )
 
-ENUMMS:
+ENUMS:
 ----------------------------------------------------------------------------------------------------------------------
 GET
     /AnalyticalApplications

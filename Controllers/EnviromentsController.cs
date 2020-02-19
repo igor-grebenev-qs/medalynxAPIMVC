@@ -91,8 +91,64 @@ namespace MedalynxAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 
+        [HttpPut("Archive/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Models.Environment> Archive(string id)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+
+            Guid environmentId = Utils.ToGuid(id, false);
+            if (environmentId == Guid.Empty) {
+                return BadRequest();
+            }
+
+            string sid = Utils.ToGuid(id, false).ToString("B");
+            Models.Environment environment = Program.MedialynxData.environmentDBAPI.Get(sid);
+            if (environment == null)
+            {
+                return NotFound();
+            }
+            environment.Status = ObjectStatus.Archived;
+
+            Program.MedialynxData.environmentDBAPI.Update(environment);
+            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
+        }
+
+        [HttpPut("Delete/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Models.Environment> MarkDeleted(string id)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+
+            Guid environmentId = Utils.ToGuid(id, false);
+            if (environmentId == Guid.Empty) {
+                return BadRequest();
+            }
+
+            string sid = Utils.ToGuid(id, false).ToString("B");
+            Models.Environment environment = Program.MedialynxData.environmentDBAPI.Get(sid);
+            if (environment == null)
+            {
+                return NotFound();
+            }
+            environment.Status = ObjectStatus.Deleted;
+
+            Program.MedialynxData.environmentDBAPI.Update(environment);
+            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
+        }
+
         [HttpOptions]
         [HttpOptions("ByUser/{userId}")]
+        [HttpOptions("Archive/{id}")]
+        [HttpOptions("Delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Models.Environment> Options()
         {

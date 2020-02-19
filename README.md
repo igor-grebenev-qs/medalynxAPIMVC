@@ -88,6 +88,9 @@ PUT /Environments (update environment
         }
 PUT /Environments/Archive/{id}
 PUT /Environments/Delete/{id}
+PUT /Environments/Approve/{id}
+PUT /Environments/Reject/{id}
+
 )
 
 ENUMS:
@@ -184,6 +187,10 @@ PUT
         }
 PUT /Cohorts/Archive/{id}
 PUT /Cohorts/Delete/{id}
+PUT /Cohorts/ApproveAdmin/{id}
+PUT /Cohorts/ApproveUser/{id}
+PUT /Cohorts/RejectAdmin/{id}
+PUT /Cohorts/RejectUser/{id}
 )
 
 ----------------------------------------------------------------------------------------------------------------------

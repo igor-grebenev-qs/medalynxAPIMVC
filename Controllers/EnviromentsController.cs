@@ -195,10 +195,90 @@ namespace MedalynxAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 
+        [HttpPut("Approve/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Models.Environment> Approve(string id)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+
+            Guid environmentId = Utils.ToGuid(id, false);
+            if (environmentId == Guid.Empty) {
+                return BadRequest();
+            }
+
+            string sid = Utils.ToGuid(id, false).ToString("B");
+            Models.Environment environment = Program.MedialynxData.environmentDBAPI.Get(sid);
+
+            if (environment == null)
+            {
+                return NotFound();
+            }
+
+            environment.Request = RequestType.Approved;
+
+            Program.MedialynxData.environmentDBAPI.Update(environment);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    sid,
+                    this.GetType().ToString(),
+                    "Environment approved. id: " + id
+                )
+            );
+
+            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
+        }
+
+        [HttpPut("Reject/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Models.Environment> Reject(string id)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest(); }
+
+            Guid environmentId = Utils.ToGuid(id, false);
+            if (environmentId == Guid.Empty) {
+                return BadRequest();
+            }
+
+            string sid = Utils.ToGuid(id, false).ToString("B");
+            Models.Environment environment = Program.MedialynxData.environmentDBAPI.Get(sid);
+
+            if (environment == null)
+            {
+                return NotFound();
+            }
+
+            environment.Request = RequestType.Rejected;
+
+            Program.MedialynxData.environmentDBAPI.Update(environment);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    sid,
+                    this.GetType().ToString(),
+                    "Environment rejected. id: " + id
+                )
+            );
+
+            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
+        }
+
         [HttpOptions]
         [HttpOptions("ByUser/{userId}")]
         [HttpOptions("Archive/{id}")]
         [HttpOptions("Delete/{id}")]
+        [HttpOptions("Approve/{id}")]
+        [HttpOptions("Reject/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Models.Environment> Options()
         {

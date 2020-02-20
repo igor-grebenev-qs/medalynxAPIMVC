@@ -56,7 +56,7 @@ namespace MedalynxAPI.Controllers
 
             string sid = Utils.ToGuid(userId, false).ToString("B");
             List<Models.Environment> environments = Program.MedialynxData.environmentDBAPI.GetByUser(sid);
-            if (environments.Count != 1)
+            if (environments.Count == 0)
             {
                 return NotFound();
             }

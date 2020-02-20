@@ -4,7 +4,8 @@ namespace MedalynxAPI.Models
     {
         Default = 0,
         Archived = 10,
-        Deleted = 20,
-        PartialDeleted = 30
+        PartialArchived = 20,
+        Deleted = 30,
+        PartialDeleted = 40
     }
 }

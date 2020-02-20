@@ -2,9 +2,10 @@ namespace MedalynxAPI.Models
 {
     public enum DeletionArchiveRequestType
     {
-        FullDeletion = 10,
-        PartialDeletion = 20,
-        FullArchival = 30,
-        PartialArchival = 40
+        Default = 0,
+        FullArchival = 10,
+        PartialArchival = 20,
+        FullDeletion = 30,
+        PartialDeletion = 40
     }
 }

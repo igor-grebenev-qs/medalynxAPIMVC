@@ -99,16 +99,13 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CredentialsInfo> Login(Credentials credentials)
         {
-            #pragma warning disable 4014
-            //EmailService.SendEmailOauth2Async(credentials.UserEmail, "login success", "google test");
-            #pragma warning restore 4014
             User user = Program.MedialynxData.userDBAPI.GetByEmail(credentials.UserEmail);
             if (user == null) {
-                return NotFound();
+                return NotFound("User " + credentials.UserEmail + " not found.");
             }
-            // {aef2cd61-a94e-0c7c-29cf-08c317991dea} - medalynx
-            string pass = Utils.GetHashString(credentials.Password);
-            if (user.Password == pass) { // OK!!!
+
+            string passwordHash = Utils.GetHashString(credentials.Password);
+            if (user.Password == passwordHash) { // OK!!!
                 return this.GetCredentialsInfo(user);
             }
             return null;

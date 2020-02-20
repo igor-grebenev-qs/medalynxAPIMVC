@@ -69,7 +69,7 @@ namespace MedalynxAPI.Controllers
             List<Cohort> cohorts = Program.MedialynxData.cohortDBAPI.Get(sid);
             if (cohorts.Count != 1)
             {
-                return NotFound();
+                return NotFound("Cohort count is " + cohorts.Count + ". Await 1 object.");
             }
 
             return this.GetCohortRepresentation(cohorts[0]);

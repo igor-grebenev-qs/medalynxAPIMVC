@@ -6,6 +6,14 @@ using MedalynxAPI.Models.Cohort;
 
 namespace MedalynxAPI
 {
+    internal class CohortComparer : IComparer<Cohort>
+    {
+        public int Compare(Cohort x, Cohort y)
+        {
+            return y.LastUpdate.CompareTo(x.LastUpdate);
+        }
+    }
+
     public class CohortDBAPI
     {
         // Get cohort by id
@@ -39,6 +47,7 @@ namespace MedalynxAPI
                     cohorts.AddRange(dbContext.Cohorts);
                 }
             }
+            cohorts.Sort(new CohortComparer());
             return cohorts;
         }
 
@@ -88,7 +97,9 @@ namespace MedalynxAPI
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    return dbContext.Cohorts.Where(c => c != null && c.UserId == sid ).ToList();
+                    List<Cohort> cohorts = dbContext.Cohorts.Where(c => c != null && c.UserId == sid ).ToList();
+                    cohorts.Sort(new CohortComparer());
+                    return cohorts;
                 }
             }
             return new List<Cohort>();

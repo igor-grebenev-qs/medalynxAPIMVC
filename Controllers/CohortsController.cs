@@ -33,7 +33,7 @@ namespace MedalynxAPI.Controllers
             cohortRepresentation.CohortEnumLinks = Program.MedialynxData.cohortEnumLinkDBAPI.GetLinksByCohort(cohort.Id);
             return cohortRepresentation;
         }
-
+        /*
         [HttpDelete("{cohortId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -53,6 +53,7 @@ namespace MedalynxAPI.Controllers
 
             return Program.MedialynxData.cohortDBAPI.Remove(cohortId);
         }
+        */
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -290,7 +291,7 @@ namespace MedalynxAPI.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }
-        /*
+
         [HttpPut("Delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -332,7 +333,6 @@ namespace MedalynxAPI.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }
-        */
 
         [HttpPut("ApproveAdmin/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

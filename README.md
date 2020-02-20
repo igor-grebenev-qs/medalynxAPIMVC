@@ -61,7 +61,8 @@ PUT /Users (update exists user. You can provide not all fields. id - reqired
 
 ENVIRONMENTS:
 GET /Environments
-GET /Environments/{UserId}
+GET /Environments/ByUser/{UserId}
+GET /Environments/AllByUser/{UserId}
 POST /Environments (create new environment
         body for request sample:
         {
@@ -128,6 +129,7 @@ GET
     /Cohorts
     /Cohorts/{id} - Alive cohort by user (CohortRepresentation)
     /Cohorts/ByUser/{userId} - Alive cohort by user (CohortRepresentation) Not-Rejected header can be specified.
+    /Cohorts/AllByUser/{userId}
 DELETE
     /Cohorts/{id} - Remove cohort
 POST

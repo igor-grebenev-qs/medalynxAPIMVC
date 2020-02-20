@@ -44,6 +44,26 @@ namespace MedalynxAPI.Controllers
             return environments[0];
         }
 
+        [HttpGet("AllByUser/{userId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<List<Models.Environment>> GetAllById(string userId)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
+
+            string sid = Utils.ToGuid(userId, false).ToString("B");
+            List<Models.Environment> environments = Program.MedialynxData.environmentDBAPI.GetByUser(sid);
+            if (environments.Count != 1)
+            {
+                return NotFound();
+            }
+
+            return environments;
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -274,6 +294,7 @@ namespace MedalynxAPI.Controllers
         }
 
         [HttpOptions]
+        [HttpOptions("AllByUser/{userId}")]
         [HttpOptions("ByUser/{userId}")]
         [HttpOptions("Archive/{id}")]
         [HttpOptions("Delete/{id}")]

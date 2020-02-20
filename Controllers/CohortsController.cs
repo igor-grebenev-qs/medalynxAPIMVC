@@ -91,13 +91,33 @@ namespace MedalynxAPI.Controllers
             bool notRejected = requestTypeHeaders.Count > 0;
 
             string sid = Utils.ToGuid(userId, false).ToString("B");
-            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetByUser(sid, notRejected);
+            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetFirstByUser(sid, notRejected);
             if (cohort == null)
             {
                 return NotFound();
             }
 
             return this.GetCohortRepresentation(cohort);
+        }
+
+        [HttpGet("AllByUser/{userId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<List<Cohort>> GetAllByUserId(string userId)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
+
+            string sid = Utils.ToGuid(userId, false).ToString("B");
+            List<Cohort> cohorts = Program.MedialynxData.cohortDBAPI.GetAllByUser(sid);
+            if (cohorts.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return cohorts;
         }
 
         /// <summary>
@@ -148,7 +168,7 @@ namespace MedalynxAPI.Controllers
                 }
             }
             // validate that cohort is not exists
-            Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetByUser(cohortApi.UserId);
+            Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetFirstByUser(cohortApi.UserId);
             if (existsCohort != null) {
                 return BadRequest("Cohort already exists"); // cohort already exists. Please use update.
             }
@@ -528,6 +548,7 @@ namespace MedalynxAPI.Controllers
 
         [HttpOptions]
         [HttpOptions("{id}")]
+        [HttpOptions("AllByUser/{userId}")]
         [HttpOptions("ByUser/{userId}")]
         [HttpOptions("Archive/{id}")]
         [HttpOptions("Delete/{id}")]

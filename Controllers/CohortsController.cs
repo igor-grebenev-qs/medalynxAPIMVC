@@ -195,7 +195,7 @@ namespace MedalynxAPI.Controllers
                     sessionUserId,
                     cohort.Id,
                     this.GetType().ToString(),
-                    "Create cohort called with data:" + JsonSerializer.Serialize(cohortApi)
+                    "Create cohort called with data: " + JsonSerializer.Serialize(cohortApi)
                 )
             );
 
@@ -255,7 +255,7 @@ namespace MedalynxAPI.Controllers
                     sessionUserId,
                     cohort.Id,
                     this.GetType().ToString(),
-                    "Update cohort called with data:" + JsonSerializer.Serialize(cohortApi)
+                    "Update cohort called with data: " + JsonSerializer.Serialize(cohortApi)
                 )
             );
 

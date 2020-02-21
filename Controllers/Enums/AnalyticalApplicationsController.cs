@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Mime;
+using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MedalynxAPI.Models;
 using MedalynxAPI.Models.Enums;
 
 namespace MedalynxAPI.Controllers.Enums
@@ -57,6 +59,16 @@ namespace MedalynxAPI.Controllers.Enums
                 item.Id = Guid.NewGuid().ToString("B");
             }
             Program.MedialynxData.analyticalApplicationsDBAPI.Add(item);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    item.Id,
+                    this.GetType().ToString(),
+                    "Create AnalyticalApplicationItem called with data: " + JsonSerializer.Serialize(item)
+                )
+            );
+
             return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
         }
 

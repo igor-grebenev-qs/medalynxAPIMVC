@@ -96,7 +96,7 @@ namespace MedalynxAPI.Controllers
                     sessionUserId,
                     environment.Id,
                     this.GetType().ToString(),
-                    "Create environment called with data:" + JsonSerializer.Serialize(environment)
+                    "Create environment called with data: " + JsonSerializer.Serialize(environment)
                 )
             );
 
@@ -124,7 +124,7 @@ namespace MedalynxAPI.Controllers
                     sessionUserId,
                     environment.Id,
                     this.GetType().ToString(),
-                    "Update environment called with data:" + JsonSerializer.Serialize(environment)
+                    "Update environment called with data: " + JsonSerializer.Serialize(environment)
                 )
             );
 

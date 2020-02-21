@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Mime;
+using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MedalynxAPI.Models;
@@ -73,6 +74,16 @@ namespace MedalynxAPI.Controllers
             if (id == Guid.Empty) {
                 link.Id = Guid.NewGuid().ToString("B");
                 Program.MedialynxData.cohortEnumLinkDBAPI.Add(link);
+
+                Program.MedialynxData.historyDBAPI.Add(
+                    new HistoryItem(
+                        sessionUserId,
+                        link.Id,
+                        this.GetType().ToString(),
+                        "Create CohortEnumLink called with data: " + JsonSerializer.Serialize(link)
+                    )
+                );
+
                 return CreatedAtAction(nameof(GetById), new { id = link.Id }, link);
             }
             return BadRequest("Cohort enum link object can't be created. Please check id. (" + link.Id + ")");
@@ -94,6 +105,16 @@ namespace MedalynxAPI.Controllers
             }
             link.LastUpdate = DateTime.UtcNow;
             Program.MedialynxData.cohortEnumLinkDBAPI.Update(link);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    link.Id,
+                    this.GetType().ToString(),
+                    "Update CohortEnumLink called with data: " + JsonSerializer.Serialize(link)
+                )
+            );
+
             return CreatedAtAction(nameof(GetById), new { id = link.Id }, link);
         }
 

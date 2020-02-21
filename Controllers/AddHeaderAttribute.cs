@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.ComponentModel.DataAnnotations.Schema;
 //Access-Control-Allow-Origin
+
+[NotMapped]
 public class AddHeaderAttribute : ResultFilterAttribute
 {
     private readonly string _name;

@@ -6,7 +6,13 @@ namespace MedalynxAPI.Models
     {
         public HistoryItem(){}
         public HistoryItem(string userId, string objectId, string objectType, string message){
+            if (userId == null) {
+                throw new Exception("User Id must be initialized");
+            }
             UserId = userId;
+            if (objectId == null) {
+                throw new Exception("Object Id must be initialized");
+            }
             ObjectId = objectId;
             ObjectType = objectType;
             Message = message;

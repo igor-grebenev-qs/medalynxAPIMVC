@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Mime;
+using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MedalynxAPI;
 using MedalynxAPI.Models;
 using MedalynxAPI.Models.User;
 using medalynxAPI.Notifications;
@@ -57,6 +57,15 @@ namespace MedalynxAPI.Controllers
 
             string sid = Utils.ToGuid(sessionId, false).ToString("B");
             Program.MedialynxData.sessionDBAPI.Delete(sid);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    sessionId,
+                    this.GetType().ToString(),
+                    "Logout called data"
+                )
+            );
         }
 
         [HttpGet("me")]
@@ -104,9 +113,27 @@ namespace MedalynxAPI.Controllers
                 return NotFound("User " + credentials.UserEmail + " not found.");
             }
 
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    user.Id,
+                    user.Id,
+                    this.GetType().ToString(),
+                    "Try to login "  + credentials.UserEmail
+                )
+            );
+
             string passwordHash = Utils.GetHashString(credentials.Password);
             if (user.Password == passwordHash) { // OK!!!
-                return this.GetCredentialsInfo(user);
+                CredentialsInfo credentialsInfo = this.GetCredentialsInfo(user);
+                Program.MedialynxData.historyDBAPI.Add(
+                    new HistoryItem(
+                        user.Id,
+                        credentialsInfo.Session.Id,
+                        this.GetType().ToString(),
+                        "Login Success " + credentials.UserEmail
+                    )
+                );
+                return credentialsInfo;
             }
             return null;
         }
@@ -175,9 +202,17 @@ namespace MedalynxAPI.Controllers
                 #pragma warning restore 4014
                 UserRepresentation userRepresentation = new UserRepresentation(user);
                 userRepresentation.CredentialsInfo = this.GetCredentialsInfo(user);
-                return userRepresentation;
 
-                // return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
+                Program.MedialynxData.historyDBAPI.Add(
+                    new HistoryItem(
+                        user.Id,
+                        user.Id,
+                        this.GetType().ToString(),
+                        "User created successfully " + JsonSerializer.Serialize(userRepresentation)
+                    )
+                );
+
+                return userRepresentation;
             }
             return BadRequest("User can't be created. Provided id (" + id + ")");
         }
@@ -199,6 +234,16 @@ namespace MedalynxAPI.Controllers
             user.Password = String.IsNullOrEmpty(user.Password) ? null : Utils.GetHashString(user.Password);
             user.LastUpdate = DateTime.UtcNow;
             Program.MedialynxData.userDBAPI.Update(user);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    user.Id,
+                    this.GetType().ToString(),
+                    "Update user " + user.Email + " called"
+                )
+            );
+
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
         }
 

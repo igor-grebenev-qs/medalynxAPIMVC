@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
@@ -80,6 +81,16 @@ namespace MedalynxAPI.Controllers
             }
             notification.LastUpdate = DateTime.UtcNow;
             Program.MedialynxData.notificationDBAPI.Update(notification);
+
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    notification.Id,
+                    this.GetType().ToString(),
+                    "Update notification called with data: " + JsonSerializer.Serialize(notification)
+                )
+            );
+
             return CreatedAtAction(nameof(GetById), new { id = notification.Id }, notification);
         }
 

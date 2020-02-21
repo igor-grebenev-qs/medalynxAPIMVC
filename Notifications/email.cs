@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Google.Apis.Auth;
 using Google.Apis.Auth.OAuth2;
 using EASendMail;
+using MedalynxAPI;
+using MedalynxAPI.Models;
 
 /// <summary>
 /// https://metanit.com/sharp/aspnet5/21.1.php
@@ -26,6 +28,16 @@ namespace medalynxAPI.Notifications
     {
         public static async Task SendEmailAsync(string email, string subject, string message)
         {
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    "unknown",
+                    "unknown",
+                    "Mailing Service",
+                    "SendEmailAsync called for: " + email
+                )
+            );
+
+
             var emailMessage = new MimeMessage();
  
             emailMessage.From.Add(new MailboxAddress("Medalynx", "medalynx@yandex.ru"));

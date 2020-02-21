@@ -269,7 +269,7 @@ namespace MedalynxAPI.Controllers
             return this.GetCohortRepresentation(cohorts[0]);
 
         }
-
+        /*
         [HttpPut("Archive/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -505,6 +505,7 @@ namespace MedalynxAPI.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }
+        */
 
         [HttpPut("RequestType/{id}")]
         [Consumes(MediaTypeNames.Application.Json)]
@@ -526,7 +527,7 @@ namespace MedalynxAPI.Controllers
             Cohort cohort = Program.MedialynxData.cohortDBAPI.GetById(sid);
             if (cohort == null)
             {
-                return NotFound();
+                return NotFound("Cohort with id=" + sid + " not found");
             }
 
             if ((int)cohort.RequestType != requestType.RequestType) {
@@ -539,7 +540,47 @@ namespace MedalynxAPI.Controllers
                         sessionUserId,
                         sid,
                         this.GetType().ToString(),
-                        "Cohort RequestType updated. id: " + id
+                        "Cohort RequestType was updated. id: " + id
+                    )
+                );
+            }
+            return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
+        }
+
+        [HttpPut("Status/{id}")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Cohort> UpdateStatus(string id, CohortStatusAPI status)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
+
+            Guid cohortId = Utils.ToGuid(id, false);
+            if (cohortId == Guid.Empty) {
+                return BadRequest("Cohort id is not valid (" + id + ")");
+            }
+
+            string sid = Utils.ToGuid(id, false).ToString("B");
+            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetById(sid);
+            if (cohort == null)
+            {
+                return NotFound("Cohort with id=" + sid + " not found");
+            }
+
+            if ((int)cohort.Status != status.Status) {
+                cohort.Status = (ObjectStatus) status.Status;
+
+                Program.MedialynxData.cohortDBAPI.Update(cohort);
+
+                Program.MedialynxData.historyDBAPI.Add(
+                    new HistoryItem(
+                        sessionUserId,
+                        sid,
+                        this.GetType().ToString(),
+                        "Cohort Status was updated. id: " + id
                     )
                 );
             }
@@ -550,13 +591,16 @@ namespace MedalynxAPI.Controllers
         [HttpOptions("{id}")]
         [HttpOptions("AllByUser/{userId}")]
         [HttpOptions("ByUser/{userId}")]
+        /*
         [HttpOptions("Archive/{id}")]
         [HttpOptions("Delete/{id}")]
         [HttpOptions("ApproveAdmin/{id}")]
         [HttpOptions("ApproveUser/{id}")]
         [HttpOptions("RejectAdmin/{id}")]
         [HttpOptions("RejectUser/{id}")]
+        */
         [HttpOptions("RequestType/{id}")]
+        [HttpOptions("Status/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Models.Environment> Options()
         {

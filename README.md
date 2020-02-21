@@ -187,14 +187,6 @@ PUT
                 }
             ]
         }
-/* commented
-PUT /Cohorts/Archive/{id}
-PUT /Cohorts/Delete/{id}
-PUT /Cohorts/ApproveAdmin/{id}
-PUT /Cohorts/ApproveUser/{id}
-PUT /Cohorts/RejectAdmin/{id}
-PUT /Cohorts/RejectUser/{id}
-*/
 PUT /Cohorts/RequestType/{id}
         body for request sample :
         {

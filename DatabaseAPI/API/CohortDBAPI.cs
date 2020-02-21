@@ -82,9 +82,12 @@ namespace MedalynxAPI
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    return dbContext.Cohorts.FirstOrDefault(c => c != null && c.UserId == sid &&
-                        ( !notRejected || (c.RequestAdmin != RequestType.Rejected || c.RequestUser != RequestType.Rejected) )
-                    );
+                    List<Cohort> cohorts = dbContext.Cohorts.Where(c => c != null &&
+                        c.UserId == sid &&
+                        (!notRejected || (c.RequestAdmin != RequestType.Rejected || c.RequestUser != RequestType.Rejected))
+                    ).ToList();
+                    cohorts.Sort(new CohortComparer());
+                    return cohorts.Count > 0 ? cohorts[0] : null;
                 }
             }
             return null;

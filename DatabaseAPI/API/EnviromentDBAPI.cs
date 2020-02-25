@@ -24,7 +24,7 @@ namespace MedalynxAPI
 
             using (var dbContext = new MedialynxDbEnvironmentsContext()) {
                 string sid = id.ToString("B");
-                return dbContext.Environments.FirstOrDefault(environment => environment != null && environment.UserId == sid);
+                return dbContext.Environments.FirstOrDefault(environment => environment != null && environment.Id == sid);
             }
         }
 

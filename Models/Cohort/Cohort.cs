@@ -12,7 +12,7 @@ namespace MedalynxAPI.Models.Cohort
         public RequestType RequestAdmin { get; set; }
         public RequestType RequestUser { get; set; }
         public ObjectStatus Status { get; set; }
-        public DeletionArchiveRequestType RequestType { get; set; }
+        public ObjectStatus RequestType { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdate { get; set; }
     }

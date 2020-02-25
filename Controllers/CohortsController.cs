@@ -294,7 +294,7 @@ namespace MedalynxAPI.Controllers
             }
 
             if ((int)cohort.RequestType != requestType.RequestType) {
-                cohort.RequestType = (DeletionArchiveRequestType) requestType.RequestType;
+                cohort.RequestType = (ObjectStatus) requestType.RequestType;
 
                 Program.MedialynxData.cohortDBAPI.Update(cohort);
 

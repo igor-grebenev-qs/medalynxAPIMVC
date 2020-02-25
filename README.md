@@ -87,11 +87,17 @@ PUT /Environments (update environment
             "request": 0,
             "status": 0
         }
-PUT /Environments/RequestType/{id}
+PUT /Environments/RequestTypeAdmin/{id}
         body for request sample :
         {
             "requestType": 20
         }
+PUT /Environments/RequestTypeUser/{id}
+        body for request sample :
+        {
+            "requestType": 20
+        }
+
 PUT /Environments/Status/{id}
         body for request sample :
         {

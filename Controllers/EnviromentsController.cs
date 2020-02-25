@@ -131,11 +131,12 @@ namespace MedalynxAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 
-        [HttpPut("Archive/{id}")]
+        [HttpPut("RequestType/{id}")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Models.Environment> Archive(string id)
+        public ActionResult<Models.Environment> UpdateRequestType(string id, RequestTypeAPI requestType)
         {
             // validate that session exists
             string sessionUserId;
@@ -143,41 +144,39 @@ namespace MedalynxAPI.Controllers
 
             Guid environmentId = Utils.ToGuid(id, false);
             if (environmentId == Guid.Empty) {
-                return BadRequest("Invalid id (" + id + ")");
+                return BadRequest("Environment id is not valid (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             Models.Environment environment = Program.MedialynxData.environmentDBAPI.Get(sid);
             if (environment == null)
             {
-                return NotFound();
+                return NotFound("Environment with id=" + sid + " not found");
             }
 
-            if (environment.Status != ObjectStatus.Default) {
-                return BadRequest("You can't archive current environment");
+            if ((int)environment.RequestType != requestType.RequestType) {
+                environment.RequestType = (RequestType) requestType.RequestType;
+
+                Program.MedialynxData.environmentDBAPI.Update(environment);
+
+                Program.MedialynxData.historyDBAPI.Add(
+                    new HistoryItem(
+                        sessionUserId,
+                        sid,
+                        this.GetType().ToString(),
+                        "Environment RequestType was updated. id: " + id
+                    )
+                );
             }
-
-            environment.Status = ObjectStatus.Archived;
-
-            Program.MedialynxData.environmentDBAPI.Update(environment);
-
-            Program.MedialynxData.historyDBAPI.Add(
-                new HistoryItem(
-                    sessionUserId,
-                    sid,
-                    this.GetType().ToString(),
-                    "Archive environment called with id: " + id
-                )
-            );
-
             return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 
-        [HttpPut("Delete/{id}")]
+        [HttpPut("Status/{id}")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Models.Environment> MarkDeleted(string id)
+        public ActionResult<Models.Environment> UpdateStatus(string id, StatusAPI status)
         {
             // validate that session exists
             string sessionUserId;
@@ -185,121 +184,38 @@ namespace MedalynxAPI.Controllers
 
             Guid environmentId = Utils.ToGuid(id, false);
             if (environmentId == Guid.Empty) {
-                return BadRequest("Invalid id (" + id + ")");
+                return BadRequest("Environment id is not valid (" + id + ")");
             }
 
             string sid = Utils.ToGuid(id, false).ToString("B");
             Models.Environment environment = Program.MedialynxData.environmentDBAPI.Get(sid);
             if (environment == null)
             {
-                return NotFound();
+                return NotFound("Environment with id=" + sid + " not found");
             }
 
-            if (environment.Status != ObjectStatus.Default) {
-                return BadRequest("You can't delete current environment");
+            if ((int)environment.Status != status.Status) {
+                environment.Status = (ObjectStatus) status.Status;
+
+                Program.MedialynxData.environmentDBAPI.Update(environment);
+
+                Program.MedialynxData.historyDBAPI.Add(
+                    new HistoryItem(
+                        sessionUserId,
+                        sid,
+                        this.GetType().ToString(),
+                        "Environment Status was updated. id: " + id
+                    )
+                );
             }
-
-            environment.Status = ObjectStatus.Deleted;
-
-            Program.MedialynxData.environmentDBAPI.Update(environment);
-
-            Program.MedialynxData.historyDBAPI.Add(
-                new HistoryItem(
-                    sessionUserId,
-                    sid,
-                    this.GetType().ToString(),
-                    "Delete (mark as deleted) environment called with id: " + id
-                )
-            );
-
-            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
-        }
-
-        [HttpPut("Approve/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Models.Environment> Approve(string id)
-        {
-            // validate that session exists
-            string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
-
-            Guid environmentId = Utils.ToGuid(id, false);
-            if (environmentId == Guid.Empty) {
-                return BadRequest("Invalid id (" + id + ")");
-            }
-
-            string sid = Utils.ToGuid(id, false).ToString("B");
-            Models.Environment environment = Program.MedialynxData.environmentDBAPI.Get(sid);
-
-            if (environment == null)
-            {
-                return NotFound();
-            }
-
-            environment.Request = RequestType.Approved;
-
-            Program.MedialynxData.environmentDBAPI.Update(environment);
-
-            Program.MedialynxData.historyDBAPI.Add(
-                new HistoryItem(
-                    sessionUserId,
-                    sid,
-                    this.GetType().ToString(),
-                    "Environment approved. id: " + id
-                )
-            );
-
-            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
-        }
-
-        [HttpPut("Reject/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Models.Environment> Reject(string id)
-        {
-            // validate that session exists
-            string sessionUserId;
-            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
-
-            Guid environmentId = Utils.ToGuid(id, false);
-            if (environmentId == Guid.Empty) {
-                return BadRequest("Invalid id (" + id + ")");
-            }
-
-            string sid = Utils.ToGuid(id, false).ToString("B");
-            Models.Environment environment = Program.MedialynxData.environmentDBAPI.Get(sid);
-
-            if (environment == null)
-            {
-                return NotFound();
-            }
-
-            environment.Request = RequestType.Rejected;
-
-            Program.MedialynxData.environmentDBAPI.Update(environment);
-
-            Program.MedialynxData.historyDBAPI.Add(
-                new HistoryItem(
-                    sessionUserId,
-                    sid,
-                    this.GetType().ToString(),
-                    "Environment rejected. id: " + id
-                )
-            );
-
             return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 
         [HttpOptions]
         [HttpOptions("AllByUser/{userId}")]
         [HttpOptions("ByUser/{userId}")]
-        [HttpOptions("Archive/{id}")]
-        [HttpOptions("Delete/{id}")]
-        [HttpOptions("Approve/{id}")]
-        [HttpOptions("Reject/{id}")]
+        [HttpOptions("RequestType/{id}")]
+        [HttpOptions("Status/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Models.Environment> Options()
         {

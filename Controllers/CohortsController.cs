@@ -315,7 +315,7 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Cohort> UpdateStatus(string id, CohortStatusAPI status)
+        public ActionResult<Cohort> UpdateStatus(string id, StatusAPI status)
         {
             // validate that session exists
             string sessionUserId;

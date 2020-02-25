@@ -87,11 +87,16 @@ PUT /Environments (update environment
             "request": 0,
             "status": 0
         }
-PUT /Environments/Archive/{id}
-PUT /Environments/Delete/{id}
-PUT /Environments/Approve/{id}
-PUT /Environments/Reject/{id}
-
+PUT /Environments/RequestType/{id}
+        body for request sample :
+        {
+            "requestType": 20
+        }
+PUT /Environments/Status/{id}
+        body for request sample :
+        {
+            "status": 20
+        }
 )
 
 ENUMS:

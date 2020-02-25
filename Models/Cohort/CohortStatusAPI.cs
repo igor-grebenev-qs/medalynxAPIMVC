@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MedalynxAPI.Models
 {
         [NotMapped]
-        public class CohortStatusAPI {
+        public class StatusAPI {
             public int Status { get; set; }
         }
 }

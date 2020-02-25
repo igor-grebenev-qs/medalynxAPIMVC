@@ -11,6 +11,7 @@ namespace MedalynxAPI.Models
         public string AnalyticalApplication { get; set; } // array of id's
         public string TypeOfConnectivity { get; set; } // guid
         public RequestType Request { get; set; }
+        public ObjectStatus RequestType { get; set; }
         public ObjectStatus Status { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdate { get; set; }

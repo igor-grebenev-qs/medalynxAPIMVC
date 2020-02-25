@@ -242,7 +242,7 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelEnvironmentTest() {
             // Fields constraints. All necessary fields listed below
-            Assert.Equal(10, typeof(MedalynxAPI.Models.Environment).GetProperties().Length);
+            Assert.Equal(11, typeof(MedalynxAPI.Models.Environment).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("Id", typeof(string)));
@@ -252,6 +252,7 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("AnalyticalApplication", typeof(string)));
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("TypeOfConnectivity", typeof(string)));
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("Request", typeof(RequestType)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("RequestType", typeof(ObjectStatus)));
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("Status", typeof(ObjectStatus)));
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("CreationDate", typeof(DateTime)));
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("LastUpdate", typeof(DateTime)));

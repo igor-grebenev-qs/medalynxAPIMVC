@@ -85,6 +85,7 @@ PUT /Environments (update environment
             "analyticalApplication": "[]",
             "typeOfConnectivity": "{2f3ff4f0-b363-40ba-990d-7b80f0df574f}",
             "request": 0,
+            "requestType": 0,
             "status": 0
         }
 PUT /Environments/RequestType/{id}

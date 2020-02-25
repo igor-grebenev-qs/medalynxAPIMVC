@@ -131,12 +131,12 @@ namespace MedalynxAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
         }
 
-        [HttpPut("RequestType/{id}")]
+        [HttpPut("Request/{id}")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Models.Environment> UpdateRequestTypeAdmin(string id, RequestTypeAPI requestType)
+        public ActionResult<Models.Environment> UpdateRequest(string id, RequestAPI request)
         {
             // validate that session exists
             string sessionUserId;
@@ -154,8 +154,48 @@ namespace MedalynxAPI.Controllers
                 return NotFound("Environment with id=" + sid + " not found");
             }
 
-            if ((int)environment.Request != requestType.RequestType) {
-                environment.Request = (RequestType) requestType.RequestType;
+            if ((int)environment.Request != request.Request) {
+                environment.Request = (RequestType) request.Request;
+
+                Program.MedialynxData.environmentDBAPI.Update(environment);
+
+                Program.MedialynxData.historyDBAPI.Add(
+                    new HistoryItem(
+                        sessionUserId,
+                        sid,
+                        this.GetType().ToString(),
+                        "Environment RequestType was updated. id: " + id
+                    )
+                );
+            }
+            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
+        }
+
+        [HttpPut("RequestType/{id}")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Models.Environment> UpdateRequestType(string id, RequestTypeAPI requestType)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
+
+            Guid environmentId = Utils.ToGuid(id, false);
+            if (environmentId == Guid.Empty) {
+                return BadRequest("Environment id is not valid (" + id + ")");
+            }
+
+            string sid = Utils.ToGuid(id, false).ToString("B");
+            Models.Environment environment = Program.MedialynxData.environmentDBAPI.Get(sid);
+            if (environment == null)
+            {
+                return NotFound("Environment with id=" + sid + " not found");
+            }
+
+            if ((int)environment.RequestType != requestType.RequestType) {
+                environment.RequestType = (ObjectStatus) requestType.RequestType;
 
                 Program.MedialynxData.environmentDBAPI.Update(environment);
 
@@ -214,6 +254,7 @@ namespace MedalynxAPI.Controllers
         [HttpOptions]
         [HttpOptions("AllByUser/{userId}")]
         [HttpOptions("ByUser/{userId}")]
+        [HttpOptions("Request/{id}")]
         [HttpOptions("RequestType/{id}")]
         [HttpOptions("Status/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

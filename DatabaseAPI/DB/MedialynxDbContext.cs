@@ -88,4 +88,12 @@ namespace MedalynxAPI
         public DbSet<Models.Project> Projects { get; set; }
     }
 
+    public class MedialynxDbTeamContext : BaseDbContext {
+        public DbSet<Models.Team> Teams { get; set; }
+    }
+
+    public class MedialynxDbTeamUserLinkContext : BaseDbContext {
+        public DbSet<Models.TeamUserLink> TeamUserLinks { get; set; }
+    }
+
 }

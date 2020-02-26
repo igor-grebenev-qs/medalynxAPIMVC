@@ -164,6 +164,43 @@ PUT
 )
 
 ----------------------------------------------------------------------------------------------------------------------
+
+TEAMS:
+GET
+    /Team
+    /Team/{id}
+    /Team/TeamUsers/{teamId}
+POST
+    /Team (create new Team item
+        body for request sample :
+        {
+            "name": "sample",
+            "details": "some description"
+        }
+)
+PUT
+    /Team/AddUser/{teamId} (add user to team
+        body for request sample :
+        {
+            "userId": "{2b605924-e75a-4eef-9ba7-c2c7fe770b29}"
+        }
+)
+    /Team/RemoveUser/{teamId} (remove user from team
+        body for request sample :
+        {
+            "userId": "{2b605924-e75a-4eef-9ba7-c2c7fe770b29}"
+        }
+)
+    /Team (update new Team item
+        body for request sample :
+        {
+            "id": "{422aa748-484c-469c-8111-6149a13d9878}"
+            "name": "sample",
+            "details": "some description"
+        }
+)
+
+----------------------------------------------------------------------------------------------------------------------
 COHORTS:
 GET
     /Cohorts

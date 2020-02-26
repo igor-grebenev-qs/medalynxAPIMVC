@@ -325,5 +325,36 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Project>("LastUpdate", typeof(DateTime)));
         }
 
+        /// <summary>
+        /// Team entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelTeamTest() {
+            // Fields constraints. All necessary fields listed below
+            Assert.Equal(5, typeof(MedalynxAPI.Models.Team).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Team>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Team>("Name", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Team>("Details", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Team>("CreationDate", typeof(DateTime)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Team>("LastUpdate", typeof(DateTime)));
+        }
+
+        /// <summary>
+        /// TeamUserLink entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelTeamUserLinkTest() {
+            // Fields constraints. All necessary fields listed below
+            Assert.Equal(4, typeof(MedalynxAPI.Models.TeamUserLink).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.TeamUserLink>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.TeamUserLink>("TeamId", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.TeamUserLink>("UserId", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.TeamUserLink>("AccessRights", typeof(string)));
+        }
+
     }
 }

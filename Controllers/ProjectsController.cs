@@ -39,7 +39,7 @@ namespace MedalynxAPI.Controllers
             List<Project> projects = Program.MedialynxData.projectDBAPI.Get(sid);
             if (projects.Count != 1)
             {
-                return NotFound("Cohort count is " + projects.Count + ". Await 1 object.");
+                return NotFound("Projects count is " + projects.Count + ". Await 1 object.");
             }
 
             return projects[0]; // projects count must equal 1
@@ -60,7 +60,7 @@ namespace MedalynxAPI.Controllers
         }
 
         /// </summary>
-        /// <param name="CohortAPI object"></param>
+        /// <param name="Project object"></param>
         /// <returns></returns>
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]

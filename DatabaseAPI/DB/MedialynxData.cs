@@ -27,6 +27,8 @@ namespace MedalynxAPI
 
         public ProjectDBAPI projectDBAPI;
 
+        public TeamDBAPI teamDBAPI;
+
         public MedialynxData () {
             // enums
             analyticalApplicationsDBAPI = new AnalyticalApplicationsDBAPI();
@@ -59,6 +61,8 @@ namespace MedalynxAPI
             medialynxDbMetadataContext = new MedialynxDbMetadataContext();
 
             projectDBAPI = new ProjectDBAPI();
+
+            teamDBAPI = new TeamDBAPI();
         }
     }
 }

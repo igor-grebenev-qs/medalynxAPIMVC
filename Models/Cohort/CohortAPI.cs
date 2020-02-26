@@ -55,7 +55,7 @@ namespace MedalynxAPI.Models.Cohort
     public class CohortAPI
     {
         public string Id { get; set; }
-        public string UserId { get; set; }
+        public string ProjectId { get; set; }
         public int NumberOfSubjectsRequired { get; set; }
         public string CohortType { get; set; }
         public RequestType RequestAdmin { get; set; }

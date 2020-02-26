@@ -74,21 +74,6 @@ namespace MedalynxAPI
             return false;
         }
 
-        public Project GetFirstByTeam(string teamId, bool notRejected = true)
-        {
-            Guid id = Utils.ToGuid(teamId);
-            using (var dbContext = new MedialynxDbProjectContext()) {
-                if (id != Guid.Empty)
-                {
-                    string sid = id.ToString("B");
-                    List<Project> projects = dbContext.Projects.Where(pr => pr != null && pr.TeamId == sid).ToList();
-                    projects.Sort(new ProjectComparer());
-                    return projects.FirstOrDefault();
-                }
-            }
-            return null;
-        }
-
         public List<Project> GetAllByTeam(string teamId)
         {
             Guid id = Utils.ToGuid(teamId);

@@ -136,7 +136,34 @@ GET
     /CohortEnums/{enumId}/values
 ----------------------------------------------------------------------------------------------------------------------
 
+PROJECTS:
+GET
+    /Projects
+    /Projects/{id}
+    /Projects/AllByTeam/{teamId}
+POST
+    /Projects (create new Project item
+        body for request sample :
+        {
+            "teamId": "{08e496a7-ea98-4619-9140-73654c8d9f92}",
+            "name": "sample project",
+            "cohortType": "unknown",
+            "access": "DEFAULT"
+        }
+)
+PUT
+    /Projects (update Project item
+        body for request sample :
+        {
+            "id": "{2b605924-e75a-4eef-9ba7-c2c7fe770b29}"
+            "teamId": "{08e496a7-ea98-4619-9140-73654c8d9f92}",
+            "name": "sample project",
+            "cohortType": "unknown",
+            "access": "DEFAULT"
+        }
+)
 
+----------------------------------------------------------------------------------------------------------------------
 COHORTS:
 GET
     /Cohorts

@@ -33,6 +33,7 @@ namespace MedalynxAPI.Controllers
             cohortRepresentation.CohortEnumLinks = Program.MedialynxData.cohortEnumLinkDBAPI.GetLinksByCohort(cohort.Id);
             return cohortRepresentation;
         }
+
         /*
         [HttpDelete("{cohortId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -75,11 +76,11 @@ namespace MedalynxAPI.Controllers
             return this.GetCohortRepresentation(cohorts[0]);
         }
 
-        [HttpGet("ByUser/{userId}")]
+        [HttpGet("ByProject/{projectId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<CohortRepresentation> GetByUserId(string userId)
+        public ActionResult<CohortRepresentation> GetByProjectId(string projectId)
         {
             // validate that session exists
             string sessionUserId;
@@ -90,8 +91,8 @@ namespace MedalynxAPI.Controllers
             this.Request.Headers.TryGetValue("Not-Rejected", out requestTypeHeaders);
             bool notRejected = requestTypeHeaders.Count > 0;
 
-            string sid = Utils.ToGuid(userId, false).ToString("B");
-            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetFirstByUser(sid, notRejected);
+            string sid = Utils.ToGuid(projectId, false).ToString("B");
+            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetFirstByProject(sid, notRejected);
             if (cohort == null)
             {
                 return NotFound();
@@ -100,18 +101,18 @@ namespace MedalynxAPI.Controllers
             return this.GetCohortRepresentation(cohort);
         }
 
-        [HttpGet("AllByUser/{userId}")]
+        [HttpGet("AllByProject/{projectId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<List<Cohort>> GetAllByUserId(string userId)
+        public ActionResult<List<Cohort>> GetAllByProjectId(string projectId)
         {
             // validate that session exists
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
-            string sid = Utils.ToGuid(userId, false).ToString("B");
-            List<Cohort> cohorts = Program.MedialynxData.cohortDBAPI.GetAllByUser(sid);
+            string sid = Utils.ToGuid(projectId, false).ToString("B");
+            List<Cohort> cohorts = Program.MedialynxData.cohortDBAPI.GetAllByProject(sid);
             if (cohorts.Count == 0)
             {
                 return NotFound();
@@ -123,7 +124,7 @@ namespace MedalynxAPI.Controllers
         /// <summary>
         /* Object sample (CohortAPI)
             {
-                "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+                "projectId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
                 "numberOfSubjectsRequired": 1,
                 "cohortType": "unknown",
                 "request": 0,
@@ -168,7 +169,7 @@ namespace MedalynxAPI.Controllers
                 }
             }
             // validate that cohort is not exists
-            Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetFirstByUser(cohortApi.UserId);
+            Cohort existsCohort = Program.MedialynxData.cohortDBAPI.GetFirstByProject(cohortApi.ProjectId);
             if (existsCohort != null) {
                 return BadRequest("Cohort already exists"); // cohort already exists. Please use update.
             }
@@ -178,7 +179,7 @@ namespace MedalynxAPI.Controllers
             // setup cohort
             Cohort cohort = new Cohort();
             cohort.Id = cohortApi.Id;
-            cohort.UserId = cohortApi.UserId;
+            cohort.ProjectId = cohortApi.ProjectId;
             cohort.NumberOfSubjectsRequired = cohortApi.NumberOfSubjectsRequired;
             cohort.CohortType = cohortApi.CohortType;
             cohort.RequestAdmin = cohortApi.RequestAdmin;
@@ -239,7 +240,7 @@ namespace MedalynxAPI.Controllers
             // setup cohort
             Cohort cohort = new Cohort();
             cohort.Id = cohortApi.Id;
-            cohort.UserId = cohortApi.UserId;
+            cohort.ProjectId = cohortApi.ProjectId;
             cohort.NumberOfSubjectsRequired = cohortApi.NumberOfSubjectsRequired;
             cohort.CohortType = cohortApi.CohortType;
             cohort.RequestAdmin = cohortApi.RequestAdmin;
@@ -352,8 +353,8 @@ namespace MedalynxAPI.Controllers
 
         [HttpOptions]
         [HttpOptions("{id}")]
-        [HttpOptions("AllByUser/{userId}")]
-        [HttpOptions("ByUser/{userId}")]
+        [HttpOptions("AllByProject/{projectId}")]
+        [HttpOptions("ByProject/{projectId}")]
         [HttpOptions("RequestType/{id}")]
         [HttpOptions("Status/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

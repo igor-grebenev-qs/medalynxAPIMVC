@@ -21,21 +21,21 @@ namespace MedalynxAPI.Controllers
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
-            return Program.MedialynxData.environmentDBAPI.GetByUser();
+            return Program.MedialynxData.environmentDBAPI.GetByProject();
         }
 
-        [HttpGet("ByUser/{userId}")]
+        [HttpGet("ByProject/{projectId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Models.Environment> GetById(string userId)
+        public ActionResult<Models.Environment> GetByProject(string projectId)
         {
             // validate that session exists
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
-            string sid = Utils.ToGuid(userId, false).ToString("B");
-            List<Models.Environment> environments = Program.MedialynxData.environmentDBAPI.GetByUser(sid);
+            string sid = Utils.ToGuid(projectId, false).ToString("B");
+            List<Models.Environment> environments = Program.MedialynxData.environmentDBAPI.GetByProject(sid);
             if (environments.Count != 1)
             {
                 return NotFound();
@@ -44,18 +44,18 @@ namespace MedalynxAPI.Controllers
             return environments[0];
         }
 
-        [HttpGet("AllByUser/{userId}")]
+        [HttpGet("AllByProject/{projectId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<List<Models.Environment>> GetAllById(string userId)
+        public ActionResult<List<Models.Environment>> GetAllByProject(string projectId)
         {
             // validate that session exists
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
-            string sid = Utils.ToGuid(userId, false).ToString("B");
-            List<Models.Environment> environments = Program.MedialynxData.environmentDBAPI.GetByUser(sid);
+            string sid = Utils.ToGuid(projectId, false).ToString("B");
+            List<Models.Environment> environments = Program.MedialynxData.environmentDBAPI.GetByProject(sid);
             if (environments.Count == 0)
             {
                 return NotFound();
@@ -100,7 +100,7 @@ namespace MedalynxAPI.Controllers
                 )
             );
 
-            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
+            return CreatedAtAction(nameof(GetByProject), new { id = environment.Id }, environment);
         }
 
         [HttpPut]
@@ -128,7 +128,7 @@ namespace MedalynxAPI.Controllers
                 )
             );
 
-            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
+            return CreatedAtAction(nameof(GetByProject), new { id = environment.Id }, environment);
         }
 
         [HttpPut("Request/{id}")]
@@ -168,7 +168,7 @@ namespace MedalynxAPI.Controllers
                     )
                 );
             }
-            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
+            return CreatedAtAction(nameof(GetByProject), new { id = environment.Id }, environment);
         }
 
         [HttpPut("RequestType/{id}")]
@@ -208,7 +208,7 @@ namespace MedalynxAPI.Controllers
                     )
                 );
             }
-            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
+            return CreatedAtAction(nameof(GetByProject), new { id = environment.Id }, environment);
         }
 
         [HttpPut("Status/{id}")]
@@ -248,12 +248,12 @@ namespace MedalynxAPI.Controllers
                     )
                 );
             }
-            return CreatedAtAction(nameof(GetById), new { id = environment.Id }, environment);
+            return CreatedAtAction(nameof(GetByProject), new { id = environment.Id }, environment);
         }
 
         [HttpOptions]
-        [HttpOptions("AllByUser/{userId}")]
-        [HttpOptions("ByUser/{userId}")]
+        [HttpOptions("AllByProject/{projectId}")]
+        [HttpOptions("ByProject/{projectId}")]
         [HttpOptions("Request/{id}")]
         [HttpOptions("RequestType/{id}")]
         [HttpOptions("Status/{id}")]

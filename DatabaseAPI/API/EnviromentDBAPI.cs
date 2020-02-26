@@ -29,15 +29,15 @@ namespace MedalynxAPI
         }
 
         // Get Environment by user
-        public List<Models.Environment> GetByUser(string userId = "{00000000-0000-0000-0000-000000000000}")
+        public List<Models.Environment> GetByProject(string projectId = "{00000000-0000-0000-0000-000000000000}")
         {
-            Guid id = Utils.ToGuid(userId);
+            Guid id = Utils.ToGuid(projectId);
             List<Models.Environment> environments = new List<Models.Environment>();
             using (var dbContext = new MedialynxDbEnvironmentsContext()) {
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    Models.Environment environment = dbContext.Environments.FirstOrDefault(environment => environment != null && environment.UserId == sid);
+                    Models.Environment environment = dbContext.Environments.FirstOrDefault(environment => environment != null && environment.ProjectId == sid);
                     environments.Add(environment);
                 }
                 else

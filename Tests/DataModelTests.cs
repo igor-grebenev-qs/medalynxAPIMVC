@@ -246,7 +246,7 @@ namespace medalynxAPI.Tests
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("Id", typeof(string)));
-            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("UserId", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("ProjectId", typeof(string)));
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("NumberOfUsers", typeof(int)));
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("DataStorage", typeof(float)));
             Assert.True(Utils.HasProperty<MedalynxAPI.Models.Environment>("AnalyticalApplication", typeof(string)));

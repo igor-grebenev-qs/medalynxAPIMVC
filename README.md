@@ -61,12 +61,12 @@ PUT /Users (update exists user. You can provide not all fields. id - reqired
 
 ENVIRONMENTS:
 GET /Environments
-GET /Environments/ByUser/{UserId}
-GET /Environments/AllByUser/{UserId}
+GET /Environments/ByProject/{projectId}
+GET /Environments/AllByProject/{projectId}
 POST /Environments (create new environment
         body for request sample:
         {
-            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+            "projectId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
             "numberOfUsers": 10,
             "dataStorage": 100,
             "analyticalApplication": "[]",
@@ -79,7 +79,7 @@ PUT /Environments (update environment
         body for request sample:
         {
             "id": "{577c9b90-8495-4ed7-9fa1-3877c64d1111}",
-            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+            "projectId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
             "numberOfUsers": 10,
             "dataStorage": 100,
             "analyticalApplication": "[]",

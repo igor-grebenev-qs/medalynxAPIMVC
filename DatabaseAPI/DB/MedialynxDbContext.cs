@@ -7,7 +7,7 @@ namespace MedalynxAPI
     public abstract class BaseDbContext : DbContext {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=35.188.34.140;UserId=root;Password=m1llions;database=medalynx_db;");
+            optionsBuilder.UseMySql("server=35.188.34.140;UserId=root;Password=m1llions;database=medalynx_db2;");
         }
     }
 
@@ -83,4 +83,9 @@ namespace MedalynxAPI
     public class MedialynxDbMetadataContext : BaseDbContext {
         public DbSet<Models.Metadata> Metadata { get; set; }
     }
+
+    public class MedialynxDbProjectContext : BaseDbContext {
+        public DbSet<Models.Project> Projects { get; set; }
+    }
+
 }

@@ -26,6 +26,13 @@ namespace MedalynxAPI
             }
         }
 
+        public Metadata GetLast()
+        {
+            using (var dbContext = new MedialynxDbMetadataContext()) {
+                return dbContext.Metadata.OrderBy(item => item.MetadataOrder).LastOrDefault();
+            }
+        }
+
         /// <summary>
         /// It's required ? I'm not sure !!!
         /// </summary>

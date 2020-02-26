@@ -75,32 +75,32 @@ namespace MedalynxAPI
             return false;
         }
 
-        public Cohort GetFirstByUser(string userId, bool notRejected = true)
+        public Cohort GetFirstByProject(string projectId, bool notRejected = true)
         {
-            Guid id = Utils.ToGuid(userId);
+            Guid id = Utils.ToGuid(projectId);
             using (var dbContext = new MedialynxDbCohortContext()) {
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
                     List<Cohort> cohorts = dbContext.Cohorts.Where(c => c != null &&
-                        c.UserId == sid &&
+                        c.ProjectId == sid &&
                         (!notRejected || (c.RequestAdmin != RequestType.Rejected || c.RequestUser != RequestType.Rejected))
                     ).ToList();
                     cohorts.Sort(new CohortComparer());
-                    return cohorts.Count > 0 ? cohorts[0] : null;
+                    return cohorts.FirstOrDefault();
                 }
             }
             return null;
         }
 
-        public List<Cohort> GetAllByUser(string userId)
+        public List<Cohort> GetAllByProject(string projectId)
         {
-            Guid id = Utils.ToGuid(userId);
+            Guid id = Utils.ToGuid(projectId);
             using (var dbContext = new MedialynxDbCohortContext()) {
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    List<Cohort> cohorts = dbContext.Cohorts.Where(c => c != null && c.UserId == sid ).ToList();
+                    List<Cohort> cohorts = dbContext.Cohorts.Where(c => c != null && c.ProjectId == sid ).ToList();
                     cohorts.Sort(new CohortComparer());
                     return cohorts;
                 }

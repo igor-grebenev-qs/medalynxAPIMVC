@@ -140,16 +140,16 @@ GET
 COHORTS:
 GET
     /Cohorts
-    /Cohorts/{id} - Alive cohort by user (CohortRepresentation)
-    /Cohorts/ByUser/{userId} - Alive cohort by user (CohortRepresentation) Not-Rejected header can be specified.
-    /Cohorts/AllByUser/{userId}
+    /Cohorts/{id} - Alive cohort by project (CohortRepresentation)
+    /Cohorts/ByProject/{projectId} - Alive cohort by project (CohortRepresentation) Not-Rejected header can be specified.
+    /Cohorts/AllByProject/{projectId}
 DELETE
     /Cohorts/{id} - Remove cohort
 POST
     /Cohorts (create new Cohort item
         body for request sample :
         {
-            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+            "projectId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
             "numberOfSubjectsRequired": 1,
             "cohortType": "unknown",
             "requestAdmin": 0,
@@ -177,7 +177,7 @@ PUT
         body for request sample :
         {
             "id": "{248b5596-9b28-43b4-b433-c45fff62921c}",
-            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+            "projectId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
             "numberOfSubjectsRequired": 1,
             "cohortType": "unknown",
             "requestAdmin": 0,

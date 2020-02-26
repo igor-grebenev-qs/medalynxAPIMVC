@@ -75,7 +75,7 @@ namespace medalynxAPI.Tests
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<Cohort>("Id", typeof(string)));
-            Assert.True(Utils.HasProperty<Cohort>("UserId", typeof(string)));
+            Assert.True(Utils.HasProperty<Cohort>("ProjectId", typeof(string)));
             Assert.True(Utils.HasProperty<Cohort>("NumberOfSubjectsRequired", typeof(int)));
             Assert.True(Utils.HasProperty<Cohort>("CohortType", typeof(string)));
             Assert.True(Utils.HasProperty<Cohort>("RequestAdmin", typeof(RequestType)));
@@ -307,6 +307,23 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<HistoryItem>("Message", typeof(string)));
             Assert.True(Utils.HasProperty<HistoryItem>("CreationDate", typeof(DateTime)));
        }
+
+        /// <summary>
+        /// Project entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelProjectTest() {
+            // Fields constraints. All necessary fields listed below
+            Assert.Equal(6, typeof(MedalynxAPI.Models.Project).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Project>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Project>("TeamId", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Project>("Name", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Project>("Access", typeof(string)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Project>("CreationDate", typeof(DateTime)));
+            Assert.True(Utils.HasProperty<MedalynxAPI.Models.Project>("LastUpdate", typeof(DateTime)));
+        }
 
     }
 }

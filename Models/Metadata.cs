@@ -2,7 +2,7 @@
 
 namespace MedalynxAPI.Models
 {
-    public class Metadata
+    public class Metadata : BaseModelEntry
     {
         public string Id { get; set; }
         public int MetadataOrder { get; set; }

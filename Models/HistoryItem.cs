@@ -2,7 +2,7 @@
 
 namespace MedalynxAPI.Models
 {
-    public class HistoryItem
+    public class HistoryItem : BaseModelEntry
     {
         public HistoryItem(){}
         public HistoryItem(string userId, string objectId, string objectType, string message){

@@ -86,4 +86,11 @@ namespace MedalynxAPI
     public class MedialynxDbMetadataContext : BaseDbContext {
         public DbSet<Models.Metadata> Metadata { get; set; }
     }
+
+    public class MedialynxDbTestTableContext : BaseDbContext {
+        public DbSet<Models.test_table> test_table { get; set; }
+    }
+    public class MedialynxDbTypeOfConnectivityContext : BaseDbContext {
+        public DbSet<Models.TypeOfConnectivity> TypeOfConnectivity { get; set; }
+    }
 }

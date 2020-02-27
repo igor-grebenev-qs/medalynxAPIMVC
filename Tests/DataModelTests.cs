@@ -6,6 +6,10 @@ using MedalynxAPI.Models.Cohort;
 using MedalynxAPI.Models.Cohort.CohortEnums;
 using MedalynxAPI.Models.Enums;
 using MedalynxAPI.Models.User;
+using MySql.Data.MySqlClient;
+using System.Reflection;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace medalynxAPI.Tests
 {
@@ -308,5 +312,51 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<HistoryItem>("CreationDate", typeof(DateTime)));
        }
 
+        /// <summary>
+        /// TypeOfConnectivity entity validation.
+        /// </summary>
+        [Fact]
+        public void PassingModelTypeOfConnectivityTest() {
+            // Fields constraints. All necessary fields listed below
+            Assert.Equal(3, typeof(TypeOfConnectivity).GetProperties().Length);
+
+            // Enumerate all exists fields
+            Assert.True(Utils.HasProperty<TypeOfConnectivity>("Id", typeof(string)));
+            Assert.True(Utils.HasProperty<TypeOfConnectivity>("Pos", typeof(int)));
+            Assert.True(Utils.HasProperty<TypeOfConnectivity>("Name", typeof(string)));
+       }
+
+        [Fact]
+        public void ValidateInformationSchema() {
+            Type parent = typeof(BaseDbContext);
+            Type[] types = Assembly.GetExecutingAssembly().GetTypes(); // Maybe select some other assembly here, depending on what you need
+            var inheritingTypes = types.Where(t => parent.IsAssignableFrom(t)).ToList();
+            List<string> dbSetNames = new List<string>();
+            foreach( var t in inheritingTypes) {
+                PropertyInfo[] props = t.GetProperties();
+                foreach (PropertyInfo pi in props) {
+                    dbSetNames.Add(pi.Name);
+                }
+            }
+
+            string schemaName = "medalynx_db";
+            string query = String.Concat("SELECT * FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_SCHEMA=\"", schemaName,"\"");
+            using (MySqlConnection connection = new MySqlConnection(BaseDbContext.ConnectionString)){
+                connection.Open();
+                using (var cmd = connection.CreateCommand()) {
+                    cmd.CommandText = query;
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var tableName = reader["TABLE_NAME"];
+                        bool modelHasDbTable = dbSetNames.Contains(tableName);
+                        if (!modelHasDbTable) {
+                            Console.WriteLine(tableName + " DbSet not exists!");
+                        }
+                        Assert.True(modelHasDbTable);
+                    }
+                }
+            }
+        }
     }
 }

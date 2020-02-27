@@ -10,6 +10,7 @@ namespace MedalynxAPI
 
         public static void Main(string[] args)
         {
+            Patches.ApplyPatches(); // Apply patches (sql)
             CreateHostBuilder(args).Build().Run();
         }
 

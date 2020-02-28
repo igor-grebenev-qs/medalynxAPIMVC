@@ -18,7 +18,7 @@ namespace MedalynxAPI
 
             using (var dbContext = new MedialynxDbTeamContext()) {
                 string sid = id.ToString("B");
-                return dbContext.Teams.FirstOrDefault(team => team != null && team.Id == sid);
+                return dbContext.Team.FirstOrDefault(team => team != null && team.Id == sid);
             }
         }
 
@@ -30,13 +30,13 @@ namespace MedalynxAPI
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    Team team = dbContext.Teams.FirstOrDefault(team => team != null && team.Id == sid);
+                    Team team = dbContext.Team.FirstOrDefault(team => team != null && team.Id == sid);
                     teams.Add(team);
                 }
                 else
                 {
                     // Add all teams
-                    teams.AddRange(dbContext.Teams);
+                    teams.AddRange(dbContext.Team);
                 }
             }
             return teams;
@@ -49,9 +49,9 @@ namespace MedalynxAPI
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    Team team = dbContext.Teams.FirstOrDefault(team => team != null && team.Id == sid);
+                    Team team = dbContext.Team.FirstOrDefault(team => team != null && team.Id == sid);
                     if (team != null) {
-                        dbContext.Teams.Remove(team);
+                        dbContext.Team.Remove(team);
                         dbContext.SaveChanges();
                     }
                     return true;
@@ -67,7 +67,7 @@ namespace MedalynxAPI
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    List<TeamUserLink> links = dbContext.TeamUserLinks.Where(link => link != null && link.TeamId == sid).ToList();
+                    List<TeamUserLink> links = dbContext.TeamUserLink.Where(link => link != null && link.TeamId == sid).ToList();
                     List<User> users = new List<User>();
                     using (var dbContextUser = new MedialynxDbUserContext()) {
                         foreach (var link in links) {
@@ -83,7 +83,7 @@ namespace MedalynxAPI
         public void Add(Team team)
         {
             using (var dbContext = new MedialynxDbTeamContext()) {
-                dbContext.Teams.Add(team);
+                dbContext.Team.Add(team);
                 dbContext.SaveChanges();
             }
         }
@@ -96,7 +96,7 @@ namespace MedalynxAPI
             link.UserId = userId;
             link.AccessRights = "DEFAULT"; // not supported yet
             using (var dbContext = new MedialynxDbTeamUserLinkContext()) {
-                dbContext.TeamUserLinks.Add(link);
+                dbContext.TeamUserLink.Add(link);
                 dbContext.SaveChanges();
             }
 
@@ -106,9 +106,9 @@ namespace MedalynxAPI
         public TeamUserLink DeleteUserFromTeam(string teamId, string userId)
         {
             using (var dbContext = new MedialynxDbTeamUserLinkContext()) {
-                TeamUserLink teamUserLink = dbContext.TeamUserLinks.FirstOrDefault(link => link.TeamId == teamId && link.UserId == userId);
+                TeamUserLink teamUserLink = dbContext.TeamUserLink.FirstOrDefault(link => link.TeamId == teamId && link.UserId == userId);
                 if (teamUserLink != null) {
-                    dbContext.TeamUserLinks.Remove(teamUserLink);
+                    dbContext.TeamUserLink.Remove(teamUserLink);
                     dbContext.SaveChanges();
                 }
                 return teamUserLink;
@@ -118,12 +118,12 @@ namespace MedalynxAPI
         public void Update(Team team)
         {
             using (var dbContext = new MedialynxDbTeamContext()) {
-                Team existsTeam = dbContext.Teams.FirstOrDefault(t => t != null && t.Id == team.Id);
+                Team existsTeam = dbContext.Team.FirstOrDefault(t => t != null && t.Id == team.Id);
                 if (existsTeam != null)
                 {
                     if (Utils.CopyPropertyValues<Team>(team, existsTeam))
                     {
-                        dbContext.Teams.Update(existsTeam);
+                        dbContext.Team.Update(existsTeam);
                         dbContext.SaveChanges();
                     }
                 }

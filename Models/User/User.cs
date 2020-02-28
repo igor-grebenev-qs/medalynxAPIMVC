@@ -2,7 +2,7 @@
 
 namespace MedalynxAPI.Models.User
 {
-    public class User
+    public class User : BaseModelEntry
     {
         public string Id { get; set; } // guid
         public string Email { get; set; }

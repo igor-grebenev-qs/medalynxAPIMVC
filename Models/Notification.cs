@@ -2,7 +2,7 @@
 
 namespace MedalynxAPI.Models
 {
-    public class Notification
+    public class Notification : BaseModelEntry
     {
         public string Id { get; set; }
         public string UserId { get; set; }

@@ -25,7 +25,7 @@ namespace MedalynxAPI
 
             using (var dbContext = new MedialynxDbProjectContext()) {
                 string sid = id.ToString("B");
-                return dbContext.Projects.FirstOrDefault(project => project != null && project.Id == sid);
+                return dbContext.Project.FirstOrDefault(project => project != null && project.Id == sid);
             }
         }
 
@@ -37,13 +37,13 @@ namespace MedalynxAPI
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    Project project = dbContext.Projects.FirstOrDefault(pr => pr != null && pr.Id == sid);
+                    Project project = dbContext.Project.FirstOrDefault(pr => pr != null && pr.Id == sid);
                     projects.Add(project);
                 }
                 else
                 {
                     // Add all project
-                    projects.AddRange(dbContext.Projects);
+                    projects.AddRange(dbContext.Project);
                 }
             }
             projects.Sort(new ProjectComparer());
@@ -57,7 +57,7 @@ namespace MedalynxAPI
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    Project project = dbContext.Projects.FirstOrDefault(pr => pr != null && pr.Id == sid);
+                    Project project = dbContext.Project.FirstOrDefault(pr => pr != null && pr.Id == sid);
                     if (project != null) {
                         // remove cogorts
                         using (var cogortsContext = new MedialynxDbCohortContext()) {
@@ -65,7 +65,7 @@ namespace MedalynxAPI
                             cogorts.ForEach(c => Program.MedialynxData.cohortDBAPI.Remove(c.Id));
                         }
                         
-                        dbContext.Projects.Remove(project);
+                        dbContext.Project.Remove(project);
                         dbContext.SaveChanges();
                     }
                     return true;
@@ -81,7 +81,7 @@ namespace MedalynxAPI
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    List<Project> projects = dbContext.Projects.Where(pr => pr != null && pr.TeamId == sid).ToList();
+                    List<Project> projects = dbContext.Project.Where(pr => pr != null && pr.TeamId == sid).ToList();
                     projects.Sort(new ProjectComparer());
                     return projects;
                 }
@@ -92,7 +92,7 @@ namespace MedalynxAPI
         public void Add(Project project)
         {
             using (var dbContext = new MedialynxDbProjectContext()) {
-                dbContext.Projects.Add(project);
+                dbContext.Project.Add(project);
                 dbContext.SaveChanges();
             }
         }
@@ -100,12 +100,12 @@ namespace MedalynxAPI
         public void Update(Project project)
         {
             using (var dbContext = new MedialynxDbProjectContext()) {
-                Project existsProject = dbContext.Projects.FirstOrDefault(pr => pr != null && pr.Id == project.Id);
+                Project existsProject = dbContext.Project.FirstOrDefault(pr => pr != null && pr.Id == project.Id);
                 if (existsProject != null)
                 {
                     if (Utils.CopyPropertyValues<Project>(project, existsProject))
                     {
-                        dbContext.Projects.Update(existsProject);
+                        dbContext.Project.Update(existsProject);
                         dbContext.SaveChanges();
                     }
                 }

@@ -2,7 +2,7 @@
 
 namespace MedalynxAPI.Models
 {
-    public class Environment
+    public class Environment : BaseModelEntry
     {
         public string Id { get; set; }
         public string ProjectId { get; set; }

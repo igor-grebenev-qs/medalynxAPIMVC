@@ -1,6 +1,6 @@
 namespace MedalynxAPI.Models.Cohort.CohortEnums
 {
-    public class GeneticMatches
+    public class GeneticMatches : BaseModelEntry
     {
         public string Id { get; set; }
         public string Chromosome { get; set; }

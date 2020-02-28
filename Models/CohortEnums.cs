@@ -2,7 +2,7 @@ using System;
 
 namespace MedalynxAPI.Models
 {
-    public class CohortEnums
+    public class CohortEnums : BaseModelEntry
     {
         public string Id { get; set; } // guid
         public string Name { get; set; } // Display name

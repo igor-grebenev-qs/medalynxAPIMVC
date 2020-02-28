@@ -5,8 +5,11 @@ using Microsoft.EntityFrameworkCore;
 namespace MedalynxAPI
 {
     public abstract class BaseDbContext : DbContext {
+        public static string SchemaName {
+            get { return "medalynx_db2"; }
+        }
         public static string ConnectionString {
-            get { return "server=35.188.34.140;UserId=root;Password=m1llions;database=medalynx_db2;"; }
+            get { return "server=35.188.34.140;UserId=root;Password=m1llions;database=" + SchemaName + ";"; }
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -88,15 +91,21 @@ namespace MedalynxAPI
     }
 
     public class MedialynxDbProjectContext : BaseDbContext {
-        public DbSet<Models.Project> Projects { get; set; }
+        public DbSet<Models.Project> Project { get; set; }
     }
 
     public class MedialynxDbTeamContext : BaseDbContext {
-        public DbSet<Models.Team> Teams { get; set; }
+        public DbSet<Models.Team> Team { get; set; }
     }
 
     public class MedialynxDbTeamUserLinkContext : BaseDbContext {
-        public DbSet<Models.TeamUserLink> TeamUserLinks { get; set; }
+        public DbSet<Models.TeamUserLink> TeamUserLink { get; set; }
     }
 
+    public class MedialynxDbTestTableContext : BaseDbContext {
+        public DbSet<Models.test_table> test_table { get; set; }
+    }
+    public class MedialynxDbTypeOfConnectivityContext : BaseDbContext {
+        public DbSet<Models.TypeOfConnectivity> TypeOfConnectivity { get; set; }
+    }
 }

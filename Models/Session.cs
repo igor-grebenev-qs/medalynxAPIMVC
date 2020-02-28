@@ -2,7 +2,7 @@
 
 namespace MedalynxAPI.Models
 {
-    public class Session
+    public class Session : BaseModelEntry
     {
         public string Id { get; set; }
         public string UserId { get; set; }

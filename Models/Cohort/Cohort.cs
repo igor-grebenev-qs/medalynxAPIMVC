@@ -3,7 +3,7 @@
 namespace MedalynxAPI.Models.Cohort
 {
     // see CohortPresentation
-    public class Cohort
+    public class Cohort : BaseModelEntry
     {
         public string Id { get; set; }
         public string ProjectId { get; set; }

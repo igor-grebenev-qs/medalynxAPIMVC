@@ -1,6 +1,6 @@
 namespace MedalynxAPI.Models.Cohort.CohortEnums
 {
-    public class Demographics
+    public class Demographics : BaseModelEntry
     {
         public string Id { get; set; }
         public float AgeFrom { get; set; }

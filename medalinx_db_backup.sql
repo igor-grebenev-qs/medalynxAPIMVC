@@ -307,6 +307,7 @@ CREATE TABLE `HistoryItems` (
 
 LOCK TABLES `HistoryItems` WRITE;
 /*!40000 ALTER TABLE `HistoryItems` DISABLE KEYS */;
+INSERT INTO `HistoryItems` VALUES ('{938a3e71-aeef-44b3-881c-8bba48059c7b}','n/a','{de35e58f-851a-4362-93fc-2fb84d7c6be0}','MedalynxAPI.Models.Metadata','Patch applied: {29d8be4e-394f-4c28-888d-cd6f5811951a}','2020-02-27 04:09:24');
 /*!40000 ALTER TABLE `HistoryItems` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,6 +359,7 @@ CREATE TABLE `Metadata` (
 
 LOCK TABLES `Metadata` WRITE;
 /*!40000 ALTER TABLE `Metadata` DISABLE KEYS */;
+INSERT INTO `Metadata` VALUES ('{de35e58f-851a-4362-93fc-2fb84d7c6be0}',1,'Patch applied: {29d8be4e-394f-4c28-888d-cd6f5811951a}','CREATE TABLE medalynx_db2.test_table ( f1 INT NOT NULL );\n\nALTER TABLE medalynx_db2.test_table ADD f2 INT NOT NULL DEFAULT 0 AFTER f1;\n','2020-02-27 04:09:23');
 /*!40000 ALTER TABLE `Metadata` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -625,6 +627,28 @@ LOCK TABLES `Users` WRITE;
 INSERT INTO `Users` VALUES ('{39c42f7e-c446-4416-b007-c40fdb5ef598}','dmitry.kochergin+demo@quantumsoft.pro','Dmitry','Kochergin','QuantumSoft',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-17 15:05:59','2020-02-17 15:05:59'),('{49fffec7-48e4-4bbf-83b8-ee85e97051c5}','test4@mail.ru','testname','test','',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-12 10:07:33','2020-02-12 10:07:33'),('{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','igor.ge@mail.ru','Igor (TEST USER)','Grebenev','Quantumsoft',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-01-30 10:15:46','2020-01-30 10:15:46'),('{57a98e8e-f5ab-4032-b647-b793b60468ff}','medalynx@gmail.com','Admin','','',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','ADMIN',0,'2020-02-05 01:57:22','2020-02-05 01:57:22'),('{756f72f3-5150-4e85-b02a-a3f0ab23e07e}','test3@mail.ru','super','user','test',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-12 10:01:21','2020-02-12 10:01:21'),('{aadc41b9-84a4-4d01-aec5-ffa982cdd1e5}','vasiliy.sokolov@quantumsoft.pro','Vasiliy','Sokolov','QuantumSoft',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-17 12:23:38','2020-02-17 12:23:38'),('{ae999fda-46fb-42ef-b238-55cbf4b21ff8}','vasiliy.sokolov+demo1@quantumsoft.pro','Vasily','Sokolov','QuantumSoft',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-17 14:54:25','2020-02-17 14:54:25'),('{b3643e06-bd3a-4429-aacb-89a52f8f7950}','antony@mail.ru','antony','antony','antony corporation',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-10 06:02:57','2020-02-10 06:02:57'),('{bde09723-429a-4d20-a0e1-ab1672936243}','test1@mail.ru','antony','antony','antony',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-12 09:59:01','2020-02-12 09:59:01'),('{bffe1e64-4c5b-435b-be7b-71585dab06fd}','testdev@mail.ru','test','dev','company',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-18 05:56:11','2020-02-18 05:56:11'),('{c2e3ff31-eeb6-40d1-9cbf-f92153dc427c}','dmitry.kochergin@quantumsoft.pro','Dmitry','Kochergin','QS',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-17 12:12:03','2020-02-17 12:12:03'),('{db909a00-49a4-4107-9066-7b02af48fd11}','vasiliy.sokolov+demo@quantumsoft.pro','Vasiliy','Sokolov','QuantumSoft',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-17 14:08:51','2020-02-17 14:08:51'),('{e38fe985-af6e-4b21-a719-547b7462afe8}','testdev2@mail.ru','test','user','company',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-18 07:19:05','2020-02-18 07:19:05'),('{e8d62dd6-59d4-4029-a1b1-248da6f933e4}','test@mail.ru','test','test','adf',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-14 07:48:51','2020-02-14 07:48:51'),('{f62a2c71-77db-4166-bad8-5ff2676ac21b}','test2@mail.ru','user','test','test',0,'{aef2cd61-a94e-0c7c-29cf-08c317991dea}','STANDARD_USER',0,'2020-02-12 10:00:16','2020-02-12 10:00:16');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `test_table`
+--
+
+DROP TABLE IF EXISTS `test_table`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `test_table` (
+  `f1` int(11) NOT NULL,
+  `f2` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test_table`
+--
+
+LOCK TABLES `test_table` WRITE;
+/*!40000 ALTER TABLE `test_table` DISABLE KEYS */;
+/*!40000 ALTER TABLE `test_table` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -635,4 +659,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-26 15:24:37
+-- Dump completed on 2020-02-28 12:18:11

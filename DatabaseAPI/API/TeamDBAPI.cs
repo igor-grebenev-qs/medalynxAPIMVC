@@ -88,13 +88,13 @@ namespace MedalynxAPI
             }
         }
 
-        public TeamUserLink AddUserToTeam(string teamId, string userId)
+        public TeamUserLink AddUserToTeam(string teamId, string userId, string accessRights = "DEFAULT")
         {
             TeamUserLink link = new TeamUserLink();
             link.Id = Guid.NewGuid().ToString("B");
             link.TeamId = teamId;
             link.UserId = userId;
-            link.AccessRights = "DEFAULT"; // not supported yet
+            link.AccessRights = accessRights;
             using (var dbContext = new MedialynxDbTeamUserLinkContext()) {
                 dbContext.TeamUserLink.Add(link);
                 dbContext.SaveChanges();

@@ -147,7 +147,7 @@ namespace MedalynxAPI.Controllers
 
             // create team
             Program.MedialynxData.teamDBAPI.Add(team);
-            Program.MedialynxData.teamDBAPI.AddUserToTeam(team.Id, teamApi.UserId);
+            Program.MedialynxData.teamDBAPI.AddUserToTeam(team.Id, teamApi.UserId, "OWNER");
             
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(

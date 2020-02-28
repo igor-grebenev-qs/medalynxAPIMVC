@@ -17,7 +17,9 @@ namespace MedalynxAPI
                 {
                     string sid = id.ToString("B");
                     Notification notification = dbContext.Notifications.FirstOrDefault(item => item != null && item.Id == sid);
-                    notifications.Add(notification);
+                    if (notification != null) {
+                        notifications.Add(notification);
+                    }
                 }
                 else
                 {

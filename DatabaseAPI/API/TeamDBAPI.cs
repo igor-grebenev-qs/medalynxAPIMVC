@@ -80,6 +80,22 @@ namespace MedalynxAPI
             return new List<User>();
         }
 
+        public User GetTeamOwner(string teamId)
+        {
+            Guid id = Utils.ToGuid(teamId);
+            using (var dbContext = new MedialynxDbTeamUserLinkContext()) {
+                if (id != Guid.Empty)
+                {
+                    string sid = id.ToString("B");
+                    TeamUserLink link = dbContext.TeamUserLink.FirstOrDefault(link => link != null && link.TeamId == sid && link.AccessRights == "OWNER");
+                    using (var dbContextUser = new MedialynxDbUserContext()) {
+                        return dbContextUser.Users.FirstOrDefault(user => user != null && user.Id == link.UserId);
+                    }
+                }
+                return null;
+            }
+        }
+
         public void Add(Team team)
         {
             using (var dbContext = new MedialynxDbTeamContext()) {

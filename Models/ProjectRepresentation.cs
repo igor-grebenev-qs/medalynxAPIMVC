@@ -15,6 +15,7 @@ namespace MedalynxAPI.Models
             this.Environments = Program.MedialynxData.environmentDBAPI.GetByProject(project.Id);
             this.Team = Program.MedialynxData.teamDBAPI.GetById(project.TeamId);
             this.Users = Program.MedialynxData.teamDBAPI.GetTeamUsers(this.Team.Id);
+            this.Owner = Program.MedialynxData.teamDBAPI.GetTeamOwner(this.Team.Id);
             this.Notification = Program.MedialynxData.notificationDBAPI.GetByProject(project.Id);
         }
 
@@ -22,6 +23,7 @@ namespace MedalynxAPI.Models
         public List<Models.Environment> Environments {get; private set;}
         public Models.Team Team {get; private set;}
         public List<Models.User.User> Users {get; private set;}
+        public Models.User.User Owner {get; private set;}
         public List<Models.Notification> Notification {get; private set;}
     }
 }

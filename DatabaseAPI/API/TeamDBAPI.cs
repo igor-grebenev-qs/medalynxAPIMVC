@@ -80,6 +80,19 @@ namespace MedalynxAPI
             return new List<User>();
         }
 
+        public int GetTeamUsersCount(string teamId)
+        {
+            Guid id = Utils.ToGuid(teamId);
+            using (var dbContext = new MedialynxDbTeamUserLinkContext()) {
+                if (id != Guid.Empty)
+                {
+                    string sid = id.ToString("B");
+                    return dbContext.TeamUserLink.Where(link => link != null && link.TeamId == sid).Count();
+                }
+            }
+            return 0;
+        }
+
         public User GetTeamOwner(string teamId)
         {
             Guid id = Utils.ToGuid(teamId);

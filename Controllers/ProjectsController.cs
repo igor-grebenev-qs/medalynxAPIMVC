@@ -16,13 +16,17 @@ namespace MedalynxAPI.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<List<Project>> GetAll()
+        public ActionResult<List<ProjectListItemRepresentation>> GetAll()
         {
             // validate that session exists
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
-
-            return Program.MedialynxData.projectDBAPI.Get();
+            List<Project> projects = Program.MedialynxData.projectDBAPI.Get();
+            List<ProjectListItemRepresentation> representations = new List<ProjectListItemRepresentation>();
+            foreach(var project in projects) {
+                representations.Add(new ProjectListItemRepresentation(project));
+            }
+            return representations;
         }
 
         [HttpGet("{id}")]

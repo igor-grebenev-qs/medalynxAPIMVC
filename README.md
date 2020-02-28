@@ -175,7 +175,8 @@ POST
         body for request sample :
         {
             "name": "sample",
-            "details": "some description"
+            "details": "some description",
+            "userId": "{214e72d0-2636-45e4-89d6-59196ed657e0}"
         }
 )
 PUT

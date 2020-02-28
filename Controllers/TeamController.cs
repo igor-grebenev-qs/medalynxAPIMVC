@@ -131,11 +131,13 @@ namespace MedalynxAPI.Controllers
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Team> Create(Team team)
+        public ActionResult<Team> Create(TeamAPI teamApi)
         {
             // validate that session exists
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
+
+            Team team = new Team(teamApi);
 
             team.Id = Guid.NewGuid().ToString("B");
 
@@ -145,6 +147,7 @@ namespace MedalynxAPI.Controllers
 
             // create team
             Program.MedialynxData.teamDBAPI.Add(team);
+            Program.MedialynxData.teamDBAPI.AddUserToTeam(team.Id, teamApi.UserId);
             
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(

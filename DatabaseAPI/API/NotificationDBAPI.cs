@@ -37,8 +37,7 @@ namespace MedalynxAPI
                 if (id != Guid.Empty)
                 {
                     string sid = id.ToString("B");
-                    Notification notification = dbContext.Notifications.FirstOrDefault(item => item != null && item.ProjectId == sid);
-                    notifications.Add(notification);
+                    notifications.AddRange(dbContext.Notifications.Where(item => item != null && item.ProjectId == sid));
                 }
             }
             return notifications;

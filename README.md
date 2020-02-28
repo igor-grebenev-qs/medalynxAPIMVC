@@ -176,7 +176,7 @@ POST
         {
             "name": "sample",
             "details": "some description",
-            "userId": "{214e72d0-2636-45e4-89d6-59196ed657e0}"
+            "userId": "{214e72d0-2636-45e4-89d6-59196ed657e0}" // owner
         }
 )
 PUT

@@ -88,7 +88,7 @@ namespace MedalynxAPI
             }
         }
 
-        public TeamUserLink AddUserToTeam(string teamId, string userId, string accessRights = "DEFAULT")
+        public TeamUserLink AddUserToTeam(string sessionUserId, string teamId, string userId, string accessRights = "DEFAULT")
         {
             TeamUserLink link = new TeamUserLink();
             link.Id = Guid.NewGuid().ToString("B");
@@ -100,6 +100,14 @@ namespace MedalynxAPI
                 dbContext.SaveChanges();
             }
 
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    link.Id,
+                    this.GetType().ToString(),
+                    "User added to team with id: " + teamId + " <- (" + request.UserId + ")"
+                )
+            );
             return link;
         }
 

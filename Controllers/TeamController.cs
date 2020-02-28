@@ -80,16 +80,8 @@ namespace MedalynxAPI.Controllers
                 return BadRequest("User id is not valid (" + request.UserId + ")");
             }
 
-            TeamUserLink link = Program.MedialynxData.teamDBAPI.AddUserToTeam(teamId, request.UserId);
+            TeamUserLink link = Program.MedialynxData.teamDBAPI.AddUserToTeam(sessionUserId, teamId, request.UserId);
 
-            Program.MedialynxData.historyDBAPI.Add(
-                new HistoryItem(
-                    sessionUserId,
-                    link.Id,
-                    this.GetType().ToString(),
-                    "User added to team with id: " + teamId + " <- (" + request.UserId + ")"
-                )
-            );
             return new ActionResult<TeamUserLink>(link);
         }
 
@@ -147,7 +139,7 @@ namespace MedalynxAPI.Controllers
 
             // create team
             Program.MedialynxData.teamDBAPI.Add(team);
-            Program.MedialynxData.teamDBAPI.AddUserToTeam(team.Id, teamApi.UserId, "OWNER");
+            Program.MedialynxData.teamDBAPI.AddUserToTeam(sessionUserId, team.Id, teamApi.UserId, "OWNER");
             
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(

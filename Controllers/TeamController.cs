@@ -119,6 +119,29 @@ namespace MedalynxAPI.Controllers
             return new ActionResult<TeamUserLink>(link);
         }
 
+        internal static Team CreateTeam(string sessionUserId, string ownerUserId, TeamAPI teamApi) {
+            Team team = new Team(teamApi);
+            team.Id = Guid.NewGuid().ToString("B");
+
+            // setup dates
+            team.CreationDate = DateTime.UtcNow;
+            team.LastUpdate = team.CreationDate;
+
+            // create team
+            Program.MedialynxData.teamDBAPI.Add(team);
+            Program.MedialynxData.teamDBAPI.AddUserToTeam(sessionUserId, team.Id, ownerUserId, "OWNER");
+            
+            Program.MedialynxData.historyDBAPI.Add(
+                new HistoryItem(
+                    sessionUserId,
+                    team.Id,
+                    typeof(TeamController).ToString(),
+                    "Create team called with data: " + JsonSerializer.Serialize(team)
+                )
+            );
+            return team;
+        }
+
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -129,26 +152,8 @@ namespace MedalynxAPI.Controllers
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
-            Team team = new Team(teamApi);
 
-            team.Id = Guid.NewGuid().ToString("B");
-
-            // setup dates
-            team.CreationDate = DateTime.UtcNow;
-            team.LastUpdate = team.CreationDate;
-
-            // create team
-            Program.MedialynxData.teamDBAPI.Add(team);
-            Program.MedialynxData.teamDBAPI.AddUserToTeam(sessionUserId, team.Id, teamApi.UserId, "OWNER");
-            
-            Program.MedialynxData.historyDBAPI.Add(
-                new HistoryItem(
-                    sessionUserId,
-                    team.Id,
-                    this.GetType().ToString(),
-                    "Create team called with data: " + JsonSerializer.Serialize(team)
-                )
-            );
+            Team team = CreateTeam(sessionUserId, teamApi.UserId, teamApi);
 
             return CreatedAtAction(nameof(GetById), new { id = team.Id }, team);
         }

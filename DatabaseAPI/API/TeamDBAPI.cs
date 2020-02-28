@@ -105,7 +105,7 @@ namespace MedalynxAPI
                     sessionUserId,
                     link.Id,
                     this.GetType().ToString(),
-                    "User added to team with id: " + teamId + " <- (" + request.UserId + ")"
+                    "User added to team with id: " + teamId + " <- (" + userId + ")"
                 )
             );
             return link;

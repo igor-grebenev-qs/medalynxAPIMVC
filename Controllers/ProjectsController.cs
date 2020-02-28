@@ -80,6 +80,13 @@ namespace MedalynxAPI.Controllers
 
             // create project
             Program.MedialynxData.projectDBAPI.Add(project);
+
+            TeamAPI teamApi = new TeamAPI(){
+                Name = "Default Team",
+                Details = "Autocreated",
+                UserId = sessionUserId
+            };
+            TeamController.CreateTeam(sessionUserId, sessionUserId, teamApi);
             
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(

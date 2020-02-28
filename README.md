@@ -145,6 +145,7 @@ POST
     /Projects (create new Project item
         body for request sample :
         {
+            "teamId": "{08e496a7-ea98-4619-9140-73654c8d9f92}",
             "name": "sample project",
             "cohortType": "unknown",
             "access": "DEFAULT"

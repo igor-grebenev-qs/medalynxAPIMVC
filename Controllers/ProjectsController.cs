@@ -66,28 +66,29 @@ namespace MedalynxAPI.Controllers
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Project> Create(ProjectAPI projectApi)
+        public ActionResult<Project> Create(Project project)
         {
             // validate that session exists
             string sessionUserId;
             if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
 
-            Project project = new Project(projectApi);
             project.Id = Guid.NewGuid().ToString("B");
 
             // setup dates
             project.CreationDate = DateTime.UtcNow;
             project.LastUpdate = project.CreationDate;
 
-            // Create team
-            TeamAPI teamApi = new TeamAPI(){
-                Name = "Default Team",
-                Details = "Autocreated",
-                UserId = sessionUserId
-            };
-            Team team = TeamController.CreateTeam(sessionUserId, sessionUserId, teamApi);
+            if (String.IsNullOrEmpty(project.TeamId)) {
+                // Create team
+                TeamAPI teamApi = new TeamAPI(){
+                    Name = "Default Team",
+                    Details = "Autocreated",
+                    UserId = sessionUserId
+                };
+                Team team = TeamController.CreateTeam(sessionUserId, sessionUserId, teamApi);
 
-            project.TeamId = team.Id;
+                project.TeamId = team.Id;
+            }
 
             // create project
             Program.MedialynxData.projectDBAPI.Add(project);

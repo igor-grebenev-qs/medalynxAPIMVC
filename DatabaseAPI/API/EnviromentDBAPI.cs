@@ -28,7 +28,7 @@ namespace MedalynxAPI
             }
         }
 
-        // Get Environment by user
+        // Get Environment by project
         public List<Models.Environment> GetByProject(string projectId = "{00000000-0000-0000-0000-000000000000}")
         {
             Guid id = Utils.ToGuid(projectId);

@@ -28,6 +28,22 @@ namespace MedalynxAPI
             return notifications;
         }
 
+        public List<Notification> GetByProject(string projectId)
+        {
+            Guid id = Utils.ToGuid(projectId);
+            List<Notification> notifications = new List<Notification>();
+
+            using (var dbContext = new MedialynxDbNotificationsContext()) {
+                if (id != Guid.Empty)
+                {
+                    string sid = id.ToString("B");
+                    Notification notification = dbContext.Notifications.FirstOrDefault(item => item != null && item.ProjectId == sid);
+                    notifications.Add(notification);
+                }
+            }
+            return notifications;
+        }
+
         public void Add(Notification notification)
         {
             using (var dbContext = new MedialynxDbNotificationsContext()) {

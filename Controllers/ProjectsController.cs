@@ -29,7 +29,7 @@ namespace MedalynxAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Project> GetById(string id)
+        public ActionResult<ProjectRepresentation> GetById(string id)
         {
             // validate that session exists
             string sessionUserId;
@@ -42,7 +42,7 @@ namespace MedalynxAPI.Controllers
                 return NotFound("Projects count is " + projects.Count + ". Await 1 object.");
             }
 
-            return projects[0]; // projects count must equal 1
+            return new ProjectRepresentation(projects[0]); // projects count must equal 1
         }
 
         [HttpGet("AllByTeam/{teamId}")]

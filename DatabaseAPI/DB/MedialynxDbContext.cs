@@ -5,8 +5,11 @@ using Microsoft.EntityFrameworkCore;
 namespace MedalynxAPI
 {
     public abstract class BaseDbContext : DbContext {
+        public static string SchemaName {
+            get { return "medalynx_db"; }
+        }
         public static string ConnectionString {
-            get { return "server=35.188.34.140;UserId=root;Password=m1llions;database=medalynx_db;"; }
+            get { return "server=35.188.34.140;UserId=root;Password=m1llions;database=" + SchemaName + ";"; }
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

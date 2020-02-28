@@ -328,6 +328,7 @@ namespace medalynxAPI.Tests
 
         [Fact]
         public void ValidateInformationSchema() {
+            Console.WriteLine("VALIDATE INFORMATION SCHEMA");
             Type parent = typeof(BaseDbContext);
             Type[] types = Assembly.GetExecutingAssembly().GetTypes(); // Maybe select some other assembly here, depending on what you need
             var inheritingTypes = types.Where(t => parent.IsAssignableFrom(t)).ToList();
@@ -339,8 +340,7 @@ namespace medalynxAPI.Tests
                 }
             }
 
-            string schemaName = "medalynx_db";
-            string query = String.Concat("SELECT * FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_SCHEMA=\"", schemaName,"\"");
+            string query = String.Concat("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA=\"", BaseDbContext.SchemaName,"\"");
             using (MySqlConnection connection = new MySqlConnection(BaseDbContext.ConnectionString)){
                 connection.Open();
                 using (var cmd = connection.CreateCommand()) {
@@ -354,6 +354,7 @@ namespace medalynxAPI.Tests
                             Console.WriteLine(tableName + " DbSet not exists!");
                         }
                         Assert.True(modelHasDbTable);
+                        Console.WriteLine(tableName + " passed");
                     }
                 }
             }

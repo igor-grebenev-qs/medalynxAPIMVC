@@ -299,11 +299,10 @@ POST /Notifications (create new notification
         body for request sample:
         {
             "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+            "projectId": "{1536d6cf-4426-4526-99b4-e95e03525381}"
             "message": "Environment request from Wendy Howard",
             "notificationType": 0,
-            "status": 0,
-            "creationDate": "2020-01-31T12:00:00",
-            "lastUpdate": "2020-01-31T12:00:00"
+            "status": 0
         }
 )
 PUT /Notifications (update notification
@@ -311,11 +310,10 @@ PUT /Notifications (update notification
         {
             "id": "{8a299213-b198-459b-b8d8-e7829f6e4677}",
             "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
+            "projectId": "{1536d6cf-4426-4526-99b4-e95e03525381}"
             "message": "Environment request from Wendy Howard",
             "notificationType": 0,
-            "status": 0,
-            "creationDate": "2020-01-31T12:00:00",
-            "lastUpdate": "2020-01-31T12:00:00"
+            "status": 0
         }
 )
 

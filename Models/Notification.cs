@@ -6,6 +6,7 @@ namespace MedalynxAPI.Models
     {
         public string Id { get; set; }
         public string UserId { get; set; }
+        public string ProjectId { get; set; }
         public string Message { get; set; }
         public int NotificationType { get; set; }
         public NotificationStatus Status { get; set; }

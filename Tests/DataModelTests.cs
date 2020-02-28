@@ -268,11 +268,12 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelNotificationTest() {
             // Fields constraints. All necessary fields listed below
-            Assert.Equal(7, typeof(Notification).GetProperties().Length);
+            Assert.Equal(8, typeof(Notification).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<Notification>("Id", typeof(string)));
             Assert.True(Utils.HasProperty<Notification>("UserId", typeof(string)));
+            Assert.True(Utils.HasProperty<Notification>("ProjectId", typeof(string)));
             Assert.True(Utils.HasProperty<Notification>("Message", typeof(string)));
             Assert.True(Utils.HasProperty<Notification>("NotificationType", typeof(int)));
             Assert.True(Utils.HasProperty<Notification>("Status", typeof(NotificationStatus)));

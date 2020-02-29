@@ -375,7 +375,29 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<TypeOfConnectivity>("Id", typeof(string)));
             Assert.True(Utils.HasProperty<TypeOfConnectivity>("Pos", typeof(int)));
             Assert.True(Utils.HasProperty<TypeOfConnectivity>("Name", typeof(string)));
-       }
+        }
+
+        private bool CheckColumnsArePresentInType(string tableName, Type type) {
+            string query = String.Concat("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=\"", BaseDbContext.SchemaName, "\" AND ", "TABLE_NAME = '" + tableName + "';");
+            using (MySqlConnection connection = new MySqlConnection(BaseDbContext.ConnectionString)){
+                connection.Open();
+                using (var cmd = connection.CreateCommand()) {
+                    cmd.CommandText = query;
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        string columnName = (string) reader["COLUMN_NAME"];
+                        var tp = type.GetProperties();
+                        bool hasColumn = type.GetProperty(columnName) != null;
+                        if (!hasColumn) {
+                            Console.WriteLine("            > ERROR: column " + columnName + " not present in type " + type.FullName);
+                        }
+                        Assert.True(hasColumn);
+                        Console.WriteLine("            > column " + columnName + " passed");
+                    }
+                }
+            }
+            return true;
+        }
 
         [Fact]
         public void ValidateInformationSchema() {
@@ -383,12 +405,12 @@ namespace medalynxAPI.Tests
             Type parent = typeof(BaseDbContext);
             Type[] types = Assembly.GetExecutingAssembly().GetTypes(); // Maybe select some other assembly here, depending on what you need
             var inheritingTypes = types.Where(t => t.BaseType == parent).ToList();
-            List<string> dbSetNames = new List<string>();
+            Dictionary<string, Type> dbSetNames = new Dictionary<string, Type>();
             foreach( var t in inheritingTypes) {
                 PropertyInfo[] props = t.GetProperties();
                 foreach (PropertyInfo pi in props) {
                     if (pi.DeclaringType == t) { // own only
-                        dbSetNames.Add(pi.Name);
+                        dbSetNames[pi.Name] = pi.PropertyType.GenericTypeArguments[0];
                     }
                 }
             }
@@ -402,13 +424,16 @@ namespace medalynxAPI.Tests
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        var tableName = reader["TABLE_NAME"];
-                        bool modelHasDbTable = dbSetNames.Contains(tableName);
+                        string tableName = (string) reader["TABLE_NAME"];
+                        bool modelHasDbTable = dbSetNames.Keys.Contains(tableName);
                         if (!modelHasDbTable) {
                             Console.WriteLine(tableName + " DbSet not exists!");
                         }
                         Assert.True(modelHasDbTable);
-                        Console.WriteLine(tableName + " passed");
+
+                        CheckColumnsArePresentInType(tableName, dbSetNames[tableName]);
+
+                        Console.WriteLine(tableName + " passed (" + dbSetNames[tableName] + ")");
                     }
                 }
             }

@@ -47,32 +47,36 @@ namespace MedalynxAPI
                 // Execute patch query
                 using (MySqlConnection connection = new MySqlConnection(BaseDbContext.ConnectionString)){
                     connection.Open();
+                    // An unhandled exception of type 'System.InvalidOperationException' occurred in MedalynxAPI.dll: 'The transaction associated with this command is not the connection's active ...
+                    // using (var sqlTxn = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+                    // { ... sqlTxn.Commit();}
                     using (var cmd = connection.CreateCommand()) {
                         cmd.CommandText = scriptBody;
                         cmd.ExecuteNonQuery();
                     }
+
+                    // Save metadata object
+                    Metadata md = new Metadata();
+                    md.Id = Guid.NewGuid().ToString("B");
+                    md.MetadataOrder = metadataOrder;
+                    md.Comment = "Patch applied: " + patchId;
+                    md.Data = scriptBody;
+                    md.CreationDate = DateTime.UtcNow;
+                    
+                    dbContext.Metadata.Add(md);
+                    dbContext.SaveChanges();
+
+                    // Add history log
+                    Program.MedialynxData.historyDBAPI.Add(
+                        new HistoryItem(
+                            "n/a",
+                            md.Id,
+                            typeof(Metadata).ToString(),
+                            "Patch applied: " + patchId
+                        )
+                    );
+
                 }
-
-                // Save metadata object
-                Metadata md = new Metadata();
-                md.Id = Guid.NewGuid().ToString("B");
-                md.MetadataOrder = metadataOrder;
-                md.Comment = "Patch applied: " + patchId;
-                md.Data = scriptBody;
-                md.CreationDate = DateTime.UtcNow;
-                
-                dbContext.Metadata.Add(md);
-                dbContext.SaveChanges();
-
-                // Add history log
-                Program.MedialynxData.historyDBAPI.Add(
-                    new HistoryItem(
-                        "n/a",
-                        md.Id,
-                        typeof(Metadata).ToString(),
-                        "Patch applied: " + patchId
-                    )
-                );
             }
         }
     }

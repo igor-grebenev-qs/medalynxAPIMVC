@@ -102,9 +102,6 @@ namespace MedalynxAPI
         public DbSet<Models.TeamUserLink> TeamUserLink { get; set; }
     }
 
-    public class MedialynxDbTestTableContext : BaseDbContext {
-        public DbSet<Models.test_table> test_table { get; set; }
-    }
     public class MedialynxDbTypeOfConnectivityContext : BaseDbContext {
         public DbSet<Models.TypeOfConnectivity> TypeOfConnectivity { get; set; }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Transactions;
 using MedalynxAPI.Models;
 
 using MySql.Data.MySqlClient;
@@ -43,13 +44,14 @@ namespace MedalynxAPI
         }
 
         private static void ApplySinglePatch(int metadataOrder, string patchId, string scriptBody) {
-            using (var dbContext = new MedialynxDbMetadataContext()) {
+            //using (var scope = new TransactionScope(TransactionScopeOption.Required)) {
                 // Execute patch query
                 using (MySqlConnection connection = new MySqlConnection(BaseDbContext.ConnectionString)){
                     connection.Open();
                     // An unhandled exception of type 'System.InvalidOperationException' occurred in MedalynxAPI.dll: 'The transaction associated with this command is not the connection's active ...
                     // using (var sqlTxn = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
                     // { ... sqlTxn.Commit();}
+                    // see https://docs.microsoft.com/ru-ru/ef/ef6/saving/transactions
                     using (var cmd = connection.CreateCommand()) {
                         cmd.CommandText = scriptBody;
                         cmd.ExecuteNonQuery();
@@ -62,9 +64,10 @@ namespace MedalynxAPI
                     md.Comment = "Patch applied: " + patchId;
                     md.Data = scriptBody;
                     md.CreationDate = DateTime.UtcNow;
-                    
-                    dbContext.Metadata.Add(md);
-                    dbContext.SaveChanges();
+                    using (var dbContext = new MedialynxDbMetadataContext()) {
+                        dbContext.Metadata.Add(md);
+                        dbContext.SaveChanges();
+                    }
 
                     // Add history log
                     Program.MedialynxData.historyDBAPI.Add(
@@ -75,9 +78,10 @@ namespace MedalynxAPI
                             "Patch applied: " + patchId
                         )
                     );
-
+                    Console.WriteLine("Patch  " + patchId + " applied!");
                 }
-            }
+                //scope.Complete();
+            //}
         }
     }
 }

@@ -81,16 +81,15 @@ namespace MedalynxAPI.Controllers
             }
             Program.MedialynxData.environmentDBAPI.Add(environment);
 
-            Notification notification = new Notification();
-            notification.Id = Guid.NewGuid().ToString("B");
-            notification.UserId = sessionUserId;
-            notification.ProjectId = environment.ProjectId;
-            notification.Message = "Environment created";
-            notification.NotificationType = 1;
-            notification.Status = NotificationStatus.Created;
-            notification.CreationDate = DateTime.UtcNow;
-            notification.LastUpdate = notification.CreationDate;
-            Program.MedialynxData.notificationDBAPI.Add(notification);
+            Program.MedialynxData.notificationDBAPI.Add(
+                sessionUserId,
+                environment.ProjectId,
+                "Environment created",
+                NotificationType.Environment,
+                ObjectStatus.Undefined,
+                ObjectStatus.Undefined,
+                RequestType.Created
+            );
 
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
@@ -160,6 +159,16 @@ namespace MedalynxAPI.Controllers
 
                 Program.MedialynxData.environmentDBAPI.Update(environment);
 
+                Program.MedialynxData.notificationDBAPI.Add(
+                    sessionUserId,
+                    environment.ProjectId,
+                    "Environment request changed",
+                    NotificationType.Environment,
+                    ObjectStatus.Undefined,
+                    ObjectStatus.Undefined,
+                    environment.Request
+                );
+
                 Program.MedialynxData.historyDBAPI.Add(
                     new HistoryItem(
                         sessionUserId,
@@ -200,6 +209,16 @@ namespace MedalynxAPI.Controllers
 
                 Program.MedialynxData.environmentDBAPI.Update(environment);
 
+                Program.MedialynxData.notificationDBAPI.Add(
+                    sessionUserId,
+                    environment.ProjectId,
+                    "Environment request type changed",
+                    NotificationType.Environment,
+                    ObjectStatus.Undefined,
+                    environment.RequestType,
+                    RequestType.Undefined
+                );
+
                 Program.MedialynxData.historyDBAPI.Add(
                     new HistoryItem(
                         sessionUserId,
@@ -239,6 +258,16 @@ namespace MedalynxAPI.Controllers
                 environment.Status = (ObjectStatus) status.Status;
 
                 Program.MedialynxData.environmentDBAPI.Update(environment);
+
+                Program.MedialynxData.notificationDBAPI.Add(
+                    sessionUserId,
+                    environment.ProjectId,
+                    "Environment status changed",
+                    NotificationType.Environment,
+                    environment.Status,
+                    ObjectStatus.Undefined,
+                    RequestType.Undefined
+                );
 
                 Program.MedialynxData.historyDBAPI.Add(
                     new HistoryItem(

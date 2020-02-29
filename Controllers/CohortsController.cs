@@ -121,33 +121,6 @@ namespace MedalynxAPI.Controllers
             return cohorts;
         }
 
-        /// <summary>
-        /* Object sample (CohortAPI)
-            {
-                "projectId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
-                "numberOfSubjectsRequired": 1,
-                "cohortType": "unknown",
-                "request": 0,
-                "cohortEnumLinks": [
-                    {
-                        "cohortEnumId": "{cc77ecca-8279-4c9d-b321-064ba492ba9e}",
-                        "enumItemId": null,
-                        "include": 0,
-                        "percentage": 0,
-                        "numberOfSubjects": 0,
-                        "enumItem":
-                            {
-                                "stageOfTumour": 3,
-                                "numberOfNodesAffected": 6,
-                                "numberOfMetastasis": 6
-                            }
-                    }
-                ]
-            }
-        */
-        /// </summary>
-        /// <param name="CohortAPI object"></param>
-        /// <returns></returns>
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -191,6 +164,16 @@ namespace MedalynxAPI.Controllers
             // create cohort links (necessary enum items will be created with link)
             Program.MedialynxData.cohortEnumLinkDBAPI.CreateLinks(cohort.Id, cohortApi.cohortEnumLinks);
 
+            Program.MedialynxData.notificationDBAPI.Add(
+                sessionUserId,
+                cohortApi.ProjectId,
+                "Cohort created",
+                NotificationType.Cohort,
+                ObjectStatus.Undefined,
+                ObjectStatus.Undefined,
+                RequestType.Created
+            );
+
             Program.MedialynxData.historyDBAPI.Add(
                 new HistoryItem(
                     sessionUserId,
@@ -207,17 +190,6 @@ namespace MedalynxAPI.Controllers
             {
                 return NotFound();
             }
-
-            Notification notification = new Notification();
-            notification.Id = Guid.NewGuid().ToString("B");
-            notification.UserId = sessionUserId;
-            notification.ProjectId = cohortApi.ProjectId;
-            notification.Message = "Cohort created";
-            notification.NotificationType = 0;
-            notification.Status = NotificationStatus.Created;
-            notification.CreationDate = DateTime.UtcNow;
-            notification.LastUpdate = notification.CreationDate;
-            Program.MedialynxData.notificationDBAPI.Add(notification);
 
             return this.GetCohortRepresentation(cohorts[0]);
         }
@@ -300,6 +272,16 @@ namespace MedalynxAPI.Controllers
 
                 Program.MedialynxData.cohortDBAPI.Update(cohort);
 
+                Program.MedialynxData.notificationDBAPI.Add(
+                    sessionUserId,
+                    cohort.ProjectId,
+                    "Cohort request type changed",
+                    NotificationType.Cohort,
+                    ObjectStatus.Undefined,
+                    cohort.RequestType,
+                    RequestType.Undefined
+                );
+
                 Program.MedialynxData.historyDBAPI.Add(
                     new HistoryItem(
                         sessionUserId,
@@ -309,6 +291,7 @@ namespace MedalynxAPI.Controllers
                     )
                 );
             }
+
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }
 
@@ -339,6 +322,16 @@ namespace MedalynxAPI.Controllers
                 cohort.Status = (ObjectStatus) status.Status;
 
                 Program.MedialynxData.cohortDBAPI.Update(cohort);
+
+                Program.MedialynxData.notificationDBAPI.Add(
+                    sessionUserId,
+                    cohort.ProjectId,
+                    "Cohort status changed",
+                    NotificationType.Cohort,
+                    cohort.Status,
+                    ObjectStatus.Undefined,
+                    RequestType.Undefined
+                );
 
                 Program.MedialynxData.historyDBAPI.Add(
                     new HistoryItem(

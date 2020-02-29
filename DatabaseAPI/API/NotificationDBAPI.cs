@@ -53,6 +53,34 @@ namespace MedalynxAPI
             }
         }
 
+        public void Add(
+            string sessionUserId,
+            string projectId,
+            string message,
+            NotificationType notificationType,
+            ObjectStatus status,
+            ObjectStatus requestType,
+            RequestType request)
+        {
+            Notification notification = new Notification();
+            notification.Id = Guid.NewGuid().ToString("B");
+            notification.UserId = sessionUserId;
+            notification.ProjectId = projectId;
+            notification.Message = message;
+            notification.NotificationType = notificationType;
+            notification.Status = status;
+            notification.RequestType = requestType;
+
+            notification.CreationDate = DateTime.UtcNow;
+            notification.LastUpdate = notification.CreationDate;
+
+            using (var dbContext = new MedialynxDbNotificationsContext()) {
+                dbContext.Notifications.Add(notification);
+                dbContext.SaveChanges();
+            }
+        }
+
+
         public void Update(Notification notification)
         {
             using (var dbContext = new MedialynxDbNotificationsContext()) {

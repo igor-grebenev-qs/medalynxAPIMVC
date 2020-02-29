@@ -268,15 +268,18 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelNotificationTest() {
             // Fields constraints. All necessary fields listed below
-            Assert.Equal(8, typeof(Notification).GetProperties().Length);
+            Assert.Equal(11, typeof(Notification).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<Notification>("Id", typeof(string)));
             Assert.True(Utils.HasProperty<Notification>("UserId", typeof(string)));
             Assert.True(Utils.HasProperty<Notification>("ProjectId", typeof(string)));
             Assert.True(Utils.HasProperty<Notification>("Message", typeof(string)));
-            Assert.True(Utils.HasProperty<Notification>("NotificationType", typeof(int)));
-            Assert.True(Utils.HasProperty<Notification>("Status", typeof(NotificationStatus)));
+            Assert.True(Utils.HasProperty<Notification>("NotificationType", typeof(NotificationType)));
+            Assert.True(Utils.HasProperty<Notification>("Status", typeof(ObjectStatus)));
+            Assert.True(Utils.HasProperty<Notification>("RequestType", typeof(ObjectStatus)));
+            Assert.True(Utils.HasProperty<Notification>("Request", typeof(RequestType)));
+            Assert.True(Utils.HasProperty<Notification>("Processing", typeof(int)));
             Assert.True(Utils.HasProperty<Notification>("CreationDate", typeof(DateTime)));
             Assert.True(Utils.HasProperty<Notification>("LastUpdate", typeof(DateTime)));
         }
@@ -379,15 +382,18 @@ namespace medalynxAPI.Tests
             Console.WriteLine("VALIDATE INFORMATION SCHEMA");
             Type parent = typeof(BaseDbContext);
             Type[] types = Assembly.GetExecutingAssembly().GetTypes(); // Maybe select some other assembly here, depending on what you need
-            var inheritingTypes = types.Where(t => parent.IsAssignableFrom(t)).ToList();
+            var inheritingTypes = types.Where(t => t.BaseType == parent).ToList();
             List<string> dbSetNames = new List<string>();
             foreach( var t in inheritingTypes) {
                 PropertyInfo[] props = t.GetProperties();
                 foreach (PropertyInfo pi in props) {
-                    dbSetNames.Add(pi.Name);
+                    if (pi.DeclaringType == t) { // own only
+                        dbSetNames.Add(pi.Name);
+                    }
                 }
             }
 
+            // validate that tables exists
             string query = String.Concat("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA=\"", BaseDbContext.SchemaName,"\"");
             using (MySqlConnection connection = new MySqlConnection(BaseDbContext.ConnectionString)){
                 connection.Open();

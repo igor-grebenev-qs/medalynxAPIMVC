@@ -8,8 +8,11 @@ namespace MedalynxAPI.Models
         public string UserId { get; set; }
         public string ProjectId { get; set; }
         public string Message { get; set; }
-        public int NotificationType { get; set; }
-        public NotificationStatus Status { get; set; }
+        public NotificationType NotificationType { get; set; }
+        public ObjectStatus Status { get; set; }
+        public ObjectStatus RequestType { get; set; }
+        public RequestType Request { get; set; }
+        public int Processing { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdate { get; set; }
     }

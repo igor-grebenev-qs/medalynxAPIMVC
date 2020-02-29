@@ -16,7 +16,7 @@ namespace MedalynxAPI
             optionsBuilder.UseMySql(BaseDbContext.ConnectionString);
         }
     }
-
+    /*
     public abstract class MedialynxDbBaseContext : BaseDbContext {
 
         public MedialynxDbBaseContext()
@@ -24,7 +24,7 @@ namespace MedalynxAPI
             Database.EnsureCreated();
         }
     }
-
+    */
     public class MedialynxDbUserContext : BaseDbContext {
         public DbSet<User> Users { get; set; }
     }

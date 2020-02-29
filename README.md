@@ -295,28 +295,10 @@ PUT
 NOTIFICATIONS:
 GET /Notifications
 GET /Notifications/{id}
-POST /Notifications (create new notification
-        body for request sample:
-        {
-            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
-            "projectId": "{1536d6cf-4426-4526-99b4-e95e03525381}"
-            "message": "Environment request from Wendy Howard",
-            "notificationType": 0,
-            "status": 0
-        }
-)
-PUT /Notifications (update notification
-        body for request sample:
-        {
-            "id": "{8a299213-b198-459b-b8d8-e7829f6e4677}",
-            "userId": "{5d6c9b90-8495-4ed7-9fa1-e88cc64d3524}",
-            "projectId": "{1536d6cf-4426-4526-99b4-e95e03525381}"
-            "message": "Environment request from Wendy Howard",
-            "notificationType": 0,
-            "status": 0
-        }
-)
+GET /Notifications/ByProject/{projectId}
+PUT /Notifications/Processed/{id} - mark as read
 
+----------------------------------------------------------------------------------------------------------------------
 MESSAGES:
 GET /Messages
 GET /Messages/{userId}

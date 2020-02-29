@@ -307,7 +307,7 @@ CREATE TABLE `HistoryItems` (
 
 LOCK TABLES `HistoryItems` WRITE;
 /*!40000 ALTER TABLE `HistoryItems` DISABLE KEYS */;
-INSERT INTO `HistoryItems` VALUES ('{938a3e71-aeef-44b3-881c-8bba48059c7b}','n/a','{de35e58f-851a-4362-93fc-2fb84d7c6be0}','MedalynxAPI.Models.Metadata','Patch applied: {29d8be4e-394f-4c28-888d-cd6f5811951a}','2020-02-27 04:09:24');
+INSERT INTO `HistoryItems` VALUES ('{00f826bb-d6a1-44e5-82ba-68a24c9d6957}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','{2a681a36-d2ec-41c0-a45a-a6028b1d4048}','MedalynxAPI.Controllers.TeamController','Create team called with data: {\"Id\":\"{2a681a36-d2ec-41c0-a45a-a6028b1d4048}\",\"Name\":\"Default Team\",\"Details\":\"Autocreated\",\"CreationDate\":\"2020-02-28T08:23:19.0475217Z\",\"LastUpdate\":\"2020-02-28T08:23:19.0475217Z\"}','2020-02-28 08:23:22'),('{19315e74-cc75-4d85-a4cb-ff7d055ddfe8}','{57a98e8e-f5ab-4032-b647-b793b60468ff}','{9ae3dfe4-ae85-410d-8696-9427650d100a}','MedalynxAPI.Controllers.ProjectsController','Create project called with data: {\"Id\":\"{9ae3dfe4-ae85-410d-8696-9427650d100a}\",\"TeamId\":\"{8fe5eedf-47ee-44a8-918e-dc6d38a92dac}\",\"Name\":\"sample\",\"Access\":null,\"CreationDate\":\"2020-02-28T08:30:30.5191485Z\",\"LastUpdate\":\"2020-02-28T08:30:30.5191485Z\"}','2020-02-28 08:30:35'),('{4d2cb714-cd6e-48d9-9d11-8ff834535783}','n/a','{78c537fc-f0cb-4944-985d-62b3110a8f33}','MedalynxAPI.Models.Metadata','Patch applied: {29db4fa0-461a-425e-83fe-74889094adf8}','2020-02-29 02:56:53'),('{5586515d-0db6-4f70-98c3-2388e39eaa6c}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','{58b39ac1-9ddb-4f3f-b990-141c4d2b8a76}','MedalynxAPI.Controllers.TeamController','Create team called with data: {\"Id\":\"{58b39ac1-9ddb-4f3f-b990-141c4d2b8a76}\",\"Name\":\"Default Team\",\"Details\":\"Autocreated\",\"CreationDate\":\"2020-02-28T08:29:02.7022156Z\",\"LastUpdate\":\"2020-02-28T08:29:02.7022156Z\"}','2020-02-28 08:29:05'),('{585ae069-b5d7-4e67-adb6-7aaf4dae1036}','{57a98e8e-f5ab-4032-b647-b793b60468ff}','{5bdc8892-14b5-42e2-9930-3cda1c5890ca}','MedalynxAPI.TeamDBAPI','User added to team with id: {8fe5eedf-47ee-44a8-918e-dc6d38a92dac} <- ({57a98e8e-f5ab-4032-b647-b793b60468ff})','2020-02-28 08:30:32'),('{734979ed-2630-497e-8699-b103d4fee337}','n/a','{3e97303c-1dda-4f2b-a2dd-f3b101f573c0}','MedalynxAPI.Models.Metadata','Patch applied: {8707c7bf-9748-4634-bb0a-af151c6fd399}','2020-02-29 04:56:18'),('{7ba41368-8371-45fd-b265-85f059c13828}','{57a98e8e-f5ab-4032-b647-b793b60468ff}','{8fe5eedf-47ee-44a8-918e-dc6d38a92dac}','MedalynxAPI.Controllers.TeamController','Create team called with data: {\"Id\":\"{8fe5eedf-47ee-44a8-918e-dc6d38a92dac}\",\"Name\":\"Default Team\",\"Details\":\"Autocreated\",\"CreationDate\":\"2020-02-28T08:30:30.5208189Z\",\"LastUpdate\":\"2020-02-28T08:30:30.5208189Z\"}','2020-02-28 08:30:33'),('{8bfef667-e778-429b-9f59-aaaf2d844d53}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','{5e97aff4-a95c-4df4-8621-6b15841fe2bf}','MedalynxAPI.TeamDBAPI','User added to team with id: {58b39ac1-9ddb-4f3f-b990-141c4d2b8a76} <- ({574e9d57-24fa-4a65-b1dd-ff7b742d18f2})','2020-02-28 08:29:04'),('{938a3e71-aeef-44b3-881c-8bba48059c7b}','n/a','{de35e58f-851a-4362-93fc-2fb84d7c6be0}','MedalynxAPI.Models.Metadata','Patch applied: {29d8be4e-394f-4c28-888d-cd6f5811951a}','2020-02-27 04:09:24'),('{b42f1a99-fa33-48c6-87c3-43c46d37d71a}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','{66de9822-78a3-460f-abb3-39e27ec8fb9c}','MedalynxAPI.Controllers.ProjectsController','Create project called with data: {\"Id\":\"{66de9822-78a3-460f-abb3-39e27ec8fb9c}\",\"TeamId\":\"{58b39ac1-9ddb-4f3f-b990-141c4d2b8a76}\",\"Name\":\"sample project\",\"Access\":\"DEFAULT\",\"CreationDate\":\"2020-02-28T08:29:02.7011054Z\",\"LastUpdate\":\"2020-02-28T08:29:02.7011054Z\"}','2020-02-28 08:29:07'),('{b9771cb1-5aec-47c3-a387-5b2ed20e0a6c}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','{c90f5f74-0871-4cd8-8c0a-38d4458a0fce}','MedalynxAPI.TeamDBAPI','User added to team with id: {2a681a36-d2ec-41c0-a45a-a6028b1d4048} <- ({574e9d57-24fa-4a65-b1dd-ff7b742d18f2})','2020-02-28 08:23:21'),('{c6616e05-1ae3-414c-81b1-102a2ee6e44e}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','{e1838fc5-fe88-493a-b2ef-f25cba63cc77}','MedalynxAPI.Controllers.ProjectsController','Create project called with data: {\"Id\":\"{e1838fc5-fe88-493a-b2ef-f25cba63cc77}\",\"TeamId\":\"{2a681a36-d2ec-41c0-a45a-a6028b1d4048}\",\"Name\":\"sample project\",\"Access\":\"DEFAULT\",\"CreationDate\":\"2020-02-28T08:23:19.0458983Z\",\"LastUpdate\":\"2020-02-28T08:23:19.0458983Z\"}','2020-02-28 08:23:23'),('{ed277850-ada1-452b-a47a-7e38f360268a}','n/a','{a42e9c5e-cd79-4b45-b513-7192c7e8d740}','MedalynxAPI.Models.Metadata','Patch applied: {c1ccca5f-00df-4d63-ba38-e55b1ba94dfa}','2020-02-29 04:01:10');
 /*!40000 ALTER TABLE `HistoryItems` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,7 +359,7 @@ CREATE TABLE `Metadata` (
 
 LOCK TABLES `Metadata` WRITE;
 /*!40000 ALTER TABLE `Metadata` DISABLE KEYS */;
-INSERT INTO `Metadata` VALUES ('{de35e58f-851a-4362-93fc-2fb84d7c6be0}',1,'Patch applied: {29d8be4e-394f-4c28-888d-cd6f5811951a}','CREATE TABLE medalynx_db2.test_table ( f1 INT NOT NULL );\n\nALTER TABLE medalynx_db2.test_table ADD f2 INT NOT NULL DEFAULT 0 AFTER f1;\n','2020-02-27 04:09:23');
+INSERT INTO `Metadata` VALUES ('{3e97303c-1dda-4f2b-a2dd-f3b101f573c0}',4,'Patch applied: {8707c7bf-9748-4634-bb0a-af151c6fd399}','ALTER TABLE `medalynx_db2`.`Notifications` \nADD COLUMN `Request` INT NULL DEFAULT 0 AFTER `Processing`,\nCHANGE COLUMN `Status` `Status` INT(11) NULL DEFAULT 0 COMMENT \'Created = 0, Read = 1, Cancelld = 2\\\\n\' ;','2020-02-29 04:56:17'),('{78c537fc-f0cb-4944-985d-62b3110a8f33}',2,'Patch applied: {29db4fa0-461a-425e-83fe-74889094adf8}','ALTER TABLE `medalynx_db2`.`Notifications` \n\nADD COLUMN `Processing` INT NULL DEFAULT 0 AFTER `Status`;','2020-02-29 02:56:51'),('{a42e9c5e-cd79-4b45-b513-7192c7e8d740}',3,'Patch applied: {c1ccca5f-00df-4d63-ba38-e55b1ba94dfa}','ALTER TABLE `medalynx_db2`.`Notifications` \n\nADD COLUMN `RequestType` INT NULL DEFAULT 0 AFTER `Status`;','2020-02-29 04:01:09'),('{de35e58f-851a-4362-93fc-2fb84d7c6be0}',1,'Patch applied: {29d8be4e-394f-4c28-888d-cd6f5811951a}','CREATE TABLE medalynx_db2.test_table ( f1 INT NOT NULL );\n\nALTER TABLE medalynx_db2.test_table ADD f2 INT NOT NULL DEFAULT 0 AFTER f1;\n','2020-02-27 04:09:23');
 /*!40000 ALTER TABLE `Metadata` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,9 +373,13 @@ DROP TABLE IF EXISTS `Notifications`;
 CREATE TABLE `Notifications` (
   `Id` varchar(38) NOT NULL,
   `UserId` varchar(38) DEFAULT NULL,
+  `ProjectId` varchar(38) NOT NULL,
   `Message` longtext DEFAULT NULL,
   `NotificationType` int(11) NOT NULL COMMENT 'Environment, Cohort, Pharma user etc',
-  `Status` int(11) NOT NULL DEFAULT 0 COMMENT 'Created = 0, Read = 1, Cancelld = 2\n',
+  `Status` int(11) DEFAULT 0 COMMENT 'Created = 0, Read = 1, Cancelld = 2\\n',
+  `RequestType` int(11) DEFAULT 0,
+  `Processing` int(11) DEFAULT 0,
+  `Request` int(11) DEFAULT 0,
   `CreationDate` datetime NOT NULL DEFAULT current_timestamp(),
   `LastUpdate` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`Id`)
@@ -463,6 +467,7 @@ CREATE TABLE `Project` (
 
 LOCK TABLES `Project` WRITE;
 /*!40000 ALTER TABLE `Project` DISABLE KEYS */;
+INSERT INTO `Project` VALUES ('{66de9822-78a3-460f-abb3-39e27ec8fb9c}','{58b39ac1-9ddb-4f3f-b990-141c4d2b8a76}','sample project','DEFAULT','2020-02-28 08:29:02','2020-02-28 08:29:02'),('{9ae3dfe4-ae85-410d-8696-9427650d100a}','{8fe5eedf-47ee-44a8-918e-dc6d38a92dac}','sample',NULL,'2020-02-28 08:30:30','2020-02-28 08:30:30'),('{e1838fc5-fe88-493a-b2ef-f25cba63cc77}','{2a681a36-d2ec-41c0-a45a-a6028b1d4048}','sample project','DEFAULT','2020-02-28 08:23:19','2020-02-28 08:23:19');
 /*!40000 ALTER TABLE `Project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -541,6 +546,7 @@ CREATE TABLE `Team` (
 
 LOCK TABLES `Team` WRITE;
 /*!40000 ALTER TABLE `Team` DISABLE KEYS */;
+INSERT INTO `Team` VALUES ('{2a681a36-d2ec-41c0-a45a-a6028b1d4048}','Default Team','Autocreated','2020-02-28 08:23:19','2020-02-28 08:23:19'),('{58b39ac1-9ddb-4f3f-b990-141c4d2b8a76}','Default Team','Autocreated','2020-02-28 08:29:02','2020-02-28 08:29:02'),('{8fe5eedf-47ee-44a8-918e-dc6d38a92dac}','Default Team','Autocreated','2020-02-28 08:30:30','2020-02-28 08:30:30');
 /*!40000 ALTER TABLE `Team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -566,6 +572,7 @@ CREATE TABLE `TeamUserLink` (
 
 LOCK TABLES `TeamUserLink` WRITE;
 /*!40000 ALTER TABLE `TeamUserLink` DISABLE KEYS */;
+INSERT INTO `TeamUserLink` VALUES ('{5bdc8892-14b5-42e2-9930-3cda1c5890ca}','{8fe5eedf-47ee-44a8-918e-dc6d38a92dac}','{57a98e8e-f5ab-4032-b647-b793b60468ff}','OWNER'),('{5e97aff4-a95c-4df4-8621-6b15841fe2bf}','{58b39ac1-9ddb-4f3f-b990-141c4d2b8a76}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','OWNER'),('{c90f5f74-0871-4cd8-8c0a-38d4458a0fce}','{2a681a36-d2ec-41c0-a45a-a6028b1d4048}','{574e9d57-24fa-4a65-b1dd-ff7b742d18f2}','OWNER');
 /*!40000 ALTER TABLE `TeamUserLink` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -659,4 +666,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-28 12:18:11
+-- Dump completed on 2020-02-29 12:08:40

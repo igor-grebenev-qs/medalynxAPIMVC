@@ -396,7 +396,7 @@ namespace MedalynxAPI.Controllers
                 );
             }
 
-            // update links
+            // update links without cohort validation
             Program.MedialynxData.cohortEnumLinkDBAPI.UpdateStatusRange(links.EnumLinksIds, links.Status);
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }

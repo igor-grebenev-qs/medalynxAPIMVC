@@ -141,6 +141,7 @@ GET
     /Projects
     /Projects/{id}
     /Projects/AllByTeam/{teamId}
+    /Projects/AllByUser/{userId}
 POST
     /Projects (create new Project item
         body for request sample :

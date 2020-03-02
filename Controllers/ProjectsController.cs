@@ -63,6 +63,20 @@ namespace MedalynxAPI.Controllers
             return Program.MedialynxData.projectDBAPI.GetAllByTeam(sid);
         }
 
+        [HttpGet("AllByUser/{userId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<List<Project>> GetAllByUserId(string userId)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
+
+            string sid = Utils.ToGuid(userId, false).ToString("B");
+            return Program.MedialynxData.projectDBAPI.GetAllByUser(sid);
+        }
+
         /// </summary>
         /// <param name="Project object"></param>
         /// <returns></returns>
@@ -145,6 +159,7 @@ namespace MedalynxAPI.Controllers
         [HttpOptions]
         [HttpOptions("{id}")]
         [HttpOptions("AllByTeam/{teamId}")]
+        [HttpOptions("AllByUser/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Models.Environment> Options()
         {

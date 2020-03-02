@@ -111,5 +111,28 @@ namespace MedalynxAPI
                 }
             }
         }
+
+        public List<Project> GetAllByUser(string userId)
+        {
+            List<string> teams = new List<string>();
+            using (var dbContext = new MedialynxDbTeamUserLinkContext()) {
+                List<TeamUserLink> links = dbContext.TeamUserLink.Where(t => t.UserId == userId).ToList();
+                foreach (TeamUserLink link in links) {
+                    if (!teams.Contains(link.TeamId)) {
+                        teams.Add(link.TeamId);
+                    }
+                }
+            }
+            HashSet<Project> projects = new HashSet<Project>();
+            foreach (string teamId in teams) {
+                List<Project> teamProjects = GetAllByTeam(teamId)
+                foreach (Project project in teamProjects)
+                {
+                    projects.Add(project);
+                }
+            }
+
+            return projects.ToList();
+        }
     }
 }

@@ -125,7 +125,7 @@ namespace MedalynxAPI
             }
             HashSet<Project> projects = new HashSet<Project>();
             foreach (string teamId in teams) {
-                List<Project> teamProjects = GetAllByTeam(teamId)
+                List<Project> teamProjects = GetAllByTeam(teamId);
                 foreach (Project project in teamProjects)
                 {
                     projects.Add(project);

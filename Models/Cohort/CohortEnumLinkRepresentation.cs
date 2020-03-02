@@ -10,14 +10,7 @@ namespace MedalynxAPI.Models
     public class CohortEnumLinkRepresentation : CohortEnumLink
     {
         public CohortEnumLinkRepresentation(CohortEnumLink link) {
-            this.Id = link.Id;
-            this.CohortId = link.CohortId;
-            this.CohortEnumId = link.CohortEnumId;
-            this.EnumItemId = link.EnumItemId;
-            this.Include = link.Include;
-            this.Percentage = link.Percentage;
-            this.CreationDate = link.CreationDate;
-            this.LastUpdate = link.LastUpdate;
+            Utils.CopyPropertyValues<CohortEnumLink>(link, this);
         }
 
         public object EnumItem  { get; set; }

@@ -208,8 +208,6 @@ GET
     /Cohorts/{id} - Alive cohort by project (CohortRepresentation)
     /Cohorts/ByProject/{projectId} - Alive cohort by project (CohortRepresentation) Not-Rejected header can be specified.
     /Cohorts/AllByProject/{projectId}
-DELETE
-    /Cohorts/{id} - Remove cohort
 POST
     /Cohorts (create new Cohort item
         body for request sample :
@@ -274,6 +272,12 @@ PUT /Cohorts/Status/{id}
         body for request sample :
         {
             "status": 20
+        }
+PUT /Cohorts/LinksStatus/{cohortId}
+        body for request sample :
+        {
+            "enumLinksIds":["{03c3f457-50ff-4e55-a89b-b806468272b3}", "{0948e5f4-264a-454f-89b5-9e89ce8ce9f3}"],
+            "status":20
         }
 
 ----------------------------------------------------------------------------------------------------------------------

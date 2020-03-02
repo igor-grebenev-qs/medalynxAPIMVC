@@ -96,7 +96,7 @@ namespace medalynxAPI.Tests
         [Fact]
         public void PassingModelCohortEnumLinkTest() {
             // Fields constraints. All necessary fields listed below
-            Assert.Equal(8, typeof(CohortEnumLink).GetProperties().Length);
+            Assert.Equal(9, typeof(CohortEnumLink).GetProperties().Length);
 
             // Enumerate all exists fields
             Assert.True(Utils.HasProperty<CohortEnumLink>("Id", typeof(string)));
@@ -105,6 +105,7 @@ namespace medalynxAPI.Tests
             Assert.True(Utils.HasProperty<CohortEnumLink>("EnumItemId", typeof(string)));
             Assert.True(Utils.HasProperty<CohortEnumLink>("Include", typeof(int)));
             Assert.True(Utils.HasProperty<CohortEnumLink>("Percentage", typeof(float)));
+            Assert.True(Utils.HasProperty<CohortEnumLink>("Status", typeof(EnumLinkStatus)));
             Assert.True(Utils.HasProperty<CohortEnumLink>("CreationDate", typeof(DateTime)));
             Assert.True(Utils.HasProperty<CohortEnumLink>("LastUpdate", typeof(DateTime)));
         }

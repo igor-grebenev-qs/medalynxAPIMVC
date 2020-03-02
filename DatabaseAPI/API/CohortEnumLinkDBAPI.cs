@@ -90,6 +90,7 @@ namespace MedalynxAPI
             return links;
         }
 
+        /*
         public void Generate(string cohortId)
         {
             List<CohortEnumLink> links = new List<CohortEnumLink>();
@@ -145,6 +146,7 @@ namespace MedalynxAPI
                 }
             }
         }
+        */
 
         /// <summary>
         /// Assume that EnumItemAPI contains fields for any cases. PROPS MUST HAVE SAME NAMES !!!
@@ -275,7 +277,7 @@ namespace MedalynxAPI
                     toDeleteIds.Add(item);
                 }
             }
-            // remove not exists limks
+            // remove not exists links
             this.RemoveRange(toDeleteIds);
 
             foreach (CohortEnumLinkAPI linkAPI in LinksForUpdate) {
@@ -330,6 +332,22 @@ namespace MedalynxAPI
                     linksToRemove.Add(dbContext.CohortEnumLink.FirstOrDefault(link => link != null && link.Id == id));
                 }
                 dbContext.CohortEnumLink.RemoveRange(linksToRemove);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void UpdateStatusRange(List<string> linkIds, EnumLinkStatus status)
+        {
+            using (var dbContext = new MedialynxDbCohortEnumLinkContext()) {
+                List<CohortEnumLink> linksToUpdate = new List<CohortEnumLink>();
+                foreach (string linkId in linkIds) {
+                    CohortEnumLink link = dbContext.CohortEnumLink.FirstOrDefault(link => link != null && link.Id == linkId);
+                    if (link != null) {
+                        link.Status = status;
+                        linksToUpdate.Add(link);
+                    }
+                }
+                dbContext.CohortEnumLink.UpdateRange(linksToUpdate);
                 dbContext.SaveChanges();
             }
         }

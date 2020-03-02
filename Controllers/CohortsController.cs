@@ -221,7 +221,7 @@ namespace MedalynxAPI.Controllers
             cohort.LastUpdate = DateTime.UtcNow;
             // update cohort
             Program.MedialynxData.cohortDBAPI.Update(cohort);
-            // update/create/delete cohort links (neccessary enum items will be created with link)
+            // update/create/delete cohort links (necessary enum items will be created with link)
             Program.MedialynxData.cohortEnumLinkDBAPI.UpdateLinks(cohort.Id, cohortApi.cohortEnumLinks);
 
             Program.MedialynxData.historyDBAPI.Add(
@@ -345,12 +345,69 @@ namespace MedalynxAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
         }
 
+        [HttpPut("LinksStatus/{cohortId}")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Cohort> UpdateLinksStatus(string cohortId, CohortStatusAPI links)
+        {
+            // validate that session exists
+            string sessionUserId;
+            if (!Utils.ValidateSession(this.Request.Headers, out sessionUserId)) { return BadRequest("Session does not exists."); }
+
+            Guid cohortGuid = Utils.ToGuid(cohortId, false);
+            if (cohortGuid == Guid.Empty) {
+                return BadRequest("Cohort id is not valid (" + cohortId + ")");
+            }
+
+            string sid = Utils.ToGuid(cohortId, false).ToString("B");
+            Cohort cohort = Program.MedialynxData.cohortDBAPI.GetById(sid);
+            if (cohort == null)
+            {
+                return NotFound("Cohort with id=" + sid + " not found");
+            }
+            if (cohort.Status == ObjectStatus.Archived) {
+                return BadRequest("Cohort already archived (" + cohortId + ")");
+            }
+
+            if (cohort.Status != ObjectStatus.PartialArchived) {
+                cohort.Status = ObjectStatus.PartialArchived;
+
+                Program.MedialynxData.cohortDBAPI.Update(cohort);
+
+                Program.MedialynxData.notificationDBAPI.Add(
+                    sessionUserId,
+                    cohort.ProjectId,
+                    "Cohort status changed",
+                    NotificationType.Cohort,
+                    cohort.Status,
+                    ObjectStatus.Undefined,
+                    RequestType.Undefined
+                );
+
+                Program.MedialynxData.historyDBAPI.Add(
+                    new HistoryItem(
+                        sessionUserId,
+                        sid,
+                        this.GetType().ToString(),
+                        "Cohort Status was updated. id: " + cohortId
+                    )
+                );
+            }
+
+            // update links
+            Program.MedialynxData.cohortEnumLinkDBAPI.UpdateStatusRange(links.EnumLinksIds, links.Status);
+            return CreatedAtAction(nameof(GetById), new { id = cohort.Id }, cohort);
+        }
+
         [HttpOptions]
         [HttpOptions("{id}")]
         [HttpOptions("AllByProject/{projectId}")]
         [HttpOptions("ByProject/{projectId}")]
         [HttpOptions("RequestType/{id}")]
         [HttpOptions("Status/{id}")]
+        [HttpOptions("LinksStatus/{cohortId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Models.Environment> Options()
         {

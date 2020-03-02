@@ -21,6 +21,8 @@ namespace MedalynxAPI.Models
 
         public float Percentage { get; set; }
 
+        public EnumLinkStatus Status {get; set;}
+
         public DateTime CreationDate { get; set; }
 
         public DateTime LastUpdate { get; set; }

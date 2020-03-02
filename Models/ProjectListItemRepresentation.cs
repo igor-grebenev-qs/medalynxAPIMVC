@@ -13,11 +13,11 @@ namespace MedalynxAPI.Models
             Utils.CopyPropertyValues<Project>(project, this);
             this.UsersCount = Program.MedialynxData.teamDBAPI.GetTeamUsersCount(this.TeamId);
             this.Owner = Program.MedialynxData.teamDBAPI.GetTeamOwner(this.TeamId);
-            this.Notification = Program.MedialynxData.notificationDBAPI.GetByProject(project.Id);
+            this.Notifications = Program.MedialynxData.notificationDBAPI.GetByProject(project.Id);
         }
 
         public int UsersCount {get; private set;}
         public Models.User.User Owner {get; private set;}
-        public List<Models.Notification> Notification {get; private set;}
+        public List<Models.Notification> Notifications {get; private set;}
     }
 }
